@@ -49,6 +49,12 @@ export class OrderService {
     return this.http.get(ordersApiURL + "/" + "pending_list");
   }
 
+  stations(): Observable<any>{
+    let ordersApiURL = this.hostAppService.getHost() + '/stations';
+
+    return this.http.get(ordersApiURL + "/" );
+  }
+
   markFulfilled(id: number): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost() + '/orders';
 

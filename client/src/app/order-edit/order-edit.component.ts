@@ -118,8 +118,8 @@ export class OrderEditComponent implements OnInit {
     );
   }
 
-  private getStationList():void {
-    this.orderService.stationList().subscribe(
+  private getStationList(): void {
+    this.orderService.stations().subscribe(
       successResponse => {
         this.stations = successResponse.json();
       }
