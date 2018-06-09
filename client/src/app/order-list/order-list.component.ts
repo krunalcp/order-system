@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { timer } from 'rxjs';
 
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
@@ -53,7 +53,7 @@ export class OrderListComponent implements OnInit {
   }
 
   public subscribeToData() {
-    this.timerSubscription = Observable.timer(3000).subscribe(() => this.loadOrderList());
+    this.timerSubscription = timer(3000).subscribe(() => this.loadOrderList());
   }
 
   public deleteOrder(id: number){
