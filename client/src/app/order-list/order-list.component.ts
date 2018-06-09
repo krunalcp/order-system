@@ -25,6 +25,7 @@ export class OrderListComponent implements OnInit {
   public isOrderDeleting: boolean = false;
   public currentOrderId: number;
   public isExporting: boolean = false;
+  public timerSubscription: any;
 
   constructor(
   	private orderService: OrderService,
@@ -52,7 +53,7 @@ export class OrderListComponent implements OnInit {
   }
 
   public subscribeToData() {
-    this.timerSubscription = Observable.interval(3000).subscribe(() => this.loadOrderList());
+    this.timerSubscription = Observable.timer(3000).subscribe(() => this.loadOrderList());
   }
 
   public deleteOrder(id: number){
