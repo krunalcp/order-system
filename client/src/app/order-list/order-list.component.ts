@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
@@ -41,12 +42,17 @@ export class OrderListComponent implements OnInit {
       successResponse => {
         this.orders = successResponse.json();
         this.isOrdersLoading = false;
+        this.subscribeToData();
       },
       (errorResponse) => {
         this.isOrdersLoading = false;
         // this.displayErrors(errorResponse);
       }
     );
+  }
+
+  public subscribeToData() {
+    this.timerSubscription = Observable.interval(3000).subscribe(() => this.loadOrderList());
   }
 
   public deleteOrder(id: number){
