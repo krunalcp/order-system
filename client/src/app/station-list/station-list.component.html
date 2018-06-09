@@ -1,0 +1,51 @@
+<div class="container g-mt-100">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Stations List</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <a routerLink="/station/add" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"> 
+      <i class="fa fa-plus-circle g-mr-5"></i>New Station
+      </a>
+    </div>
+  </div>
+  <div class="table-responsive" *ngIf="stations && !isStationsLoading">
+    <table class="table table-bordered u-table--v2">
+      <thead class="text-uppercase g-letter-spacing-1">
+        <tr>
+          <th class="g-font-weight-300 g-color-black g-min-width-300">Station ID</th>
+          <th class="g-font-weight-300 g-color-black g-min-width-300">Station Name</th>
+          <th class="g-font-weight-300 g-color-black">Options</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let station of stations">
+          <td class="align-middle">{{station.id}}</td>
+          <td>{{station.name}}</td>
+          <td class="text-center">
+            <a href="#!" class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/station/show/{{station.id}}">open</a>
+            <a href="#!" class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/station/edit/{{station.id}}">edit</a>
+            <button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteStation(station.id)">
+              <span *ngIf="!isStationDeleting">Delete</span>
+              <span *ngIf="isStationDeleting && currentStationId != station.id">Delete</span>
+              <span *ngIf="isStationDeleting && currentStationId == station.id">Deleting..</span>
+              <span class="g-pl-5" *ngIf="isStationDeleting && currentStationId == station.id">
+                <i class="fa fa-spinner fa-spin"></i>
+              <span class="sr-only">Loading...</span>
+              </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row" *ngIf="isStationsLoading">
+    <div class="col-md-12 text-center g-color-blue">
+      <i class="fa fa-spinner fa-spin"></i>
+      <span class="sr-only">Loading...</span>
+      <p>Loading stations...</p>
+    </div>
+  </div>
+
+</div>

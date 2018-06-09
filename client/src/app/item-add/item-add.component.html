@@ -1,0 +1,50 @@
+<div class="container g-mt-100">
+	<div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+  	<h1 class="h3 u-heading-v1__title">Add Item</h1>
+	</div>
+	<div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
+	  <h3 class="h2 g-font-weight-300 g-mb-20">Enter item details</h3>
+	  <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+		  <!-- Text Input -->
+		  <div class="row">
+			  <div class="form-group g-mb-25 col-md-6">
+			    <div class="col-sm-9">
+			    	<label class="g-mb-10" for="name">
+			    		<span *ngIf="!formErrors.name"
+                  [ngClass]="{'text-success': !itemForm.controls.name.pristine}"></span>
+            	<span *ngIf="formErrors.name" class="text-danger">{{formErrors.name}}</span>
+			    	</label>
+			      <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
+			    </div>
+			  </div>
+			  <div class="form-group g-mb-25 col-md-6">
+			  	<label class="g-mb-10" for="price">
+		    		<span *ngIf="!formErrors.price"
+                [ngClass]="{'text-success': !itemForm.controls.price.pristine}"></span>
+          	<span *ngIf="formErrors.price" class="text-danger">{{formErrors.price}}</span>
+		    	</label>
+		      <div class="input-group g-brd-primary--focus">
+		        <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+              <i class="fa fa-usd" aria-hidden="true"></i>
+            </div>
+		        <input class="form-control form-control-md rounded-0" type="number" placeholder="Enter price" id="price" formControlName="price">
+		      </div>
+			  </div>
+			</div>
+		</form>
+		<div class="text-right">
+			<button (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
+		        <span *ngIf="!isItemAdding">Add Item</span>
+		        <span *ngIf="isItemAdding">Adding Item...</span>
+		        <span class="g-pl-5" *ngIf="isItemAdding">
+		        	<i class="fa fa-spinner fa-spin"></i>
+				  		<span class="sr-only">Loading...</span>
+		        </span>
+      		</button>
+      <button class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="cancelItem()">
+        Cancel
+      </button>
+      
+    </div>
+	</div>
+</div>

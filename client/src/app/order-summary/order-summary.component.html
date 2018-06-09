@@ -1,0 +1,31 @@
+<div class="container g-mt-100">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Order summary</h1>
+  </div>
+
+  <div class="table-responsive" *ngIf="orderSummary && !isItemsLoading">
+    <table class="table table-bordered u-table--v2">
+      <thead class="text-uppercase g-letter-spacing-1">
+        <tr>
+          <th class="g-font-weight-300 g-color-black"></th>
+          <th class="g-font-weight-300 g-color-black" *ngFor="let station of stations">S{{station.id}} - {{station.name}}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of orderSummary">
+          <td class="align-middle">{{item.name}}</td>
+          <td *ngFor="let station of item.stations">{{station.quantity}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row" *ngIf="isItemsLoading">
+    <div class="col-md-12 text-center g-color-blue">
+      <i class="fa fa-spinner fa-spin"></i>
+      <span class="sr-only">Loading...</span>
+      <p>Loading orders summary...</p>
+    </div>
+  </div>
+</div>

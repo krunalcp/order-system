@@ -1,0 +1,58 @@
+<header id="js-header" class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance" data-header-fix-moment="300">
+  <div class="u-header__section u-header__section--dark g-bg-black g-transition-0_3 g-py-10" data-header-fix-moment-exclude="g-py-10" data-header-fix-moment-classes="g-py-0">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <!-- Responsive Toggle Button -->
+        <button class="navbar-toggler navbar-toggler-right btn g-line-height-1 g-brd-none g-pa-0 g-pos-abs g-top-3 g-right-0" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">
+          <span class="hamburger hamburger--slider">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+          </span>
+          </span>
+        </button>
+        <!-- End Responsive Toggle Button -->
+
+        <!-- Logo -->
+        <a href="/" class="navbar-brand">
+          <img src="/assets/app_logo.jpg" class="g-width-60x">
+          <!-- <span class="h1">F</span><span class="h3">ood</span><span class="h1">U</span><span class="h3">p</span> -->
+        </a>
+        <!-- End Logo -->
+
+        <!-- Navigation -->
+        <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
+          <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
+            <li class="nav-item g-mx-20--lg">
+              <a routerLink="/station/list" class="nav-link px-0"> Stations
+            
+          </a>
+            </li>
+            <li class="nav-item g-mx-20--lg">
+              <a routerLink="/item/list" class="nav-link px-0"> Items List
+            
+          </a>
+            </li>
+            <li class="nav-item g-mx-20--lg">
+              <a routerLink="/order/list" class="nav-link px-0">Orders List
+            
+          </a>
+            </li>
+            <li class="nav-item g-mx-20--lg">
+              <a routerLink="/station/order" class="nav-link px-0">Station Orders
+            
+          </a>
+            </li>
+            <li class="nav-item g-mx-20--lg">
+              <a routerLink="/order/summary" class="nav-link px-0">Order summary
+
+          </a>
+            </li>
+          </ul>
+        </div>
+        <!-- End Navigation -->
+      </div>
+    </nav>
+  </div>
+</header>
+<router-outlet></router-outlet>
+

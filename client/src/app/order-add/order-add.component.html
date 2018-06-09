@@ -1,0 +1,85 @@
+<div class="container g-mt-100">
+	<div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+  	<h1 class="h3 u-heading-v1__title">Place Order</h1>
+	</div>
+	<div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
+	  <h3 class="h2 g-font-weight-300 g-mb-20">Enter order details</h3>
+	  <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+		  <!-- Text Input -->
+		  <div class="row">
+			  <div class="form-group g-mb-25 col-md-8">
+			    <div class="col-sm-9">
+			    	<label class="g-mb-10" for="customer_name">
+			    		<span *ngIf="!formErrors.customer_name" [ngClass]="{'text-success': !orderForm.controls.customer_name.pristine}"></span>
+            	<span *ngIf="formErrors.customer_name" class="text-danger">{{formErrors.customer_name}}</span>
+			    	</label>
+			      <input class="form-control u-form-control rounded-0" type="text" placeholder="(Referance)" id="customer_name" formControlName="customer_name">
+			    </div>
+			  </div>
+			</div>
+		</form>
+			  
+		<div class="card g-brd-teal rounded-0 g-mb-30">
+		  <h3 class="card-header g-bg-teal g-brd-transparent g-color-white g-font-size-16 rounded-0 mb-0">
+		    <i class="fa fa-edit g-mr-5"></i>
+		    Choose items
+		  </h3>
+
+		  <div class="table-responsive text-center">
+		    <table class="table table-striped u-table--v1 mb-0">
+		      <thead>
+		        <tr>
+		          <th>Item</th>
+		          <th>Price($)</th>
+		          <th>Quantity</th>
+		          <th></th>
+		          <th>Total Price($)</th>
+		        </tr>
+		      </thead>
+
+		      <tbody>
+		        <tr *ngFor="let item of items">
+							<td>{{item.name}}</td>
+							<td>{{item.price}}</td>
+							<td>
+								{{item.quantity}}
+							</td>
+							<td>
+								<button class="btn btn-sm u-btn-outline-primary g-mr-10" (click)="quantityOptions(item, 'plus')">
+									<i class="fa fa-plus g-px-20"></i>
+								</button>
+								<button class="btn btn-sm u-btn-outline-lightred" (click)="quantityOptions(item, 'minus')">
+									<i class="fa fa-minus g-px-20"></i>
+								</button>
+							</td>
+							<td>
+								{{(item.price * item.quantity).toFixed(2)}}
+							</td>
+						</tr>
+						<hr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><b>Total($) :</b></td>
+							<td>{{totalPrice.toFixed(2)}}</td>
+						</tr>
+		      </tbody>
+		    </table>
+		  </div>
+		</div>
+		<div class="text-right">
+			<button (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
+	        	<span *ngIf="!isOrderAdding">Add Order</span>
+		        <span *ngIf="isOrderAdding">Adding order...</span>
+		        <span class="g-pl-5" *ngIf="isOrderAdding">
+		        	<i class="fa fa-spinner fa-spin"></i>
+				  		<span class="sr-only">Loading...</span>
+		        </span>
+	        </button>
+      <button class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="cancelOrder()">
+        Cancel
+      </button>
+    </div>
+	</div>
+</div>
