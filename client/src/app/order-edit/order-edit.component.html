@@ -19,7 +19,7 @@
 				<div class="form-group g-mb-25 col-md-6">
 			    <div class="col-sm-6">
 			    	<label class="g-mb-10" for="station">Select station</label>
-		    		<select class="form-control rounded-0 u-form-control" id="station" formControlName="station" >
+		    		<select class="form-control rounded-0 u-form-control" id="station" formControlName="station_id" >
 		      		<option *ngFor="let station of stations" value="{{station.id}}">S{{station.id}} - {{station.name}}</option>
 			    	</select>
 			    </div>

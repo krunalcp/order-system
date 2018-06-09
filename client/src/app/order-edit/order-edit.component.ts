@@ -160,7 +160,7 @@ export class OrderEditComponent implements OnInit {
           // Validators.maxLength(this.maxlength.title)
         ]
       ],
-      'station': [
+      'station_id': [
         this.order.station
       ]
     });
