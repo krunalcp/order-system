@@ -50,7 +50,43 @@
 					  	<span class="sr-only">Loading...</span>
 			        </span>
 	        	</button>
+						<button class="btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="printOrders(order.id)">
+							<i class="fa fa-file-excel-o g-mr-5"></i>Print
+						</button>
 	        </td>
+					<div id="{{order.id}}" style="display: none">
+						<div class="text-center">
+							<div><strong>2018 Fieldays</strong></div>
+							<div><strong>The LOCAL</strong></div>
+							<br/>
+							<div>{{order.created_at}}</div>
+							<br/>
+							<div>Order ID: {{order.id}}</div>
+							<br/>
+						  <table width="90%">
+						    <thead>
+						      <tr>
+						        <td>Item</td>
+						        <td>Quantity</td>
+						        <td>Value</td>
+						      </tr>
+						    </thead>
+						    <tbody>
+						      <tr *ngFor="let order_item of order.order_items">
+						        <td>{{order_item.item}}</td>
+						        <td>{{order_item.quantity}}</td>
+						        <td>{{order_item.value}}</td>
+						      </tr>
+						      <tr>
+						        <td colspan= 2>TOTAL</td>
+										<td>{{order.value}}</td>
+						      </tr>
+						    </tbody>
+						  </table>
+							<br/>
+							<div>Enjoy your meal and thank you for shopping with us!</div>
+						</div>
+					</div>
 	      </tr>
 	    </tbody>
 	  </table>

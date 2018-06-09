@@ -95,6 +95,36 @@ export class OrderListComponent implements OnInit {
     this.exportAsExcelFile(ordersData, 'ctordering');
   }
 
+  public printOrders(order_id) {
+    let ordersData = []
+    let order = this.orders.find(x => x.id === order_id)
+    var printSection = document.getElementById(order_id).innerHTML;
+    console.log(document.getElementById(order_id).innerHTML)
+    var popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Print tab</title>
+          <style>
+            @media print
+            {
+              body, table {
+                font-size: 7pt;
+              }
+              .text-center {
+                text-align: center;
+              }
+              @page { size: 90mm; }
+            }
+          </style>
+        </head>
+        <body onload="window.print();window.close()">${printSection}</body>
+      </html>`
+    );
+    popupWin.document.close();
+  }
+
   public exportAsExcelFile(json: any[], excelFileName: string): void {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
