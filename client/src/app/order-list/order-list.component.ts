@@ -53,7 +53,7 @@ export class OrderListComponent implements OnInit {
   }
 
   public subscribeToData() {
-    this.timerSubscription = timer(3000).subscribe(() => this.loadOrderList());
+    this.timerSubscription = timer(10000).subscribe(() => this.loadOrderList());
   }
 
   public deleteOrder(id: number){

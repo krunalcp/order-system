@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { timer } from 'rxjs';
 
 import { OrderService } from '../order.service';
 import { StationService } from '../station.service';
@@ -27,6 +28,7 @@ export class StationOrdersComponent implements OnInit {
   public stationOrders: any;
   public lastStation: any;
   public selectedStation: any;
+  public timerSubscription: any;
   constructor(
   	private orderService: OrderService,
     private stationService: StationService,
@@ -48,6 +50,7 @@ export class StationOrdersComponent implements OnInit {
         this.currentStation = this.stations[0].id;
         let last = this.stations.length;
         this.lastStation = this.stations[last - 1].id;
+        this.subscribeToData();
       },
       (errorResponse) => {
         // this.displayErrors(errorResponse);
@@ -55,9 +58,13 @@ export class StationOrdersComponent implements OnInit {
     );
   }
 
+  public subscribeToData() {
+    this.timerSubscription = timer(10000).subscribe(() => this.loadStationList());
+  }
+
   public onSelect(stationId) {
     this.stationOrders = this.orders.filter(order => order.station.id == stationId)
-    
+
   }
 
   public loadOrders(){
