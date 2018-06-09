@@ -97,6 +97,6 @@ class OrdersController < ApplicationController
 	private
 
 	def order_params
-		params.permit(:customer_name, :station, :value, :order_items => [:name, :price, :quantity])
+		params.permit(:customer_name, :station, :station_id, :value, :order_items => [:name, :price, :quantity])
 	end
 end
