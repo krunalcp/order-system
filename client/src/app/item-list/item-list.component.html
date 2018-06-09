@@ -25,8 +25,11 @@
 	        <td>{{item.price}}</td>
 	        <td class="text-center">
 	        	<a href="#!" class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/item/show/{{item.id}}">open</a>
-	        	<a href="#!" class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/item/edit/{{item.id}}">edit</a>
-	        	<button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteItem(item.id)">
+						<button class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" [disabled]="item.item_used" routerLink="/item/edit/{{item.id}}" >
+						edit
+						</button>
+
+	        	<button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteItem(item.id)" [disabled]="item.item_used">
 		        	<span *ngIf="!isItemDeleting">Delete</span>
 		        	<span *ngIf="isItemDeleting && currentItemId != item.id">Delete</span>
 			        <span *ngIf="isItemDeleting && currentItemId == item.id">Deleting..</span>
@@ -49,4 +52,3 @@
 	</div>
 
 </div>
-
