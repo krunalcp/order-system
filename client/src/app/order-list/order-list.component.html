@@ -50,7 +50,6 @@
 					  	<span class="sr-only">Loading...</span>
 			        </span>
 	        	</button>
-            <a class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" ng-print print-element-id="printSection">print</a>
 	        </td>
 	      </tr>
 	    </tbody>
@@ -63,41 +62,4 @@
 		  <p>Loading orders...</p>
 		</div>
 	</div>
-</div>
-
-<div id="printSection">
-  <div class="text-center">2018 Fielddays</div>
-  <div class="text-center">The LOCAL</div>
-  <br/>
-  <div class="text-center">{{order.created_at.strftime('%d.%m.%Y %H:%M')}}</div>
-  <br/>
-  <div class="text-center">Order ID: {{order.id}}</div>
-  <div class="table-responsive" >
-    <table class="table table-bordered u-table--v2">
-      <thead class="text-uppercase g-letter-spacing-1">
-        <tr>
-          <th class="g-font-weight-300 g-color-black">Item</th>
-          <th class="g-font-weight-300 g-color-black">Quantity</th>
-          <th class="g-font-weight-300 g-color-black">Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let order_item of order.order_items">
-          <th>{{order_item.name}}</th>
-          <th>{{order_item.quantity}}</th>
-          <th>{{order_item.value}}</th>
-        </tr>
-      </tbody>
-      <thead>
-        <tr>
-          <th>Total :</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>{{order.value}}</th>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 </div>
