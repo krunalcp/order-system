@@ -13,8 +13,8 @@ export class HostappService {
   	if (environment == 'localhost'){
   		return "http://localhost:3000"
   	}
-  	else if (environment == 'foodup.herokuapp.com'){
-      return "https://foodup.herokuapp.com"
+  	else if (environment == 'foodup-demo.herokuapp.com'){
+      return "https://foodup-demo.herokuapp.com"
   	}
   }
 }
