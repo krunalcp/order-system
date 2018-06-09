@@ -58,8 +58,8 @@ export class StationOrdersComponent implements OnInit {
     );
   }
 
-  public subscribeToData() {
-    this.timerSubscription = timer(10000).subscribe(() => this.loadStationList());
+  public subscribeToData(): void  {
+    this.timerSubscription = timer(10000).first().subscribe(() => this.loadStationList());
   }
 
   public onSelect(stationId) {

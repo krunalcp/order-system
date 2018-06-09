@@ -52,8 +52,8 @@ export class OrderListComponent implements OnInit {
     );
   }
 
-  public subscribeToData() {
-    this.timerSubscription = timer(10000).subscribe(() => this.loadOrderList());
+  public subscribeToData(): void {
+    this.timerSubscription = timer(10000).first().subscribe(() => this.loadOrderList());
   }
 
   public deleteOrder(id: number){
