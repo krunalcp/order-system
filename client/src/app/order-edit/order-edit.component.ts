@@ -34,6 +34,7 @@ export class OrderEditComponent implements OnInit {
   public isOrderUpdating: boolean = false;
   public items: any;
   public isItemsFilled: boolean = false;
+  public stations: any;
 
   constructor(
   	private orderService: OrderService,
@@ -50,6 +51,7 @@ export class OrderEditComponent implements OnInit {
       (params: any) => {
         this.orderId = params.id;
         this.getOrder();
+        this.getStationList();
       }
     );
   }
@@ -99,7 +101,7 @@ export class OrderEditComponent implements OnInit {
     else{
       return 0;
     }
-    
+
   }
 
   private getOrder(): void {
@@ -112,6 +114,14 @@ export class OrderEditComponent implements OnInit {
       },
       () => {
         this.errorMessage = 'Failed to load order.';
+      }
+    );
+  }
+
+  private getStationList():void {
+    this.orderService.stationList().subscribe(
+      successResponse => {
+        this.stations = successResponse.json();
       }
     );
   }
