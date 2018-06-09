@@ -59,10 +59,10 @@ class OrdersController < ApplicationController
 			end
 
 			@order.order_items = order_items
-			@order.station = Station.first if @order.station.blank?
+			@order.station = Station.first if order_params[:station].blank?
 
 			if @order.update(new_order_params)
-				
+
 				head :ok
 			else
 				render json: {errors: @order.errors.full_messages}, status: :unprocessable_entity
