@@ -159,6 +159,9 @@ export class OrderEditComponent implements OnInit {
           Validators.required,
           // Validators.maxLength(this.maxlength.title)
         ]
+      ],
+      'station': [
+        this.order.station
       ]
     });
 

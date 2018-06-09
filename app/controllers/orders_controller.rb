@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
 			head :ok
 		else
 			render json: {errors: order.errors.full_messages}, status: :unprocessable_entity
-		end	
+		end
 	end
 
 
@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
 		@order = Order.find(params[:id])
 
 		if @order
-			new_order_params = {customer_name: order_params[:customer_name], value: order_params[:value]}
+			new_order_params = {customer_name: order_params[:customer_name], station: order_params[:station], value: order_params[:value]}
 
 			order_items = []
 
@@ -59,7 +59,7 @@ class OrdersController < ApplicationController
 			end
 
 			@order.order_items = order_items
-			@order.station = Station.first
+			@order.station = Station.first if @order.station.blank?
 
 			if @order.update(new_order_params)
 				
