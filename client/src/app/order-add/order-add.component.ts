@@ -139,7 +139,6 @@ export class OrderAddComponent implements OnInit {
     this.orderService.stations().subscribe(
       successResponse => {
         this.stations = successResponse.json();
-        this.station_id = this.stations[0].id
       }
     );
   }
