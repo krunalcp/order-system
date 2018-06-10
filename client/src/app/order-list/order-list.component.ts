@@ -43,7 +43,7 @@ export class OrderListComponent implements OnInit {
       successResponse => {
         this.orders = successResponse.json();
         this.isOrdersLoading = false;
-        this.subscribeToData();
+        // this.subscribeToData();
       },
       (errorResponse) => {
         this.isOrdersLoading = false;
