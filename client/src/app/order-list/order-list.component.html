@@ -65,19 +65,19 @@
 						  <table width="90%" style="font-size: 14px;">
 						    <thead>
 						      <tr>
-						        <td>Item</td>
+						        <td align="left">Item</td>
 						        <td align="right">Qty</td>
 						        <td align="right">Value</td>
 						      </tr>
 						    </thead>
 						    <tbody>
 						      <tr *ngFor="let order_item of order.order_items">
-						        <td>{{order_item.item}}</td>
+						        <td align="left">{{order_item.item}}</td>
 						        <td align="right">{{order_item.quantity}}</td>
 						        <td align="right">${{order_item.value}}</td>
 						      </tr>
 						      <tr>
-						        <td colspan="2">TOTAL</td>
+						        <td align="left" colspan="2">TOTAL</td>
 										<td align="right">${{order.value}}</td>
 						      </tr>
 						    </tbody>
