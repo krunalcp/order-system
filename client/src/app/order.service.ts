@@ -38,10 +38,9 @@ export class OrderService {
   }
 
   list(s: boolean): Observable<any>{
+    let ordersApiURL = this.hostAppService.getHost() + '/orders';
     if(s){
-  	  let ordersApiURL = this.hostAppService.getHost() + '/orders?s=1';
-    } else {
-      let ordersApiURL = this.hostAppService.getHost() + '/orders';
+  	  ordersApiURL = ordersApiURL + '?s=1';
     }
   	return this.http.get(ordersApiURL);
   }
