@@ -13,6 +13,7 @@ export class OrderSummaryComponent implements OnInit {
   public orderSummary: any;
   public stations: any;
   public isItemsLoading: boolean = false;
+  public timerSubscription: any;
 
   constructor(private itemService: ItemService) { }
 
