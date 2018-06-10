@@ -37,9 +37,12 @@ export class OrderService {
     return this.http.delete(ordersApiURL + "/" + id);
   }
 
-  list(): Observable<any>{
-  	let ordersApiURL = this.hostAppService.getHost() + '/orders';
-
+  list(s: boolean): Observable<any>{
+    if(s){
+  	  let ordersApiURL = this.hostAppService.getHost() + '/orders?s=1';
+    } else {
+      let ordersApiURL = this.hostAppService.getHost() + '/orders';
+    }
   	return this.http.get(ordersApiURL);
   }
 

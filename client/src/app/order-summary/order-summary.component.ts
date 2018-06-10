@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../item.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-order-summary',
@@ -26,11 +27,16 @@ export class OrderSummaryComponent implements OnInit {
         this.orderSummary = successResponse.json();
         this.stations = this.orderSummary[0].stations
         this.isItemsLoading = false;
+        this.subscribeToData();
       },
       (errorResponse) => {
         // this.displayErrors(errorResponse);
       }
     );
+  }
+
+  public subscribeToData(): void {
+    this.timerSubscription = timer(5000).subscribe(() => this.loadItemList());
   }
 
 }

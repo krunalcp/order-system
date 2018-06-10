@@ -39,7 +39,7 @@ export class OrderListComponent implements OnInit {
 
   public loadOrderList(){
     this.isOrdersLoading = true;
-      this.orderService.list().subscribe(
+      this.orderService.list(false).subscribe(
       successResponse => {
         this.orders = successResponse.json();
         this.isOrdersLoading = false;

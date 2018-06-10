@@ -37,8 +37,8 @@ export class StationOrdersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadStationList();
     this.loadOrders();
+    this.loadStationList();
   }
 
   public loadStationList(){
@@ -73,7 +73,7 @@ export class StationOrdersComponent implements OnInit {
 
   public loadOrders(){
     this.isOrdersLoading = true;
-  	this.orderService.list().subscribe(
+  	this.orderService.list(true).subscribe(
       successResponse => {
         this.orders = successResponse.json();
         this.stationOrders = this.orders.filter(order => order.station.id == this.currentStation);
