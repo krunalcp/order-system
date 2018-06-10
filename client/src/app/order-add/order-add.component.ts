@@ -38,7 +38,7 @@ export class OrderAddComponent implements OnInit {
 	public orderAddRequest: Subscription;
   private isFormSubmitted: boolean;
   public isOrderAdding: boolean = false;
-
+  public stations: any;
 
   constructor(
   	private orderService: OrderService,
@@ -51,7 +51,9 @@ export class OrderAddComponent implements OnInit {
   ngOnInit() {
 
   	this.buildForm();
+    this.getStationList();
     this.loadItems();
+
   }
 
   public loadItems(){
@@ -86,7 +88,7 @@ export class OrderAddComponent implements OnInit {
     else{
       return 0;
     }
-    
+
   }
 
   public onSubmit() {
@@ -122,12 +124,24 @@ export class OrderAddComponent implements OnInit {
           Validators.required,
           // Validators.maxLength(this.maxlength.title)
         ]
+      ],
+      'station_id': [
+        this.order.station
       ]
     });
 
     this.orderForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
+  }
+
+  private getStationList(): void {
+    this.orderService.stations().subscribe(
+      successResponse => {
+        this.stations = successResponse.json();
+        this.station_id = this.stations[0].id
+      }
+    );
   }
 
   private onValueChanged(data?: any) {

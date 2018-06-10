@@ -50,7 +50,7 @@ export class StationOrdersComponent implements OnInit {
         this.currentStation = this.stations[0].id;
         let last = this.stations.length;
         this.lastStation = this.stations[last - 1].id;
-        this.subscribeToData();
+        // this.subscribeToStations();
       },
       (errorResponse) => {
         // this.displayErrors(errorResponse);
@@ -58,13 +58,17 @@ export class StationOrdersComponent implements OnInit {
     );
   }
 
-  public subscribeToData(): void {
-    this.timerSubscription = timer(5000).subscribe(() => this.loadStationList());
+  // public subscribeToStations(): void {
+  //   this.timerSubscription = timer(5000).subscribe(() => this.loadStationList());
+  // }
+
+  public subscribeToOrders(): void {
+    this.timerSubscription = timer(5000).subscribe(() => this.loadOrders());
   }
 
   public onSelect(stationId) {
     this.stationOrders = this.orders.filter(order => order.station.id == stationId)
-
+    this.currentStation = stationId;
   }
 
   public loadOrders(){
@@ -75,6 +79,7 @@ export class StationOrdersComponent implements OnInit {
         this.stationOrders = this.orders.filter(order => order.station.id == this.currentStation);
         // console.log(this.currentStation);
         this.isOrdersLoading = false;
+        this.subscribeToOrders();
       },
       (errorResponse) => {
         // this.displayErrors(errorResponse);

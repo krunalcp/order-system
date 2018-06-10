@@ -1,12 +1,12 @@
 class OrdersController < ApplicationController
 	def index
-		@orders = Order.all.order('created_at DESC')
+		@orders = Order.includes(:order_items).all.order('created_at')
 
 		render json: @orders
 	end
 
 	def create
-		new_order_params = {customer_name: order_params[:customer_name], value: order_params[:value]}
+		new_order_params = {customer_name: order_params[:customer_name], station_id: order_params[:station_id], value: order_params[:value]}
 
 		@order = Order.create(new_order_params)
 
@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
 
 		@order.order_items = order_items
 
-		@order.station = Station.first
+		@order.station = Station.first if @order.station.blank?
 
 		if @order.save
 			head :ok
