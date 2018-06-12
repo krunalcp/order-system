@@ -51,6 +51,7 @@
 	        </td>
 	        <td class="align-middle">{{order.value}}</td>
 	        <td class="text-center">
+            <a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
 	        	<button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" (click)="checkOutOrder(order)" *ngIf="order.station.id != lastStation">
 	        		FulFilled
 			        <span class="g-pl-5" *ngIf="isOrderChecking && currentOrderId == order.id">

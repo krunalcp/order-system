@@ -1,5 +1,5 @@
 class OrderSerializer < ActiveModel::Serializer
-	attributes :id, :customer_name, :station, :value, :created_at, :station_id
+	attributes :id, :customer_name, :station, :value, :created_at, :station_id, :charge_to_account
 
 	has_many :order_items
 
