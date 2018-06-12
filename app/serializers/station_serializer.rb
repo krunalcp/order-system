@@ -1,5 +1,5 @@
 class StationSerializer < ActiveModel::Serializer
-  attributes :id, :name, :next, :prev
+  attributes :id, :name, :next, :prev, :refresh_time
 
   def next
     next_val = object.next

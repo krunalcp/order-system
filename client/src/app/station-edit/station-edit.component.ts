@@ -97,6 +97,9 @@ export class StationEditComponent implements OnInit {
           Validators.required,
           // Validators.maxLength(this.maxlength.title)
         ]
+      ],
+      'refresh_time': [
+        this.station.refresh_time
       ]
     });
 
