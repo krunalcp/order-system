@@ -63,7 +63,7 @@ export class StationOrdersComponent implements OnInit {
   // }
 
   public subscribeToOrders(): void {
-    this.timerSubscription = timer(5000).subscribe(() => this.loadOrders());
+    this.timerSubscription = timer(60000).subscribe(() => this.loadOrders());
   }
 
   public onSelect(stationId) {
