@@ -50,6 +50,10 @@ const appRoutes: Routes = [
     component: OrderListComponent
   },
   {
+    path: 'order/list/:id',
+    component: OrderListComponent
+  },
+  {
     path: 'order/show/:id',
     component: OrderShowComponent
   },

@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
 		@order.station = Station.first if @order.station.blank?
 
 		if @order.save
-			head :ok
+			render json: {id: @order.id}
 		else
 			render json: {errors: order.errors.full_messages}, status: :unprocessable_entity
 		end

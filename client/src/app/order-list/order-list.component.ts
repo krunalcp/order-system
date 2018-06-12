@@ -28,12 +28,12 @@ export class OrderListComponent implements OnInit {
   public timerSubscription: any;
 
   constructor(
+    private route: ActivatedRoute,
   	private orderService: OrderService,
     private router: Router
   ) { }
 
   ngOnInit() {
-
   	this.loadOrderList();
   }
 
@@ -44,6 +44,12 @@ export class OrderListComponent implements OnInit {
         this.orders = successResponse.json();
         this.isOrdersLoading = false;
         // this.subscribeToData();
+        this.route.params.subscribe(
+          (params: any) => {
+            let id : number = params.id;
+            this.timerSubscription = timer(1000).subscribe(() => this.printOrders(id));
+          }
+        );
       },
       (errorResponse) => {
         this.isOrdersLoading = false;
@@ -96,6 +102,7 @@ export class OrderListComponent implements OnInit {
   }
 
   public printOrders(order_id) {
+    order_id = parseInt(order_id);
     let ordersData = []
     let order = this.orders.find(x => x.id === order_id)
     var printSection = document.getElementById(order_id).innerHTML;

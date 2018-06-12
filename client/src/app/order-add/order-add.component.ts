@@ -166,7 +166,12 @@ export class OrderAddComponent implements OnInit {
 
   private sucessHandler(successResponse: Response): void {
     this.isOrderAdding = false;
-    this.router.navigate(['/order/list']);
+    let id = JSON.parse(successResponse._body).id
+    if(id>0){
+      this.router.navigate(['/order/list/' + id]);
+    } else {
+      this.router.navigate(['/order/list']);
+    }
   }
 
   private errorHandler(errorResponse: Response): void {
