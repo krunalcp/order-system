@@ -7,18 +7,24 @@
 	  <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
 		  <!-- Text Input -->
 		  <div class="row">
-			  <div class="form-group g-mb-25 col-md-6">
+			  <div class="form-group g-mb-25 col-md-4">
 			    <div class="col-sm-6">
 			    	<label class="g-mb-10" for="customer_name"></label>
 			      <input class="form-control u-form-control rounded-0" type="text" placeholder="(Refernece)" id="customer_name" formControlName="customer_name">
 			    </div>
 			  </div>
-				<div class="form-group g-mb-25 col-md-6">
+				<div class="form-group g-mb-25 col-md-4">
 			    <div class="col-sm-6">
 			    	<label class="g-mb-10" for="station_id">Select station</label>
 		    		<select class="form-control rounded-0 u-form-control" id="station" formControlName="station_id" >
 		      		<option *ngFor="let station of stations" value="{{station.id}}">S{{station.id}} - {{station.name}}</option>
 			    	</select>
+			    </div>
+			  </div>
+				<div class="form-group g-mb-25 col-md-4">
+			    <div class="col-sm-6">
+			    	<label class="g-mb-10" for="charge_to_account">Charge To Account</label>
+			      <input class="form-control u-form-control rounded-0" type="checkbox" id="charge_to_account" formControlName="charge_to_account">
 			    </div>
 			  </div>
 			</div>

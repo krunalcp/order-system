@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-		new_order_params = {customer_name: order_params[:customer_name], station_id: order_params[:station_id], value: order_params[:value]}
+		new_order_params = {customer_name: order_params[:customer_name], station_id: order_params[:station_id], value: order_params[:value], charge_to_account: order_params[:charge_to_account]}
 
 		@order = Order.create(new_order_params)
 
@@ -47,7 +47,7 @@ class OrdersController < ApplicationController
 		@order = Order.find(params[:id])
 
 		if @order
-			new_order_params = {customer_name: order_params[:customer_name], station_id: order_params[:station_id], value: order_params[:value]}
+			new_order_params = {customer_name: order_params[:customer_name], station_id: order_params[:station_id], value: order_params[:value], charge_to_account: order_params[:charge_to_account]}
 
 			order_items = []
 
@@ -98,6 +98,6 @@ class OrdersController < ApplicationController
 	private
 
 	def order_params
-		params.permit(:customer_name, :station, :station_id, :value, :order_items => [:name, :price, :quantity])
+		params.permit(:customer_name, :station, :station_id, :value, :charge_to_account, :order_items => [:name, :price, :quantity])
 	end
 end

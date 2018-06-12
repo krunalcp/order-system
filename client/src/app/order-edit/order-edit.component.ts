@@ -159,6 +159,9 @@ export class OrderEditComponent implements OnInit {
       ],
       'station_id': [
         this.order.station
+      ],
+      'charge_to_account': [
+        this.order.charge_to_account
       ]
     });
 
