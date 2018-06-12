@@ -29,6 +29,7 @@ export class StationOrdersComponent implements OnInit {
   public lastStation: any;
   public selectedStation: any;
   public timerSubscription: any;
+  public station: any;
   public refreshTime: number;
 
   constructor(
@@ -71,9 +72,9 @@ export class StationOrdersComponent implements OnInit {
   public onSelect(stationId) {
     this.stationOrders = this.orders.filter(order => order.station.id == stationId)
     this.currentStation = stationId;
-    station = this.stations.find(x => x.id === stationId)
-    refreshTime = station.refresh_time
-    this.subscribeToOrders(refreshTime);
+    this.station = this.stations.find(x => x.id === stationId)
+    this.refreshTime = this.station.refresh_time
+    this.subscribeToOrders(this.refreshTime);
   }
 
   public loadOrders(ts: boolean){
@@ -83,11 +84,11 @@ export class StationOrdersComponent implements OnInit {
         this.orders = successResponse.json();
         this.stationOrders = this.orders.filter(order => order.station.id == this.currentStation);
         // console.log(this.currentStation);
-        station = this.stations.find(x => x.id === this.currentStation)
-        refreshTime = station.refresh_time
+        this.station = this.stations.find(x => x.id === this.currentStation)
+        refreshTime = this.station.refresh_time
         this.isOrdersLoading = false;
         if(ts){
-          this.subscribeToOrders(refreshTime);
+          this.subscribeToOrders(this.refreshTime);
         }
       },
       (errorResponse) => {
