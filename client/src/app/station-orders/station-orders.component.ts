@@ -85,7 +85,7 @@ export class StationOrdersComponent implements OnInit {
         this.stationOrders = this.orders.filter(order => order.station.id == this.currentStation);
         // console.log(this.currentStation);
         this.station = this.stations.find(x => x.id === this.currentStation)
-        refreshTime = this.station.refresh_time
+        this.refreshTime = this.station.refresh_time
         this.isOrdersLoading = false;
         if(ts){
           this.subscribeToOrders(this.refreshTime);
