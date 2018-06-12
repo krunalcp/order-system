@@ -23,6 +23,7 @@ export class OrderListComponent implements OnInit {
   public orders: any;
   public isOrdersLoading: boolean = false;
   public isOrderDeleting: boolean = false;
+  public isOrderPrinting: boolean = false;
   public currentOrderId: number;
   public isExporting: boolean = false;
   public timerSubscription: any;
@@ -47,7 +48,10 @@ export class OrderListComponent implements OnInit {
         this.route.params.subscribe(
           (params: any) => {
             let id : number = params.id;
-            this.timerSubscription = timer(1000).subscribe(() => this.printOrders(id));
+            if(this.isOrderPrinting == false){
+              this.isOrderPrinting = true;
+              this.timerSubscription = timer(1000).subscribe(() => this.printOrders(id));
+            }
           }
         );
       },
