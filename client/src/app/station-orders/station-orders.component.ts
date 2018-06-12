@@ -70,9 +70,10 @@ export class StationOrdersComponent implements OnInit {
   }
 
   public onSelect(stationId) {
-    this.stationOrders = this.orders.filter(order => order.station.id == stationId)
-    this.currentStation = stationId;
-    this.station = this.stations.find(x => x.id === stationId)
+    let sid = parseInt(stationId);
+    this.stationOrders = this.orders.filter(order => order.station.id == sid)
+    this.currentStation = sid;
+    this.station = this.stations.find(x => x.id === sid)
     this.refreshTime = this.station.refresh_time
     this.subscribeToOrders(this.refreshTime);
   }

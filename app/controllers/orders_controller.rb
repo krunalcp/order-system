@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 	def index
     order = params[:s] == '1' ? 'asc' : 'desc'
-		@orders = Order.includes(:order_items).all.order("created_at #{order}")
+		@orders = Order.includes([:station, :order_items]).all.order("created_at #{order}")
 
 		render json: @orders
 	end
