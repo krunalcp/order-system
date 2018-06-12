@@ -40,8 +40,8 @@ export class StationOrdersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadOrders(true);
     this.loadStationList();
+    this.loadOrders(true);
   }
 
   public loadStationList(){
