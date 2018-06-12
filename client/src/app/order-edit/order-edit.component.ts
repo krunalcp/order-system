@@ -17,14 +17,14 @@ import { Order } from '../order';
 export class OrderEditComponent implements OnInit {
 
 	public errorMessage: any;
-  public formErrors = {
-    'customer_name': ''
-  };
-  validationMessages = {
-    'customer_name': {
-      'required': 'Reference is required.',
-    }
-  };
+  // public formErrors = {
+  //   'customer_name': ''
+  // };
+  // validationMessages = {
+  //   'customer_name': {
+  //     'required': 'Reference is required.',
+  //   }
+  // };
 
 	private orderId: number;
   public orderForm: FormGroup;
@@ -155,10 +155,7 @@ export class OrderEditComponent implements OnInit {
   private buildForm(): void {
     this.orderForm = this.fb.group({
       'customer_name': [
-        this.order.customer_name, [
-          Validators.required,
-          // Validators.maxLength(this.maxlength.title)
-        ]
+        this.order.customer_name
       ],
       'station_id': [
         this.order.station

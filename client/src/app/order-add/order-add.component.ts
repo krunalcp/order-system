@@ -24,14 +24,14 @@ export class OrderAddComponent implements OnInit {
 
   public items: any;
 	public errorMessage: any;
-  public formErrors = {
-    'customer_name': ''
-  };
-  validationMessages = {
-    'customer_name': {
-      'required': 'Reference is required.',
-    }
-  };
+  // public formErrors = {
+  //   'customer_name': ''
+  // };
+  // validationMessages = {
+  //   'customer_name': {
+  //     'required': 'Reference is required.',
+  //   }
+  // };
 
   public orderForm: FormGroup;
 	public order : Order = new Order();
@@ -120,10 +120,7 @@ export class OrderAddComponent implements OnInit {
   private buildForm(): void {
     this.orderForm = this.fb.group({
       'customer_name': [
-        this.order.customer_name, [
-          Validators.required,
-          // Validators.maxLength(this.maxlength.title)
-        ]
+        this.order.customer_name
       ],
       'station_id': [
         this.order.station

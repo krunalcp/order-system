@@ -9,10 +9,7 @@
 		  <div class="row">
         <div class="form-group g-mb-25 col-md-6">
 			    <div class="col-sm-6">
-			    	<label class="g-mb-10" for="customer_name">
-			    		<span *ngIf="!formErrors.customer_name" [ngClass]="{'text-success': !orderForm.controls.customer_name.pristine}"></span>
-            	<span *ngIf="formErrors.customer_name" class="text-danger">{{formErrors.customer_name}}</span>
-			    	</label>
+			    	<label class="g-mb-10" for="customer_name">Reference Name</label>
 			      <input class="form-control u-form-control rounded-0" type="text" placeholder="(Refernece)" id="customer_name" formControlName="customer_name">
 			    </div>
 			  </div>
