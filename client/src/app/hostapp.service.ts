@@ -16,5 +16,8 @@ export class HostappService {
   	else if (environment == 'foodup-demo.herokuapp.com'){
       return "https://foodup-demo.herokuapp.com"
   	}
+    else if (environment == 'ctordering.herokuapp.com'){
+      return "https://ctordering.herokuapp.com"
+  	}
   }
 }
