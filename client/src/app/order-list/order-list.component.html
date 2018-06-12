@@ -4,6 +4,13 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12 text-right">
+			<button class="btn btn-md u-btn-outline-deeporange u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="loadOrderList()">
+				<span *ngIf="!isOrdersLoading">Refresh</span>
+				<span class="g-pl-5" *ngIf="isOrdersLoading">
+					<i class="fa fa-spinner fa-spin"></i>
+					<span class="sr-only">Refreshing...</span>
+				</span>
+			</button>
 			<a routerLink="/order/add" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
 			<i class="fa fa-plus-circle g-mr-5"></i>New Order
 			</a>
@@ -51,7 +58,7 @@
 			        </span>
 	        	</button>
 						<button class="btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="printOrders(order.id)">
-							<i class="fa fa-file-excel-o g-mr-5"></i>Print
+							<i class="fa fa-file-pdf-o g-mr-5"></i>Print
 						</button>
 	        </td>
 					<div id="{{order.id}}" style="display: none; width: 90mm;">
