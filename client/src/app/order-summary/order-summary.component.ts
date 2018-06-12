@@ -18,17 +18,19 @@ export class OrderSummaryComponent implements OnInit {
   constructor(private itemService: ItemService) { }
 
   ngOnInit() {
-    this.loadItemList();
+    this.loadItemList(true);
   }
 
-  public loadItemList(){
+  public loadItemList(ts: boolean){
     this.isItemsLoading = true;
     this.itemService.listSummary().subscribe(
       successResponse => {
         this.orderSummary = successResponse.json();
         this.stations = this.orderSummary[0].stations
         this.isItemsLoading = false;
-        this.subscribeToData();
+        if(ts){
+          this.subscribeToData();
+        }
       },
       (errorResponse) => {
         // this.displayErrors(errorResponse);
@@ -37,7 +39,7 @@ export class OrderSummaryComponent implements OnInit {
   }
 
   public subscribeToData(): void {
-    this.timerSubscription = timer(5000).subscribe(() => this.loadItemList());
+    this.timerSubscription = timer(60000).subscribe(() => this.loadItemList(true));
   }
 
 }

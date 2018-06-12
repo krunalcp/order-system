@@ -4,7 +4,19 @@
 	</div>
 
 	<div class="row">
-		<div class="offset-md-8 col-md-4">
+    <div class="offset-md-6 col-md-3">
+      <div class="form-group g-mb-25">
+        <label for="exampleSelect1">&nbsp;</label>
+        <button class="form-control rounded-0 btn btn-md u-btn-outline-deeporange u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="loadOrders(false)">
+          <span *ngIf="!isOrdersLoading">Refresh</span>
+          <span class="g-pl-5" *ngIf="isOrdersLoading">
+            <i class="fa fa-spinner fa-spin"></i>
+            <span class="sr-only">Refreshing...</span>
+          </span>
+        </button>
+      </div>
+    </div>
+		<div class="col-md-3">
 			<div class="form-group g-mb-25">
 		    <label for="exampleSelect1">Select station</label>
 		    <select class="form-control rounded-0" id="exampleSelect1" (change)="onSelect($event.target.value)">

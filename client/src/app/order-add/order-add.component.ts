@@ -24,14 +24,14 @@ export class OrderAddComponent implements OnInit {
 
   public items: any;
 	public errorMessage: any;
-  // public formErrors = {
-  //   'customer_name': ''
-  // };
-  // validationMessages = {
-  //   'customer_name': {
-  //     'required': 'Reference is required.',
-  //   }
-  // };
+  public formErrors = {
+    'customer_name': ''
+  };
+  validationMessages = {
+    // 'customer_name': {
+    //   'required': 'Reference is required.',
+    // }
+  };
 
   public orderForm: FormGroup;
 	public order : Order = new Order();

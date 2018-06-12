@@ -17,14 +17,14 @@ import { Order } from '../order';
 export class OrderEditComponent implements OnInit {
 
 	public errorMessage: any;
-  // public formErrors = {
-  //   'customer_name': ''
-  // };
-  // validationMessages = {
-  //   'customer_name': {
-  //     'required': 'Reference is required.',
-  //   }
-  // };
+  public formErrors = {
+    'customer_name': ''
+  };
+  validationMessages = {
+    // 'customer_name': {
+    //   'required': 'Reference is required.',
+    // }
+  };
 
 	private orderId: number;
   public orderForm: FormGroup;

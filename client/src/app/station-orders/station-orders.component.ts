@@ -37,7 +37,7 @@ export class StationOrdersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadOrders();
+    this.loadOrders(true);
     this.loadStationList();
   }
 
@@ -63,7 +63,7 @@ export class StationOrdersComponent implements OnInit {
   // }
 
   public subscribeToOrders(): void {
-    this.timerSubscription = timer(60000).subscribe(() => this.loadOrders());
+    this.timerSubscription = timer(60000).subscribe(() => this.loadOrders(true));
   }
 
   public onSelect(stationId) {
@@ -71,7 +71,7 @@ export class StationOrdersComponent implements OnInit {
     this.currentStation = stationId;
   }
 
-  public loadOrders(){
+  public loadOrders(ts: boolean){
     this.isOrdersLoading = true;
   	this.orderService.list(true).subscribe(
       successResponse => {
@@ -79,7 +79,9 @@ export class StationOrdersComponent implements OnInit {
         this.stationOrders = this.orders.filter(order => order.station.id == this.currentStation);
         // console.log(this.currentStation);
         this.isOrdersLoading = false;
-        this.subscribeToOrders();
+        if(ts){
+          this.subscribeToOrders();
+        }
       },
       (errorResponse) => {
         // this.displayErrors(errorResponse);
@@ -96,7 +98,7 @@ export class StationOrdersComponent implements OnInit {
         this.isOrderChecking = false;
         let orderIndex = this.stationOrders.indexOf(order);
         this.stationOrders.splice(orderIndex, 1);
-        this.loadOrders();
+        this.loadOrders(false);
         // this.currentStation = order.station.next;
       },
       (errorResponse) => {
