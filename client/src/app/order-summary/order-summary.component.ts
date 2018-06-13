@@ -28,9 +28,9 @@ export class OrderSummaryComponent implements OnInit {
         this.orderSummary = successResponse.json();
         this.stations = this.orderSummary[0].stations
         this.isItemsLoading = false;
-        if(ts){
-          this.subscribeToData();
-        }
+        // if(ts){
+        //   this.subscribeToData();
+        // }
       },
       (errorResponse) => {
         // this.displayErrors(errorResponse);
