@@ -27,6 +27,14 @@
 		        <input class="form-control form-control-md rounded-0" type="number" placeholder="Enter price" id="price" formControlName="price">
 		      </div>
 			  </div>
+        <div class="form-group g-mb-25 col-md-6">
+			  	<label class="g-mb-10" for="order_no">
+		    		<span *ngIf="!formErrors.order_no"
+                [ngClass]="{'text-success': !itemForm.controls.order_no.pristine}"></span>
+          	<span *ngIf="formErrors.order_no" class="text-danger">{{formErrors.order_no}}</span>
+		    	</label>
+		      <input class="form-control form-control-md rounded-0" type="number" placeholder="Enter Order no" id="order_no" formControlName="order_no">
+			  </div>
 			</div>
 		</form>
 		<div class="text-right">

@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  default_scope { order(:order_no) }
 
   def self.get_summary
     summary =[]

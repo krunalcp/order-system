@@ -19,7 +19,8 @@ export class ItemAddComponent implements OnInit {
   public errorMessage: any;
   public formErrors = {
     'name': '',
-    'price': ''
+    'price': '',
+    'order_no': ''
   };
   validationMessages = {
     'name': {
@@ -27,6 +28,9 @@ export class ItemAddComponent implements OnInit {
     },
     'price': {
       'required': 'Price is required.',
+    },
+    'order_no': {
+      'required': 'Order no is required.',
     }
   };
 
@@ -86,6 +90,12 @@ export class ItemAddComponent implements OnInit {
           // Validators.maxLength(this.maxlength.description)
         ]
       ],
+      'order_no': [
+        this.item.order_no, [
+          Validators.required,
+          // Validators.maxLength(this.maxlength.description)
+        ]
+      ]
     });
 
     this.itemForm.valueChanges

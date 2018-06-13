@@ -26,7 +26,8 @@ export class ItemEditComponent implements OnInit {
 	public errorMessage: any;
   public formErrors = {
     'name': '',
-    'price': ''
+    'price': '',
+    'order_no': ''
   };
   validationMessages = {
     'name': {
@@ -34,6 +35,9 @@ export class ItemEditComponent implements OnInit {
     },
     'price': {
       'required': 'Price is required.'
+    },
+    'order_no': {
+      'required': 'Order no is required.'
     }
   };
 
@@ -87,6 +91,7 @@ export class ItemEditComponent implements OnInit {
         let data = successResponse.json();
         this.item['name'] = data.name;
         this.item['price'] = data.price;
+        this.item['order_no'] = data.order_no;
         this.itemForm.patchValue(this.item);
       },
       () => {
@@ -105,6 +110,12 @@ export class ItemEditComponent implements OnInit {
       ],
       'price': [
         this.item.price, [
+          Validators.required,
+          // Validators.maxLength(this.maxlength.description)
+        ]
+      ],
+      'order_no': [
+        this.item.order_no, [
           Validators.required,
           // Validators.maxLength(this.maxlength.description)
         ]

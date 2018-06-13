@@ -1,5 +1,5 @@
 class ItemSerializer < ActiveModel::Serializer
-  attributes :id, :name, :price, :quantity, :item_used
+  attributes :id, :name, :price, :quantity, :item_used, :order_no
 
   def quantity
   	0
