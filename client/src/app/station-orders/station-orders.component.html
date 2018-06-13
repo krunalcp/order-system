@@ -64,6 +64,26 @@
 	    </tbody>
 	  </table>
 	</div>
+
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <button class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15 g-mr-10" (click)="callLoadOrderList(this.currentPage - 1)">
+        <span *ngIf="!isOrdersLoading">Prev</span>
+        <span class="g-pl-5" *ngIf="isOrdersLoading">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Prev...</span>
+        </span>
+      </button>
+      <button class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15 g-ml-10" (click)="callLoadOrderList(this.currentPage + 1)">
+        <span *ngIf="!isOrdersLoading">Next</span>
+        <span class="g-pl-5" *ngIf="isOrdersLoading">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Next...</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
 	<div class="alert alert-info" role="alert" *ngIf="!currentStation && !isOrdersLoading">
     <strong>Choose station!</strong> to see the orders.
   </div>

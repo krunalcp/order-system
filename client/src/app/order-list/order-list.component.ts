@@ -27,6 +27,9 @@ export class OrderListComponent implements OnInit {
   public currentOrderId: number;
   public isExporting: boolean = false;
   public timerSubscription: any;
+  public currentPage: number = 1;
+  public totalOrder: number = 0;
+  public perPageOrder: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,9 +41,33 @@ export class OrderListComponent implements OnInit {
   	this.loadOrderList();
   }
 
+  public callLoadOrderList(page: number) {
+    if(page > 0 && ((page - 1) * this.perPageOrder) < this.totalOrder){
+      this.currentPage = page;
+      this.loadOrderList();
+    }
+  }
+
   public loadOrderList(){
     this.isOrdersLoading = true;
-      this.orderService.list(false).subscribe(
+    this.orderService.list(this.currentPage, 0, 0).subscribe(
+      successResponse => {
+        let listResponse = successResponse.json();
+        this.currentPage = listResponse.page;
+        this.totalOrder = listResponse.total;
+        this.perPageOrder = listResponse.per;
+        this.loadOnlyOrderList();
+      },
+      (errorResponse) => {
+        this.isOrdersLoading = false;
+        // this.displayErrors(errorResponse);
+      }
+    );
+  }
+
+  public loadOnlyOrderList(){
+    this.isOrdersLoading = true;
+    this.orderService.list(this.currentPage, 0, 1).subscribe(
       successResponse => {
         this.orders = successResponse.json();
         this.isOrdersLoading = false;
@@ -85,24 +112,32 @@ export class OrderListComponent implements OnInit {
     this.isExporting = true;
     let ordersData = []
 
-     this.orders.forEach(function(order) {
-      order.order_items.forEach(function(orderItem) {
-        let newItem = {ORDER_ID: '', ORDER_TIME: '',ORDER_REFERENCE: '',STATION: '',TOTAL_VALUE: '',ITEM: '',QUANTITY: '',VALUE: ''}
-        newItem.ORDER_ID = order.id;
-        newItem.ORDER_TIME = order.created_at;
-        newItem.ORDER_REFERENCE = order.customer_name;
-        newItem.STATION = 'S' + order.station.id + ' - ' + order.station.name;
-        newItem.TOTAL_VALUE = order.value;
-        newItem.ITEM = orderItem.item;
-        newItem.QUANTITY = orderItem.quantity;
-        newItem.VALUE = orderItem.value;
+    this.orderService.listAll().subscribe(
+      successResponse => {
+        let allOrders = successResponse.json();
 
-        ordersData.push(newItem);
-      });
-     });
+        allOrders.forEach(function(order) {
+          order.order_items.forEach(function(orderItem) {
+            let newItem = {ORDER_ID: '', ORDER_TIME: '', ORDER_REFERENCE: '', STATION: '', TOTAL_VALUE: '', ITEM: '', QUANTITY: '',VALUE: ''}
+            newItem.ORDER_ID = order.id;
+            newItem.ORDER_TIME = order.created_at;
+            newItem.ORDER_REFERENCE = order.customer_name;
+            newItem.STATION = 'S' + order.station.id + ' - ' + order.station.name;
+            newItem.TOTAL_VALUE = order.value;
+            newItem.ITEM = orderItem.item;
+            newItem.QUANTITY = orderItem.quantity;
+            newItem.VALUE = orderItem.value;
 
+            ordersData.push(newItem);
+          });
+        });
 
-    this.exportAsExcelFile(ordersData, 'ctordering');
+        this.exportAsExcelFile(ordersData, 'ctordering');
+      },
+      (errorResponse) => {
+        this.isExporting = false;
+      }
+    );
   }
 
   public printOrders(order_id) {

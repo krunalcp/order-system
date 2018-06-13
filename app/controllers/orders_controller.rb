@@ -1,9 +1,26 @@
 class OrdersController < ApplicationController
+  before_action :set_pagination, only: :index
 	def index
-    order = params[:s] == '1' ? 'asc' : 'desc'
-		@orders = Order.includes([:station, :order_items]).all.order("created_at #{order}")
+    station_order = (params[:s].to_i > 0)
+    order = station_order ? 'asc' : 'desc'
 
-		render json: @orders
+    @orders = Order.includes([:station, :order_items]).order("created_at #{order}")
+
+    if params[:all] == "true"
+      render json: @orders
+    else
+      if station_order
+        @orders = @orders.where(station_id: params[:s])
+      end
+      @total = @orders.count
+      @orders = @orders.limit(@per_page).offset(@offset)
+
+      if params[:oo] == "1"
+        render json: @orders
+      else
+  		  render json: { orders: @orders, total: @total, page: @page, per: @per_page }
+      end
+    end
 	end
 
 	def create

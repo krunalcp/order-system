@@ -4,7 +4,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12 text-right">
-			<button class="btn btn-md u-btn-outline-deeporange u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="loadOrderList()">
+			<button class="btn btn-md u-btn-outline-deeporange u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="callLoadOrderList(1)">
 				<span *ngIf="!isOrdersLoading">Refresh</span>
 				<span class="g-pl-5" *ngIf="isOrdersLoading">
 					<i class="fa fa-spinner fa-spin"></i>
@@ -101,6 +101,24 @@
 	    </tbody>
 	  </table>
 	</div>
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <button class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15 g-mr-10" (click)="callLoadOrderList(this.currentPage - 1)">
+        <span *ngIf="!isOrdersLoading">Prev</span>
+        <span class="g-pl-5" *ngIf="isOrdersLoading">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Prev...</span>
+        </span>
+      </button>
+      <button class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15 g-ml-10" (click)="callLoadOrderList(this.currentPage + 1)">
+        <span *ngIf="!isOrdersLoading">Next</span>
+        <span class="g-pl-5" *ngIf="isOrdersLoading">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Next...</span>
+        </span>
+      </button>
+    </div>
+  </div>
 	<div class="row" *ngIf="isOrdersLoading">
 		<div class="col-md-12 text-center g-color-blue">
 		  <i class="fa fa-spinner fa-spin"></i>

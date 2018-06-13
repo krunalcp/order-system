@@ -31,6 +31,9 @@ export class StationOrdersComponent implements OnInit {
   public timerSubscription: any;
   public station: any;
   public refreshTime: number;
+  public currentPage: number = 1;
+  public totalOrder: number = 0;
+  public perPageOrder: number = 0;
 
   constructor(
   	private orderService: OrderService,
@@ -41,7 +44,6 @@ export class StationOrdersComponent implements OnInit {
 
   ngOnInit() {
     this.loadStationList();
-    this.loadOrders(true);
   }
 
   public loadStationList(){
@@ -53,6 +55,7 @@ export class StationOrdersComponent implements OnInit {
         this.currentStation = this.stations[0].id;
         let last = this.stations.length;
         this.lastStation = this.stations[last - 1].id;
+        this.loadOrders(true);
         // this.subscribeToStations();
       },
       (errorResponse) => {
@@ -71,19 +74,34 @@ export class StationOrdersComponent implements OnInit {
 
   public onSelect(stationId) {
     let sid = parseInt(stationId);
-    this.stationOrders = this.orders.filter(order => order.station.id == sid)
+    // this.stationOrders = this.orders.filter(order => order.station.id == sid)
     this.currentStation = sid;
+    this.currentPage = 1;
+    this.totalOrder = 0;
+    this.perPageOrder = 0;
     this.station = this.stations.find(x => x.id === sid)
     this.refreshTime = this.station.refresh_time
-    this.subscribeToOrders(this.refreshTime);
+    this.loadOrders(true);
+    //this.subscribeToOrders(this.refreshTime);
+  }
+
+  public callLoadOrderList(page: number) {
+    if(page > 0 && ((page - 1) * this.perPageOrder) < this.totalOrder){
+      this.currentPage = page;
+      this.loadOrders(true);
+    }
   }
 
   public loadOrders(ts: boolean){
     this.isOrdersLoading = true;
-  	this.orderService.list(true).subscribe(
+  	this.orderService.list(this.currentPage, this.currentStation, 0).subscribe(
       successResponse => {
-        this.orders = successResponse.json();
-        this.stationOrders = this.orders.filter(order => order.station.id == this.currentStation);
+        let listResponse = successResponse.json();
+        this.orders = listResponse.orders;
+        this.stationOrders = this.orders; //.filter(order => order.station.id == this.currentStation);
+        this.currentPage = listResponse.page;
+        this.totalOrder = listResponse.total;
+        this.perPageOrder = listResponse.per;
         // console.log(this.currentStation);
         this.station = this.stations.find(x => x.id === this.currentStation)
         this.refreshTime = this.station.refresh_time

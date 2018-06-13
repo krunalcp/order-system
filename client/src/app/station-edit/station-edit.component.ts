@@ -82,6 +82,7 @@ export class StationEditComponent implements OnInit {
       successResponse => {
         let data = successResponse.json();
         this.station['name'] = data.name;
+        this.station['refresh_time'] = data.refresh_time;
         this.stationForm.patchValue(this.station);
       },
       () => {
