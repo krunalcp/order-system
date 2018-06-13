@@ -97,14 +97,13 @@ export class StationOrdersComponent implements OnInit {
   	this.orderService.list(this.currentPage, this.currentStation, 0).subscribe(
       successResponse => {
         let listResponse = successResponse.json();
-        this.orders = listResponse.orders;
-        this.stationOrders = this.orders; //.filter(order => order.station.id == this.currentStation);
         this.currentPage = listResponse.page;
         this.totalOrder = listResponse.total;
         this.perPageOrder = listResponse.per;
         // console.log(this.currentStation);
         this.station = this.stations.find(x => x.id === this.currentStation)
         this.refreshTime = this.station.refresh_time
+        this.loadOnlyOrderList();
         this.isOrdersLoading = false;
         if(ts){
           this.subscribeToOrders(this.refreshTime);
@@ -113,6 +112,20 @@ export class StationOrdersComponent implements OnInit {
       (errorResponse) => {
         // this.displayErrors(errorResponse);
         this.isOrdersLoading = true;
+      }
+    );
+  }
+
+  public loadOnlyOrderList(){
+    this.orderService.list(this.currentPage, this.currentStation, 1).subscribe(
+      successResponse => {
+        this.orders = successResponse.json();
+        this.stationOrders = this.orders; //.filter(order => order.station.id == this.currentStation);
+
+      },
+      (errorResponse) => {
+        this.isOrdersLoading = false;
+        // this.displayErrors(errorResponse);
       }
     );
   }
