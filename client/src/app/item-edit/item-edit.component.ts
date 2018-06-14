@@ -92,6 +92,7 @@ export class ItemEditComponent implements OnInit {
         this.item['name'] = data.name;
         this.item['price'] = data.price;
         this.item['order_no'] = data.order_no;
+        this.item['item_used'] = data.item_used;
         this.itemForm.patchValue(this.item);
       },
       () => {

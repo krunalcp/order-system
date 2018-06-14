@@ -13,7 +13,8 @@
 		    		<span *ngIf="!formErrors.name" [ngClass]="{'text-success': !itemForm.controls.name.pristine}"></span>
           	<span *ngIf="formErrors.name" class="text-danger">{{formErrors?.name}}</span>
 		    	</label>
-		      <input class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
+          <span *ngIf="!item.item_used" class="form-control u-form-control rounded-0">{{item.name}}</span>
+		      <input *ngIf="item.item_used"  class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
 			  </div>
 			  <div class="form-group g-mb-25 col-md-6">
 			  	<label class="g-mb-10" for="price">
@@ -24,7 +25,8 @@
 		        <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
               <i class="fa fa-usd" aria-hidden="true"></i>
             </div>
-		        <input class="form-control form-control-md rounded-0" type="number" placeholder="Enter price" id="price" formControlName="price">
+            <span *ngIf="!item_used" class="form-control u-form-control rounded-0">{{item.price}}</span>
+		        <input *ngIf="item_used" class="form-control form-control-md rounded-0" type="number" placeholder="Enter price" id="price" formControlName="price">
 		      </div>
 			  </div>
         <div class="form-group g-mb-25 col-md-6">

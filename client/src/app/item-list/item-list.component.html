@@ -27,7 +27,7 @@
 	        <td align="right">${{(item.price * 1).toFixed(2)}}</td>
 	        <td class="text-center">
 	        	<a href="#!" class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/item/show/{{item.id}}">open</a>
-						<button class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" [disabled]="item.item_used" routerLink="/item/edit/{{item.id}}" >
+						<button class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/item/edit/{{item.id}}" >
 						edit
 						</button>
 
