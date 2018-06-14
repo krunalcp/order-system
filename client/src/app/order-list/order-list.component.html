@@ -86,7 +86,9 @@
 						    <tbody>
 						      <tr *ngFor="let order_item of order.order_items">
 						        <td align="left">
-                      {{order_item.item}}<br><small>({{order_item.notes}})</small>
+                      {{order_item.item}}<br>
+
+                      <small *ngIf="order_item.notes != null && order_item.notes != ''">({{order_item.notes}})</small>
                     </td>
 						        <td align="right">{{order_item.quantity}}</td>
 						        <td align="right">${{(order_item.price * order_item.quantity).toFixed(2)}}</td>
