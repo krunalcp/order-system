@@ -40,7 +40,7 @@
 			  	<span class="row">
 			  		<dt class="col-md-6">Total Value:
 			  		</dt>
-			  		<dd class="col-md-6">{{order.value}}
+			  		<dd class="col-md-6">${{(order.value * 1).toFixed(2)}}
 			  		</dd>
 			  	</span>
 			  </p>
@@ -67,11 +67,11 @@
 	      <tbody>
 	        <tr *ngFor="let item of order.order_items">
 						<td>{{item.item}}</td>
-						<td>{{item.price}}</td>
+						<td>${{(item.price * 1).toFixed(2)}}</td>
 						<td>
 							{{item.quantity}}
 						</td>
-						<td>{{item.quantity * item.price}}</td>
+						<td>${{(item.quantity * item.price).toFixed(2)}}</td>
 					</tr>
 				</tbody>
 			</table>

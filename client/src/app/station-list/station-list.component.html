@@ -4,7 +4,7 @@
   </div>
   <div class="row">
     <div class="col-md-12 text-right">
-      <a routerLink="/station/add" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"> 
+      <a routerLink="/station/add" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
       <i class="fa fa-plus-circle g-mr-5"></i>New Station
       </a>
     </div>
@@ -13,9 +13,10 @@
     <table class="table table-bordered u-table--v2">
       <thead class="text-uppercase g-letter-spacing-1">
         <tr>
-          <th class="g-font-weight-300 g-color-black g-min-width-300">Station ID</th>
-          <th class="g-font-weight-300 g-color-black g-min-width-300">Station Name</th>
-          <th class="g-font-weight-300 g-color-black">Options</th>
+          <th class="g-font-weight-300 g-color-black">#</th>
+          <th class="g-font-weight-300 g-color-black g-min-width-300">Name</th>
+          <th class="g-font-weight-300 g-color-black g-min-width-300">Next Station</th>
+          <th class="g-font-weight-300 g-color-black g-min-width-300">Options</th>
         </tr>
       </thead>
 
@@ -23,6 +24,7 @@
         <tr *ngFor="let station of stations">
           <td class="align-middle">{{station.id}}</td>
           <td>{{station.name}}</td>
+          <td></td>
           <td class="text-center">
             <a href="#!" class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/station/show/{{station.id}}">open</a>
             <a href="#!" class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/station/edit/{{station.id}}">edit</a>

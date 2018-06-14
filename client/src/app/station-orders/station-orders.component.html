@@ -51,7 +51,7 @@
 	        <td class="align-middle">
 	        	<span *ngFor="let item of order.order_items">{{item.quantity}} &#215; {{item.item}}<br></span>
 	        </td>
-	        <td class="align-middle">{{order.value}}</td>
+	        <td align="right">${{(order.value * 1).toFixed(2)}}</td>
 	        <td class="text-center">
             <a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
 	        	<button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" (click)="checkOutOrder(order)" *ngIf="order.station.id != lastStation">

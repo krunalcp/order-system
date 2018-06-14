@@ -31,11 +31,12 @@
 	  <table class="table table-bordered u-table--v2">
 	    <thead class="text-uppercase g-letter-spacing-1">
 	      <tr>
-	        <th class="g-font-weight-300 g-color-black">Order ID</th>
-	        <th class="g-font-weight-300 g-color-black">Order Time</th>
+	        <th class="g-font-weight-300 g-color-black">#</th>
+	        <th class="g-font-weight-300 g-color-black">Time</th>
 	        <th class="g-font-weight-300 g-color-black">Reference</th>
 	        <th class="g-font-weight-300 g-color-black">Station</th>
-	        <th class="g-font-weight-300 g-color-black">Total value</th>
+          <th class="g-font-weight-300 g-color-black">Items</th>
+	        <th class="g-font-weight-300 g-color-black">Value</th>
 	        <th class="g-font-weight-300 g-color-black">Options</th>
 	      </tr>
 	    </thead>
@@ -43,10 +44,13 @@
 	    <tbody>
 	      <tr *ngFor="let order of orders">
 	        <td class="align-middle">{{order.id}}</td>
-	        <td class="align-middle">{{order.created_at}}</td>
+	        <td class="align-middle">{{order.created_at | date:'dd.MM.yy HH:mm:ss'}}</td>
 	        <td class="align-middle">{{order.customer_name}}</td>
 	        <td class="align-middle">S{{order.station.id}} - {{order.station.name}}</td>
-	        <td class="align-middle">{{order.value}}</td>
+          <td class="align-middle">
+	        	<span *ngFor="let item of order.order_items">{{item.quantity}} &#215; {{item.item}}<br></span>
+	        </td>
+	        <td align="right">${{(order.value * 1).toFixed(2)}}</td>
 	        <td class="text-center">
 	        	<a class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/order/show/{{order.id}}">open</a>
 	        	<a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
@@ -87,7 +91,7 @@
 						      </tr>
 						      <tr>
 						        <td align="left" colspan="2">TOTAL</td>
-										<td align="right">${{order.value}}</td>
+										<td align="right">${{(order.value * 1).toFixed(2)}}</td>
 						      </tr>
 						    </tbody>
 						  </table>
