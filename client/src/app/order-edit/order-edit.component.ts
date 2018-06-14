@@ -8,6 +8,9 @@ import { OrderService } from '../order.service';
 import { ItemService } from '../item.service';
 
 import { Order } from '../order';
+
+declare var $: any;
+
 @Component({
   selector: 'app-order-edit',
   templateUrl: './order-edit.component.html',
