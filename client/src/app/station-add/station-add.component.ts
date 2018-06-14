@@ -31,6 +31,7 @@ export class StationAddComponent implements OnInit {
   public stationAddRequest: Subscription;
   private isFormSubmitted: boolean;
   public isStationAdding: boolean = false;
+  public stations: any;
 
   constructor(
     private stationService: StationService,
@@ -40,8 +41,8 @@ export class StationAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.buildForm();
+    this.getStationList();
   }
 
   public onSubmit() {
@@ -78,6 +79,9 @@ export class StationAddComponent implements OnInit {
       ],
       'refresh_time': [
         this.station.refresh_time
+      ],
+      'next_station_id': [
+        this.station.next_station_id
       ]
     });
 
@@ -85,6 +89,14 @@ export class StationAddComponent implements OnInit {
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
+  }
+
+  private getStationList(): void {
+    this.stationService.list().subscribe(
+      successResponse => {
+        this.stations = successResponse.json();
+      }
+    );
   }
 
   private onValueChanged(data?: any) {

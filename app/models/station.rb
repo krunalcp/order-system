@@ -3,7 +3,7 @@ class Station < ApplicationRecord
   has_many :orders
 
   def next
-    Station.where("id > ?", id).first
+    Station.find_by_id(next_station_id)
   end
 
   def prev

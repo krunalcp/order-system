@@ -8,36 +8,37 @@
       <!-- Text Input -->
       <div class="row">
         <div class="form-group g-mb-25 col-md-6">
-          <div class="col-sm-9">
-            <label class="g-mb-10" for="name">
-              <span *ngIf="!formErrors.name"
-                  [ngClass]="{'text-success': !stationForm.controls.name.pristine}"></span>
-              <span *ngIf="formErrors.name" class="text-danger">{{formErrors.name}}</span>
-            </label>
-            <input class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
-          </div>
+          <label class="g-mb-10" for="name">
+            <span *ngIf="!formErrors.name"
+                [ngClass]="{'text-success': !stationForm.controls.name.pristine}">Name</span>
+            <span *ngIf="formErrors.name" class="text-danger">{{formErrors.name}}</span>
+          </label>
+          <input class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
         </div>
         <div class="form-group g-mb-25 col-md-6">
-          <div class="col-sm-9">
-            <label class="g-mb-10" for="refresh_time"></label>
-            <input class="form-control u-form-control rounded-0" type="text" placeholder="Enter Refresh Time" id="refresh_time" formControlName="refresh_time">
-          </div>
+          <label class="g-mb-10" for="refresh_time">Next Station</label>
+          <select class="form-control rounded-0 u-form-control" id="station" formControlName="next_station_id" >
+	      		<option *ngFor="let station of stations" value="{{station.id}}">S{{station.id}} - {{station.name}}</option>
+		    	</select>
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="refresh_time">Refresh Time</label>
+          <input class="form-control u-form-control rounded-0" type="text" placeholder="Enter Refresh Time" id="refresh_time" formControlName="refresh_time">
         </div>
       </div>
     </form>
     <div class="text-right">
       <button (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
-            <span *ngIf="!isStationAdding">Add Station</span>
-            <span *ngIf="isStationAdding">Adding Station...</span>
-            <span class="g-pl-5" *ngIf="isStationAdding">
-              <i class="fa fa-spinner fa-spin"></i>
-              <span class="sr-only">Loading...</span>
-            </span>
-          </button>
+        <span *ngIf="!isStationAdding">Add Station</span>
+        <span *ngIf="isStationAdding">Adding Station...</span>
+        <span class="g-pl-5" *ngIf="isStationAdding">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Loading...</span>
+        </span>
+      </button>
       <button class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="cancelStation()">
         Cancel
       </button>
-
     </div>
   </div>
 </div>

@@ -22,6 +22,7 @@ export class StationEditComponent implements OnInit {
   public stationUpdateRequest: Subscription;
   private isFormSubmitted: boolean;
   public isStationUpdating: boolean = false;
+  public stations: any;
 
   public errorMessage: any;
   public formErrors = {
@@ -51,7 +52,7 @@ export class StationEditComponent implements OnInit {
         this.getStation();
       }
     );
-
+    this.getStationList();
   }
 
   public onSubmit() {
@@ -73,6 +74,14 @@ export class StationEditComponent implements OnInit {
     );
   }
 
+  private getStationList(): void {
+    this.stationService.list().subscribe(
+      successResponse => {
+        this.stations = successResponse.json();
+      }
+    );
+  }
+
   public cancelStation(){
     this.router.navigate(['/station/list']);
   }
@@ -83,6 +92,7 @@ export class StationEditComponent implements OnInit {
         let data = successResponse.json();
         this.station['name'] = data.name;
         this.station['refresh_time'] = data.refresh_time;
+        this.station['next_station_id'] = data.next_station_id;
         this.stationForm.patchValue(this.station);
       },
       () => {
@@ -101,6 +111,9 @@ export class StationEditComponent implements OnInit {
       ],
       'refresh_time': [
         this.station.refresh_time
+      ],
+      'next_station_id': [
+        this.station.next_station_id
       ]
     });
 
