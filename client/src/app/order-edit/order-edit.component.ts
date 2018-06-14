@@ -71,6 +71,7 @@ export class OrderEditComponent implements OnInit {
       order.order_items.forEach(function(orderItem) {
         if (orderItem.item == item.name){
           items[itemIndex].quantity = orderItem.quantity;
+          items[itemIndex].notes = orderItem.notes;
         }
       });
     });
@@ -86,6 +87,11 @@ export class OrderEditComponent implements OnInit {
     else if (operation == 'minus' && this.items[itemIndex].quantity > 0) {
       this.items[itemIndex].quantity -= 1;
     }
+  }
+
+  public notesOptions(item) {
+    let itemIndex = this.items.indexOf(item);
+    this.items[itemIndex].notes = $("#item_notes_" + item.name.replace(' ', '')).val();
   }
 
   get totalPrice() {

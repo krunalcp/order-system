@@ -38,12 +38,13 @@
 		  <div class="table-responsive text-center">
 		    <table class="table table-striped u-table--v1 mb-0">
 		      <thead>
-		        <tr>
+            <tr>
 		          <th>Item</th>
 		          <th>Price($)</th>
 		          <th>Quantity</th>
-		          <th></th>
+              <th></th>
 		          <th>Total Price($)</th>
+              <th>Notes</th>
 		        </tr>
 		      </thead>
 
@@ -65,6 +66,9 @@
 							<td>
 								${{(item.price * item.quantity).toFixed(2)}}
 							</td>
+              <td>
+                <input class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.name.replace(' ', '')}}" value="{{item.notes}}" (change)="notesOptions(item)">
+              </td>
 						</tr>
 						<hr>
 						<tr>

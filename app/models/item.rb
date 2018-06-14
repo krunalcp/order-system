@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+  attr_accessor :notes
+
   default_scope { order(:order_no) }
 
   def self.get_summary

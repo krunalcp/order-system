@@ -6,6 +6,7 @@ export class Order {
     public value?: number,
     public item?: string,
     public quantity?: number,
+    public notes?: string,
     public order_items?: any,
     public price?: any,
     public charge_to_account?: boolean

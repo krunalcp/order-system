@@ -75,6 +75,11 @@ export class OrderAddComponent implements OnInit {
     }
   }
 
+  public notesOptions(item) {
+    let itemIndex = this.items.indexOf(item);
+    this.items[itemIndex].notes = $("#item_notes_" + item.name.replace(' ', '')).val();
+  }
+
   get totalPrice() {
     let total = 0;
 
@@ -115,7 +120,6 @@ export class OrderAddComponent implements OnInit {
   public cancelOrder(){
     this.router.navigate(['/order/list']);
   }
-
 
   private buildForm(): void {
     this.orderForm = this.fb.group({

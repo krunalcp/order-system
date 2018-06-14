@@ -43,8 +43,9 @@
 		          <th>Item</th>
 		          <th>Price($)</th>
 		          <th>Quantity</th>
-		          <th></th>
+              <th></th>
 		          <th>Total Price($)</th>
+              <th>Notes</th>
 		        </tr>
 		      </thead>
 
@@ -65,7 +66,10 @@
 							</td>
 							<td>
 								${{(item.price * item.quantity).toFixed(2)}}
-							</td>
+              </td>
+							<td>
+                <input class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.name.replace(' ', '')}}" value="{{item.notes}}" (change)="notesOptions(item)">
+              </td>
 						</tr>
 						<hr>
 						<tr>
@@ -74,6 +78,7 @@
 							<td></td>
 							<td><b>Total($) :</b></td>
 							<td>${{totalPrice.toFixed(2)}}</td>
+              <td></td>
 						</tr>
 		      </tbody>
 		    </table>
