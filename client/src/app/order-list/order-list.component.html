@@ -5,7 +5,9 @@
 	<div class="row">
 		<div class="col-md-12 text-right">
 			<button class="btn btn-md u-btn-outline-deeporange u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="callLoadOrderList(1)">
-				<span *ngIf="!isOrdersLoading">Refresh</span>
+				<span *ngIf="!isOrdersLoading">
+          <i class="fa fa-refresh"></i> Refresh
+        </span>
 				<span class="g-pl-5" *ngIf="isOrdersLoading">
 					<i class="fa fa-spinner fa-spin"></i>
 					<span class="sr-only">Refreshing...</span>
@@ -57,7 +59,7 @@
 					  	<span class="sr-only">Loading...</span>
 			        </span>
 	        	</button>
-						<button class="btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="printOrders(order.id)">
+						<button class="btn btn-md u-btn-outline-pink g-mr-10 g-mb-15" (click)="printOrders(order.id)">
 							<i class="fa fa-file-pdf-o g-mr-5"></i>Print
 						</button>
 	        </td>
@@ -110,6 +112,7 @@
           <span class="sr-only">Prev...</span>
         </span>
       </button>
+      <span class="g-mx-15 g-mb-15 g-ml-10"> {{((currentPage - 1) * perPageOrder) + 1}} - {{currentPage * perPageOrder > totalOrder ? totalOrder : (currentPage * perPageOrder) }} of {{totalOrder}} </span>
       <button class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15 g-ml-10" (click)="callLoadOrderList(this.currentPage + 1)">
         <span *ngIf="!isOrdersLoading">Next</span>
         <span class="g-pl-5" *ngIf="isOrdersLoading">
