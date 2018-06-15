@@ -48,7 +48,9 @@
 	        <td class="align-middle">{{order.customer_name}}</td>
 	        <td class="align-middle">S{{order.station.id}} - {{order.station.name}}</td>
           <td class="align-middle">
-	        	<span *ngFor="let item of order.order_items">{{item.quantity}} &#215; {{item.item}}<br></span>
+	        	<span *ngFor="let item of order.order_items">{{item.quantity}} &#215; {{item.item}}
+              <small *ngIf="item.notes != null && item.notes != ''">({{item.notes}})</small><br>
+            </span>
 	        </td>
 	        <td align="right">${{(order.value * 1).toFixed(2)}}</td>
 	        <td class="text-center">
@@ -64,7 +66,7 @@
 			        </span>
 	        	</button>
 						<button class="btn btn-md u-btn-outline-pink g-mr-10 g-mb-15" (click)="printOrders(order.id)">
-							<i class="fa fa-file-pdf-o g-mr-5"></i>Print
+							Print
 						</button>
 	        </td>
 					<div id="{{order.id}}" style="display: none; width: 90mm;">
@@ -113,21 +115,30 @@
 	</div>
   <div class="row">
     <div class="col-md-12 text-right">
-      <button class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15 g-mr-10" (click)="callLoadOrderList(this.currentPage - 1)">
-        <span *ngIf="!isOrdersLoading">Prev</span>
-        <span class="g-pl-5" *ngIf="isOrdersLoading">
-          <i class="fa fa-spinner fa-spin"></i>
-          <span class="sr-only">Prev...</span>
-        </span>
-      </button>
-      <span class="g-mx-15 g-mb-15 g-ml-10"> {{((currentPage - 1) * perPageOrder) + 1}} - {{currentPage * perPageOrder > totalOrder ? totalOrder : (currentPage * perPageOrder) }} of {{totalOrder}} </span>
-      <button class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15 g-ml-10" (click)="callLoadOrderList(this.currentPage + 1)">
-        <span *ngIf="!isOrdersLoading">Next</span>
-        <span class="g-pl-5" *ngIf="isOrdersLoading">
-          <i class="fa fa-spinner fa-spin"></i>
-          <span class="sr-only">Next...</span>
-        </span>
-      </button>
+      <div class="form-inline pull-right">
+        <div class="form-group">
+          <span class="g-mx-15 g-mb-15 g-ml-10"> {{((currentPage - 1) * perPageOrder) + 1}} - {{currentPage * perPageOrder > totalOrder ? totalOrder : (currentPage * perPageOrder) }} of {{totalOrder}} </span>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15 g-mr-10" (click)="callLoadOrderList(this.currentPage - 1)">
+            <span *ngIf="!isOrdersLoading">Prev</span>
+            <span class="g-pl-5" *ngIf="isOrdersLoading">
+              <i class="fa fa-spinner fa-spin"></i>
+              <span class="sr-only">Prev...</span>
+            </span>
+          </button>
+        </div>
+        
+        <div class="form-group">
+          <button class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15 g-ml-10" (click)="callLoadOrderList(this.currentPage + 1)">
+            <span *ngIf="!isOrdersLoading">Next</span>
+            <span class="g-pl-5" *ngIf="isOrdersLoading">
+              <i class="fa fa-spinner fa-spin"></i>
+              <span class="sr-only">Next...</span>
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 	<div class="row" *ngIf="isOrdersLoading">

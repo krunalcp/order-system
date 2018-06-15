@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+  validates :name, presence: true, uniqueness: true
+
   attr_accessor :notes
 
   default_scope { order(:order_no) }
