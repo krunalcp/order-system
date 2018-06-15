@@ -8,6 +8,8 @@ import { StationService } from '../station.service';
 
 import { Order } from '../order';
 
+declare var $: any;
+
 @Component({
   selector: 'app-station-orders',
   templateUrl: './station-orders.component.html',
@@ -34,6 +36,8 @@ export class StationOrdersComponent implements OnInit {
   public currentPage: number = 1;
   public totalOrder: number = 0;
   public perPageOrder: number = 0;
+  public pages: number = 0;
+  public selectedPage: number = 1;
 
   constructor(
   	private orderService: OrderService,
@@ -88,8 +92,13 @@ export class StationOrdersComponent implements OnInit {
   public callLoadOrderList(page: number) {
     if(page > 0 && ((page - 1) * this.perPageOrder) < this.totalOrder){
       this.currentPage = page;
+      this.selectedPage = page;
       this.loadOrders(true);
     }
+  }
+
+  public callPageLoadOrderList() {
+    this.callLoadOrderList(parseInt($('#selectedPage').val()));
   }
 
   public loadOrders(ts: boolean){
@@ -100,6 +109,7 @@ export class StationOrdersComponent implements OnInit {
         this.currentPage = listResponse.page;
         this.totalOrder = listResponse.total;
         this.perPageOrder = listResponse.per;
+        this.pages = (this.totalOrder % this.perPageOrder) == 0 ? (this.totalOrder / this.perPageOrder) : (this.totalOrder / this.perPageOrder) + 1;
         // console.log(this.currentStation);
         this.station = this.stations.find(x => x.id === this.currentStation)
         this.refreshTime = this.station.refresh_time

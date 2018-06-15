@@ -9,6 +9,8 @@ import * as XLSX from 'xlsx';
 import { OrderService } from '../order.service';
 import { Order } from '../order';
 
+declare var $: any;
+
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 
@@ -30,6 +32,8 @@ export class OrderListComponent implements OnInit {
   public currentPage: number = 1;
   public totalOrder: number = 0;
   public perPageOrder: number = 0;
+  public pages: number = 0;
+  public selectedPage: number = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,8 +48,13 @@ export class OrderListComponent implements OnInit {
   public callLoadOrderList(page: number) {
     if(page > 0 && ((page - 1) * this.perPageOrder) < this.totalOrder){
       this.currentPage = page;
+      this.selectedPage = page;
       this.loadOrderList();
     }
+  }
+
+  public callPageLoadOrderList() {
+    this.callLoadOrderList(parseInt($('#selectedPage').val()));
   }
 
   public loadOrderList(){
@@ -56,6 +65,7 @@ export class OrderListComponent implements OnInit {
         this.currentPage = listResponse.page;
         this.totalOrder = listResponse.total;
         this.perPageOrder = listResponse.per;
+        this.pages = (this.totalOrder % this.perPageOrder) == 0 ? (this.totalOrder / this.perPageOrder) : (this.totalOrder / this.perPageOrder) + 1;
         this.loadOnlyOrderList();
       },
       (errorResponse) => {
