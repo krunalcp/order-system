@@ -62,7 +62,7 @@
 								${{(item.price * item.quantity).toFixed(2)}}
               </td>
 							<td>
-                <input class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.name.replace(' ', '')}}" value="{{item.notes}}" (change)="notesOptions(item)">
+                <input class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesOptions(item)">
               </td>
 						</tr>
 						<hr>
