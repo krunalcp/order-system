@@ -94,7 +94,7 @@ export class OrderEditComponent implements OnInit {
 
   public notesOptions(item) {
     let itemIndex = this.items.indexOf(item);
-    this.items[itemIndex].notes = $("#item_notes_" + item.name.replace(' ', '')).val();
+    this.items[itemIndex].notes = $("#item_notes_" + item.id).val();
   }
 
   get totalPrice() {
