@@ -14,16 +14,20 @@ export class OrderSummaryComponent implements OnInit {
   public stations: any;
   public isItemsLoading: boolean = false;
   public timerSubscription: any;
+  public s_type: string = 'quantity';
 
   constructor(private itemService: ItemService) { }
 
   ngOnInit() {
-    this.loadItemList(true);
+    this.loadItemList(true, 'quantity');
   }
 
-  public loadItemList(ts: boolean){
+  public loadItemList(ts: boolean, type: string){
     this.isItemsLoading = true;
-    this.itemService.listSummary().subscribe(
+    if (ts) {
+      this.s_type = type;
+    }
+    this.itemService.listSummary(this.s_type).subscribe(
       successResponse => {
         this.orderSummary = successResponse.json();
         this.stations = this.orderSummary[0].stations
@@ -39,7 +43,7 @@ export class OrderSummaryComponent implements OnInit {
   }
 
   public subscribeToData(): void {
-    this.timerSubscription = timer(60000).subscribe(() => this.loadItemList(true));
+    this.timerSubscription = timer(60000).subscribe(() => this.loadItemList(false, this.s_type));
   }
 
 }

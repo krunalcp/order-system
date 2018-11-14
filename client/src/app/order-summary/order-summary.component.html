@@ -5,7 +5,7 @@
 
   <div class="row">
 		<div class="col-md-12 text-right">
-			<button class="btn btn-md u-btn-outline-deeporange u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="loadItemList(false)">
+			<button class="btn btn-md u-btn-outline-deeporange u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="loadItemList(false, 'quantity')">
 				<span *ngIf="!isItemsLoading">
           <i class="fa fa-refresh"></i> Refresh
         </span>
@@ -13,6 +13,14 @@
 					<i class="fa fa-spinner fa-spin"></i>
 					<span class="sr-only">Refreshing...</span>
 				</span>
+			</button>
+
+      <button class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="loadItemList(true, 'quantity')">
+				<i class="fa fa-list-ol"></i> Number Sold
+			</button>
+
+      <button class="btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="loadItemList(true, 'value')">
+				<i class="fa fa-usd"></i> Value Sold
 			</button>
 		</div>
 	</div>
