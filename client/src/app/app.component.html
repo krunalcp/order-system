@@ -23,35 +23,30 @@
         <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
           <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
             <li class="nav-item g-mx-20--lg">
-              <a routerLink="/station/list" class="nav-link px-0"> Stations
-
-          </a>
+              <a routerLink="/station/list" class="nav-link px-0"> Stations </a>
             </li>
             <li class="nav-item g-mx-20--lg">
-              <a routerLink="/item/list" class="nav-link px-0"> Items
-
-          </a>
+              <a routerLink="/item/list" class="nav-link px-0"> Items </a>
             </li>
             <li class="nav-item g-mx-20--lg">
-              <a routerLink="/order/list" class="nav-link px-0">Orders
-
-          </a>
+              <a routerLink="/order/list" class="nav-link px-0">Orders </a>
             </li>
             <li class="nav-item g-mx-20--lg">
-              <a routerLink="/station/order" class="nav-link px-0">Station Orders
-
-          </a>
+              <a routerLink="/station/order" class="nav-link px-0">Station Orders </a>
             </li>
             <li class="nav-item g-mx-20--lg">
-              <a routerLink="/order/summary" class="nav-link px-0">Order Summary
-
-          </a>
+              <a routerLink="/order/summary" class="nav-link px-0">Order Summary </a>
             </li>
           </ul>
         </div>
         <!-- End Navigation -->
       </div>
     </nav>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="test-header" *ngIf="hostAppService.isTestSite()">TEST SITE</h2>
+    </div>
   </div>
 </header>
 <router-outlet></router-outlet>
