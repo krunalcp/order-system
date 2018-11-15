@@ -35,6 +35,7 @@
             "scripts": [
               "src/assets/jquery/jquery/jquery.min.js",
               "src/assets/jquery/jquery-migrate/jquery-migrate.min.js",
+              "src/assets/vendor/bootstrap/bootstrap.min.js",
               "src/assets/jquery/jquery-ui//jquery-ui.min.js",
               "src/assets/js/hs.core.js",
               "src/assets/js/components/hs.count-qty.js"
