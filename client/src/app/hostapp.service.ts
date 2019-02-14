@@ -33,7 +33,7 @@ export class HostappService {
     if (environment == 'ctordering.herokuapp.com'){
       return false
     }
-    else
+    else{
       return true
     }
   }
