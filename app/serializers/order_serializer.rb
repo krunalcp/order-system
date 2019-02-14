@@ -12,11 +12,11 @@ class OrderSerializer < ActiveModel::Serializer
   end
 
   def scheduled_order_time
-    object.scheduled_order_time.strftime("%FT%T");
+    object.scheduled_order_time.try(:strftime, "%FT%T");
   end
 
   def display_scheduled_order_time
-    object.scheduled_order_time.strftime("%m/%d/%Y %H:%M:%S");
+    object.scheduled_order_time.try(:strftime, "%m/%d/%Y %H:%M:%S");
   end
 
 end
