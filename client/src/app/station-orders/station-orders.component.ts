@@ -103,7 +103,7 @@ export class StationOrdersComponent implements OnInit {
 
   public loadOrders(ts: boolean){
     this.isOrdersLoading = true;
-  	this.orderService.list(this.currentPage, this.currentStation, 0).subscribe(
+  	this.orderService.list(this.currentPage, this.currentStation, 0, '', 'asc').subscribe(
       successResponse => {
         let listResponse = successResponse.json();
         this.currentPage = listResponse.page;
@@ -127,7 +127,7 @@ export class StationOrdersComponent implements OnInit {
   }
 
   public loadOnlyOrderList(){
-    this.orderService.list(this.currentPage, this.currentStation, 1).subscribe(
+    this.orderService.list(this.currentPage, this.currentStation, 1, '', 'asc').subscribe(
       successResponse => {
         this.orders = successResponse.json();
         this.stationOrders = this.orders; //.filter(order => order.station.id == this.currentStation);

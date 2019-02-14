@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HostappService } from './hostapp.service';
 import { Http } from '@angular/http';
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,8 @@ import {Observable} from "rxjs";
 export class OrderService {
 
   constructor(
-  	public hostAppService: HostappService,
-  	private http: Http
+    public hostAppService: HostappService,
+    private http: Http
   ) { }
 
   add(order: any): Observable<any>{
@@ -37,17 +37,23 @@ export class OrderService {
     return this.http.delete(ordersApiURL + "/" + id);
   }
 
-  list(page: number, stationId: number, onlyOrder: number): Observable<any>{
+  list(page: number, stationId: number, onlyOrder: number, sortBy: string, sortOrder: string): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost() + '/orders';
     ordersApiURL = ordersApiURL + '?s=' + stationId + '&page=' + page + '&oo=' + onlyOrder;
+    if (sortBy && sortBy != ''){
+      ordersApiURL += '&sort_by=' + sortBy;
+    }
+    if (sortOrder && sortOrder != ''){
+      ordersApiURL += '&sort_order=' + sortOrder;
+    }
 
-  	return this.http.get(ordersApiURL);
+    return this.http.get(ordersApiURL);
   }
 
   listAll(): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost() + '/orders?all=true;';
 
-  	return this.http.get(ordersApiURL);
+    return this.http.get(ordersApiURL);
   }
 
   stationList(): Observable<any>{

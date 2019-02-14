@@ -161,7 +161,7 @@ export class ItemEditComponent implements OnInit {
     let data = errorResponse.json();
 
     if(data.errors.length > 0) {
-      this.errorMessage = data.errors.join(', ')
+      this.formErrors.name = data.errors.join(', ')
     }
   }
 

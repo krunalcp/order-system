@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: %i[show update destroy]
+
   def index
     @items = Item.all
 
@@ -6,29 +8,29 @@ class ItemsController < ApplicationController
   end
 
   def create
-    Item.create(item_params)
+    item = Item.new(item_params)
 
-    head :ok
+    if item.save
+      head :ok
+    else
+      render json: { errors: item.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def show
-    item = Item.find(params[:id])
-
-    if item
-      render json: item
+    if @item
+      render json: @item
     else
       render json: { errors: ['Item not found'] }, status: 404
     end
   end
 
   def update
-    item = Item.find(params[:id])
-
-    if item
-      if item.update(item_params)
+    if @item
+      if @item.update(item_params)
         head :ok
       else
-        render json: { errors: item.errors.full_messages }, status: :unprocessable_entity
+        render json: { errors: @item.errors.full_messages }, status: :unprocessable_entity
       end
     else
       render json: { errors: ['Item not found'] }, status: 404
@@ -36,9 +38,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-
-    if item.destroy
+    if @item && @item.destroy
       head :ok
     else
       render json: { errors: ['Item not found'] }, status: 404
@@ -57,6 +57,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find_by_id(params[:id])
+  end
 
   def item_params
     params.permit(:name, :price, :order_no)

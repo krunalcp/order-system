@@ -32,11 +32,29 @@
 	    <thead class="text-uppercase g-letter-spacing-1">
 	      <tr>
 	        <th class="g-font-weight-300 g-color-black">#</th>
-	        <th class="g-font-weight-300 g-color-black">Time</th>
+	        <th class="g-font-weight-300 g-color-black">
+            <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'created_at')">
+              <i class="fa fa-sort-asc" *ngIf="sortBy == 'created_at' && sortOrder == 'asc'"></i>
+              <i class="fa fa-sort-desc" *ngIf="sortBy == 'created_at' && sortOrder == 'desc'"></i>
+              Time
+            </a>
+          </th>
 	        <th class="g-font-weight-300 g-color-black">Reference</th>
-	        <th class="g-font-weight-300 g-color-black">Station</th>
+	        <th class="g-font-weight-300 g-color-black">
+            <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'station_id')">
+              <i class="fa fa-sort-asc" *ngIf="sortBy == 'station_id' && sortOrder == 'asc'"></i>
+              <i class="fa fa-sort-desc" *ngIf="sortBy == 'station_id' && sortOrder == 'desc'"></i>
+              Station
+            </a>
+          </th>
           <th class="g-font-weight-300 g-color-black">Items</th>
-	        <th class="g-font-weight-300 g-color-black">Value</th>
+	        <th class="g-font-weight-300 g-color-black">
+            <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'value')">
+              <i class="fa fa-sort-asc" *ngIf="sortBy == 'value' && sortOrder == 'asc'"></i>
+              <i class="fa fa-sort-desc" *ngIf="sortBy == 'value' && sortOrder == 'desc'"></i>
+              Value
+            </a>
+          </th>
 	        <th class="g-font-weight-300 g-color-black">Options</th>
 	      </tr>
 	    </thead>

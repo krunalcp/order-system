@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
@@ -65,7 +65,7 @@ export class ItemAddComponent implements OnInit {
         this.sucessHandler(successResponse);
         // swal({title: 'Product added successfully', type: 'success'});
       },
-      errorResponse   => {
+      errorResponse => {
         this.errorHandler(errorResponse);
       }
     );
@@ -74,7 +74,6 @@ export class ItemAddComponent implements OnInit {
   public cancelItem(){
     this.router.navigate(['/item/list']);
   }
-
 
   private buildForm(): void {
     this.itemForm = this.fb.group({
@@ -133,12 +132,11 @@ export class ItemAddComponent implements OnInit {
   }
 
   private errorHandler(errorResponse: Response): void {
+    this.isItemAdding = false;
     let data = errorResponse.json();
 
     if(data.errors.length > 0) {
-      this.errorMessage = data.errors.join(', ')
+      this.formErrors.name = data.errors.join(', ')
     }
   }
-
-
 }

@@ -30,6 +30,8 @@ export class OrderListComponent implements OnInit {
   public isExporting: boolean = false;
   public timerSubscription: any;
   public currentPage: number = 1;
+  public sortBy: string = 'created_at';
+  public sortOrder: string = 'desc';
   public totalOrder: number = 0;
   public perPageOrder: number = 0;
   public pages: number = 0;
@@ -53,13 +55,25 @@ export class OrderListComponent implements OnInit {
     }
   }
 
+  public callLoadSortOrderList(page: number, sb: string) {
+    if(page > 0 && ((page - 1) * this.perPageOrder) < this.totalOrder){
+      if(this.sortBy != sb){
+        this.sortBy = sb;
+        this.sortOrder = 'desc';
+      } else {
+        this.sortOrder = (this.sortOrder == 'asc' ? 'desc' : 'asc');
+      }
+      this.callLoadOrderList(page);
+    }
+  }
+
   public callPageLoadOrderList() {
     this.callLoadOrderList(parseInt($('#selectedPage').val()));
   }
 
   public loadOrderList(){
     this.isOrdersLoading = true;
-    this.orderService.list(this.currentPage, 0, 0).subscribe(
+    this.orderService.list(this.currentPage, 0, 0, this.sortBy, this.sortOrder).subscribe(
       successResponse => {
         let listResponse = successResponse.json();
         this.currentPage = listResponse.page;
@@ -77,7 +91,7 @@ export class OrderListComponent implements OnInit {
 
   public loadOnlyOrderList(){
     this.isOrdersLoading = true;
-    this.orderService.list(this.currentPage, 0, 1).subscribe(
+    this.orderService.list(this.currentPage, 0, 1, this.sortBy, this.sortOrder).subscribe(
       successResponse => {
         this.orders = successResponse.json();
         this.isOrdersLoading = false;
