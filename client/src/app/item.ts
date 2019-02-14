@@ -4,6 +4,7 @@ export class Item {
     public price?: number,
     public notes?: string,
     public item_used?: boolean,
-    public order_no?: number
+    public order_no?: number,
+    public active?: boolean
   ) {}
 }

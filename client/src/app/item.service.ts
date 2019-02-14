@@ -43,6 +43,13 @@ export class ItemService {
 
   	return this.http.get(itemsApiURL);
   }
+
+  activeItem(): Observable<any>{
+    let itemsApiURL = this.hostAppService.getHost() + '/items/active_items';
+
+    return this.http.get(itemsApiURL);
+  }
+
   listSummary(s_type: string): Observable<any>{
     let itemsApiURL = this.hostAppService.getHost() + '/items/order_summary?type=' + s_type;
 

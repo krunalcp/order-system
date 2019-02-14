@@ -1,52 +1,55 @@
 <div class="container g-mt-100">
-	<div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
-  	<h1 class="h3 u-heading-v1__title">Edit Item</h1>
-	</div>
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Edit Item</h1>
+  </div>
 
-	<div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
-	  <h3 class="h2 g-font-weight-300 g-mb-20">Edit item details</h3>
-	  <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" [formGroup]="itemForm" (ngSubmit)="onSubmit()">
-		  <!-- Text Input -->
-		  <div class="row">
-			  <div class="form-group g-mb-25 col-md-6">
-		    	<label class="g-mb-10" for="name">
-		    		<span *ngIf="!formErrors.name" [ngClass]="{'text-success': !itemForm.controls.name.pristine}"></span>
-          	<span *ngIf="formErrors.name" class="text-danger">{{formErrors?.name}}</span>
-		    	</label>
+  <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
+    <h3 class="h2 g-font-weight-300 g-mb-20">Edit item details</h3>
+    <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+      <!-- Text Input -->
+      <div class="row">
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="name">
+            <span *ngIf="!formErrors.name" [ngClass]="{'text-success': !itemForm.controls.name.pristine}"></span>
+            <span *ngIf="formErrors.name" class="text-danger">{{formErrors?.name}}</span>
+          </label>
           <span *ngIf="item.item_used" class="form-control u-form-control used rounded-0">{{item.name}}</span>
-		      <input *ngIf="!item.item_used"  class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
-			  </div>
-			  <div class="form-group g-mb-25 col-md-6">
-			  	<label class="g-mb-10" for="price">
-		    		<span *ngIf="!formErrors.price" [ngClass]="{'text-success': !itemForm.controls.price.pristine}"></span>
-          	<span *ngIf="formErrors.price" class="text-danger">{{formErrors?.price}}</span>
-		    	</label>
-		      <div class="input-group g-brd-primary--focus">
-		        <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+          <input *ngIf="!item.item_used" class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="price">
+            <span *ngIf="!formErrors.price" [ngClass]="{'text-success': !itemForm.controls.price.pristine}"></span>
+            <span *ngIf="formErrors.price" class="text-danger">{{formErrors?.price}}</span>
+          </label>
+          <div class="input-group g-brd-primary--focus">
+            <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
               <i class="fa fa-usd" aria-hidden="true"></i>
             </div>
             <span *ngIf="item.item_used" class="form-control u-form-control used rounded-0">{{item.price}}</span>
-		        <input *ngIf="!item.item_used" class="form-control form-control-md rounded-0" type="number" placeholder="Enter price" id="price" formControlName="price">
-		      </div>
-			  </div>
+            <input *ngIf="!item.item_used" class="form-control form-control-md rounded-0" type="number" placeholder="Enter price" id="price" formControlName="price">
+          </div>
+        </div>
         <div class="form-group g-mb-25 col-md-6">
-			  	<label class="g-mb-10" for="order_no">
-		    		<span *ngIf="!formErrors.order_no"
-                [ngClass]="{'text-success': !itemForm.controls.order_no.pristine}"></span>
-          	<span *ngIf="formErrors.order_no" class="text-danger">{{formErrors.order_no}}</span>
-		    	</label>
-		      <input class="form-control form-control-md rounded-0" type="number" placeholder="Enter Order no" id="order_no" formControlName="order_no">
-			  </div>
-			</div>
-		</form>
-		<div class="text-right">
-			<button (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
-		        <span *ngIf="!isItemUpdating">Update Item</span>
-		        <span *ngIf="isItemUpdating">Updating Item...</span>
-		        <span class="g-pl-5" *ngIf="isItemUpdating">
-		        	<i class="fa fa-spinner fa-spin"></i>
-				  		<span class="sr-only">Loading...</span>
-		        </span>
+          <label class="g-mb-10" for="order_no">
+            <span *ngIf="!formErrors.order_no" [ngClass]="{'text-success': !itemForm.controls.order_no.pristine}"></span>
+            <span *ngIf="formErrors.order_no" class="text-danger">{{formErrors.order_no}}</span>
+          </label>
+          <input class="form-control form-control-md rounded-0" type="number" placeholder="Enter Order no" id="order_no" formControlName="order_no">
+        </div>
+        <div class="form-group g-mb-25 col-md-3">
+          <label class="g-mb-10" for="active">Active</label>
+          <input class="form-control u-form-control rounded-0" type="checkbox" id="active" formControlName="active">
+        </div>
+      </div>
+    </form>
+    <div class="text-right">
+      <button (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
+        <span *ngIf="!isItemUpdating">Update Item</span>
+        <span *ngIf="isItemUpdating">Updating Item...</span>
+        <span class="g-pl-5" *ngIf="isItemUpdating">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Loading...</span>
+        </span>
       </button>
       <button class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="cancelItem()">
         Cancel

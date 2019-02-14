@@ -57,7 +57,7 @@ export class OrderAddComponent implements OnInit {
   }
 
   public loadItems(){
-    this.itemService.list().subscribe(
+    this.itemService.activeItem().subscribe(
       successResponse => {
         this.items = successResponse.json();
       }

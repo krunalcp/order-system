@@ -93,6 +93,7 @@ export class ItemEditComponent implements OnInit {
         this.item['price'] = data.price;
         this.item['order_no'] = data.order_no;
         this.item['item_used'] = data.item_used;
+        this.item['active'] = data.active;
         this.itemForm.patchValue(this.item);
       },
       () => {
@@ -121,6 +122,9 @@ export class ItemEditComponent implements OnInit {
           // Validators.maxLength(this.maxlength.description)
         ]
       ],
+      'active': [
+        this.item.active
+      ]
     });
 
     this.itemForm.valueChanges.subscribe(data => this.onValueChanged(data));

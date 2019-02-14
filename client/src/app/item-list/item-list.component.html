@@ -1,56 +1,58 @@
 <div class="container g-mt-100">
-	<div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
-  	<h1 class="h3 u-heading-v1__title">Items List</h1>
-	</div>
-	<div class="row">
-		<div class="col-md-12 text-right">
-			<a routerLink="/item/add" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
-			<i class="fa fa-plus-circle g-mr-5"></i>New Item
-			</a>
-		</div>
-	</div>
-	<div class="table-responsive" *ngIf="items && !isItemsLoading">
-	  <table class="table table-bordered u-table--v2">
-	    <thead class="text-uppercase g-letter-spacing-1">
-	      <tr>
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Items List</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <a routerLink="/item/add" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
+        <i class="fa fa-plus-circle g-mr-5"></i>New Item
+      </a>
+    </div>
+  </div>
+  <div class="table-responsive" *ngIf="items && !isItemsLoading">
+    <table class="table table-bordered u-table--v2">
+      <thead class="text-uppercase g-letter-spacing-1">
+        <tr>
           <th class="g-font-weight-300 g-color-black">#</th>
-	        <th class="g-font-weight-300 g-color-black g-min-width-300">Name</th>
-	        <th class="g-font-weight-300 g-color-black">Price</th>
-	        <th class="g-font-weight-300 g-color-black">Options</th>
-	      </tr>
-	    </thead>
+          <th class="g-font-weight-300 g-color-black g-min-width-300">Name</th>
+          <th class="g-font-weight-300 g-color-black">Price</th>
+          <th class="g-font-weight-300 g-color-black">Status</th>
+          <th class="g-font-weight-300 g-color-black">Options</th>
+        </tr>
+      </thead>
 
-	    <tbody>
-	      <tr *ngFor="let item of items">
+      <tbody>
+        <tr *ngFor="let item of items">
           <td class="align-middle">{{item.order_no}}</td>
-	        <td class="align-middle">{{item.name}}</td>
-	        <td align="right">${{(item.price * 1).toFixed(2)}}</td>
-	        <td class="text-center">
-	        	<a href="#!" class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/item/show/{{item.id}}">open</a>
-						<button class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/item/edit/{{item.id}}" >
-						edit
-						</button>
+          <td class="align-middle">{{item.name}}</td>
+          <td align="right">${{(item.price * 1).toFixed(2)}}</td>
+          <td class="align-middle">{{item.status}}</td>
+          <td class="text-center">
+            <a href="#!" class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/item/show/{{item.id}}">open</a>
+            <button class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/item/edit/{{item.id}}">
+              edit
+            </button>
 
-	        	<button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteItem(item.id)" [disabled]="item.item_used">
-		        	<span *ngIf="!isItemDeleting">Delete</span>
-		        	<span *ngIf="isItemDeleting && currentItemId != item.id">Delete</span>
-			        <span *ngIf="isItemDeleting && currentItemId == item.id">Deleting..</span>
-			        <span class="g-pl-5" *ngIf="isItemDeleting && currentItemId == item.id">
-			        	<i class="fa fa-spinner fa-spin"></i>
-					  	<span class="sr-only">Loading...</span>
-			        </span>
-	        	</button>
-	        </td>
-	      </tr>
-	    </tbody>
-	  </table>
-	</div>
-	<div class="row" *ngIf="isItemsLoading">
-		<div class="col-md-12 text-center g-color-blue">
-		  <i class="fa fa-spinner fa-spin"></i>
-		  <span class="sr-only">Loading...</span>
-		  <p>Loading items...</p>
-		</div>
-	</div>
+            <button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteItem(item.id)" [disabled]="item.item_used">
+              <span *ngIf="!isItemDeleting">Delete</span>
+              <span *ngIf="isItemDeleting && currentItemId != item.id">Delete</span>
+              <span *ngIf="isItemDeleting && currentItemId == item.id">Deleting..</span>
+              <span class="g-pl-5" *ngIf="isItemDeleting && currentItemId == item.id">
+                <i class="fa fa-spinner fa-spin"></i>
+                <span class="sr-only">Loading...</span>
+              </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row" *ngIf="isItemsLoading">
+    <div class="col-md-12 text-center g-color-blue">
+      <i class="fa fa-spinner fa-spin"></i>
+      <span class="sr-only">Loading...</span>
+      <p>Loading items...</p>
+    </div>
+  </div>
 
 </div>

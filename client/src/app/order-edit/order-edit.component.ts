@@ -60,7 +60,7 @@ export class OrderEditComponent implements OnInit {
   }
 
   public loadItems(order){
-    this.itemService.list().subscribe(
+    this.itemService.activeItem().subscribe(
       successResponse => {
         let data = successResponse.json();
         this.fillChoosanQuantity(data, order);

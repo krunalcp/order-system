@@ -7,6 +7,12 @@ class ItemsController < ApplicationController
     render json: @items
   end
 
+  def active_items
+    @items = Item.where(active: true)
+
+    render json: @items
+  end
+
   def create
     item = Item.new(item_params)
 
@@ -63,6 +69,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.permit(:name, :price, :order_no)
+    params.permit(:name, :price, :order_no, :active)
   end
 end

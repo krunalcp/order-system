@@ -94,6 +94,9 @@ export class ItemAddComponent implements OnInit {
           Validators.required,
           // Validators.maxLength(this.maxlength.description)
         ]
+      ],
+      'active': [
+        this.item.active
       ]
     });
 

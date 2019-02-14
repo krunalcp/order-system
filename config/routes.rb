@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :items do
     collection do
       get 'order_summary'
+      get 'active_items'
     end
   end
 
