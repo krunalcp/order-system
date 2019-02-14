@@ -1,13 +1,13 @@
 <div class="container g-mt-100">
-	<div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
-  	<h1 class="h3 u-heading-v1__title">Station orders</h1>
-	</div>
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Station orders</h1>
+  </div>
 
-	<div class="row">
+  <div class="row">
     <div class="offset-md-6 col-md-3">
       <div class="form-group g-mb-25">
         <label for="exampleSelect1">&nbsp;</label>
-        <button class="form-control rounded-0 btn btn-md u-btn-outline-teal u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="loadOrders(false)">
+        <button class="form-control rounded-0 btn btn-md u-btn-outline-teal u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15 btn-outline" (click)="loadOrders(false)">
           <span *ngIf="!isOrdersLoading">
             <i class="fa fa-refresh"></i> Refresh
           </span>
@@ -18,56 +18,56 @@
         </button>
       </div>
     </div>
-		<div class="col-md-3">
-			<div class="form-group g-mb-25">
-		    <label for="exampleSelect1">Select station</label>
-		    <select class="form-control rounded-0" id="exampleSelect1" (change)="onSelect($event.target.value)">
-		      <option *ngFor="let station of stations" value="{{station.id}}">S{{station.id}} - {{station.name}}</option>
-		    </select>
-		  </div>
-		</div>
-	</div>
+    <div class="col-md-3">
+      <div class="form-group g-mb-25">
+        <label for="exampleSelect1">Select station</label>
+        <select class="form-control rounded-0" id="exampleSelect1" (change)="onSelect($event.target.value)">
+          <option *ngFor="let station of stations" value="{{station.id}}">S{{station.id}} - {{station.name}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
 
-	<div class="table-responsive" *ngIf="orders && !isOrdersLoading">
-	  <table class="table table-bordered u-table--v2">
-	    <thead class="text-uppercase g-letter-spacing-1">
-	      <tr>
-	        <th class="g-font-weight-300 g-color-black">Order ID</th>
-	        <th class="g-font-weight-300 g-color-black">Order Time</th>
-	        <th class="g-font-weight-300 g-color-black">Reference</th>
-	        <th class="g-font-weight-300 g-color-black">Station</th>
-	        <th class="g-font-weight-300 g-color-black">Items</th>
-	        <th class="g-font-weight-300 g-color-black">Total value</th>
-	        <th class="g-font-weight-300 g-color-black">Options</th>
-	      </tr>
-	    </thead>
+  <div class="table-responsive" *ngIf="orders && !isOrdersLoading">
+    <table class="table table-bordered u-table--v2">
+      <thead class="text-uppercase g-letter-spacing-1">
+        <tr>
+          <th class="g-font-weight-300 g-color-black">Order ID</th>
+          <th class="g-font-weight-300 g-color-black">Order Time</th>
+          <th class="g-font-weight-300 g-color-black">Reference</th>
+          <th class="g-font-weight-300 g-color-black">Station</th>
+          <th class="g-font-weight-300 g-color-black">Items</th>
+          <th class="g-font-weight-300 g-color-black">Total value</th>
+          <th class="g-font-weight-300 g-color-black">Options</th>
+        </tr>
+      </thead>
 
-	    <tbody>
-	      <tr *ngFor="let order of stationOrders">
-	        <td class="align-middle">{{order.id}}</td>
-	        <td class="align-middle">{{order.created_at}}</td>
-	        <td class="align-middle">{{order.customer_name}}</td>
-	        <td class="align-middle">S{{order.station.id}} - {{order.station.name}}</td>
-	        <td class="align-middle">
-	        	<span *ngFor="let item of order.order_items">{{item.quantity}} &#215; {{item.item}}
+      <tbody>
+        <tr *ngFor="let order of stationOrders">
+          <td class="align-middle">{{order.id}}</td>
+          <td class="align-middle">{{order.created_at}}</td>
+          <td class="align-middle">{{order.customer_name}}</td>
+          <td class="align-middle">S{{order.station.id}} - {{order.station.name}}</td>
+          <td class="align-middle">
+            <span *ngFor="let item of order.order_items">{{item.quantity}} &#215; {{item.item}}
               <small *ngIf="item.notes != null && item.notes != ''">({{item.notes}})</small><br>
             </span>
-	        </td>
-	        <td align="right">${{(order.value * 1).toFixed(2)}}</td>
-	        <td class="text-center">
+          </td>
+          <td align="right">${{(order.value * 1).toFixed(2)}}</td>
+          <td class="text-center">
             <a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
-	        	<button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" (click)="checkOutOrder(order)" *ngIf="order.station.id != lastStation">
-	        		FulFilled
-			        <span class="g-pl-5" *ngIf="isOrderChecking && currentOrderId == order.id">
-			        	<i class="fa fa-spinner fa-spin"></i>
-					  	<span class="sr-only">Loading...</span>
-			        </span>
-	        	</button>
-	        </td>
-	      </tr>
-	    </tbody>
-	  </table>
-	</div>
+            <button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" (click)="checkOutOrder(order)" *ngIf="order.station.id != lastStation">
+              FulFilled
+              <span class="g-pl-5" *ngIf="isOrderChecking && currentOrderId == order.id">
+                <i class="fa fa-spinner fa-spin"></i>
+                <span class="sr-only">Loading...</span>
+              </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="row">
     <div class="col-md-12 text-right">
@@ -102,14 +102,14 @@
     </div>
   </div>
 
-	<div class="alert alert-info" role="alert" *ngIf="!currentStation && !isOrdersLoading">
+  <div class="alert alert-info" role="alert" *ngIf="!currentStation && !isOrdersLoading">
     <strong>Choose station!</strong> to see the orders.
   </div>
-	<div class="row" *ngIf="isOrdersLoading">
-		<div class="col-md-12 text-center g-color-blue">
-		  <i class="fa fa-spinner fa-spin"></i>
-		  <span class="sr-only">Loading...</span>
-		  <p>Loading station orders...</p>
-		</div>
-	</div>
+  <div class="row" *ngIf="isOrdersLoading">
+    <div class="col-md-12 text-center g-color-blue">
+      <i class="fa fa-spinner fa-spin"></i>
+      <span class="sr-only">Loading...</span>
+      <p>Loading station orders...</p>
+    </div>
+  </div>
 </div>

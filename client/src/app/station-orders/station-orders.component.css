@@ -1,0 +1,12 @@
+.btn-outline{
+  color: #18ba9b;
+  border-color: #18ba9b;
+}
+.btn-outline:focus{
+  color: #fff;
+  background-color: #18ba9b;
+}
+.btn-outline:hover {
+  color: #fff;
+  background-color: #18ba9b;
+}
