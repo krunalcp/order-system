@@ -20,10 +20,10 @@ export class HostappService {
       return "https://ctordering-test.herokuapp.com"
     }
     else if (environment == 'ctordering-obsolete.herokuapp.com'){
-      return "https://ctordering-test.herokuapp.com"
+      return "https://ctordering-obsolete.herokuapp.com"
     }
     else if (environment == 'ctordering-demo.herokuapp.com'){
-      return "https://ctordering-test.herokuapp.com"
+      return "https://ctordering-demo.herokuapp.com"
     }
   }
 
