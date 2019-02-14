@@ -171,6 +171,9 @@ export class OrderEditComponent implements OnInit {
       ],
       'charge_to_account': [
         this.order.charge_to_account
+      ],
+      'scheduled_order_time': [
+        this.order.scheduled_order_time
       ]
     });
 

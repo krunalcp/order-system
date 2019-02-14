@@ -34,6 +34,7 @@
         <tr>
           <th class="g-font-weight-300 g-color-black">Order ID</th>
           <th class="g-font-weight-300 g-color-black">Order Time</th>
+          <th class="g-font-weight-300 g-color-black">Scheduled Order Time</th>
           <th class="g-font-weight-300 g-color-black">Reference</th>
           <th class="g-font-weight-300 g-color-black">Station</th>
           <th class="g-font-weight-300 g-color-black">Items</th>
@@ -46,6 +47,7 @@
         <tr *ngFor="let order of stationOrders">
           <td class="align-middle">{{order.id}}</td>
           <td class="align-middle">{{order.created_at}}</td>
+          <td class="align-middle">{{order.display_scheduled_order_time}}</td>
           <td class="align-middle">{{order.customer_name}}</td>
           <td class="align-middle">S{{order.station.id}} - {{order.station.name}}</td>
           <td class="align-middle">

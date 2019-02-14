@@ -9,6 +9,7 @@ export class Order {
     public notes?: string,
     public order_items?: any,
     public price?: any,
-    public charge_to_account?: boolean
+    public charge_to_account?: boolean,
+    public scheduled_order_time?: any
   ) {}
 }
