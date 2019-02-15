@@ -4,7 +4,7 @@ class OrderSerializer < ActiveModel::Serializer
 	has_many :order_items
 
 	def created_at
-		(object.created_at + 12.hour).strftime("%m/%d/%Y %H:%M:%S");
+		(object.created_at + 12.hour).strftime("%m/%d/%Y %H:%M:%S")
 	end
 
   def station
@@ -12,11 +12,11 @@ class OrderSerializer < ActiveModel::Serializer
   end
 
   def scheduled_order_time
-    object.scheduled_order_time.try(:strftime, "%FT%T");
+    object.scheduled_order_time.try(:strftime, "%FT%T")
   end
 
   def display_scheduled_order_time
-    object.scheduled_order_time.try(:strftime, "%m/%d/%Y %H:%M:%S");
+    object.scheduled_order_time.try(:strftime, "%m/%d/%Y %H:%M:%S") || created_at
   end
 
 end

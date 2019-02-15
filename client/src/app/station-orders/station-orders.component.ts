@@ -38,6 +38,8 @@ export class StationOrdersComponent implements OnInit {
   public perPageOrder: number = 0;
   public pages: number = 0;
   public selectedPage: number = 1;
+  public sortBy: string = 'scheduled_order_time';
+  public sortOrder: string = 'desc';
 
   constructor(
   	private orderService: OrderService,
@@ -97,13 +99,25 @@ export class StationOrdersComponent implements OnInit {
     }
   }
 
+  public callLoadSortOrderList(page: number, sb: string) {
+    if(page > 0 && ((page - 1) * this.perPageOrder) < this.totalOrder){
+      if(this.sortBy != sb){
+        this.sortBy = sb;
+        this.sortOrder = 'desc';
+      } else {
+        this.sortOrder = (this.sortOrder == 'asc' ? 'desc' : 'asc');
+      }
+      this.callLoadOrderList(page);
+    }
+  }
+
   public callPageLoadOrderList() {
     this.callLoadOrderList(parseInt($('#selectedPage').val()));
   }
 
   public loadOrders(ts: boolean){
     this.isOrdersLoading = true;
-  	this.orderService.list(this.currentPage, this.currentStation, 0, '', 'asc').subscribe(
+  	this.orderService.list(this.currentPage, this.currentStation, 0, this.sortBy, this.sortOrder).subscribe(
       successResponse => {
         let listResponse = successResponse.json();
         this.currentPage = listResponse.page;
@@ -127,7 +141,7 @@ export class StationOrdersComponent implements OnInit {
   }
 
   public loadOnlyOrderList(){
-    this.orderService.list(this.currentPage, this.currentStation, 1, '', 'asc').subscribe(
+    this.orderService.list(this.currentPage, this.currentStation, 1, this.sortBy, this.sortOrder).subscribe(
       successResponse => {
         this.orders = successResponse.json();
         this.stationOrders = this.orders; //.filter(order => order.station.id == this.currentStation);

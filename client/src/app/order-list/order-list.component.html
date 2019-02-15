@@ -1,46 +1,46 @@
 <div class="container g-mt-100">
-	<div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
-  	<h1 class="h3 u-heading-v1__title">Orders List</h1>
-	</div>
-	<div class="row">
-		<div class="col-md-12 text-right">
-			<button class="btn btn-md u-btn-outline-teal u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="callLoadOrderList(1)">
-				<span *ngIf="!isOrdersLoading">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Orders List</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <button class="btn btn-md u-btn-outline-teal u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="callLoadOrderList(1)">
+        <span *ngIf="!isOrdersLoading">
           <i class="fa fa-refresh"></i> Refresh
         </span>
-				<span class="g-pl-5" *ngIf="isOrdersLoading">
-					<i class="fa fa-spinner fa-spin"></i>
-					<span class="sr-only">Refreshing...</span>
-				</span>
-			</button>
-			<a routerLink="/order/add" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
-			<i class="fa fa-plus-circle g-mr-5"></i>New Order
-			</a>
-			<button class="btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="exportOrders()">
-				<i class="fa fa-file-excel-o g-mr-5"></i>
-				<span *ngIf="!isExporting">Export orders</span>
-				<span *ngIf="isExporting">
-					<span>Exporting...</span>
-					<i class="fa fa-spinner fa-spin"></i>
-		  		<span class="sr-only">Loading...</span>
-		  	</span>
-			</button>
-		</div>
-	</div>
-	<div class="table-responsive" *ngIf="orders && !isOrdersLoading">
-	  <table class="table table-bordered u-table--v2">
-	    <thead class="text-uppercase g-letter-spacing-1">
-	      <tr>
-	        <th class="g-font-weight-300 g-color-black">#</th>
-	        <th class="g-font-weight-300 g-color-black">
-            <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'created_at')">
-              <i class="fa fa-sort-asc" *ngIf="sortBy == 'created_at' && sortOrder == 'asc'"></i>
-              <i class="fa fa-sort-desc" *ngIf="sortBy == 'created_at' && sortOrder == 'desc'"></i>
-              Time
+        <span class="g-pl-5" *ngIf="isOrdersLoading">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Refreshing...</span>
+        </span>
+      </button>
+      <a routerLink="/order/add" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
+        <i class="fa fa-plus-circle g-mr-5"></i>New Order
+      </a>
+      <button class="btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="exportOrders()">
+        <i class="fa fa-file-excel-o g-mr-5"></i>
+        <span *ngIf="!isExporting">Export orders</span>
+        <span *ngIf="isExporting">
+          <span>Exporting...</span>
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Loading...</span>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="table-responsive" *ngIf="orders && !isOrdersLoading">
+    <table class="table table-bordered u-table--v2">
+      <thead class="text-uppercase g-letter-spacing-1">
+        <tr>
+          <th class="g-font-weight-300 g-color-black">#</th>
+          <th class="g-font-weight-300 g-color-black">
+            <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'scheduled_order_time')">
+              <i class="fa fa-sort-asc" *ngIf="sortBy == 'scheduled_order_time' && sortOrder == 'asc'"></i>
+              <i class="fa fa-sort-desc" *ngIf="sortBy == 'scheduled_order_time' && sortOrder == 'desc'"></i>
+              Scheduled Order Time
             </a>
           </th>
-	        <th class="g-font-weight-300 g-color-black">Reference</th>
-	        <th class="g-font-weight-300 g-color-black">
+          <th class="g-font-weight-300 g-color-black">Reference</th>
+          <th class="g-font-weight-300 g-color-black">
             <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'station_id')">
               <i class="fa fa-sort-asc" *ngIf="sortBy == 'station_id' && sortOrder == 'asc'"></i>
               <i class="fa fa-sort-desc" *ngIf="sortBy == 'station_id' && sortOrder == 'desc'"></i>
@@ -48,90 +48,92 @@
             </a>
           </th>
           <th class="g-font-weight-300 g-color-black">Items</th>
-	        <th class="g-font-weight-300 g-color-black">
+          <th class="g-font-weight-300 g-color-black">
             <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'value')">
               <i class="fa fa-sort-asc" *ngIf="sortBy == 'value' && sortOrder == 'asc'"></i>
               <i class="fa fa-sort-desc" *ngIf="sortBy == 'value' && sortOrder == 'desc'"></i>
               Value
             </a>
           </th>
-	        <th class="g-font-weight-300 g-color-black">Options</th>
-	      </tr>
-	    </thead>
+          <th class="g-font-weight-300 g-color-black">Options</th>
+        </tr>
+      </thead>
 
-	    <tbody>
-	      <tr *ngFor="let order of orders">
-	        <td class="align-middle">{{order.id}}</td>
-	        <td class="align-middle">{{order.created_at | date:'dd.MM.yy HH:mm:ss'}}</td>
-	        <td class="align-middle">{{order.customer_name}}</td>
-	        <td class="align-middle">S{{order.station.id}} - {{order.station.name}}</td>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td class="align-middle">{{order.id}}</td>
+          <td class="align-middle">{{order.display_scheduled_order_time | date:'dd.MM.yy HH:mm:ss'}}</td>
+          <td class="align-middle">{{order.customer_name}}</td>
+          <td class="align-middle">S{{order.station.id}} - {{order.station.name}}</td>
           <td class="align-middle">
-	        	<span *ngFor="let item of order.order_items">{{item.quantity}} &#215; {{item.item}}
+            <span *ngFor="let item of order.order_items">{{item.quantity}} &#215; {{item.item}}
               <small *ngIf="item.notes != null && item.notes != ''">({{item.notes}})</small><br>
             </span>
-	        </td>
-	        <td align="right">${{(order.value * 1).toFixed(2)}}</td>
-	        <td class="text-center">
-	        	<a class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/order/show/{{order.id}}">open</a>
-	        	<a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
-	        	<button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteOrder(order.id)">
-	        		<span *ngIf="!isOrderDeleting">Delete</span>
-		        	<span *ngIf="isOrderDeleting && currentOrderId != order.id">Delete</span>
-			        <span *ngIf="isOrderDeleting && currentOrderId == order.id">Deleting..</span>
-			        <span class="g-pl-5" *ngIf="isOrderDeleting && currentOrderId == order.id">
-			        	<i class="fa fa-spinner fa-spin"></i>
-					  	<span class="sr-only">Loading...</span>
-			        </span>
-	        	</button>
-						<button class="btn btn-md u-btn-outline-pink g-mr-10 g-mb-15" (click)="printOrders(order.id)">
-							Print
-						</button>
-	        </td>
-					<div id="{{order.id}}" style="display: none; width: 90mm;">
-						<div class="text-center">
-							<div><h1>2018 Fieldays<br/>The LOCAL</h1></div>
-							<br/>
+          </td>
+          <td align="right">${{(order.value * 1).toFixed(2)}}</td>
+          <td class="text-center">
+            <a class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/order/show/{{order.id}}">open</a>
+            <a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
+            <button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteOrder(order.id)">
+              <span *ngIf="!isOrderDeleting">Delete</span>
+              <span *ngIf="isOrderDeleting && currentOrderId != order.id">Delete</span>
+              <span *ngIf="isOrderDeleting && currentOrderId == order.id">Deleting..</span>
+              <span class="g-pl-5" *ngIf="isOrderDeleting && currentOrderId == order.id">
+                <i class="fa fa-spinner fa-spin"></i>
+                <span class="sr-only">Loading...</span>
+              </span>
+            </button>
+            <button class="btn btn-md u-btn-outline-pink g-mr-10 g-mb-15" (click)="printOrders(order.id)">
+              Print
+            </button>
+          </td>
+          <div id="{{order.id}}" style="display: none; width: 90mm;">
+            <div class="text-center">
+              <div>
+                <h1>2018 Fieldays<br />The LOCAL</h1>
+              </div>
+              <br />
               <div style="font-size: 14px; font-weight: bold;">GST Number: 113 260 521</div>
-							<div style="font-size: 14px; font-weight: bold;">{{order.created_at | date:'dd.MM.yyyy HH:mm'}}</div>
-							<div style="font-size: 14px; font-weight: bold;">Order Number: {{order.id}}</div>
+              <div style="font-size: 14px; font-weight: bold;">{{order.created_at | date:'dd.MM.yyyy HH:mm'}}</div>
+              <div style="font-size: 14px; font-weight: bold;">Order Number: {{order.id}}</div>
               <div style="font-size: 14px; font-weight: bold;">Order Ref: {{order.customer_name}}</div>
-							<br/>
-						  <table width="90%" style="font-size: 14px;">
-						    <thead>
-						      <tr>
-						        <td align="left">Item</td>
-						        <td align="right">Qty</td>
-						        <td align="right">Value</td>
-						      </tr>
-						    </thead>
-						    <tbody>
-						      <tr *ngFor="let order_item of order.order_items">
-						        <td align="left">
+              <br />
+              <table width="90%" style="font-size: 14px;">
+                <thead>
+                  <tr>
+                    <td align="left">Item</td>
+                    <td align="right">Qty</td>
+                    <td align="right">Value</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let order_item of order.order_items">
+                    <td align="left">
                       {{order_item.item}}<br>
 
                       <small *ngIf="order_item.notes != null && order_item.notes != ''">({{order_item.notes}})</small>
                     </td>
-						        <td align="right">{{order_item.quantity}}</td>
-						        <td align="right">${{(order_item.price * order_item.quantity).toFixed(2)}}</td>
-						      </tr>
-						      <tr>
-						        <td align="left" colspan="2">TOTAL</td>
-										<td align="right">${{(order.value * 1).toFixed(2)}}</td>
-						      </tr>
-						    </tbody>
-						  </table>
-							<br/>
+                    <td align="right">{{order_item.quantity}}</td>
+                    <td align="right">${{(order_item.price * order_item.quantity).toFixed(2)}}</td>
+                  </tr>
+                  <tr>
+                    <td align="left" colspan="2">TOTAL</td>
+                    <td align="right">${{(order.value * 1).toFixed(2)}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br />
               <div style="font-size: 14px;">Enjoy your meal</div>
-							<div style="font-size: 14px;">Thank you for shopping with us!</div>
+              <div style="font-size: 14px;">Thank you for shopping with us!</div>
               <br><br>
               <hr>
               <br>
-						</div>
-					</div>
-	      </tr>
-	    </tbody>
-	  </table>
-	</div>
+            </div>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <div class="row">
     <div class="col-md-12 text-right">
       <div class="form-inline pull-right">
@@ -164,11 +166,11 @@
       </div>
     </div>
   </div>
-	<div class="row" *ngIf="isOrdersLoading">
-		<div class="col-md-12 text-center g-color-blue">
-		  <i class="fa fa-spinner fa-spin"></i>
-		  <span class="sr-only">Loading...</span>
-		  <p>Loading orders...</p>
-		</div>
-	</div>
+  <div class="row" *ngIf="isOrdersLoading">
+    <div class="col-md-12 text-center g-color-blue">
+      <i class="fa fa-spinner fa-spin"></i>
+      <span class="sr-only">Loading...</span>
+      <p>Loading orders...</p>
+    </div>
+  </div>
 </div>

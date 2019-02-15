@@ -30,7 +30,7 @@ export class OrderListComponent implements OnInit {
   public isExporting: boolean = false;
   public timerSubscription: any;
   public currentPage: number = 1;
-  public sortBy: string = 'created_at';
+  public sortBy: string = 'scheduled_order_time';
   public sortOrder: string = 'desc';
   public totalOrder: number = 0;
   public perPageOrder: number = 0;
