@@ -43,6 +43,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts_as_list (0.9.7)
+      activerecord (>= 3.0)
     arel (8.0.0)
     builder (3.2.3)
     byebug (10.0.2)
@@ -132,6 +134,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  acts_as_list
   byebug
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
@@ -143,4 +146,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   1.16.1
+   2.0.1

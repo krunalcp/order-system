@@ -62,6 +62,15 @@ class ItemsController < ApplicationController
     end
   end
 
+  def last_order_number
+    item = Item.last
+    if item
+      render json: (item.order_no || 0) + 1
+    else
+      head :ok
+    end
+  end
+
   private
 
   def set_item

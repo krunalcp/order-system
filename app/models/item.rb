@@ -5,6 +5,8 @@ class Item < ApplicationRecord
 
   default_scope { order(:order_no) }
 
+  acts_as_list column: :order_no
+
   def self.get_summary(type = 'quantity')
     summary = []
 

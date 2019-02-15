@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     collection do
       get 'order_summary'
       get 'active_items'
+      get 'last_order_number'
     end
   end
 

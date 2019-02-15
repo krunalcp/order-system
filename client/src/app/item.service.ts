@@ -50,6 +50,12 @@ export class ItemService {
     return this.http.get(itemsApiURL);
   }
 
+  lastOrderNumber(): Observable<any>{
+    let itemsApiURL = this.hostAppService.getHost() + '/items/last_order_number';
+
+    return this.http.get(itemsApiURL);
+  }
+
   listSummary(s_type: string): Observable<any>{
     let itemsApiURL = this.hostAppService.getHost() + '/items/order_summary?type=' + s_type;
 
