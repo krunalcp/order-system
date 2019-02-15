@@ -32,7 +32,8 @@ export class ItemEditComponent implements OnInit {
   public formErrors = {
     'name': '',
     'price': '',
-    'order_no': ''
+    'order_no': '',
+    'category_id': ''
   };
   validationMessages = {
     'name': {
