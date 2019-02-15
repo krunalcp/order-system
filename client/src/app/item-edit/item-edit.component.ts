@@ -5,6 +5,7 @@ import { Response } from '@angular/http';
 import {Subscription} from 'rxjs';
 
 import { ItemService } from '../item.service';
+import { CategoryService } from '../category.service';
 
 import { Item } from '../item';
 
@@ -12,7 +13,10 @@ import { Item } from '../item';
   selector: 'app-item-edit',
   templateUrl: './item-edit.component.html',
   styleUrls: ['./item-edit.component.css'],
-  providers: [ItemService]
+  providers: [
+    ItemService,
+    CategoryService
+  ]
 })
 export class ItemEditComponent implements OnInit {
 
@@ -22,6 +26,7 @@ export class ItemEditComponent implements OnInit {
 	public itemUpdateRequest: Subscription;
   private isFormSubmitted: boolean;
   public isItemUpdating: boolean = false;
+  public categories: any;
 
 	public errorMessage: any;
   public formErrors = {
@@ -46,7 +51,8 @@ export class ItemEditComponent implements OnInit {
   	private route: ActivatedRoute,
     private router: Router,
     private itemService: ItemService,
-  	private fb: FormBuilder
+  	private fb: FormBuilder,
+    private categoryService: CategoryService,
   ) { }
 
   ngOnInit() {
@@ -57,6 +63,7 @@ export class ItemEditComponent implements OnInit {
       (params: any) => {
         this.itemId = params.id;
         this.getItem();
+        this.getCategoryList();
       }
     );
 
@@ -93,6 +100,7 @@ export class ItemEditComponent implements OnInit {
         this.item['price'] = data.price;
         this.item['order_no'] = data.order_no;
         this.item['item_used'] = data.item_used;
+        this.item['category_id'] = data.category_id;
         this.item['active'] = data.active;
         this.itemForm.patchValue(this.item);
       },
@@ -121,6 +129,9 @@ export class ItemEditComponent implements OnInit {
           Validators.required,
           // Validators.maxLength(this.maxlength.description)
         ]
+      ],
+      'category_id': [
+        this.item.category_id
       ],
       'active': [
         this.item.active
@@ -151,6 +162,14 @@ export class ItemEditComponent implements OnInit {
         }
       }
     }
+  }
+
+  private getCategoryList(): void {
+    this.categoryService.list().subscribe(
+      successResponse => {
+        this.categories = successResponse.json();
+      }
+    );
   }
 
   private sucessHandler(successResponse: Response): void {

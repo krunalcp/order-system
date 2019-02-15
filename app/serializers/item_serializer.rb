@@ -1,5 +1,6 @@
 class ItemSerializer < ActiveModel::Serializer
-  attributes :id, :name, :price, :quantity, :item_used, :order_no, :notes, :status, :active
+  attributes :id, :name, :price, :quantity, :item_used, :order_no, :notes,
+    :status, :active, :category_id, :category_name
 
   def quantity
   	0
@@ -11,5 +12,9 @@ class ItemSerializer < ActiveModel::Serializer
 
   def status
     object.active? ? 'Active' : 'Inactive'
+  end
+
+  def category_name
+    object.category.try(:name)
   end
 end

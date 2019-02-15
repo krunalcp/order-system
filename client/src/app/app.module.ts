@@ -23,6 +23,10 @@ import { StationShowComponent } from './station-show/station-show.component';
 import { StationAddComponent } from './station-add/station-add.component';
 import { StationEditComponent } from './station-edit/station-edit.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { CategoryListComponent } from './category-list/category-list.component';
+import { CategoryAddComponent } from './category-add/category-add.component';
+import { CategoryShowComponent } from './category-show/category-show.component';
+import { CategoryEditComponent } from './category-edit/category-edit.component';
 
 const appRoutes: Routes = [
 	{
@@ -44,6 +48,22 @@ const appRoutes: Routes = [
   {
     path: 'item/edit/:id',
     component: ItemEditComponent
+  },
+  {
+    path: 'category/list',
+    component: CategoryListComponent
+  },
+  {
+    path: 'category/add',
+    component: CategoryAddComponent
+  },
+  {
+    path: 'category/show/:id',
+    component: CategoryShowComponent
+  },
+  {
+    path: 'category/edit/:id',
+    component: CategoryEditComponent
   },
   {
     path: 'order/list',
@@ -108,7 +128,11 @@ const appRoutes: Routes = [
     StationShowComponent,
     StationAddComponent,
     StationEditComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    CategoryListComponent,
+    CategoryAddComponent,
+    CategoryShowComponent,
+    CategoryEditComponent,
   ],
   imports: [
     BrowserModule,

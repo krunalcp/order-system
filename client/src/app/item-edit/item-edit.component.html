@@ -35,6 +35,15 @@
           </label>
           <input class="form-control form-control-md rounded-0" type="number" placeholder="Enter Order no" id="order_no" formControlName="order_no">
         </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="category_id">
+            <span *ngIf="!formErrors.category_id" [ngClass]="{'text-success': !itemForm.controls.category_id.pristine}"></span>
+            <span *ngIf="formErrors.category_id" class="text-danger">{{formErrors.category_id}}</span>
+          </label>
+          <select class="form-control rounded-0 u-form-control" id="category_id" formControlName="category_id">
+            <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+          </select>
+        </div>
         <div class="form-group g-mb-25 col-md-3">
           <label class="g-mb-10" for="active">Active</label>
           <input class="form-control u-form-control rounded-0" type="checkbox" id="active" formControlName="active">

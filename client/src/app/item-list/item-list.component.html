@@ -17,6 +17,7 @@
           <th class="g-font-weight-300 g-color-black g-min-width-300">Name</th>
           <th class="g-font-weight-300 g-color-black">Price</th>
           <th class="g-font-weight-300 g-color-black">Status</th>
+          <th class="g-font-weight-300 g-color-black">Category</th>
           <th class="g-font-weight-300 g-color-black">Options</th>
         </tr>
       </thead>
@@ -27,6 +28,7 @@
           <td class="align-middle">{{item.name}}</td>
           <td align="right">${{(item.price * 1).toFixed(2)}}</td>
           <td class="align-middle">{{item.status}}</td>
+          <td class="align-middle">{{item.category_name}}</td>
           <td class="text-center">
             <a href="#!" class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/item/show/{{item.id}}">open</a>
             <button class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/item/edit/{{item.id}}">

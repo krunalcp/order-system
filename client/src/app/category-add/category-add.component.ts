@@ -4,80 +4,58 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
-import { ItemService } from '../item.service';
 import { CategoryService } from '../category.service';
 
-import { Item } from '../item';
+import { Category } from '../category';
 
 @Component({
-  selector: 'app-item-add',
-  templateUrl: './item-add.component.html',
-  styleUrls: ['./item-add.component.css'],
-  providers: [
-    ItemService,
-    CategoryService
-  ]
+  selector: 'app-category-add',
+  templateUrl: './category-add.component.html',
+  styleUrls: ['./category-add.component.css'],
+  providers: [CategoryService]
 })
-export class ItemAddComponent implements OnInit {
+export class CategoryAddComponent implements OnInit {
 
   public errorMessage: any;
   public formErrors = {
     'name': '',
-    'price': '',
-    'order_no': ''
+    'show_order': ''
   };
   validationMessages = {
     'name': {
       'required': 'Name is required.',
     },
-    'price': {
+    'show_order': {
       'required': 'Price is required.',
-    },
-    'order_no': {
-      'required': 'Order no is required.',
     }
   };
 
-	public itemForm: FormGroup;
-	public item : Item = new Item();
-	public itemAddRequest: Subscription;
+	public categoryForm: FormGroup;
+	public category : Category = new Category();
+	public categoryAddRequest: Subscription;
   private isFormSubmitted: boolean;
-  public isItemAdding: boolean = false;
-  public categories: any;
+  public isCategoryAdding: boolean = false;
 
   constructor(
-  	private itemService: ItemService,
+  	private categoryService: CategoryService,
   	private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
-    private categoryService: CategoryService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-
-    this.getLastOrderNumber();
     this.buildForm();
-    this.getCategoryList();
-  }
-
-  private getLastOrderNumber(): void {
-    this.itemService.lastOrderNumber().subscribe(
-      successResponse => {
-        this.item.order_no = successResponse.json();
-        this.buildForm();
-      }
-    );
   }
 
   public onSubmit() {
-    if(this.itemForm.status == 'INVALID') {
+    if(this.categoryForm.status == 'INVALID') {
       this.isFormSubmitted = true;
       this.onValueChanged();
       return;
     }
-    this.item = this.itemForm.value;
-    this.isItemAdding = true;
-    this.itemAddRequest = this.itemService.add(this.item).subscribe(
+    this.category = this.categoryForm.value;
+    this.isCategoryAdding = true;
+    this.categoryAddRequest = this.categoryService.add(this.category).subscribe(
       successResponse => {
         this.sucessHandler(successResponse);
         // swal({title: 'Product added successfully', type: 'success'});
@@ -88,47 +66,35 @@ export class ItemAddComponent implements OnInit {
     );
   }
 
-  public cancelItem(){
-    this.router.navigate(['/item/list']);
+  public cancelCategory(){
+    this.router.navigate(['/category/list']);
   }
 
   private buildForm(): void {
-    this.itemForm = this.fb.group({
+    this.categoryForm = this.fb.group({
       'name': [
-        this.item.name, [
+        this.category.name, [
           Validators.required,
           // Validators.maxLength(this.maxlength.title)
         ]
       ],
-      'price': [
-        this.item.price, [
+      'show_order': [
+        this.category.show_order, [
           Validators.required,
           // Validators.maxLength(this.maxlength.description)
         ]
-      ],
-      'order_no': [
-        this.item.order_no, [
-          Validators.required,
-          // Validators.maxLength(this.maxlength.description)
-        ]
-      ],
-      'category_id': [
-        this.item.category_id
-      ],
-      'active': [
-        this.item.active
       ]
     });
 
-    this.itemForm.valueChanges
+    this.categoryForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
   }
 
   private onValueChanged(data?: any) {
-    if (!this.itemForm) { return; }
-    const form = this.itemForm;
+    if (!this.categoryForm) { return; }
+    const form = this.categoryForm;
 
     for (const field in this.formErrors) {
       this.formErrors[field] = '';
@@ -147,23 +113,15 @@ export class ItemAddComponent implements OnInit {
     }
   }
 
-  private getCategoryList(): void {
-    this.categoryService.list().subscribe(
-      successResponse => {
-        this.categories = successResponse.json();
-      }
-    );
-  }
-
   private sucessHandler(successResponse: Response): void {
-    // this.item = successResponse.json();
+    // this.category = successResponse.json();
     // this.isItemCreated = true;
-    this.isItemAdding = false;
-    this.router.navigate(['/item/list']);
+    this.isCategoryAdding = false;
+    this.router.navigate(['/category/list']);
   }
 
   private errorHandler(errorResponse: Response): void {
-    this.isItemAdding = false;
+    this.isCategoryAdding = false;
     let data = errorResponse.json();
 
     if(data.errors.length > 0) {
