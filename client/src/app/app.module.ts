@@ -27,6 +27,7 @@ import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryAddComponent } from './category-add/category-add.component';
 import { CategoryShowComponent } from './category-show/category-show.component';
 import { CategoryEditComponent } from './category-edit/category-edit.component';
+import { MainPipe } from './main-pipe.module';
 
 const appRoutes: Routes = [
 	{
@@ -141,6 +142,7 @@ const appRoutes: Routes = [
     Angular2FontawesomeModule,
     FormsModule,
     ReactiveFormsModule,
+    MainPipe,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only

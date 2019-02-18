@@ -15,6 +15,6 @@ class ItemSerializer < ActiveModel::Serializer
   end
 
   def category_name
-    object.category.try(:name)
+    object.category.try(:name) || ''
   end
 end

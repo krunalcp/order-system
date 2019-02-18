@@ -8,8 +8,7 @@ class ItemsController < ApplicationController
   end
 
   def active_items
-    @items = Item.where(active: true)
-
+    @items = Item.unscoped.left_outer_joins(:category).where(active: true).order('categories.show_order asc, items.order_no asc')
     render json: @items
   end
 
