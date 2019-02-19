@@ -142,9 +142,10 @@ export class OrderListComponent implements OnInit {
 
         allOrders.forEach(function(order) {
           order.order_items.forEach(function(orderItem) {
-            let newItem = {ORDER_ID: '', ORDER_TIME: '', ORDER_REFERENCE: '', STATION: '', IS_COMPANY_ORDER: '', TOTAL_VALUE: '', ITEM: '', QUANTITY: '',VALUE: ''}
+            let newItem = {ORDER_ID: '', ORDER_TIME: '', SCHEDULED_ORDER_TIME: '', ORDER_REFERENCE: '', STATION: '', IS_COMPANY_ORDER: '', TOTAL_VALUE: '', ITEM: '', QUANTITY: '',VALUE: ''}
             newItem.ORDER_ID = order.id;
             newItem.ORDER_TIME = order.created_at;
+            newItem.SCHEDULED_ORDER_TIME = order.scheduled_order_time;
             newItem.ORDER_REFERENCE = order.customer_name;
             if(order.charge_to_account){
               newItem.IS_COMPANY_ORDER = 'Yes';

@@ -67,7 +67,7 @@ class ItemsController < ApplicationController
     if item
       render json: (item.order_no || 0) + 1
     else
-      head :ok
+      render json: 0
     end
   end
 

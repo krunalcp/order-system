@@ -117,7 +117,7 @@ export class ItemAddComponent implements OnInit {
         this.item.category_id
       ],
       'active': [
-        this.item.active
+        true
       ]
     });
 
