@@ -36,6 +36,9 @@
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/order/summary" class="nav-link px-0">Order Summary </a>
             </li>
+            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+              <a routerLink="/account/list" class="nav-link px-0"> Accounts </a>
+            </li>
             <li *ngIf="!tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/login" class="nav-link px-0">Login</a>
             </li>

@@ -36,6 +36,10 @@ import { MainPipe } from './main-pipe.module';
 import { LoginFormComponent } from './login-form/login-form.component';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './guards/auth.guard';
+import { AccountAddComponent } from './account-add/account-add.component';
+import { AccountListComponent } from './account-list/account-list.component';
+import { AccountEditComponent } from './account-edit/account-edit.component';
+import { AccountShowComponent } from './account-show/account-show.component';
 
 const appRoutes: Routes = [
 	{
@@ -156,7 +160,27 @@ const appRoutes: Routes = [
     path: 'order/summary',
     component: OrderSummaryComponent,
     canActivate: [AuthGuard]
-  }
+  },
+	{
+    path: 'account/list',
+    component: AccountListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'account/add',
+    component: AccountAddComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'account/show/:id',
+    component: AccountShowComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'account/edit/:id',
+    component: AccountEditComponent,
+    canActivate: [AuthGuard]
+  },
 ]
 
 @NgModule({
@@ -185,7 +209,11 @@ const appRoutes: Routes = [
     EventAddComponent,
     EventShowComponent,
     EventEditComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    AccountAddComponent,
+    AccountListComponent,
+    AccountEditComponent,
+    AccountShowComponent
   ],
   imports: [
     BrowserModule,

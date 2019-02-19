@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_current_event
   before_action :set_item, only: %i[show update destroy]
 
   def index

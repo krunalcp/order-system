@@ -14,33 +14,33 @@ export class EventService {
   	private http: Http
   ) { }
 
-  add(item: any): Observable<any>{
+  add(event: any): Observable<any>{
     let categoriesApiURL = this.hostAppService.getHost() + '/events';
 
-    return this.http.post(categoriesApiURL, item);
+    return this.http.post(categoriesApiURL, event, this.hostAppService.getToken());
   }
 
   show(id: number): Observable<any>{
     let categoriesApiURL = this.hostAppService.getHost() + '/events';
 
-    return this.http.get(categoriesApiURL + "/" + id);
+    return this.http.get(categoriesApiURL + "/" + id, this.hostAppService.getToken());
   }
 
-  update(id: number, item:any): Observable<any>{
+  update(id: number, event:any): Observable<any>{
     let categoriesApiURL = this.hostAppService.getHost() + '/events';
 
-    return this.http.put(categoriesApiURL + "/" + id, item);
+    return this.http.put(categoriesApiURL + "/" + id, event, this.hostAppService.getToken());
   }
 
   remove(id: number): Observable<any>{
     let categoriesApiURL = this.hostAppService.getHost() + '/events';
 
-    return this.http.delete(categoriesApiURL + "/" + id);
+    return this.http.delete(categoriesApiURL + "/" + id, this.hostAppService.getToken());
   }
 
   list(): Observable<any>{
   	let categoriesApiURL = this.hostAppService.getHost() + '/events';
 
-  	return this.http.get(categoriesApiURL);
+  	return this.http.get(categoriesApiURL, this.hostAppService.getToken());
   }
 }

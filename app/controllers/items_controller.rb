@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: %i[show update destroy]
 
   def index
-    @items = current_event.items.all
+    @items = current_event.items
 
     render json: @items
   end

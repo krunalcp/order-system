@@ -2,7 +2,7 @@ class StationsController < ApplicationController
   before_action :authenticate_current_event
 
   def index
-    stations = current_event.stations.all.order('created_at')
+    stations = current_event.stations.order('created_at')
 
     render json: stations
   end

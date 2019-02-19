@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :events
+  resources :accounts
 
   resources :orders do
   	collection do
