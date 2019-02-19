@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Angular2TokenService } from 'angular2-token';
 
 import { AppComponent } from './app.component';
 import { ItemListComponent } from './item-list/item-list.component';
@@ -27,28 +28,43 @@ import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryAddComponent } from './category-add/category-add.component';
 import { CategoryShowComponent } from './category-show/category-show.component';
 import { CategoryEditComponent } from './category-edit/category-edit.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { EventAddComponent } from './event-add/event-add.component';
+import { EventShowComponent } from './event-show/event-show.component';
+import { EventEditComponent } from './event-edit/event-edit.component';
 import { MainPipe } from './main-pipe.module';
+import { LoginFormComponent } from './login-form/login-form.component';
+import {AuthService} from './services/auth.service';
+import {AuthGuard} from './guards/auth.guard';
 
 const appRoutes: Routes = [
 	{
     path: '',
     component: HomeComponent
   },
+  {
+    path: 'login',
+    component: LoginFormComponent
+  },
 	{
     path: 'item/list',
-    component: ItemListComponent
+    component: ItemListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'item/add',
-    component: ItemAddComponent
+    component: ItemAddComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'item/show/:id',
-    component: ItemShowComponent
+    component: ItemShowComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'item/edit/:id',
-    component: ItemEditComponent
+    component: ItemEditComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'category/list',
@@ -67,48 +83,79 @@ const appRoutes: Routes = [
     component: CategoryEditComponent
   },
   {
+    path: 'event/list',
+    component: EventListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'event/add',
+    component: EventAddComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'event/show/:id',
+    component: EventShowComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'event/edit/:id',
+    component: EventEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'order/list',
-    component: OrderListComponent
+    component: OrderListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'order/list/:id',
-    component: OrderListComponent
+    component: OrderListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'order/show/:id',
-    component: OrderShowComponent
+    component: OrderShowComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'order/add',
-    component: OrderAddComponent
+    component: OrderAddComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'order/edit/:id',
-    component: OrderEditComponent
+    component: OrderEditComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'station/order',
-    component: StationOrdersComponent
+    component: StationOrdersComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'station/list',
-    component: StationListComponent
+    component: StationListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'station/show/:id',
-    component: StationShowComponent
+    component: StationShowComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'station/add',
-    component: StationAddComponent
+    component: StationAddComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'station/edit/:id',
-    component: StationEditComponent
+    component: StationEditComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'order/summary',
-    component: OrderSummaryComponent
+    component: OrderSummaryComponent,
+    canActivate: [AuthGuard]
   }
 ]
 
@@ -134,6 +181,11 @@ const appRoutes: Routes = [
     CategoryAddComponent,
     CategoryShowComponent,
     CategoryEditComponent,
+    EventListComponent,
+    EventAddComponent,
+    EventShowComponent,
+    EventEditComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
@@ -148,7 +200,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [Angular2TokenService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

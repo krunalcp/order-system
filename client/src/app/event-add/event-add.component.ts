@@ -4,40 +4,40 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
-import { CategoryService } from '../category.service';
+import { EventService } from '../event.service';
 
-import { Category } from '../category';
+import { Event } from '../event';
 
 @Component({
-  selector: 'app-category-add',
-  templateUrl: './category-add.component.html',
-  styleUrls: ['./category-add.component.css'],
-  providers: [CategoryService]
+  selector: 'app-event-add',
+  templateUrl: './event-add.component.html',
+  styleUrls: ['./event-add.component.css'],
+  providers: [EventService]
 })
-export class CategoryAddComponent implements OnInit {
+export class EventAddComponent implements OnInit {
 
   public errorMessage: any;
   public formErrors = {
     'name': '',
-    'show_order': ''
+    'gst_number': '',
+    'active': '',
+    'admin': '',
+    'password': ''
   };
   validationMessages = {
     'name': {
       'required': 'Name is required.',
-    },
-    'show_order': {
-      'required': 'Show Order is required.',
     }
   };
 
-	public categoryForm: FormGroup;
-	public category : Category = new Category();
-	public categoryAddRequest: Subscription;
+	public eventForm: FormGroup;
+	public event : Event = new Event();
+	public eventAddRequest: Subscription;
   private isFormSubmitted: boolean;
-  public isCategoryAdding: boolean = false;
+  public isEventAdding: boolean = false;
 
   constructor(
-  	private categoryService: CategoryService,
+  	private eventService: EventService,
   	private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
@@ -48,14 +48,14 @@ export class CategoryAddComponent implements OnInit {
   }
 
   public onSubmit() {
-    if(this.categoryForm.status == 'INVALID') {
+    if(this.eventForm.status == 'INVALID') {
       this.isFormSubmitted = true;
       this.onValueChanged();
       return;
     }
-    this.category = this.categoryForm.value;
-    this.isCategoryAdding = true;
-    this.categoryAddRequest = this.categoryService.add(this.category).subscribe(
+    this.event = this.eventForm.value;
+    this.isEventAdding = true;
+    this.eventAddRequest = this.eventService.add(this.event).subscribe(
       successResponse => {
         this.sucessHandler(successResponse);
         // swal({title: 'Product added successfully', type: 'success'});
@@ -66,35 +66,41 @@ export class CategoryAddComponent implements OnInit {
     );
   }
 
-  public cancelCategory(){
-    this.router.navigate(['/category/list']);
+  public cancelEvent(){
+    this.router.navigate(['/event/list']);
   }
 
   private buildForm(): void {
-    this.categoryForm = this.fb.group({
+    this.eventForm = this.fb.group({
       'name': [
-        this.category.name, [
+        this.event.name, [
           Validators.required,
           // Validators.maxLength(this.maxlength.title)
         ]
       ],
-      'show_order': [
-        this.category.show_order, [
-          Validators.required,
-          // Validators.maxLength(this.maxlength.description)
-        ]
-      ]
+      'password': [
+        this.event.gst_number
+      ],
+      'gst_number': [
+        this.event.gst_number
+      ],
+      'active': [
+        this.event.active
+      ],
+      'admin': [
+        this.event.admin
+      ],
     });
 
-    this.categoryForm.valueChanges
+    this.eventForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
   }
 
   private onValueChanged(data?: any) {
-    if (!this.categoryForm) { return; }
-    const form = this.categoryForm;
+    if (!this.eventForm) { return; }
+    const form = this.eventForm;
 
     for (const field in this.formErrors) {
       this.formErrors[field] = '';
@@ -114,14 +120,14 @@ export class CategoryAddComponent implements OnInit {
   }
 
   private sucessHandler(successResponse: Response): void {
-    // this.category = successResponse.json();
+    // this.event = successResponse.json();
     // this.isItemCreated = true;
-    this.isCategoryAdding = false;
-    this.router.navigate(['/category/list']);
+    this.isEventAdding = false;
+    this.router.navigate(['/event/list']);
   }
 
   private errorHandler(errorResponse: Response): void {
-    this.isCategoryAdding = false;
+    this.isEventAdding = false;
     let data = errorResponse.json();
 
     if(data.errors.length > 0) {

@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
+import {Headers, Http, RequestOptions} from "@angular/http";
+import { Angular2TokenService } from 'angular2-token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HostappService {
 
-  constructor() { }
+  constructor(public tokenService: Angular2TokenService) { }
 
   public getHost(){
     const environment: any = window.location.hostname;
 
     if (environment == 'localhost'){
-      return "http://localhost:3000"
+      return "http://localhost:3002"
     }
     else if (environment == 'ctordering.herokuapp.com'){
       return "https://ctordering.herokuapp.com"
@@ -36,5 +38,10 @@ export class HostappService {
     else{
       return true
     }
+  }
+
+  public getToken(){
+    let headers = new Headers({'access-token': this.tokenService.currentAuthData.client});
+    return new RequestOptions({headers: headers});
   }
 }

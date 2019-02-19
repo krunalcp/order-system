@@ -1,20 +1,21 @@
 class StationsController < ApplicationController
+  before_action :authenticate_current_event
 
   def index
-    stations = Station.all.order('created_at')
+    stations = current_event.stations.all.order('created_at')
 
     render json: stations
   end
 
   def create
-    Station.create(station_params)
+    current_event.stations.create(station_params)
 
     head :ok
   end
 
 
   def show
-    station = Station.find(params[:id])
+    station = current_event.stations.find(params[:id])
 
     if station
       render json: station
@@ -24,7 +25,7 @@ class StationsController < ApplicationController
   end
 
   def update
-    station = Station.find(params[:id])
+    station = current_event.stations.find(params[:id])
 
     if station
       if station.update(station_params)
@@ -38,7 +39,7 @@ class StationsController < ApplicationController
   end
 
   def destroy
-    station = Station.find(params[:id])
+    station = current_event.stations.find(params[:id])
 
     if station.destroy
       head :ok

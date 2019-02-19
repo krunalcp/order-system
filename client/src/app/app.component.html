@@ -18,23 +18,32 @@
         <!-- Navigation -->
         <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBarHeader">
           <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
-            <li class="nav-item g-mx-20--lg">
+            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/station/list" class="nav-link px-0"> Stations </a>
             </li>
-            <li class="nav-item g-mx-20--lg">
+            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/category/list" class="nav-link px-0"> Item Categories </a>
             </li>
-            <li class="nav-item g-mx-20--lg">
+            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/item/list" class="nav-link px-0"> Items </a>
             </li>
-            <li class="nav-item g-mx-20--lg">
+            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/order/list" class="nav-link px-0">Orders </a>
             </li>
-            <li class="nav-item g-mx-20--lg">
+            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/station/order" class="nav-link px-0">Station Orders </a>
             </li>
-            <li class="nav-item g-mx-20--lg">
+            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/order/summary" class="nav-link px-0">Order Summary </a>
+            </li>
+            <li *ngIf="!tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+              <a routerLink="/login" class="nav-link px-0">Login</a>
+            </li>
+            <li *ngIf="tokenService.userSignedIn() && tokenService.currentUserData && tokenService.currentUserData.admin" class="nav-item g-mx-20--lg">
+              <a routerLink="/event/list" class="nav-link px-0">Add Event</a>
+            </li>
+            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+              <a (click)="tokenService.signOut()" class="nav-link px-0">LOGOUT</a>
             </li>
           </ul>
         </div>

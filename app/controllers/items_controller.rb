@@ -1,19 +1,20 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_current_event
   before_action :set_item, only: %i[show update destroy]
 
   def index
-    @items = Item.all
+    @items = current_event.items.all
 
     render json: @items
   end
 
   def active_items
-    @items = Item.unscoped.left_outer_joins(:category).where(active: true).order('categories.show_order asc, items.order_no asc')
+    @items = current_event.items.unscoped.left_outer_joins(:category).where(active: true).order('categories.show_order asc, items.order_no asc')
     render json: @items
   end
 
   def create
-    item = Item.new(item_params)
+    item = current_event.items.new(item_params)
 
     if item.save
       head :ok
@@ -52,7 +53,7 @@ class ItemsController < ApplicationController
 
   def order_summary
     type =  %w[quantity value].include?(params[:type]) ? params[:type] : 'quantity'
-    summary = Item.get_summary(type)
+    summary = current_event.items.get_summary(type)
 
     if summary
       render json: summary
@@ -62,7 +63,7 @@ class ItemsController < ApplicationController
   end
 
   def last_order_number
-    item = Item.last
+    item = current_event.items.last
     if item
       render json: (item.order_no || 0) + 1
     else
@@ -73,7 +74,7 @@ class ItemsController < ApplicationController
   private
 
   def set_item
-    @item = Item.find_by_id(params[:id])
+    @item = current_event.items.find_by_id(params[:id])
   end
 
   def item_params

@@ -1,10 +1,11 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_current_event
   before_action :set_pagination, only: :index
 
   def index
     sort_by = %w[scheduled_order_time station_id value].include?(params[:sort_by]) ? params[:sort_by] : 'scheduled_order_time'
     order   = params[:sort_order].present? && params[:sort_order] == 'asc' ? 'asc' : 'desc'
-    @orders = Order.includes(%i[station order_items]).order("#{sort_by} #{order}")
+    @orders = current_event.orders.includes(%i[station order_items]).order("#{sort_by} #{order}")
 
     if params[:all] == 'true'
       render json: @orders
@@ -24,7 +25,7 @@ class OrdersController < ApplicationController
   def create
     new_order_params = { customer_name: order_params[:customer_name], station_id: order_params[:station_id], value: order_params[:value], charge_to_account: order_params[:charge_to_account], scheduled_order_time: order_params[:scheduled_order_time] }
 
-    @order = Order.create(new_order_params)
+    @order = current_event.orders.create(new_order_params)
 
     order_items = []
 
@@ -47,7 +48,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    order = Order.find(params[:id])
+    order = current_event.orders.find(params[:id])
 
     if order
       render json: order
@@ -57,7 +58,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find(params[:id])
+    @order = current_event.orders.find(params[:id])
 
     if @order
       new_order_params = { customer_name: order_params[:customer_name], station_id: order_params[:station_id], value: order_params[:value], charge_to_account: order_params[:charge_to_account], scheduled_order_time: order_params[:scheduled_order_time] }
@@ -85,7 +86,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    order = Order.find(params[:id])
+    order = current_event.orders.find(params[:id])
 
     if order.destroy
       head :ok
@@ -95,7 +96,7 @@ class OrdersController < ApplicationController
   end
 
   def mark_fulfilled
-    order = Order.find(params[:id])
+    order = current_event.orders.find(params[:id])
 
     current_station = order.station
     new_station = current_station.next

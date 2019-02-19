@@ -26,6 +26,9 @@ gem 'puma', '~> 3.7'
 gem 'rack-cors'
 gem 'acts_as_list'
 
+gem 'devise_token_auth'
+gem 'omniauth'
+
 # serialize API output
 gem 'active_model_serializers'
 
