@@ -44,7 +44,8 @@ import { AccountShowComponent } from './account-show/account-show.component';
 const appRoutes: Routes = [
 	{
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HostappService } from './hostapp.service';
 import { Http } from '@angular/http';
 import {Observable} from "rxjs";
-// import { Item } from './item';
 
 @Injectable({
   providedIn: 'root'
@@ -14,33 +13,33 @@ export class CategoryService {
   	private http: Http
   ) { }
 
-  add(item: any): Observable<any>{
+  add(category: any): Observable<any>{
     let categoriesApiURL = this.hostAppService.getHost() + '/categories';
 
-    return this.http.post(categoriesApiURL, item);
+    return this.http.post(categoriesApiURL, category, this.hostAppService.getToken());
   }
 
   show(id: number): Observable<any>{
     let categoriesApiURL = this.hostAppService.getHost() + '/categories';
 
-    return this.http.get(categoriesApiURL + "/" + id);
+    return this.http.get(categoriesApiURL + "/" + id, this.hostAppService.getToken());
   }
 
-  update(id: number, item:any): Observable<any>{
+  update(id: number, category:any): Observable<any>{
     let categoriesApiURL = this.hostAppService.getHost() + '/categories';
 
-    return this.http.put(categoriesApiURL + "/" + id, item);
+    return this.http.put(categoriesApiURL + "/" + id, category, this.hostAppService.getToken());
   }
 
   remove(id: number): Observable<any>{
     let categoriesApiURL = this.hostAppService.getHost() + '/categories';
 
-    return this.http.delete(categoriesApiURL + "/" + id);
+    return this.http.delete(categoriesApiURL + "/" + id, this.hostAppService.getToken());
   }
 
   list(): Observable<any>{
   	let categoriesApiURL = this.hostAppService.getHost() + '/categories';
 
-  	return this.http.get(categoriesApiURL);
+  	return this.http.get(categoriesApiURL, this.hostAppService.getToken());
   }
 }

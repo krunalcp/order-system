@@ -8,6 +8,7 @@ import * as XLSX from 'xlsx';
 
 import { OrderService } from '../order.service';
 import { Order } from '../order';
+import {Angular2TokenService} from "angular2-token";
 
 declare var $: any;
 
@@ -40,7 +41,8 @@ export class OrderListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
   	private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    public tokenService: Angular2TokenService
   ) { }
 
   ngOnInit() {
@@ -175,7 +177,6 @@ export class OrderListComponent implements OnInit {
     let ordersData = []
     let order = this.orders.find(x => x.id === order_id)
     var printSection = document.getElementById(order_id).innerHTML;
-    console.log(document.getElementById(order_id).innerHTML)
     var popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
     popupWin.document.open();
     popupWin.document.write(`

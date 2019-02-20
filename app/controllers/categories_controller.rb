@@ -1,14 +1,15 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_event!
   before_action :set_category, only: %i[show update destroy]
 
   def index
-    @categories = Category.all
+    @categories = current_event.categories
 
     render json: @categories
   end
 
   def create
-    category = Category.new(category_params)
+    category = current_event.categories.new(category_params)
 
     if category.save
       head :ok
@@ -48,7 +49,7 @@ class CategoriesController < ApplicationController
   private
 
   def set_category
-    @category = Category.find_by_id(params[:id])
+    @category = current_event.categories.find_by_id(params[:id])
   end
 
   def category_params

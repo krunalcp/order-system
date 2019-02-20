@@ -24,4 +24,9 @@ export class AppComponent {
   public dispHost(){
   	return this.hostAppService.getHost();
   }
+
+  public onSignout(){
+    this.tokenService.signOut();
+    this.router.navigate(['/login'])
+  }
 }
