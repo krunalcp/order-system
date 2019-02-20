@@ -9,5 +9,6 @@ class Event < ActiveRecord::Base
   has_many :orders
   has_many :items
   has_many :stations
+  has_many :accounts
 
 end

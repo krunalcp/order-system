@@ -1,5 +1,5 @@
 class StationsController < ApplicationController
-  before_action :authenticate_current_event
+  before_action :authenticate_event!
 
   def index
     stations = current_event.stations.order('created_at')

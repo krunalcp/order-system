@@ -8,14 +8,6 @@ class ApplicationController < ActionController::API
     @offset = (@page - 1) * @per_page
   end
 
-  def authenticate_current_event
-     head :unauthorized if current_event.nil?
-  end
-
-  def current_event
-    Event.find_by("tokens LIKE '%#{request.headers['access-token']}%'") if request.headers['access-token'].present?
-  end
-
   protected
 
   def configure_permitted_parameters

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_current_event
+  before_action :authenticate_event!
   before_action :set_pagination, only: :index
 
   def index

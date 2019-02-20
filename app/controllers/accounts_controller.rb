@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :authenticate_current_event
+  before_action :authenticate_event!
   before_action :set_account, only: %i[show update destroy]
 
   def index

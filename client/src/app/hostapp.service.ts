@@ -41,7 +41,13 @@ export class HostappService {
   }
 
   public getToken(){
-    let headers = new Headers({'access-token': this.tokenService.currentAuthData.client});
+    let headers = new Headers({
+      'access-token': this.tokenService.currentAuthData.accessToken,
+      'client': this.tokenService.currentAuthData.client,
+      'uid': this.tokenService.currentAuthData.uid,
+      'expiry': this.tokenService.currentAuthData.expiry,
+      'token_type': this.tokenService.currentAuthData.tokenType
+    });
     return new RequestOptions({headers: headers});
   }
 }
