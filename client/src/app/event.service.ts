@@ -15,32 +15,32 @@ export class EventService {
   ) { }
 
   add(event: any): Observable<any>{
-    let categoriesApiURL = this.hostAppService.getHost() + '/events';
+    let eventsApiURL = this.hostAppService.getHost() + '/events';
 
-    return this.http.post(categoriesApiURL, event, this.hostAppService.getToken());
+    return this.http.post(eventsApiURL, event, this.hostAppService.getToken());
   }
 
   show(id: number): Observable<any>{
-    let categoriesApiURL = this.hostAppService.getHost() + '/events';
+    let eventsApiURL = this.hostAppService.getHost() + '/events';
 
-    return this.http.get(categoriesApiURL + "/" + id, this.hostAppService.getToken());
+    return this.http.get(eventsApiURL + "/" + id, this.hostAppService.getToken());
   }
 
   update(id: number, event:any): Observable<any>{
-    let categoriesApiURL = this.hostAppService.getHost() + '/events';
+    let eventsApiURL = this.hostAppService.getHost() + '/events';
 
-    return this.http.put(categoriesApiURL + "/" + id, event, this.hostAppService.getToken());
+    return this.http.put(eventsApiURL + "/" + id, event, this.hostAppService.getToken());
   }
 
   remove(id: number): Observable<any>{
-    let categoriesApiURL = this.hostAppService.getHost() + '/events';
+    let eventsApiURL = this.hostAppService.getHost() + '/events';
 
-    return this.http.delete(categoriesApiURL + "/" + id, this.hostAppService.getToken());
+    return this.http.delete(eventsApiURL + "/" + id, this.hostAppService.getToken());
   }
 
   list(): Observable<any>{
-  	let categoriesApiURL = this.hostAppService.getHost() + '/events';
+  	let eventsApiURL = this.hostAppService.getHost() + '/events';
 
-  	return this.http.get(categoriesApiURL, this.hostAppService.getToken());
+  	return this.http.get(eventsApiURL, this.hostAppService.getToken());
   }
 }
