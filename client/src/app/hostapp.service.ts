@@ -13,7 +13,7 @@ export class HostappService {
     const environment: any = window.location.hostname;
 
     if (environment == 'localhost'){
-      return "http://localhost:3002"
+      return "http://localhost:3000"
     }
     else if (environment == 'ctordering.herokuapp.com'){
       return "https://ctordering.herokuapp.com"
@@ -46,7 +46,7 @@ export class HostappService {
       'client': this.tokenService.currentAuthData.client,
       'uid': this.tokenService.currentAuthData.uid,
       'expiry': this.tokenService.currentAuthData.expiry,
-      'token_type': this.tokenService.currentAuthData.tokenType
+      'token-type': this.tokenService.currentAuthData.tokenType
     });
     return new RequestOptions({headers: headers});
   }

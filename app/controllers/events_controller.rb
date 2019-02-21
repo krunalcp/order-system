@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
   def create
     event = Event.new(event_params)
-
+    event.uid = event.name
     if event.save
       head :ok
     else

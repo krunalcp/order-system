@@ -29,13 +29,6 @@ export class AppComponent {
   }
 
   public onSignout(){
-    let eventsApiURL = this.hostAppService.getHost() + '/auth/sign_out';
-
-  	this.http.delete(eventsApiURL, this.hostAppService.getToken()).subscribe(
-      successResponse => {
-        console.log('sign out')
-      }
-    );
     this.tokenService.signOut().subscribe();
     this.router.navigate(['/login']);
   }
