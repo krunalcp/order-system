@@ -56,7 +56,7 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <h2 class="test-header" *ngIf="hostAppService.isTestSite()">TEST SITE</h2>
+      <h2 class="test-header" *ngIf="hostAppService.isTestSite()">{{ hostAppService.getHeaderName() }}</h2>
     </div>
   </div>
 </header>

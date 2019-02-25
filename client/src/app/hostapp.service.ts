@@ -40,6 +40,21 @@ export class HostappService {
     }
   }
 
+  public getHeaderName(){
+    const environment: any = window.location.hostname;
+
+     if (environment == 'ctordering-obsolete.herokuapp.com'){
+       return 'Obsolete Site'
+     }
+     else if (environment == 'ctordering-demo.herokuapp.com'){
+       return 'Demo Site'
+     }
+     else{
+      return 'TEST SITE'
+    }
+  }
+
+
   public getToken(){
     let headers = new Headers({
       'access-token': this.tokenService.currentAuthData.accessToken,
