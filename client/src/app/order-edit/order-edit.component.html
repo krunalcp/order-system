@@ -22,8 +22,10 @@
           <input class="form-control u-form-control rounded-0 pr-0" type="datetime-local" id="scheduled_order_time" formControlName="scheduled_order_time">
         </div>
         <div class="form-group g-mb-25 col-md-3">
-          <label class="g-mb-10" for="charge_to_account">Charge To Account</label>
-          <input class="form-control u-form-control rounded-0" type="checkbox" id="charge_to_account" formControlName="charge_to_account">
+          <label class="g-mb-10" for="account_id">Select account</label>
+          <select class="form-control rounded-0 u-form-control" id="account" formControlName="account_id">
+            <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
+          </select>
         </div>
       </div>
     </form>

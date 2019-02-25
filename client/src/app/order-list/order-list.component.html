@@ -94,6 +94,7 @@
               </div>
               <br />
               <div style="font-size: 14px; font-weight: bold;">Order Number: {{order.id}}</div>
+              <div style="font-size: 14px; font-weight: bold;" *ngIf="order.account">Account: {{order.account.name}}</div>
               <div style="font-size: 14px; font-weight: bold;">Order Ref: {{order.customer_name}}</div>
               <br />
               <div style="font-size: 14px; font-weight: bold;">{{order.created_at | date:'dd.MM.yyyy HH:mm'}}</div>

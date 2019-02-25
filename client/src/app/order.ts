@@ -10,6 +10,7 @@ export class Order {
     public order_items?: any,
     public price?: any,
     public charge_to_account?: boolean,
-    public scheduled_order_time?: any
+    public scheduled_order_time?: any,
+    public account?: any
   ) {}
 }

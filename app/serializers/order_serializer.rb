@@ -1,5 +1,5 @@
 class OrderSerializer < ActiveModel::Serializer
-	attributes :id, :customer_name, :station, :value, :created_at, :station_id, :charge_to_account, :scheduled_order_time, :display_scheduled_order_time
+	attributes :id, :customer_name, :station, :value, :created_at, :station_id, :charge_to_account, :scheduled_order_time, :display_scheduled_order_time, :account_id, :account
 
 	has_many :order_items
 
@@ -9,6 +9,10 @@ class OrderSerializer < ActiveModel::Serializer
 
   def station
     object.station
+  end
+
+  def account
+    object.account
   end
 
   def scheduled_order_time

@@ -6,6 +6,7 @@ import { Response } from '@angular/http';
 
 import { OrderService } from '../order.service';
 import { ItemService } from '../item.service';
+import { AccountService } from '../account.service';
 
 import { Order } from '../order';
 
@@ -17,7 +18,8 @@ declare var $: any;
   styleUrls: ['./order-add.component.css'],
   providers: [
     OrderService,
-    ItemService
+    ItemService,
+    AccountService
   ]
 })
 export class OrderAddComponent implements OnInit {
@@ -39,10 +41,12 @@ export class OrderAddComponent implements OnInit {
   private isFormSubmitted: boolean;
   public isOrderAdding: boolean = false;
   public stations: any;
+  public accounts: any;
 
   constructor(
   	private orderService: OrderService,
     private itemService: ItemService,
+    private accountService: AccountService,
   	private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
@@ -52,6 +56,7 @@ export class OrderAddComponent implements OnInit {
 
   	this.buildForm();
     this.getStationList();
+    this.getAccountList();
     this.loadItems();
 
   }
@@ -106,7 +111,6 @@ export class OrderAddComponent implements OnInit {
     this.order.order_items = this.items.filter(item => item.quantity > 0)
     this.order.value = this.totalPrice;
     this.isOrderAdding = true;
-    console.log(this.order.order_items);
     this.orderAddRequest = this.orderService.add(this.order).subscribe(
       successResponse => {
         this.sucessHandler(successResponse);
@@ -129,9 +133,9 @@ export class OrderAddComponent implements OnInit {
       'station_id': [
         this.order.station
       ],
-      'charge_to_account': [
-        this.order.charge_to_account
-      ],
+      'account_id': [
+        this.order.station
+      ]
       'scheduled_order_time': [
         this.order.scheduled_order_time
       ]
@@ -146,6 +150,14 @@ export class OrderAddComponent implements OnInit {
     this.orderService.stations().subscribe(
       successResponse => {
         this.stations = successResponse.json();
+      }
+    );
+  }
+
+  private getAccountList(): void {
+    this.accountService.list().subscribe(
+      successResponse => {
+        this.accounts = successResponse.json();
       }
     );
   }

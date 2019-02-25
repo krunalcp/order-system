@@ -6,6 +6,7 @@ import { Response } from '@angular/http';
 
 import { OrderService } from '../order.service';
 import { ItemService } from '../item.service';
+import { AccountService } from '../account.service';
 
 import { Order } from '../order';
 
@@ -38,6 +39,7 @@ export class OrderEditComponent implements OnInit {
   public items: any;
   public isItemsFilled: boolean = false;
   public stations: any;
+  public accounts: any;
 
   constructor(
   	private orderService: OrderService,
@@ -45,6 +47,7 @@ export class OrderEditComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private itemService: ItemService,
+    private accountService: AccountService,
   ) { }
 
   ngOnInit() {
@@ -55,6 +58,7 @@ export class OrderEditComponent implements OnInit {
         this.orderId = params.id;
         this.getOrder();
         this.getStationList();
+        this.getAccountList();
       }
     );
   }
@@ -135,6 +139,14 @@ export class OrderEditComponent implements OnInit {
     );
   }
 
+  private getAccountList(): void {
+    this.accountService.list().subscribe(
+      successResponse => {
+        this.accounts = successResponse.json();
+      }
+    );
+  }
+
   public onSubmit() {
     if(this.orderForm.status == 'INVALID') {
       this.isFormSubmitted = true;
@@ -169,8 +181,8 @@ export class OrderEditComponent implements OnInit {
       'station_id': [
         this.order.station
       ],
-      'charge_to_account': [
-        this.order.charge_to_account
+      'account_id': [
+        this.order.account
       ],
       'scheduled_order_time': [
         this.order.scheduled_order_time
