@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def active_items
-    @items = current_event.items.unscoped.left_outer_joins(:category).where(active: true).order('categories.show_order asc, items.order_no asc')
+    @items =  Item.unscoped.where(event_id: current_event.id).left_outer_joins(:category).where(active: true).order('categories.show_order asc, items.order_no asc')
     render json: @items
   end
 
