@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
     order_items = []
 
     order_params[:order_items].each do |item|
-      item_params = { item: item[:name], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes] }
+      item_params = { item: item[:name], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes], category_id: item[:category_id] }
 
       order_item = OrderItem.create(item_params)
       order_items.push(order_item)
@@ -66,7 +66,7 @@ class OrdersController < ApplicationController
       order_items = []
 
       order_params[:order_items].each do |item|
-        item_params = { item: item[:name], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes] }
+        item_params = { item: item[:name], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes], category_id: item[:category_id] }
 
         order_item = OrderItem.create(item_params)
         order_items.push(order_item)
@@ -132,6 +132,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:customer_name, :station, :station_id, :value, :scheduled_order_time, :account_id, order_items: %i[name price quantity notes])
+    params.permit(:customer_name, :station, :station_id, :value, :scheduled_order_time, :account_id, order_items: %i[name price quantity notes category_id])
   end
 end
