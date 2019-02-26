@@ -10,14 +10,14 @@ class Item < ApplicationRecord
 
   acts_as_list column: :order_no
 
-  def self.get_summary(type = 'quantity')
+  def self.get_summary(current_event, type = 'quantity')
     summary = []
 
-    Item.find_each do |item|
+    current_event.items.find_each do |item|
       summary << { name: item.name, stations: [] }
     end
     stations = {}
-    Station.find_each do |station|
+    current_event.stations.find_each do |station|
       stations["S#{station.id} - #{station.name}"] = { quantity: 0 }
       order_items = station.order_items.select("order_items.item, sum(order_items.#{type}) as quantity").group('order_items.item')
       if order_items.present?

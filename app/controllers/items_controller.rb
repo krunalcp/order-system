@@ -53,7 +53,7 @@ class ItemsController < ApplicationController
 
   def order_summary
     type =  %w[quantity value].include?(params[:type]) ? params[:type] : 'quantity'
-    summary = current_event.items.get_summary(type)
+    summary = current_event.items.get_summary(current_event, type)
 
     if summary
       render json: summary
