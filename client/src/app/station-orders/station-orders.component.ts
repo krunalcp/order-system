@@ -109,10 +109,8 @@ export class StationOrdersComponent implements OnInit {
   // }
 
   public fulfilledOrder(order, category){
-    if(category == this.currentCategory){
-      let fulfilledOrder = order.fulfilled.split(',')
-      return fulfilledOrder.includes(this.currentCategory)
-    }
+    let fulfilledOrder = order.fulfilled.split(',')
+    return fulfilledOrder.includes(category)
   }
 
   public subscribeToOrders(refresh_time): void {
