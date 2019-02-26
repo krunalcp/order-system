@@ -82,6 +82,9 @@ export class StationAddComponent implements OnInit {
       ],
       'next_station_id': [
         this.station.next_station_id
+      ],
+      'separate_by_category': [
+        this.station.separate_by_category
       ]
     });
 

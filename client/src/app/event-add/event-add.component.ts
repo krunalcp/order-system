@@ -120,8 +120,6 @@ export class EventAddComponent implements OnInit {
   }
 
   private sucessHandler(successResponse: Response): void {
-    // this.event = successResponse.json();
-    // this.isItemCreated = true;
     this.isEventAdding = false;
     this.router.navigate(['/event/list']);
   }

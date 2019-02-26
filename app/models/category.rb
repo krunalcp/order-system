@@ -1,5 +1,6 @@
 class Category < ApplicationRecord
   has_many :items
+  has_many :order_items
   belongs_to :event
 
   validates :name, :show_order, presence: true

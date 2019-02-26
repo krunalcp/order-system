@@ -4,6 +4,7 @@ export class Station {
     public name?: string,
     public next_station?: any,
     public next_station_id?: number,
-    public refresh_time?: number
+    public refresh_time?: number,
+    public separate_by_category?: boolean
   ) {}
 }

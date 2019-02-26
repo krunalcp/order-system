@@ -97,10 +97,31 @@ class OrdersController < ApplicationController
 
   def mark_fulfilled
     order = current_event.orders.find(params[:id])
-
+    order.fulfilled = ''
     current_station = order.station
     new_station = current_station.next
     order.station = new_station || current_station
+    if order.save
+      head :ok
+    else
+      render json: { errors: ['order not found'] }, status: 404
+    end
+  end
+
+  def mark_item_fulfilled
+    order = current_event.orders.find(params[:id])
+    order.fulfilled = order.fulfilled.to_s + ',' + params[:c] if params[:c]
+
+    category_ids = order.order_items.pluck(:category_id)
+    fulfilled_category_ids = order.fulfilled.split(",").map(&:to_i)
+
+    if (category_ids - fulfilled_category_ids).blank?
+      current_station = order.station
+      new_station = current_station.next
+      order.station = new_station || current_station
+      order.fulfilled = ''
+    end
+
     if order.save
       head :ok
     else

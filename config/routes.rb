@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   	member do
   		put 'mark_fulfilled'
+      put 'mark_item_fulfilled'
   	end
   end
 

@@ -73,4 +73,10 @@ export class OrderService {
 
     return this.http.put(ordersApiURL + "/" + id + "/mark_fulfilled", {}, this.hostAppService.getToken());
   }
+
+  markItemFulfilled(id: number, categoryId: number): Observable<any>{
+    let ordersApiURL = this.hostAppService.getHost() + '/orders';
+
+    return this.http.put(ordersApiURL + "/" + id + "/mark_item_fulfilled?c="+categoryId, {}, this.hostAppService.getToken());
+  }
 }

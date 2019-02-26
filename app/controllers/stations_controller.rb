@@ -51,6 +51,6 @@ class StationsController < ApplicationController
   private
 
   def station_params
-    params.permit(:name, :refresh_time, :next_station_id)
+    params.permit(:name, :refresh_time, :next_station_id, :separate_by_category)
   end
 end

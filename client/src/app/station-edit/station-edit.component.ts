@@ -93,6 +93,7 @@ export class StationEditComponent implements OnInit {
         this.station['name'] = data.name;
         this.station['refresh_time'] = data.refresh_time;
         this.station['next_station_id'] = data.next_station_id;
+        this.station['separate_by_category'] = data.separate_by_category;
         this.stationForm.patchValue(this.station);
       },
       () => {
@@ -114,6 +115,9 @@ export class StationEditComponent implements OnInit {
       ],
       'next_station_id': [
         this.station.next_station_id
+      ],
+      'separate_by_category': [
+        this.station.separate_by_category
       ]
     });
 

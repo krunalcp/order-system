@@ -4,12 +4,12 @@
   </div>
 
   <div class="row">
-    <div class="offset-md-6 col-md-3">
+    <div class="offset-md-3 col-md-3">
       <div class="form-group g-mb-25">
         <label for="exampleSelect1">&nbsp;</label>
         <button class="form-control rounded-0 btn btn-md u-btn-outline-teal u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15 btn-outline" (click)="loadOrders(false)">
           <span *ngIf="!isOrdersLoading">
-            <i class="fa fa-refresh"></i> Refresh
+            <i class="fa fa-refresh"></i> Refresh <span *ngIf='newOrder' class="badge badge-pill">{{ newOrderNumbr }}</span>
           </span>
           <span class="g-pl-5" *ngIf="isOrdersLoading">
             <i class="fa fa-spinner fa-spin"></i>
@@ -23,6 +23,15 @@
         <label for="exampleSelect1">Select station</label>
         <select class="form-control rounded-0" id="exampleSelect1" (change)="onSelect($event.target.value)">
           <option *ngFor="let station of stations" value="{{station.id}}">S{{station.id}} - {{station.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div *ngIf="station && station.separate_by_category" class="col-md-3">
+      <div class="form-group g-mb-25">
+        <label for="exampleSelect1">Select item category</label>
+        <select class="form-control rounded-0" (change)="onCategorySelect($event.target.value)">
+          <option value="0" selected>All category</option>
+          <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
         </select>
       </div>
     </div>
@@ -53,15 +62,32 @@
           <td class="align-middle">{{order.id}}</td>
           <td class="align-middle">{{order.display_scheduled_order_time}}</td>
           <td class="align-middle">{{order.customer_name}}</td>
-          <td class="align-middle">
-            <span *ngFor="let item of order.order_items">{{item.quantity}} &#215; {{item.item}}
-              <small *ngIf="item.notes != null && item.notes != ''">({{item.notes}})</small><br>
-            </span>
+          <td class="align-middle child">
+            <table class="borderless">
+              <tr *ngFor="let i of order.order_items | groupBy: 'category_id'">
+                <td>
+                  <span *ngFor="let item of i.value">
+                    {{item.quantity}} &#215; {{item.item}}
+                    <small *ngIf="item.notes != null && item.notes != ''">({{item.notes}})</small><br>
+                  </span>
+                </td>
+                <td>
+                  <i *ngIf="fulfilledOrder(order, i.key)" class="fa fa-check fa-2x"></i>
+                </td>
+              </tr>
+            </table>
           </td>
           <td align="right">${{(order.value * 1).toFixed(2)}}</td>
           <td class="text-center">
             <a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
-            <button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" (click)="checkOutOrder(order)" *ngIf="order.station.id != lastStation" [disabled]="order.station.next_station_id == null">
+            <button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" (click)="checkOutOrder(order)" *ngIf="order.station.id != lastStation && !categorySelected" [disabled]="order.station.next_station_id == null">
+              FulFilled
+              <span class="g-pl-5" *ngIf="isOrderChecking && currentOrderId == order.id">
+                <i class="fa fa-spinner fa-spin"></i>
+                <span class="sr-only">Loading...</span>
+              </span>
+            </button>
+            <button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" (click)="checkOutItemOrder(order )" *ngIf="order.station.id != lastStation && categorySelected" [disabled]="order.station.next_station_id == null">
               FulFilled
               <span class="g-pl-5" *ngIf="isOrderChecking && currentOrderId == order.id">
                 <i class="fa fa-spinner fa-spin"></i>

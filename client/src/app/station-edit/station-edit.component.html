@@ -17,24 +17,28 @@
         </div>
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="refresh_time">Next Station</label>
-          <select class="form-control rounded-0 u-form-control" id="station" formControlName="next_station_id" >
-	      		<option *ngFor="let station of stations" value="{{station.id}}">S{{station.id}} - {{station.name}}</option>
-		    	</select>
+          <select class="form-control rounded-0 u-form-control" id="station" formControlName="next_station_id">
+            <option *ngFor="let station of stations" value="{{station.id}}">S{{station.id}} - {{station.name}}</option>
+          </select>
         </div>
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="refresh_time">Refresh Time</label>
           <input class="form-control u-form-control rounded-0" type="text" placeholder="Enter Refresh Time" id="refresh_time" formControlName="refresh_time">
         </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="separate_by_category">Separate By Category</label>
+          <input class="form-control u-form-control rounded-0" type="checkbox" id="separate_by_category" formControlName="separate_by_category">
+        </div>
       </div>
     </form>
     <div class="text-right">
       <button (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
-            <span *ngIf="!isStationUpdating">Update Station</span>
-            <span *ngIf="isStationUpdating">Updating Station...</span>
-            <span class="g-pl-5" *ngIf="isStationUpdating">
-              <i class="fa fa-spinner fa-spin"></i>
-              <span class="sr-only">Loading...</span>
-            </span>
+        <span *ngIf="!isStationUpdating">Update Station</span>
+        <span *ngIf="isStationUpdating">Updating Station...</span>
+        <span class="g-pl-5" *ngIf="isStationUpdating">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Loading...</span>
+        </span>
       </button>
       <button class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="cancelStation()">
         Cancel

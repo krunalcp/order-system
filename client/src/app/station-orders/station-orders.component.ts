@@ -5,6 +5,7 @@ import { timer } from 'rxjs';
 
 import { OrderService } from '../order.service';
 import { StationService } from '../station.service';
+import { CategoryService } from '../category.service';
 
 import { Order } from '../order';
 
@@ -16,22 +17,26 @@ declare var $: any;
   styleUrls: ['./station-orders.component.css'],
   providers: [
     OrderService,
-    StationService
+    StationService,
+    CategoryService
   ]
 })
 export class StationOrdersComponent implements OnInit {
 
   public orders: any;
   public stations: any;
+  public categories: any;
   public isOrdersLoading: boolean = false;
   public isOrderChecking: boolean = false;
   public currentOrderId: number;
   public currentStation: any;
+  public currentCategory: any;
   public stationOrders: any;
   public lastStation: any;
   public selectedStation: any;
   public timerSubscription: any;
   public station: any;
+  public category: any;
   public refreshTime: number;
   public currentPage: number = 1;
   public totalOrder: number = 0;
@@ -40,16 +45,21 @@ export class StationOrdersComponent implements OnInit {
   public selectedPage: number = 1;
   public sortBy: string = 'scheduled_order_time';
   public sortOrder: string = 'desc';
+  public newOrder: boolean;
+  public newOrderNumbr: number;
+  public categorySelected: boolean;
 
   constructor(
   	private orderService: OrderService,
     private stationService: StationService,
+    private categoryService: CategoryService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.loadStationList();
+    this.loadCategoryList();
   }
 
   public loadStationList(){
@@ -70,12 +80,57 @@ export class StationOrdersComponent implements OnInit {
     );
   }
 
+  public loadCategoryList(){
+    this.categoryService.list().subscribe(
+      successResponse => {
+        this.categories = successResponse.json();
+        this.categorySelected = false
+        this.currentCategory = 0
+      },
+      (errorResponse) => {
+        // this.displayErrors(errorResponse);
+      }
+    );
+  }
+
+  public onCategorySelect(categoryId) {
+    let sid = parseInt(categoryId);
+    this.categorySelected = categoryId != 0
+    this.currentCategory = categoryId;
+    this.currentPage = 1;
+    this.totalOrder = 0;
+    this.perPageOrder = 0;
+    this.category = this.categories.find(x => x.id === sid)
+    this.loadOrders(true);
+  }
+
   // public subscribeToStations(): void {
   //   this.timerSubscription = timer(5000).subscribe(() => this.loadStationList());
   // }
 
+  public fulfilledOrder(order, category){
+    if(category == this.currentCategory){
+      let fulfilledOrder = order.fulfilled.split(',')
+      return fulfilledOrder.includes(this.currentCategory)
+    }
+  }
+
   public subscribeToOrders(refresh_time): void {
-    this.timerSubscription = timer(refresh_time * 1000).subscribe(() => this.loadOrders(true));
+    this.timerSubscription = timer(refresh_time * 1000).subscribe(() => this.setNotification());
+  }
+
+  public setNotification(){
+    this.orderService.list(this.currentPage, this.currentStation, 0, this.sortBy, this.sortOrder).subscribe(
+      successResponse => {
+        this.newOrder = false
+        let listResponse = successResponse.json();
+        if(this.totalOrder < listResponse.total){
+          this.newOrder = true
+          this.newOrderNumbr = listResponse.total - this.totalOrder
+        }
+      }
+    )
+    this.subscribeToOrders(this.refreshTime);
   }
 
   public onSelect(stationId) {
@@ -87,6 +142,8 @@ export class StationOrdersComponent implements OnInit {
     this.perPageOrder = 0;
     this.station = this.stations.find(x => x.id === sid)
     this.refreshTime = this.station.refresh_time
+    this.currentCategory = 0
+    this.categorySelected = false
     this.loadOrders(true);
     //this.subscribeToOrders(this.refreshTime);
   }
@@ -126,6 +183,7 @@ export class StationOrdersComponent implements OnInit {
         this.pages = (this.totalOrder % this.perPageOrder) == 0 ? (this.totalOrder / this.perPageOrder) : (this.totalOrder / this.perPageOrder) + 1;
         // console.log(this.currentStation);
         this.station = this.stations.find(x => x.id === this.currentStation)
+        this.category = this.categories.find(x => x.id === this.currentCategory)
         this.refreshTime = this.station.refresh_time
         this.loadOnlyOrderList();
         this.isOrdersLoading = false;
@@ -158,6 +216,25 @@ export class StationOrdersComponent implements OnInit {
     this.isOrderChecking = true;
     this.currentOrderId = order.id;
     this.orderService.markFulfilled(order.id).subscribe(
+      successResponse => {
+        this.isOrderChecking = false;
+        let orderIndex = this.stationOrders.indexOf(order);
+        this.stationOrders.splice(orderIndex, 1);
+        this.loadOrders(false);
+        // this.currentStation = order.station.next;
+      },
+      (errorResponse) => {
+        this.isOrderChecking = false;
+        // this.displayErrors(errorResponse);
+      }
+    );
+  }
+
+  public checkOutItemOrder(order){
+    this.isOrderChecking = true;
+    this.currentOrderId = order.id;
+    console.log(this.currentCategory)
+    this.orderService.markItemFulfilled(order.id, this.currentCategory).subscribe(
       successResponse => {
         this.isOrderChecking = false;
         let orderIndex = this.stationOrders.indexOf(order);

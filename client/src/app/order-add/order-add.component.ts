@@ -135,7 +135,7 @@ export class OrderAddComponent implements OnInit {
       ],
       'account_id': [
         this.order.station
-      ]
+      ],
       'scheduled_order_time': [
         this.order.scheduled_order_time
       ]

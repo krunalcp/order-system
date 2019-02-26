@@ -10,3 +10,16 @@
   color: #fff;
   background-color: #18ba9b;
 }
+.badge {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: #18ba9b;
+  color: #fff;
+}
+.child {
+  padding: 0px;
+}
+.borderless td{
+    border: none;
+}
