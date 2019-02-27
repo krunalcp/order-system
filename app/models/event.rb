@@ -12,4 +12,16 @@ class Event < ActiveRecord::Base
   has_many :accounts
   has_many :categories
 
+  validates :published_name, presence: true
+  validates :name, presence: true
+  validates :email, presence: true
+
+  before_validation :set_email
+
+  private
+    def set_email
+      return if email.present?
+
+      self.email = name
+    end
 end

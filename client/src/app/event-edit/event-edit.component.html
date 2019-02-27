@@ -2,7 +2,6 @@
   <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
     <h1 class="h3 u-heading-v1__title">Edit Event</h1>
   </div>
-
   <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
     <h3 class="h2 g-font-weight-300 g-mb-20">Edit event details</h3>
     <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
@@ -14,6 +13,13 @@
             <span *ngIf="formErrors.name" class="text-danger">{{formErrors?.name}}</span>
           </label>
           <input class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="published_name">
+            <span *ngIf="!formErrors.published_name" [ngClass]="{'text-success': !eventForm.controls.published_name.pristine}"></span>
+            <span *ngIf="formErrors.published_name" class="text-danger">{{formErrors.published_name}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter published name" id="published_name" formControlName="published_name">
         </div>
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="gst_number">

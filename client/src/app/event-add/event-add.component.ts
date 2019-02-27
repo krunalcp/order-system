@@ -19,6 +19,7 @@ export class EventAddComponent implements OnInit {
   public errorMessage: any;
   public formErrors = {
     'name': '',
+    'published_name': '',
     'gst_number': '',
     'active': '',
     'admin': '',
@@ -27,6 +28,9 @@ export class EventAddComponent implements OnInit {
   validationMessages = {
     'name': {
       'required': 'Name is required.',
+    },
+    'published_name': {
+      'required': 'Published Name is required.',
     }
   };
 
@@ -74,6 +78,12 @@ export class EventAddComponent implements OnInit {
     this.eventForm = this.fb.group({
       'name': [
         this.event.name, [
+          Validators.required,
+          // Validators.maxLength(this.maxlength.title)
+        ]
+      ],
+      'published_name': [
+        this.event.published_name, [
           Validators.required,
           // Validators.maxLength(this.maxlength.title)
         ]

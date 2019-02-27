@@ -26,6 +26,7 @@ export class EventEditComponent implements OnInit {
 	public errorMessage: any;
   public formErrors = {
     'name': '',
+    'published_name': '',
     'gst_number': '',
     'admin': '',
     'active': '',
@@ -35,6 +36,9 @@ export class EventEditComponent implements OnInit {
     'name': {
       'required': 'Name is required.'
     },
+    'published_name': {
+      'required': 'Published Name is required.'
+    },
     'gst_number': {
       'required': 'Gst Number is required.'
     },
@@ -42,7 +46,6 @@ export class EventEditComponent implements OnInit {
       'required': 'Password is required.'
     }
   };
-
 
   constructor(
   	private route: ActivatedRoute,
@@ -92,6 +95,7 @@ export class EventEditComponent implements OnInit {
       successResponse => {
         let data = successResponse.json();
         this.event['name'] = data.name;
+        this.event['published_name'] = data.published_name;
         this.event['gst_number'] = data.gst_number;
         this.event['admin'] = data.admin;
         this.event['active'] = data.active;
@@ -107,8 +111,12 @@ export class EventEditComponent implements OnInit {
     this.eventForm = this.fb.group({
       'name': [
         this.event.name, [
-          Validators.required,
-          // Validators.maxLength(this.maxlength.title)
+          Validators.required
+        ]
+      ],
+      'published_name': [
+        this.event.published_name, [
+          Validators.required
         ]
       ],
       'gst_number': [

@@ -22,7 +22,7 @@
               <a routerLink="/station/list" class="nav-link px-0"> Stations </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-              <a routerLink="/category/list" class="nav-link px-0"> Item Categories </a>
+              <a routerLink="/category/list" class="nav-link px-0"> Categories </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/item/list" class="nav-link px-0"> Items </a>
@@ -34,7 +34,7 @@
               <a routerLink="/station/order" class="nav-link px-0">Station Orders </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-              <a routerLink="/order/summary" class="nav-link px-0">Order Summary </a>
+              <a routerLink="/order/summary" class="nav-link px-0"> Summary </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/account/list" class="nav-link px-0"> Accounts </a>
@@ -42,8 +42,8 @@
             <li *ngIf="!tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/login" class="nav-link px-0">Login</a>
             </li>
-            <li *ngIf="tokenService.userSignedIn() && tokenService.currentUserData && tokenService.currentUserData" class="nav-item g-mx-20--lg">
-              <a routerLink="/event/list" class="nav-link px-0">Add Event</a>
+            <li *ngIf="tokenService.userSignedIn() && tokenService.currentUserData && tokenService.currentUserData.admin" class="nav-item g-mx-20--lg">
+              <a routerLink="/event/list" class="nav-link px-0"> Events </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a (click)="onSignout()" class="nav-link px-0">LOGOUT</a>

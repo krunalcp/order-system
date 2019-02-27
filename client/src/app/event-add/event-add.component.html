@@ -15,6 +15,13 @@
           <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
         </div>
         <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="published_name">
+            <span *ngIf="!formErrors.published_name" [ngClass]="{'text-success': !eventForm.controls.published_name.pristine}"></span>
+            <span *ngIf="formErrors.published_name" class="text-danger">{{formErrors.published_name}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter published name" id="published_name" formControlName="published_name">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="gst_number">
             <span *ngIf="!formErrors.gst_number" [ngClass]="{'text-success': !eventForm.controls.gst_number.pristine}"></span>
             <span *ngIf="formErrors.gst_number" class="text-danger">{{formErrors.gst_number}}</span>

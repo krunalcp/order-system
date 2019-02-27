@@ -13,7 +13,7 @@ class Item < ApplicationRecord
   def self.get_summary(current_event, type = 'quantity')
     summary = []
 
-    current_event.items.find_each do |item|
+    current_event.items.where(active: true).find_each do |item|
       summary << { name: item.name, stations: [] }
     end
     stations = {}

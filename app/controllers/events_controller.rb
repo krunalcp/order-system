@@ -53,6 +53,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.permit(:name, :password, :gst_number, :admin, :active)
+    params.permit(:name, :password, :gst_number, :admin, :active, :published_name)
   end
 end
