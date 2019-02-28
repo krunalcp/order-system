@@ -26,6 +26,14 @@ class EventsController < ApplicationController
     end
   end
 
+  def current
+    if current_event
+      render json: current_event
+    else
+      render json: { errors: ['Event not found'] }, status: 404
+    end
+  end
+
   def update
     if @event
       if @event.update(event_params)
@@ -53,6 +61,9 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.permit(:name, :password, :gst_number, :admin, :active, :published_name, :station_id)
+    params.permit(
+      :name, :password, :gst_number, :admin, :active, :published_name,
+      :station_id, :logo, :icon
+    )
   end
 end

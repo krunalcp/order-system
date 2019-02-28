@@ -22,6 +22,20 @@
           <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter published name" id="published_name" formControlName="published_name">
         </div>
         <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="logo">
+            <span *ngIf="!formErrors.logo" [ngClass]="{'text-success': !eventForm.controls.logo.pristine}">Logo URL</span>
+            <span *ngIf="formErrors.logo" class="text-danger">{{formErrors.logo}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter logo url" id="logo" formControlName="logo">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="icon">
+            <span *ngIf="!formErrors.icon" [ngClass]="{'text-success': !eventForm.controls.icon.pristine}">Icon URL</span>
+            <span *ngIf="formErrors.icon" class="text-danger">{{formErrors.icon}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter icon url" id="icon" formControlName="icon">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="refresh_time">Default Station</label>
           <select class="form-control rounded-0 u-form-control" id="station_id" formControlName="station_id">
             <option *ngFor="let station of stations" value="{{station.id}}">S{{station.id}} - {{station.name}}</option>

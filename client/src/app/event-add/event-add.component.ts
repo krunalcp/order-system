@@ -25,6 +25,8 @@ export class EventAddComponent implements OnInit {
     'gst_number': '',
     'active': '',
     'admin': '',
+    'logo': '',
+    'icon': '',
     'password': ''
   };
   validationMessages = {
@@ -107,6 +109,12 @@ export class EventAddComponent implements OnInit {
       ],
       'active': [
         this.event.active
+      ],
+      'logo': [
+        this.event.logo
+      ],
+      'icon': [
+        this.event.icon
       ],
       'admin': [
         this.event.admin

@@ -26,6 +26,12 @@ export class EventService {
     return this.http.get(eventsApiURL + "/" + id, this.hostAppService.getToken());
   }
 
+  current(): Observable<any>{
+    let eventsApiURL = this.hostAppService.getHost() + '/events';
+
+    return this.http.get(eventsApiURL + "/current", this.hostAppService.getToken());
+  }
+
   update(id: number, event:any): Observable<any>{
     let eventsApiURL = this.hostAppService.getHost() + '/events';
 

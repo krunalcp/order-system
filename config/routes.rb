@@ -11,18 +11,22 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-  resources :events
+  resources :events do
+    collection do
+      get 'current'
+    end
+  end
   resources :accounts
 
   resources :orders do
-  	collection do
-  		get 'pending_list'
-  	end
+    collection do
+      get 'pending_list'
+    end
 
-  	member do
-  		put 'mark_fulfilled'
+    member do
+      put 'mark_fulfilled'
       put 'mark_item_fulfilled'
-  	end
+    end
   end
 
   resources :stations

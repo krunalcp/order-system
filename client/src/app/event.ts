@@ -7,6 +7,8 @@ export class Event {
     public active?: boolean,
     public password?: any,
     public station_id?: number,
-    public station_name?: string
+    public station_name?: string,
+    public logo?: string,
+    public icon?: string
   ) {}
 }

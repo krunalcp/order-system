@@ -10,7 +10,7 @@
 
         <!-- Logo -->
         <a href="/" class="navbar-brand">
-          <img src="/assets/app_logo.jpg" class="g-width-60x">
+          <img src="{{ currentEvent.logo }}" class="g-width-60x">
           <!-- <span class="h1">F</span><span class="h3">ood</span><span class="h1">U</span><span class="h3">p</span> -->
         </a>
         <!-- End Logo -->
@@ -18,7 +18,7 @@
         <!-- Navigation -->
         <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBarHeader">
           <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
-            <li *ngIf="tokenService.userSignedIn() && tokenService.currentUserData && tokenService.currentUserData.admin" class="nav-item g-mx-20--lg">
+            <li *ngIf="tokenService.userSignedIn() && tokenService.currentUserData && currentEvent.admin == true " class="nav-item g-mx-20--lg">
               <a routerLink="/event/list" class="nav-link px-0"> Events </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">

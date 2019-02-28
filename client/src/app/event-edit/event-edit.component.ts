@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
-import {Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { EventService } from '../event.service';
 import { OrderService } from '../order.service';
@@ -33,6 +33,8 @@ export class EventEditComponent implements OnInit {
     'gst_number': '',
     'admin': '',
     'active': '',
+    'logo': '',
+    'icon': '',
     'password': ''
   };
   validationMessages = {
@@ -105,6 +107,8 @@ export class EventEditComponent implements OnInit {
         this.event['gst_number'] = data.gst_number;
         this.event['admin'] = data.admin;
         this.event['active'] = data.active;
+        this.event['logo'] = data.logo;
+        this.event['icon'] = data.icon;
         this.eventForm.patchValue(this.event);
       },
       () => {
@@ -136,6 +140,12 @@ export class EventEditComponent implements OnInit {
       ],
       'active': [
         this.event.active
+      ],
+      'logo': [
+        this.event.logo
+      ],
+      'icon': [
+        this.event.icon
       ],
       'password': [
         ''

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { OrderService } from '../order.service';
+import { EventService } from '../event.service';
 import { ItemService } from '../item.service';
 import { AccountService } from '../account.service';
-import {Angular2TokenService} from "angular2-token";
 
 import { Order } from '../order';
+import { Event } from '../event';
 
 declare var $: any;
 
@@ -18,6 +19,7 @@ declare var $: any;
   templateUrl: './order-add.component.html',
   styleUrls: ['./order-add.component.css'],
   providers: [
+    EventService,
     OrderService,
     ItemService,
     AccountService
@@ -43,9 +45,10 @@ export class OrderAddComponent implements OnInit {
   public isOrderAdding: boolean = false;
   public stations: any;
   public accounts: any;
+  public currentEvent: Event = new Event();
 
   constructor(
-    public tokenService: Angular2TokenService,
+    public eventService: EventService,
   	private orderService: OrderService,
     private itemService: ItemService,
     private accountService: AccountService,
@@ -55,18 +58,28 @@ export class OrderAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.loadCurrentEvent();
   	this.buildForm();
     this.getStationList();
     this.getAccountList();
     this.loadItems();
-
   }
 
   public loadItems(){
     this.itemService.activeItem().subscribe(
       successResponse => {
         this.items = successResponse.json();
+      }
+    );
+  }
+
+  private loadCurrentEvent(): void {
+    this.eventService.current().subscribe(
+      successResponse => {
+        this.currentEvent = successResponse.json();
+      },
+      () => {
+        this.errorMessage = 'Failed to load Event.';
       }
     );
   }
@@ -133,7 +146,7 @@ export class OrderAddComponent implements OnInit {
         this.order.customer_name
       ],
       'station_id': [
-        this.tokenService.currentUserData.station_id
+        this.currentEvent.station_id
       ],
       'account_id': [
         this.order.account_id
