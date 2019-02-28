@@ -162,7 +162,7 @@ export class OrderListComponent implements OnInit {
 
         allOrders.forEach(function(order) {
           order.order_items.forEach(function(orderItem) {
-            let newItem = {ORDER_ID: '', ORDER_TIME: '', SCHEDULED_ORDER_TIME: '', ORDER_REFERENCE: '', STATION: '', IS_COMPANY_ORDER: '', ACCOUNT_ID: '', ACCOUNT_NAME: '', ACCOUNT_CONTACT_NAME: '', TOTAL_VALUE: '', ITEM: '', QUANTITY: '', VALUE: ''}
+            let newItem = {ORDER_ID: '', ORDER_TIME: '', SCHEDULED_ORDER_TIME: '', ORDER_REFERENCE: '', STATION: '', IS_COMPANY_ORDER: '', ACCOUNT_ID: '', ACCOUNT_NAME: '', ACCOUNT_CONTACT_NAME: '', TOTAL_VALUE: '', ITEM: '', NOTES: '', QUANTITY: '', VALUE: ''}
             newItem.ORDER_ID = order.id;
             newItem.ORDER_TIME = order.created_at;
             newItem.SCHEDULED_ORDER_TIME = order.scheduled_order_time;
@@ -180,6 +180,7 @@ export class OrderListComponent implements OnInit {
             newItem.STATION = 'S' + order.station.id + ' - ' + order.station.name;
             newItem.TOTAL_VALUE = order.value;
             newItem.ITEM = orderItem.item;
+            newItem.NOTES = orderItem.notes;
             newItem.QUANTITY = orderItem.quantity;
             newItem.VALUE = orderItem.value;
 
