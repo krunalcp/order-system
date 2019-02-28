@@ -41,19 +41,19 @@
     <table class="table table-bordered u-table--v2">
       <thead class="text-uppercase g-letter-spacing-1">
         <tr>
-          <th class="g-font-weight-300 g-color-black">Order ID</th>
-          <th class="g-font-weight-300 g-color-black">
+          <th class="align-middle g-color-black">Order ID</th>
+          <th class="align-middle g-color-black">
             <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'scheduled_order_time')">
               <i class="fa fa-sort-asc" *ngIf="sortBy == 'scheduled_order_time' && sortOrder == 'asc'"></i>
               <i class="fa fa-sort-desc" *ngIf="sortBy == 'scheduled_order_time' && sortOrder == 'desc'"></i>
               Scheduled Order Time
             </a>
           </th>
-          <!-- <th class="g-font-weight-300 g-color-black">Scheduled Order Time</th> -->
-          <th class="g-font-weight-300 g-color-black">Reference</th>
-          <th class="g-font-weight-300 g-color-black">Items</th>
-          <th class="g-font-weight-300 g-color-black">Total value</th>
-          <th class="g-font-weight-300 g-color-black">Options</th>
+          <!-- <th class="align-middle g-color-black">Scheduled Order Time</th> -->
+          <th class="align-middle g-color-black">Reference</th>
+          <th class="align-middle g-color-black">Items</th>
+          <th class="align-middle g-color-black">Total value</th>
+          <th class="align-middle g-color-black">Options</th>
         </tr>
       </thead>
 
@@ -77,8 +77,8 @@
               </tr>
             </table>
           </td>
-          <td align="right">${{(order.value * 1).toFixed(2)}}</td>
-          <td class="text-center">
+          <td class="align-middle" align="right">${{(order.value * 1).toFixed(2)}}</td>
+          <td class="align-middle text-center">
             <a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
             <button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" (click)="checkOutOrder(order)" *ngIf="order.station.id != lastStation && !categorySelected" [disabled]="order.station.next_station_id == null">
               FulFilled

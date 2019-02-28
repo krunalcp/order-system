@@ -7,6 +7,7 @@ import { Response } from '@angular/http';
 import { OrderService } from '../order.service';
 import { ItemService } from '../item.service';
 import { AccountService } from '../account.service';
+import {Angular2TokenService} from "angular2-token";
 
 import { Order } from '../order';
 
@@ -44,6 +45,7 @@ export class OrderAddComponent implements OnInit {
   public accounts: any;
 
   constructor(
+    public tokenService: Angular2TokenService,
   	private orderService: OrderService,
     private itemService: ItemService,
     private accountService: AccountService,
@@ -131,10 +133,10 @@ export class OrderAddComponent implements OnInit {
         this.order.customer_name
       ],
       'station_id': [
-        this.order.station
+        this.tokenService.currentUserData.station_id
       ],
       'account_id': [
-        this.order.station
+        this.order.account_id
       ],
       'scheduled_order_time': [
         this.order.scheduled_order_time
