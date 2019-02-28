@@ -11,6 +11,7 @@ export class Order {
     public price?: any,
     public charge_to_account?: boolean,
     public scheduled_order_time?: any,
-    public account?: any
+    public account?: any,
+    public account_id?: number
   ) {}
 }
