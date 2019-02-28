@@ -8,7 +8,8 @@ import * as XLSX from 'xlsx';
 
 import { OrderService } from '../order.service';
 import { Order } from '../order';
-import {Angular2TokenService} from "angular2-token";
+import { EventService } from '../event.service';
+import { Event } from '../event';
 
 declare var $: any;
 
@@ -19,7 +20,10 @@ const EXCEL_EXTENSION = '.xlsx';
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.css'],
-  providers: [OrderService]
+  providers: [
+    EventService,
+    OrderService
+  ]
 })
 export class OrderListComponent implements OnInit {
 
@@ -37,16 +41,30 @@ export class OrderListComponent implements OnInit {
   public perPageOrder: number = 0;
   public pages: number = 0;
   public selectedPage: number = 1;
+  public currentEvent: Event = new Event();
+	public errorMessage: any;
 
   constructor(
+    public eventService: EventService,
     private route: ActivatedRoute,
   	private orderService: OrderService,
-    private router: Router,
-    public tokenService: Angular2TokenService
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.loadCurrentEvent();
   	this.loadOrderList();
+  }
+
+  private loadCurrentEvent(): void {
+    this.eventService.current().subscribe(
+      successResponse => {
+        this.currentEvent = successResponse.json();
+      },
+      () => {
+        this.errorMessage = 'Failed to load Event.';
+      }
+    );
   }
 
   public callLoadOrderList(page: number) {
