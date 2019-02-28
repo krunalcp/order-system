@@ -110,7 +110,7 @@ class OrdersController < ApplicationController
 
   def mark_item_fulfilled
     order = current_event.orders.find(params[:id])
-    order.fulfilled = order.fulfilled.to_s + ',' + params[:c] if params[:c]
+    order.fulfilled = [order.fulfilled.to_s, params[:c]].compact.join(',') if params[:c]
 
     category_ids = order.order_items.pluck(:category_id)
     fulfilled_category_ids = order.fulfilled.split(",").map(&:to_i)

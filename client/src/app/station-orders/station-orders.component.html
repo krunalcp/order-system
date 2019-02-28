@@ -80,20 +80,30 @@
           <td class="align-middle" align="right">${{(order.value * 1).toFixed(2)}}</td>
           <td class="align-middle text-center">
             <a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
-            <button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" (click)="checkOutOrder(order)" *ngIf="order.station.id != lastStation && !categorySelected" [disabled]="order.station.next_station_id == null">
+
+            <button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15"
+                    (click)="checkOutOrder(order)"
+                    *ngIf="order.station.id != lastStation && ( !order.station.separate_by_category || ( order.station.separate_by_category && !categorySelected))"
+                    [disabled]="order.station.next_station_id == null">
               FulFilled
               <span class="g-pl-5" *ngIf="isOrderChecking && currentOrderId == order.id">
                 <i class="fa fa-spinner fa-spin"></i>
                 <span class="sr-only">Loading...</span>
               </span>
             </button>
-            <button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" (click)="checkOutItemOrder(order )" *ngIf="order.station.id != lastStation && categorySelected" [disabled]="order.station.next_station_id == null">
+
+            <button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15"
+                    (click)="checkOutItemOrder(order )"
+                    *ngIf="order.station.id != lastStation && order.station.separate_by_category && categorySelected && !fulfilledOrder(order, currentCategory)"
+                    [disabled]="order.station.next_station_id == null">
               FulFilled
               <span class="g-pl-5" *ngIf="isOrderChecking && currentOrderId == order.id">
                 <i class="fa fa-spinner fa-spin"></i>
                 <span class="sr-only">Loading...</span>
               </span>
             </button>
+
+            <i *ngIf="order.station.id != lastStation && order.station.separate_by_category && categorySelected && fulfilledOrder(order, currentCategory)" class="fa fa-check fa-2x"></i>
           </td>
         </tr>
       </tbody>

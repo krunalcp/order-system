@@ -70,7 +70,7 @@ export class StationOrdersComponent implements OnInit {
         this.selectedStation = this.stations[0];
         this.currentStation = this.stations[0].id;
         let last = this.stations.length;
-        this.lastStation = this.stations[last - 1].id;
+        this.lastStation = this.stations.find(x => x.next_station_id === null).id
         this.loadOrders(true);
         // this.subscribeToStations();
       },
@@ -95,7 +95,7 @@ export class StationOrdersComponent implements OnInit {
 
   public onCategorySelect(categoryId) {
     let sid = parseInt(categoryId);
-    this.categorySelected = categoryId != 0
+    this.categorySelected = sid != 0;
     this.currentCategory = categoryId;
     this.currentPage = 1;
     this.totalOrder = 0;
@@ -109,8 +109,8 @@ export class StationOrdersComponent implements OnInit {
   // }
 
   public fulfilledOrder(order, category){
-    let fulfilledOrder = order.fulfilled.split(',')
-    return fulfilledOrder.includes(category)
+    let ffo = order.fulfilled.split(',')
+    return ffo.includes(category.toString())
   }
 
   public subscribeToOrders(refresh_time): void {
@@ -185,6 +185,7 @@ export class StationOrdersComponent implements OnInit {
         this.refreshTime = this.station.refresh_time
         this.loadOnlyOrderList();
         this.isOrdersLoading = false;
+        this.newOrder = false
         if(ts){
           this.subscribeToOrders(this.refreshTime);
         }
