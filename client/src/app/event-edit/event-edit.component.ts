@@ -5,6 +5,7 @@ import { Response } from '@angular/http';
 import {Subscription} from 'rxjs';
 
 import { EventService } from '../event.service';
+import { OrderService } from '../order.service';
 
 import { Event } from '../event';
 
@@ -22,11 +23,13 @@ export class EventEditComponent implements OnInit {
 	public eventUpdateRequest: Subscription;
   private isFormSubmitted: boolean;
   public isEventUpdating: boolean = false;
+  public stations: any;
 
 	public errorMessage: any;
   public formErrors = {
     'name': '',
     'published_name': '',
+    'station_id': '',
     'gst_number': '',
     'admin': '',
     'active': '',
@@ -48,6 +51,7 @@ export class EventEditComponent implements OnInit {
   };
 
   constructor(
+  	private orderService: OrderService,
   	private route: ActivatedRoute,
     private router: Router,
     private eventService: EventService,
@@ -57,6 +61,7 @@ export class EventEditComponent implements OnInit {
   ngOnInit() {
 
     this.buildForm();
+    this.getStationList();
 
   	this.route.params.subscribe(
       (params: any) => {
@@ -96,6 +101,7 @@ export class EventEditComponent implements OnInit {
         let data = successResponse.json();
         this.event['name'] = data.name;
         this.event['published_name'] = data.published_name;
+        this.event['station_id'] = data.station_id;
         this.event['gst_number'] = data.gst_number;
         this.event['admin'] = data.admin;
         this.event['active'] = data.active;
@@ -118,6 +124,9 @@ export class EventEditComponent implements OnInit {
         this.event.published_name, [
           Validators.required
         ]
+      ],
+      'station_id': [
+        this.event.station_id
       ],
       'gst_number': [
         this.event.gst_number
@@ -175,4 +184,11 @@ export class EventEditComponent implements OnInit {
     }
   }
 
+  private getStationList(): void {
+    this.orderService.stations().subscribe(
+      successResponse => {
+        this.stations = successResponse.json();
+      }
+    );
+  }
 }

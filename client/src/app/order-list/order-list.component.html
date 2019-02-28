@@ -31,31 +31,31 @@
     <table class="table table-bordered u-table--v2">
       <thead class="text-uppercase g-letter-spacing-1">
         <tr>
-          <th class="g-font-weight-300 g-color-black">#</th>
-          <th class="g-font-weight-300 g-color-black">
+          <th class="align-middle g-color-black">#</th>
+          <th class="align-middle g-color-black">
             <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'scheduled_order_time')">
               <i class="fa fa-sort-asc" *ngIf="sortBy == 'scheduled_order_time' && sortOrder == 'asc'"></i>
               <i class="fa fa-sort-desc" *ngIf="sortBy == 'scheduled_order_time' && sortOrder == 'desc'"></i>
               Scheduled Order Time
             </a>
           </th>
-          <th class="g-font-weight-300 g-color-black">Reference</th>
-          <th class="g-font-weight-300 g-color-black">
+          <th class="align-middle g-color-black">Reference</th>
+          <th class="align-middle g-color-black">
             <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'station_id')">
               <i class="fa fa-sort-asc" *ngIf="sortBy == 'station_id' && sortOrder == 'asc'"></i>
               <i class="fa fa-sort-desc" *ngIf="sortBy == 'station_id' && sortOrder == 'desc'"></i>
               Station
             </a>
           </th>
-          <th class="g-font-weight-300 g-color-black">Items</th>
-          <th class="g-font-weight-300 g-color-black">
+          <th class="align-middle g-color-black">Items</th>
+          <th class="align-middle g-color-black">
             <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'value')">
               <i class="fa fa-sort-asc" *ngIf="sortBy == 'value' && sortOrder == 'asc'"></i>
               <i class="fa fa-sort-desc" *ngIf="sortBy == 'value' && sortOrder == 'desc'"></i>
               Value
             </a>
           </th>
-          <th class="g-font-weight-300 g-color-black">Options</th>
+          <th class="align-middle g-color-black">Options</th>
         </tr>
       </thead>
 
@@ -70,8 +70,8 @@
               <small *ngIf="item.notes != null && item.notes != ''">({{item.notes}})</small><br>
             </span>
           </td>
-          <td align="right">${{(order.value * 1).toFixed(2)}}</td>
-          <td class="text-center">
+          <td class="align-middle" align="right">${{(order.value * 1).toFixed(2)}}</td>
+          <td class="align-middle text-center">
             <a class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/order/show/{{order.id}}">open</a>
             <a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
             <button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteOrder(order.id)">

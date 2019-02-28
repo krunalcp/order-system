@@ -32,7 +32,8 @@ export class HostappService {
   public isTestSite() {
     const environment: any = window.location.hostname;
 
-    if (environment == 'ctordering.herokuapp.com'){
+    if (environment == 'ctordering.herokuapp.com' ||
+        environment == 'ctordering-obsolete.herokuapp.com'){
       return false
     }
     else{

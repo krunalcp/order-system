@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
   has_many :stations
   has_many :accounts
   has_many :categories
+  belongs_to :station, optional: true
 
   validates :published_name, presence: true
   validates :name, presence: true

@@ -9,28 +9,34 @@
       <div class="row">
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="name">
-            <span *ngIf="!formErrors.name" [ngClass]="{'text-success': !eventForm.controls.name.pristine}"></span>
+            <span *ngIf="!formErrors.name" [ngClass]="{'text-success': !eventForm.controls.name.pristine}">Name</span>
             <span *ngIf="formErrors.name" class="text-danger">{{formErrors?.name}}</span>
           </label>
           <input class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
         </div>
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="published_name">
-            <span *ngIf="!formErrors.published_name" [ngClass]="{'text-success': !eventForm.controls.published_name.pristine}"></span>
+            <span *ngIf="!formErrors.published_name" [ngClass]="{'text-success': !eventForm.controls.published_name.pristine}">Published Name</span>
             <span *ngIf="formErrors.published_name" class="text-danger">{{formErrors.published_name}}</span>
           </label>
           <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter published name" id="published_name" formControlName="published_name">
         </div>
         <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="refresh_time">Default Station</label>
+          <select class="form-control rounded-0 u-form-control" id="station_id" formControlName="station_id">
+            <option *ngFor="let station of stations" value="{{station.id}}">S{{station.id}} - {{station.name}}</option>
+          </select>
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="gst_number">
-            <span *ngIf="!formErrors.gst_number" [ngClass]="{'text-success': !eventForm.controls.gst_number.pristine}"></span>
+            <span *ngIf="!formErrors.gst_number" [ngClass]="{'text-success': !eventForm.controls.gst_number.pristine}">GST Number</span>
             <span *ngIf="formErrors.gst_number" class="text-danger">{{formErrors.gst_number}}</span>
           </label>
           <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter gst number" id="gst_number" formControlName="gst_number">
         </div>
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="password">
-            <span *ngIf="!formErrors.password"></span>
+            <span *ngIf="!formErrors.password">Password</span>
             <span *ngIf="formErrors.password" class="text-danger">{{formErrors.password}}</span>
           </label>
           <input id="hf-email" class="form-control u-form-control rounded-0" type="password" placeholder="Enter password " id="password" formControlName="password">

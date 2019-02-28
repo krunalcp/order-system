@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { EventService } from '../event.service';
+import { OrderService } from '../order.service';
 
 import { Event } from '../event';
 
@@ -20,6 +21,7 @@ export class EventAddComponent implements OnInit {
   public formErrors = {
     'name': '',
     'published_name': '',
+    'station_id': '',
     'gst_number': '',
     'active': '',
     'admin': '',
@@ -31,6 +33,9 @@ export class EventAddComponent implements OnInit {
     },
     'published_name': {
       'required': 'Published Name is required.',
+    },
+    'password': {
+      'required': 'Password is required.'
     }
   };
 
@@ -39,16 +44,19 @@ export class EventAddComponent implements OnInit {
 	public eventAddRequest: Subscription;
   private isFormSubmitted: boolean;
   public isEventAdding: boolean = false;
+  public stations: any;
 
   constructor(
-  	private eventService: EventService,
-  	private fb: FormBuilder,
+    private orderService: OrderService,
+    private eventService: EventService,
+    private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.buildForm();
+    this.getStationList();
   }
 
   public onSubmit() {
@@ -87,6 +95,9 @@ export class EventAddComponent implements OnInit {
           Validators.required,
           // Validators.maxLength(this.maxlength.title)
         ]
+      ],
+      'station_id': [
+        this.event.station_id
       ],
       'password': [
         this.event.gst_number
@@ -141,5 +152,13 @@ export class EventAddComponent implements OnInit {
     if(data.errors.length > 0) {
       this.formErrors.name = data.errors.join(', ')
     }
+  }
+
+  private getStationList(): void {
+    this.orderService.stations().subscribe(
+      successResponse => {
+        this.stations = successResponse.json();
+      }
+    );
   }
 }

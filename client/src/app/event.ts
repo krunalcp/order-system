@@ -5,6 +5,8 @@ export class Event {
     public gst_number?: any,
     public admin?: boolean,
     public active?: boolean,
-    public password?: any
+    public password?: any,
+    public station_id?: number,
+    public station_name?: string
   ) {}
 }

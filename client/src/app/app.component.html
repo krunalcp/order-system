@@ -18,6 +18,9 @@
         <!-- Navigation -->
         <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBarHeader">
           <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
+            <li *ngIf="tokenService.userSignedIn() && tokenService.currentUserData" class="nav-item g-mx-20--lg">
+              <a routerLink="/event/list" class="nav-link px-0"> Events </a>
+            </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/station/list" class="nav-link px-0"> Stations </a>
             </li>
@@ -28,22 +31,19 @@
               <a routerLink="/item/list" class="nav-link px-0"> Items </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+              <a routerLink="/account/list" class="nav-link px-0"> Accounts </a>
+            </li>
+            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/order/list" class="nav-link px-0">Orders </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-              <a routerLink="/station/order" class="nav-link px-0">Station Orders </a>
+              <a routerLink="/station/order" class="nav-link px-0"> Fulfilment </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/order/summary" class="nav-link px-0"> Summary </a>
             </li>
-            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-              <a routerLink="/account/list" class="nav-link px-0"> Accounts </a>
-            </li>
             <li *ngIf="!tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/login" class="nav-link px-0">Login</a>
-            </li>
-            <li *ngIf="tokenService.userSignedIn() && tokenService.currentUserData" class="nav-item g-mx-20--lg">
-              <a routerLink="/event/list" class="nav-link px-0"> Events </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a (click)="onSignout()" class="nav-link px-0">LOGOUT</a>
