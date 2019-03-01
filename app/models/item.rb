@@ -19,7 +19,11 @@ class Item < ApplicationRecord
     stations = {}
     current_event.stations.find_each do |station|
       stations["S#{station.id} - #{station.name}"] = { quantity: 0 }
-      order_items = station.order_items.select("order_items.item, sum(order_items.#{type}) as quantity").group('order_items.item')
+      order_items = if type == 'value'
+        station.order_items.select("order_items.item, sum(order_items.#{type} * order_items.quantity) as quantity").group('order_items.item')
+      else
+        station.order_items.select("order_items.item, sum(order_items.#{type}) as quantity").group('order_items.item')
+      end
       if order_items.present?
         summary.each do |s|
           match = false

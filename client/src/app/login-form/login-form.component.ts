@@ -26,7 +26,7 @@ export class LoginFormComponent implements OnInit {
         res => {
           if (res.status === 200) {
             this.onFormResult.emit({signedIn: true, res});
-            this.router.navigate(['/order/list'])
+            window.location.href = '/';
           }
         },
         err => {

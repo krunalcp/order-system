@@ -42,7 +42,17 @@ export class AppComponent {
     this.eventService.current().subscribe(
       successResponse => {
         this.currentEvent = successResponse.json();
+
+        // Set Title
         document.title = this.currentEvent.published_name
+
+        // Set Favicon
+        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        link.href = this.currentEvent.icon;
+        document.getElementsByTagName('head')[0].appendChild(link);
+
       },
       () => {
         this.errorMessage = 'Failed to load Event.';

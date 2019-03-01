@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
 
   def set_pagination
     @page = params[:page].to_i > 0 ? params[:page].to_i : 1
-    @per_page = 10
+    @per_page = params[:per].to_i > 0 ? params[:per].to_i : 10
     @offset = (@page - 1) * @per_page
   end
 

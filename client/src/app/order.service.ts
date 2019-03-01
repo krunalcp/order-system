@@ -40,6 +40,9 @@ export class OrderService {
   list(page: number, stationId: number, onlyOrder: number, sortBy: string, sortOrder: string): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost() + '/orders';
     ordersApiURL = ordersApiURL + '?s=' + stationId + '&page=' + page + '&oo=' + onlyOrder;
+    if (stationId != 0) {
+      ordersApiURL = ordersApiURL + '&per=20'
+    }
     if (sortBy && sortBy != ''){
       ordersApiURL += '&sort_by=' + sortBy;
     }
