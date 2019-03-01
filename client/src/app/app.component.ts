@@ -8,6 +8,8 @@ import {Observable} from "rxjs";
 import { EventService } from './event.service';
 import { Event } from './event';
 
+declare var $: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -47,11 +49,7 @@ export class AppComponent {
         document.title = this.currentEvent.published_name
 
         // Set Favicon
-        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-        link.type = 'image/x-icon';
-        link.rel = 'shortcut icon';
-        link.href = this.currentEvent.icon;
-        document.getElementsByTagName('head')[0].appendChild(link);
+        $("#appIcon").attr("href", this.currentEvent.icon);
 
       },
       () => {
