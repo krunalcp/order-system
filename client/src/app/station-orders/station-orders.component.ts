@@ -43,7 +43,7 @@ export class StationOrdersComponent implements OnInit {
   public perPageOrder: number = 0;
   public pages: number = 0;
   public selectedPage: number = 1;
-  public sortBy: string = 'scheduled_order_time';
+  public sortBy: string = 'created_at';
   public sortOrder: string = 'desc';
   public newOrder: boolean;
   public newOrderNumbr: number;

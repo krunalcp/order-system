@@ -60,7 +60,7 @@
       <tbody>
         <tr *ngFor="let order of stationOrders">
           <td class="align-middle">{{order.id}}</td>
-          <td class="align-middle">{{order.display_scheduled_order_time}}</td>
+          <td class="align-middle">{{order.display_scheduled_order_time | date:'dd.MM.yy HH:mm:ss'}}</td>
           <td class="align-middle">{{order.customer_name}}</td>
           <td class="align-middle child">
             <table class="borderless">

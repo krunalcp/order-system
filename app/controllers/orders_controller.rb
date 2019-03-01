@@ -1,9 +1,9 @@
-class OrdersController < ApplicationController
+ class OrdersController < ApplicationController
   before_action :authenticate_event!
   before_action :set_pagination, only: :index
 
   def index
-    sort_by = %w[scheduled_order_time station_id value].include?(params[:sort_by]) ? params[:sort_by] : 'scheduled_order_time'
+    sort_by = %w[scheduled_order_time station_id value].include?(params[:sort_by]) ? params[:sort_by] : 'created_at'
     order   = params[:sort_order].present? && params[:sort_order] == 'asc' ? 'asc' : 'desc'
     @orders = current_event.orders.includes(%i[station account order_items]).order("#{sort_by} #{order}")
 
