@@ -40,6 +40,8 @@ import { AccountAddComponent } from './account-add/account-add.component';
 import { AccountListComponent } from './account-list/account-list.component';
 import { AccountEditComponent } from './account-edit/account-edit.component';
 import { AccountShowComponent } from './account-show/account-show.component';
+import { EventOrderAddComponent } from './event-order-add/event-order-add.component';
+import { HeaderService } from './services/header.service';
 
 const appRoutes: Routes = [
 	{
@@ -182,6 +184,10 @@ const appRoutes: Routes = [
     component: AccountEditComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: ':event/order',
+    component: EventOrderAddComponent
+  }
 ]
 
 @NgModule({
@@ -214,7 +220,8 @@ const appRoutes: Routes = [
     AccountAddComponent,
     AccountListComponent,
     AccountEditComponent,
-    AccountShowComponent
+    AccountShowComponent,
+    EventOrderAddComponent
   ],
   imports: [
     BrowserModule,
@@ -229,7 +236,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [Angular2TokenService, AuthService, AuthGuard],
+  providers: [Angular2TokenService, AuthService, AuthGuard, HeaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

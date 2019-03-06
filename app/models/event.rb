@@ -14,7 +14,7 @@ class Event < ActiveRecord::Base
   belongs_to :station, optional: true
 
   validates :published_name, presence: true
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :email, presence: true
 
   before_validation :set_email

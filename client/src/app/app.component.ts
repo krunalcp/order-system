@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 import {Observable} from "rxjs";
 
 import { EventService } from './event.service';
+import { HeaderService } from "./services/header.service";
 import { Event } from './event';
 
 declare var $: any;
@@ -23,7 +24,7 @@ export class AppComponent {
   title = 'app';
   public currentEvent: Event = new Event();
 	public errorMessage: any;
-
+  public showHeader: boolean;
 
   constructor(
     public eventService: EventService,
@@ -31,13 +32,17 @@ export class AppComponent {
     public router: Router,
     public route: ActivatedRoute,
     public tokenService: Angular2TokenService,
-    private http: Http
+    private http: Http,
+    private header: HeaderService
   ){
     this.tokenService.init({apiBase: this.dispHost()});
   }
 
   ngOnInit() {
-    this.loadCurrentEvent();
+    this.header.currentMessage.subscribe(message => this.showHeader = message)
+    if(this.showHeader){
+      this.loadCurrentEvent();
+    }
   }
 
   private loadCurrentEvent(): void {

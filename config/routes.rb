@@ -18,6 +18,15 @@ Rails.application.routes.draw do
   end
   resources :accounts
 
+  resources :event_orders, path: ':event/orders', only: [:create] do
+    collection do
+      get 'active_items'
+      get 'event'
+      get 'accounts'
+      get 'stations'
+    end
+  end
+
   resources :orders do
     collection do
       get 'pending_list'
