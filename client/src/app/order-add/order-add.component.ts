@@ -77,6 +77,7 @@ export class OrderAddComponent implements OnInit {
     this.eventService.current().subscribe(
       successResponse => {
         this.currentEvent = successResponse.json();
+        this.buildForm();
       },
       () => {
         this.errorMessage = 'Failed to load Event.';
