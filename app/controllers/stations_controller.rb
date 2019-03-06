@@ -2,8 +2,11 @@ class StationsController < ApplicationController
   before_action :authenticate_event!
 
   def index
-    stations = current_event.stations.order('created_at')
-
+    if params[:e].to_i > 0
+      stations = Station.where(event_id: params[:e]).order('created_at')
+    else
+      stations = current_event.stations.order('created_at')
+    end
     render json: stations
   end
 

@@ -63,7 +63,6 @@ export class EventEditComponent implements OnInit {
   ngOnInit() {
 
     this.buildForm();
-    this.getStationList();
 
   	this.route.params.subscribe(
       (params: any) => {
@@ -71,7 +70,6 @@ export class EventEditComponent implements OnInit {
         this.getEvent();
       }
     );
-
   }
 
   public onSubmit() {
@@ -109,7 +107,9 @@ export class EventEditComponent implements OnInit {
         this.event['active'] = data.active;
         this.event['logo'] = data.logo;
         this.event['icon'] = data.icon;
+        this.event['id'] = data.id;
         this.eventForm.patchValue(this.event);
+        this.getStationList();
       },
       () => {
         this.errorMessage = 'Failed to load event.';
@@ -195,7 +195,7 @@ export class EventEditComponent implements OnInit {
   }
 
   private getStationList(): void {
-    this.orderService.stations().subscribe(
+    this.orderService.event_stations(this.event.id).subscribe(
       successResponse => {
         this.stations = successResponse.json();
       }

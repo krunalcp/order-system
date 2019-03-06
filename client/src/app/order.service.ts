@@ -71,6 +71,12 @@ export class OrderService {
     return this.http.get(ordersApiURL + "/" , this.hostAppService.getToken());
   }
 
+  event_stations(eventId: number): Observable<any>{
+    let ordersApiURL = this.hostAppService.getHost() + '/stations?e='+eventId;
+
+    return this.http.get(ordersApiURL , this.hostAppService.getToken());
+  }
+
   markFulfilled(id: number): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost() + '/orders';
 
