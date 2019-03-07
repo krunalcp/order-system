@@ -141,6 +141,10 @@ export class OrderAddComponent implements OnInit {
     this.router.navigate(['/order/list']);
   }
 
+  public toggleCategory(category) {
+    $(".category_" + category.replace(' ', '')).toggle();
+  }
+
   private buildForm(): void {
     this.orderForm = this.fb.group({
       'customer_name': [

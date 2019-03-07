@@ -49,9 +49,9 @@
           </thead>
           <tbody *ngFor="let i of items | groupBy: 'category_name'">
             <tr>
-              <td class="category_color" colspan=7><b>{{i.key}}</b></td>
+              <td class="category_color" colspan=7 (click)="toggleCategory(i.key)"><b>{{i.key}}</b></td>
             </tr>
-            <tr *ngFor="let item of i.value">
+            <tr *ngFor="let item of i.value" class="category_{{ i.key.replace(' ', '') }}">
               <td><span *ngIf="item.image"><img src="{{item.image}}" /></span></td>
               <td>{{item.name}}</td>
               <td align="right">${{(item.price * 1).toFixed(2)}}</td>

@@ -172,6 +172,9 @@ export class OrderEditComponent implements OnInit {
     this.router.navigate(['/order/list']);
   }
 
+  public toggleCategory(category) {
+    $(".category_" + category.replace(' ', '')).toggle();
+  }
 
   private buildForm(): void {
     this.orderForm = this.fb.group({
