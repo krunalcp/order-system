@@ -10,6 +10,12 @@ class Item < ApplicationRecord
 
   acts_as_list column: :order_no
 
+  after_save :update_order_items, on: :update
+
+  def update_order_items
+    self.event.order_items.where(item: name_before_last_save).update_all(item: name)
+  end
+
   def self.get_summary(current_event, type = 'quantity')
     summary = []
 

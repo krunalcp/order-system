@@ -7,6 +7,11 @@
       <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40 g-mb-30" role="alert">
         <h3 class="h2 g-font-weight-300 g-mb-20">Item details</h3>
         <p class="mb-0">
+          <span *ngIf="item.image" class="row">
+            <span class="col-md-12 text-center">
+              <img src="{{item.image}}" />
+            </span>
+          </span>
           <span class="row">
             <dt class="col-md-6">Name :
             </dt>

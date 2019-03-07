@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   devise authentication_keys: [:name, :email]
 
   has_many :orders
+  has_many :order_items, through: :orders
   has_many :items
   has_many :stations
   has_many :accounts
