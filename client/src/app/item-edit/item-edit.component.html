@@ -10,7 +10,7 @@
       <div class="row">
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="name">
-            <span *ngIf="!formErrors.name" [ngClass]="{'text-success': !itemForm.controls.name.pristine}"></span>
+            <span *ngIf="!formErrors.name" [ngClass]="{'text-success': !itemForm.controls.name.pristine}">Name</span>
             <span *ngIf="formErrors.name" class="text-danger">{{formErrors?.name}}</span>
           </label>
           <span *ngIf="item.item_used" class="form-control u-form-control used rounded-0">{{item.name}}</span>
@@ -18,7 +18,7 @@
         </div>
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="price">
-            <span *ngIf="!formErrors.price" [ngClass]="{'text-success': !itemForm.controls.price.pristine}"></span>
+            <span *ngIf="!formErrors.price" [ngClass]="{'text-success': !itemForm.controls.price.pristine}">Price</span>
             <span *ngIf="formErrors.price" class="text-danger">{{formErrors?.price}}</span>
           </label>
           <div class="input-group g-brd-primary--focus">
@@ -30,19 +30,26 @@
         </div>
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="order_no">
-            <span *ngIf="!formErrors.order_no" [ngClass]="{'text-success': !itemForm.controls.order_no.pristine}"></span>
+            <span *ngIf="!formErrors.order_no" [ngClass]="{'text-success': !itemForm.controls.order_no.pristine}">Order No</span>
             <span *ngIf="formErrors.order_no" class="text-danger">{{formErrors.order_no}}</span>
           </label>
           <input class="form-control form-control-md rounded-0" type="number" placeholder="Enter Order no" id="order_no" formControlName="order_no">
         </div>
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="category_id">
-            <span *ngIf="!formErrors.category_id" [ngClass]="{'text-success': !itemForm.controls.category_id.pristine}"></span>
+            <span *ngIf="!formErrors.category_id" [ngClass]="{'text-success': !itemForm.controls.category_id.pristine}">Category</span>
             <span *ngIf="formErrors.category_id" class="text-danger">{{formErrors.category_id}}</span>
           </label>
           <select class="form-control rounded-0 u-form-control" id="category_id" formControlName="category_id">
             <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
           </select>
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="image">
+            <span *ngIf="!formErrors.image" [ngClass]="{'text-success': !itemForm.controls.image.pristine}">Image</span>
+            <span *ngIf="formErrors.image" class="text-danger">{{formErrors.image}}</span>
+          </label>
+          <input class="form-control form-control-md rounded-0" type="text" placeholder="Enter Image url" id="image" formControlName="image">
         </div>
         <div class="form-group g-mb-25 col-md-3">
           <label class="g-mb-10" for="active">Active</label>

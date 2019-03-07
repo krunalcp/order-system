@@ -39,7 +39,7 @@
         <table class="table table-striped u-table--v1 mb-0">
           <thead>
             <tr>
-              <th>Item</th>
+              <th colspan="2">Item</th>
               <th>Price($)</th>
               <th>Quantity</th>
               <th></th>
@@ -52,6 +52,7 @@
               <td class="category_color" colspan=7><b>{{i.key}}</b></td>
             </tr>
             <tr *ngFor="let item of i.value">
+              <td><span *ngIf="item.image"><img src="{{item.image}}" /></span></td>
               <td>{{item.name}}</td>
               <td align="right">${{(item.price * 1).toFixed(2)}}</td>
               <td>
@@ -75,11 +76,12 @@
           </tbody>
           <tbody>
             <tr>
-              <td></td>
+              <td colspan="2"></td>
               <td></td>
               <td></td>
               <td><b>Total($) :</b></td>
               <td>${{(totalPrice * 1).toFixed(2)}}</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
