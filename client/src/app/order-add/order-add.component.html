@@ -53,7 +53,7 @@
             <tr>
               <td colspan="7" class="category_color" (click)="toggleCategory(i.key)"><b>{{i.key}}</b></td>
             </tr>
-            <tr *ngFor="let item of i.value" class="category_{{ i.key.replace(' ', '') }}">
+            <tr *ngFor="let item of i.value" class="category_{{ i.key.replace(' ', '') }} hidden">
               <td><span *ngIf="item.image"><img src="{{item.image}}" /></span></td>
               <td class='text-left'>{{item.name}}</td>
               <td>${{(item.price * 1).toFixed(2)}}</td>
