@@ -35,7 +35,7 @@
               edit
             </button>
 
-            <button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteItem(item.id)" [disabled]="item.item_used">
+            <button class="btn btn-md u-btn-outline-{{item.item_used ? 'darkgray' : 'deeporange'}} g-mr-10 g-mb-15" (click)="deleteItem(item.id)" [disabled]="item.item_used">
               <span *ngIf="!isItemDeleting">Delete</span>
               <span *ngIf="isItemDeleting && currentItemId != item.id">Delete</span>
               <span *ngIf="isItemDeleting && currentItemId == item.id">Deleting..</span>
