@@ -1,3 +1,6 @@
 .category_color{
   background-color: #989696 !important;
 }
+.plus_minus_width{
+  min-width: 160px;
+}

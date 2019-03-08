@@ -38,7 +38,7 @@
 
     @order.order_items = order_items
 
-    @order.station = Station.first if @order.station.blank?
+    @order.station = current_event.stations.first if @order.station.blank?
 
     if @order.save
       render json: { id: @order.id }

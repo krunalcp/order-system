@@ -1,4 +1,4 @@
-<div class="container g-mt-100">
+<div class="container">
   <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
     <h1 class="h3 u-heading-v1__title">Place Order</h1>
   </div>
@@ -11,21 +11,10 @@
           <label class="g-mb-10" for="customer_name">Reference Name</label>
           <input class="form-control u-form-control rounded-0" type="text" placeholder="(Refernece)" id="customer_name" formControlName="customer_name">
         </div>
-        <div class="form-group g-mb-25 col-md-3">
-          <label class="g-mb-10" for="station_id">Select station</label>
-          <select class="form-control rounded-0 u-form-control" id="station" formControlName="station_id">
-            <option *ngFor="let station of stations; index as i;" value="{{station.id}}">S{{i+1}} - {{station.name}}</option>
-          </select>
-        </div>
+        <input type="hidden" formControlName="station_id" value="">
         <div class="form-group g-mb-25 col-md-3">
           <label class="g-mb-10" for="scheduled_order_time">Scheduled Order Time</label>
           <input class="form-control u-form-control rounded-0 pr-0" type="datetime-local" id="scheduled_order_time" formControlName="scheduled_order_time">
-        </div>
-        <div class="form-group g-mb-25 col-md-3">
-          <label class="g-mb-10" for="account_id">Select account</label>
-          <select class="form-control rounded-0 u-form-control" id="account" formControlName="account_id">
-            <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
-          </select>
         </div>
       </div>
     </form>
@@ -40,26 +29,27 @@
         <table class="table table-striped u-table--v1 mb-0">
           <thead>
             <tr>
-              <th>Item</th>
+              <th colspan="2">Item</th>
               <th>Price($)</th>
               <th>Quantity</th>
               <th></th>
-              <th>Total Price($)</th>
+              <th>Total($)</th>
               <th>Notes</th>
             </tr>
           </thead>
 
           <tbody *ngFor="let i of items | groupBy: 'category_name'">
             <tr>
-              <td colspan=7 class="category_color"><b>{{i.key}}</b></td>
+              <td colspan=7 class="category_color" (click)="toggleCategory(i.key)"><b>{{i.key}}</b></td>
             </tr>
-            <tr *ngFor="let item of i.value">
-              <td>{{item.name}}</td>
+            <tr *ngFor="let item of i.value" class="category_{{ i.key.replace(' ', '') }}">
+              <td><span *ngIf="item.image"><img src="{{item.image}}" /></span></td>
+              <td class='text-left'>{{item.name}}</td>
               <td>${{(item.price * 1).toFixed(2)}}</td>
               <td>
                 {{item.quantity}}
               </td>
-              <td>
+              <td class="plus_minus_width">
                 <button class="btn btn-sm u-btn-outline-primary g-mr-10" (click)="quantityOptions(item, 'plus')">
                   <i class="fa fa-plus g-px-20"></i>
                 </button>
@@ -77,7 +67,7 @@
           </tbody>
           <tbody>
             <tr>
-              <td></td>
+              <td colspan="2"></td>
               <td></td>
               <td></td>
               <td><b>Total($) :</b></td>
@@ -96,6 +86,9 @@
           <i class="fa fa-spinner fa-spin"></i>
           <span class="sr-only">Loading...</span>
         </span>
+      </button>
+      <button class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="cancelEventOrder()">
+        Cancel
       </button>
     </div>
   </div>

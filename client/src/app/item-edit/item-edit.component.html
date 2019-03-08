@@ -13,8 +13,7 @@
             <span *ngIf="!formErrors.name" [ngClass]="{'text-success': !itemForm.controls.name.pristine}">Name</span>
             <span *ngIf="formErrors.name" class="text-danger">{{formErrors?.name}}</span>
           </label>
-          <span *ngIf="item.item_used" class="form-control u-form-control used rounded-0">{{item.name}}</span>
-          <input *ngIf="!item.item_used" class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
+          <input class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
         </div>
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="price">

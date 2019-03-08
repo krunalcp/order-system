@@ -49,7 +49,9 @@ export class EventOrderAddComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private header: HeaderService
-  ) { }
+  ) {
+    this.header.changeMessage(false)
+  }
 
   ngOnInit() {
   	this.buildForm();
@@ -62,7 +64,6 @@ export class EventOrderAddComponent implements OnInit {
     this.loadItems();
     this.getStationList();
     this.getAccountList();
-    this.header.changeMessage(false)
   }
 
   private loadCurrentEvent(): void {
@@ -208,6 +209,14 @@ export class EventOrderAddComponent implements OnInit {
     if(data.errors.length > 0) {
       this.errorMessage = data.errors.join(', ')
     }
+  }
+
+  public cancelEventOrder(){
+    this.router.navigate(['/eventorder/list']);
+  }
+
+  public toggleCategory(category) {
+    $(".category_" + category.replace(' ', '')).toggle();
   }
 
 }

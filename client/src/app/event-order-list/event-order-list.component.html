@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Events List</h1>
+  </div>
+  <div class="table-responsive" *ngIf="events && !isEventsLoading">
+    <table class="table table-bordered u-table--v2">
+      <thead class="text-uppercase g-letter-spacing-1">
+        <tr>
+          <th class="align-middle g-color-black g-min-width-300">Name</th>
+          <th class="align-middle g-color-black g-min-width-300">Order</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let event of events">
+          <td class="align-middle">{{event.name}}</td>
+          <td class="text-center">
+            <a href="#!" class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/{{event.name}}/order">order</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row" *ngIf="isEventsLoading">
+    <div class="col-md-12 text-center g-color-blue">
+      <i class="fa fa-spinner fa-spin"></i>
+      <span class="sr-only">Loading...</span>
+      <p>Loading events...</p>
+    </div>
+  </div>
+
+</div>

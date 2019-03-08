@@ -42,6 +42,7 @@ import { AccountEditComponent } from './account-edit/account-edit.component';
 import { AccountShowComponent } from './account-show/account-show.component';
 import { EventOrderAddComponent } from './event-order-add/event-order-add.component';
 import { HeaderService } from './services/header.service';
+import { EventOrderListComponent } from './event-order-list/event-order-list.component';
 
 const appRoutes: Routes = [
 	{
@@ -187,6 +188,10 @@ const appRoutes: Routes = [
   {
     path: ':event/order',
     component: EventOrderAddComponent
+  },
+  {
+    path: 'eventorder/list',
+    component: EventOrderListComponent
   }
 ]
 
@@ -221,7 +226,8 @@ const appRoutes: Routes = [
     AccountListComponent,
     AccountEditComponent,
     AccountShowComponent,
-    EventOrderAddComponent
+    EventOrderAddComponent,
+    EventOrderListComponent
   ],
   imports: [
     BrowserModule,
