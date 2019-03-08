@@ -70,6 +70,8 @@ export class EventOrderAddComponent implements OnInit {
     this.eventOrderService.currentEvent(this.eventName).subscribe(
       successResponse => {
         this.currentEvent = successResponse.json();
+        // Set Title
+        document.title = this.currentEvent.published_name
         this.buildForm();
       },
       () => {

@@ -4,3 +4,6 @@
 .plus_minus_width{
   min-width: 160px;
 }
+.hidden{
+  display: none;
+}
