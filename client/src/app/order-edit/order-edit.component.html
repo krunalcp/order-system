@@ -54,7 +54,7 @@
             <tr *ngFor="let item of i.value" class="category_{{ removeSpace(i.key) }} hidden">
               <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
               <td class='text-left'>{{item.name}}</td>
-              <td align="right">${{(item.price * 1).toFixed(2)}}</td>
+              <td align="right" class="price_width">${{(item.price * 1).toFixed(2)}}</td>
               <td>
                 {{item.quantity}}
               </td>
@@ -66,7 +66,7 @@
                   <i class="fa fa-minus g-px-20"></i>
                 </button>
               </td>
-              <td>
+              <td class="price_width">
                 ${{(item.price * item.quantity).toFixed(2)}}
               </td>
               <td>
