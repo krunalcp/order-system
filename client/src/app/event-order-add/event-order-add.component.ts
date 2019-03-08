@@ -216,7 +216,10 @@ export class EventOrderAddComponent implements OnInit {
   }
 
   public toggleCategory(category) {
-    $(".category_" + category.replace(' ', '')).toggle();
+    $(".category_" + this.removeSpace(category)).toggle();
   }
 
+  public removeSpace(category) {
+    return category.replace(/[^A-Z0-9]+/ig, '')
+  }
 }

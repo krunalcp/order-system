@@ -36,6 +36,13 @@
           <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter icon url" id="icon" formControlName="icon">
         </div>
         <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="item_image">
+            <span *ngIf="!formErrors.item_image" [ngClass]="{'text-success': !eventForm.controls.item_image.pristine}">Logo URL</span>
+            <span *ngIf="formErrors.item_image" class="text-danger">{{formErrors.item_image}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter item image url" id="item_image" formControlName="item_image">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="refresh_time">Default Station</label>
           <select class="form-control rounded-0 u-form-control" id="station_id" formControlName="station_id">
             <option *ngFor="let station of stations; index as i;" value="{{station.id}}">S{{i+1}} - {{station.name}}</option>

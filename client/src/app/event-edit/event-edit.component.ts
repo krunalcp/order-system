@@ -35,7 +35,8 @@ export class EventEditComponent implements OnInit {
     'active': '',
     'logo': '',
     'icon': '',
-    'password': ''
+    'password': '',
+    'item_image': ''
   };
   validationMessages = {
     'name': {
@@ -107,6 +108,7 @@ export class EventEditComponent implements OnInit {
         this.event['active'] = data.active;
         this.event['logo'] = data.logo;
         this.event['icon'] = data.icon;
+        this.event['item_image'] = data.item_image;
         this.event['id'] = data.id;
         this.eventForm.patchValue(this.event);
         this.getStationList();
@@ -146,6 +148,9 @@ export class EventEditComponent implements OnInit {
       ],
       'icon': [
         this.event.icon
+      ],
+      'item_image': [
+        this.event.item_image
       ],
       'password': [
         ''

@@ -5,10 +5,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { OrderService } from '../order.service';
+import { EventService } from '../event.service';
 import { ItemService } from '../item.service';
 import { AccountService } from '../account.service';
 
 import { Order } from '../order';
+import { Event } from '../event';
 
 declare var $: any;
 
@@ -16,7 +18,7 @@ declare var $: any;
   selector: 'app-order-edit',
   templateUrl: './order-edit.component.html',
   styleUrls: ['./order-edit.component.css'],
-  providers: [OrderService]
+  providers: [OrderService, EventService]
 })
 export class OrderEditComponent implements OnInit {
 
@@ -40,8 +42,10 @@ export class OrderEditComponent implements OnInit {
   public isItemsFilled: boolean = false;
   public stations: any;
   public accounts: any;
+  public currentEvent: Event = new Event();
 
   constructor(
+    public eventService: EventService,
   	private orderService: OrderService,
   	private fb: FormBuilder,
     private router: Router,
@@ -51,6 +55,7 @@ export class OrderEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loadCurrentEvent();
   	this.buildForm();
 
   	this.route.params.subscribe(
@@ -59,6 +64,18 @@ export class OrderEditComponent implements OnInit {
         this.getOrder();
         this.getStationList();
         this.getAccountList();
+      }
+    );
+  }
+
+  private loadCurrentEvent(): void {
+    this.eventService.current().subscribe(
+      successResponse => {
+        this.currentEvent = successResponse.json();
+        this.buildForm();
+      },
+      () => {
+        this.errorMessage = 'Failed to load Event.';
       }
     );
   }
@@ -173,7 +190,11 @@ export class OrderEditComponent implements OnInit {
   }
 
   public toggleCategory(category) {
-    $(".category_" + category.replace(' ', '')).toggle();
+    $(".category_" + this.removeSpace(category)).toggle();
+  }
+
+  public removeSpace(category) {
+    return category.replace(/[^A-Z0-9]+/ig, '')
   }
 
   private buildForm(): void {

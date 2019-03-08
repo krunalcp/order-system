@@ -27,7 +27,8 @@ export class EventAddComponent implements OnInit {
     'admin': '',
     'logo': '',
     'icon': '',
-    'password': ''
+    'password': '',
+    'item_image': '',
   };
   validationMessages = {
     'name': {
@@ -115,6 +116,9 @@ export class EventAddComponent implements OnInit {
       ],
       'icon': [
         this.event.icon
+      ],
+      'item_image': [
+        this.event.item_image
       ],
       'admin': [
         this.event.admin
