@@ -239,7 +239,7 @@ const appRoutes: Routes = [
     MainPipe,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: true, useHash: true } // <-- debugging purposes only
     )
   ],
   providers: [Angular2TokenService, AuthService, AuthGuard, HeaderService],
