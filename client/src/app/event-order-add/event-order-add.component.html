@@ -8,19 +8,19 @@
       <!-- Text Input -->
       <div class="row">
         <div class="form-group g-mb-25 col-md-3">
-          <label class="g-mb-10" for="customer_name">Reference Name</label>
+          <label class="g-mb-10" for="account_id">Account</label>
+          <select class="form-control rounded-0 u-form-control" id="account" formControlName="account_id">
+            <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
+          </select>
+        </div>
+        <div class="form-group g-mb-25 col-md-3">
+          <label class="g-mb-10" for="customer_name">Order Reference</label>
           <input class="form-control u-form-control rounded-0" type="text" placeholder="(Refernece)" id="customer_name" formControlName="customer_name">
         </div>
         <input type="hidden" formControlName="station_id" value="">
         <div class="form-group g-mb-25 col-md-3">
-          <label class="g-mb-10" for="scheduled_order_time">Scheduled Order Time</label>
+          <label class="g-mb-10" for="scheduled_order_time">Order Date/Time</label>
           <input class="form-control u-form-control rounded-0 pr-0" type="datetime-local" id="scheduled_order_time" formControlName="scheduled_order_time">
-        </div>
-        <div class="form-group g-mb-25 col-md-3">
-          <label class="g-mb-10" for="account_id">Select account</label>
-          <select class="form-control rounded-0 u-form-control" id="account" formControlName="account_id">
-            <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
-          </select>
         </div>
       </div>
     </form>
@@ -46,7 +46,13 @@
 
           <tbody *ngFor="let i of items | groupBy: 'category_name'">
             <tr>
-              <td colspan=7 class="category_color" (click)="toggleCategory(i.key)"><b>{{i.key}}</b></td>
+              <td class="category_color i_{{ removeSpace(i.key) }}" (click)="toggleCategory(i.key)">
+                <i class="fa fa-angle-down"></i>
+              </td>
+              <td class="category_color hidden i_{{ removeSpace(i.key) }}" (click)="toggleCategory(i.key)">
+                <i class="fa fa-angle-up"></i>
+              </td>
+              <td colspan=6 class="category_color" (click)="toggleCategory(i.key)"><b>{{i.key}}</b></td>
             </tr>
             <tr *ngFor="let item of i.value" class="category_{{ removeSpace(i.key) }} hidden">
               <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>

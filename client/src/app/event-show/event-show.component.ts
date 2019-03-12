@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { EventService } from '../event.service';
+import { HostappService } from '../hostapp.service';
 
 import { Event } from '../event';
 
@@ -18,7 +19,8 @@ export class EventShowComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private eventService: EventService
+    private eventService: EventService,
+    public hostAppService: HostappService,
   ) { }
 
   ngOnInit() {

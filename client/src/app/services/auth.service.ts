@@ -36,7 +36,6 @@ export class AuthService {
   }
 
   logInUser(signInData: {email: string, password: string}): Observable<any> {
-    this.logOutUser().subscribe();
     return this.authService.signIn(signInData).pipe(map(
       res => {
         this.userSignedIn$.next(true);

@@ -43,6 +43,12 @@
             <dd class="col-md-6">{{event.active}}
             </dd>
           </span>
+          <span class="row">
+            <dt class="col-md-6">Link :
+            </dt>
+            <dd class="col-md-6">{{hostAppService.getHost()}}/#/{{event.name}}/order
+            </dd>
+          </span>
         </p>
       </div>
       <a href="#!" class="btn btn-md u-btn-outline-brown g-mr-10 g-mb-15" routerLink="/event/list">
