@@ -10,6 +10,18 @@
   color: #fff;
   background-color: #18ba9b;
 }
+.btn-print-outline{
+  color: #e81c62;
+  border-color: #e81c62;
+}
+.btn-print-outline:focus{
+  color: #fff;
+  background-color: #e81c62;
+}
+.btn-print-outline:hover {
+  color: #fff;
+  background-color: #e81c62;
+}
 .badge {
   position: absolute;
   top: 0px;

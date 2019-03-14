@@ -4,7 +4,15 @@
   </div>
 
   <div class="row">
-    <div class="offset-md-3 col-md-3">
+    <div class="col-md-3">
+      <div class="form-group g-mb-25">
+        <label>&nbsp;</label>
+        <button *ngIf="orders && !isOrdersLoading" class="form-control rounded-0 btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15 btn-print-outline" (click)="printStationOrders()">
+          Print
+        </button>
+      </div>
+    </div>
+    <div class="col-md-3">
       <div class="form-group g-mb-25">
         <label for="exampleSelect1">&nbsp;</label>
         <button class="form-control rounded-0 btn btn-md u-btn-outline-teal u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15 btn-outline" (click)="loadOrders(false)">
@@ -20,16 +28,16 @@
     </div>
     <div class="col-md-3">
       <div class="form-group g-mb-25">
-        <label for="exampleSelect1">Select station</label>
-        <select class="form-control rounded-0" id="exampleSelect1" (change)="onSelect($event.target.value)">
+        <label for="station">Select station</label>
+        <select class="form-control rounded-0" id="station" (change)="onSelect($event.target.value)">
           <option *ngFor="let station of stations; index as i;" value="{{station.id}}">S{{i+1}} - {{station.name}}</option>
         </select>
       </div>
     </div>
     <div *ngIf="station && station.separate_by_category" class="col-md-3">
       <div class="form-group g-mb-25">
-        <label for="exampleSelect1">Select item category</label>
-        <select class="form-control rounded-0" (change)="onCategorySelect($event.target.value)">
+        <label for="category">Select item category</label>
+        <select class="form-control rounded-0" (change)="onCategorySelect($event.target.value)" id="category">
           <option value="0" selected>All category</option>
           <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
         </select>
@@ -37,7 +45,7 @@
     </div>
   </div>
 
-  <div class="table-responsive" *ngIf="orders && !isOrdersLoading">
+  <div class="table-responsive" *ngIf="orders && !isOrdersLoading" id='print'>
     <table class="table table-bordered u-table--v2">
       <thead class="text-uppercase g-letter-spacing-1">
         <tr>
@@ -53,7 +61,7 @@
           <th class="align-middle g-color-black">Reference</th>
           <th class="align-middle g-color-black">Items</th>
           <th class="align-middle g-color-black">Total value</th>
-          <th class="align-middle g-color-black">Options</th>
+          <th class="align-middle g-color-black print-hide">Options</th>
         </tr>
       </thead>
 
@@ -78,7 +86,7 @@
             </table>
           </td>
           <td class="align-middle" align="right">${{(order.value * 1).toFixed(2)}}</td>
-          <td class="align-middle text-center">
+          <td class="align-middle text-center print-hide">
             <a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
 
             <button class="btn btn-md u-btn-outline-aqua g-mr-10 g-mb-15" (click)="checkOutOrder(order)" *ngIf="order.station.id != lastStation && ( !order.station.separate_by_category || ( order.station.separate_by_category && !categorySelected))"

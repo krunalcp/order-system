@@ -248,4 +248,41 @@ export class StationOrdersComponent implements OnInit {
     );
   }
 
+  public printStationOrders() {
+    var printSection = document.getElementById('print').innerHTML;
+    var stationSelect = document.getElementById("station") as HTMLSelectElement;
+    var stationValue = stationSelect.options[stationSelect.selectedIndex].text;
+    var popupWin = window.open('', '_blank');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Print tab</title>
+          <style>
+            @media print
+            {
+              body, table {
+                font-size: 7pt;
+              }
+              .print-hide {
+                display: none;
+              }
+              .print-show {
+                display: block;
+              }
+              @page {
+                size: 7in 9.25in;
+              }
+            }
+          </style>
+        </head>
+        <body onload="window.print();window.close()">
+        <span><b>Station</b> : ${stationValue} </span>
+        ${printSection}</body>
+      </html>`
+    );
+    popupWin.document.close();
+  }
+
+
 }
