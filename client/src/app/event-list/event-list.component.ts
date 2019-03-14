@@ -15,6 +15,8 @@ import { Event } from '../event';
 export class EventListComponent implements OnInit {
 
 	public events: any;
+  public currentEvent: Event = new Event();
+  public errorMessage: any;
   public isEventsLoading: boolean = false;
   public isEventDeleting: boolean = false;
   public currentEventId: number;
@@ -26,7 +28,19 @@ export class EventListComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loadCurrentEvent();
   	this.loadEventList();
+  }
+
+  private loadCurrentEvent(): void {
+    this.eventService.current().subscribe(
+      successResponse => {
+        this.currentEvent = successResponse.json();
+      },
+      () => {
+        this.errorMessage = 'Failed to load Event.';
+      }
+    );
   }
 
   public loadEventList(){

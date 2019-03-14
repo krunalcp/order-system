@@ -1,10 +1,13 @@
 class EventsController < ApplicationController
-  before_action :authenticate_event!, except: :index
+  before_action :authenticate_event!
   before_action :set_item, only: %i[show update destroy]
 
   def index
-    @events = Event.all
-
+    if current_event.admin
+      @events = Event.all
+    else
+      @events = Event.where(id: current_event.id)
+    end
     render json: @events
   end
 

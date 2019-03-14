@@ -19,6 +19,7 @@ export class EventEditComponent implements OnInit {
 
 	private eventId: number;
 	public event: Event = new Event();
+  public currentEvent: Event = new Event();
 	public eventForm: FormGroup;
 	public eventUpdateRequest: Subscription;
   private isFormSubmitted: boolean;
@@ -63,12 +64,24 @@ export class EventEditComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loadCurrentEvent();
     this.buildForm();
 
   	this.route.params.subscribe(
       (params: any) => {
         this.eventId = params.id;
         this.getEvent();
+      }
+    );
+  }
+
+  private loadCurrentEvent(): void {
+    this.eventService.current().subscribe(
+      successResponse => {
+        this.currentEvent = successResponse.json();
+      },
+      () => {
+        this.errorMessage = 'Failed to load Event.';
       }
     );
   }
