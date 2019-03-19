@@ -6,7 +6,9 @@ import { timer } from 'rxjs';
 import { OrderService } from '../order.service';
 import { StationService } from '../station.service';
 import { CategoryService } from '../category.service';
+import { EventService } from '../event.service';
 
+import { Event } from '../event';
 import { Order } from '../order';
 
 declare var $: any;
@@ -18,7 +20,8 @@ declare var $: any;
   providers: [
     OrderService,
     StationService,
-    CategoryService
+    CategoryService,
+    EventService
   ]
 })
 export class StationOrdersComponent implements OnInit {
@@ -48,18 +51,33 @@ export class StationOrdersComponent implements OnInit {
   public newOrder: boolean;
   public newOrderNumbr: number;
   public categorySelected: boolean;
+  public currentEvent: Event = new Event();
+  public errorMessage: any;
 
   constructor(
   	private orderService: OrderService,
     private stationService: StationService,
     private categoryService: CategoryService,
     private router: Router,
+    public eventService: EventService,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.loadCurrentEvent()
     this.loadStationList();
     this.loadCategoryList();
+  }
+
+  private loadCurrentEvent(): void {
+    this.eventService.current().subscribe(
+      successResponse => {
+        this.currentEvent = successResponse.json();
+      },
+      () => {
+        this.errorMessage = 'Failed to load Event.';
+      }
+    );
   }
 
   public loadStationList(){
@@ -248,11 +266,16 @@ export class StationOrdersComponent implements OnInit {
     );
   }
 
-  public printStationOrders() {
-    var printSection = document.getElementById('print').innerHTML;
-    var stationSelect = document.getElementById("station") as HTMLSelectElement;
-    var stationValue = stationSelect.options[stationSelect.selectedIndex].text;
-    var popupWin = window.open('', '_blank');
+  public currentDate(){
+    return new Date();
+  }
+
+  public printOrders(order_id) {
+    order_id = parseInt(order_id);
+    let ordersData = []
+    let order = this.orders.find(x => x.id === order_id)
+    var printSection = document.getElementById(order_id).innerHTML;
+    var popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
     popupWin.document.open();
     popupWin.document.write(`
       <html>
@@ -261,8 +284,8 @@ export class StationOrdersComponent implements OnInit {
           <style>
             @media print
             {
-              body, table {
-                font-size: 7pt;
+              .text-center {
+                text-align: center;
               }
               .print-hide {
                 display: none;
@@ -276,13 +299,10 @@ export class StationOrdersComponent implements OnInit {
             }
           </style>
         </head>
-        <body onload="window.print();window.close()">
-        <span><b>Station</b> : ${stationValue} </span>
-        ${printSection}</body>
+        <body onload="window.print();window.close()">${printSection}</body>
       </html>`
     );
     popupWin.document.close();
   }
-
 
 }

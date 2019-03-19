@@ -1,5 +1,6 @@
 class OrderSerializer < ActiveModel::Serializer
-	attributes :id, :customer_name, :station, :value, :created_at, :station_id, :charge_to_account, :scheduled_order_time, :display_scheduled_order_time, :account_id, :account, :fulfilled
+	attributes :id, :customer_name, :station, :value, :created_at, :station_id, :charge_to_account, :scheduled_order_time, :display_scheduled_order_time, :account_id, :account, :fulfilled,
+  :total_quantity
 
 	has_many :order_items
 
@@ -25,6 +26,10 @@ class OrderSerializer < ActiveModel::Serializer
 
   def fulfilled
     object.fulfilled.to_s
+  end
+
+  def total_quantity
+    object.order_items.sum(:quantity)
   end
 
 end

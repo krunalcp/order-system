@@ -7,9 +7,6 @@
     <div class="col-md-3">
       <div class="form-group g-mb-25">
         <label>&nbsp;</label>
-        <button *ngIf="orders && !isOrdersLoading" class="form-control rounded-0 btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15 btn-print-outline" (click)="printStationOrders()">
-          Print
-        </button>
       </div>
     </div>
     <div class="col-md-3">
@@ -106,9 +103,79 @@
                 <span class="sr-only">Loading...</span>
               </span>
             </button>
+            <button class="btn btn-md u-btn-outline-pink g-mr-10 g-mb-15" (click)="printOrders(order.id)">
+              Print
+            </button>
 
             <i *ngIf="order.station.id != lastStation && order.station.separate_by_category && categorySelected && fulfilledOrder(order, currentCategory)" class="fa fa-check fa-2x"></i>
           </td>
+          <div id="{{order.id}}" style="display: none; width: 90mm;">
+            <div class="text-center">
+              <div>
+                <img src="{{ currentEvent.logo }}" style="width: 80px">
+                <h1>{{currentEvent.published_name}}</h1>
+              </div>
+              <div style="font-size: 14px; font-weight: bold;">{{currentDate() | date:'dd.MM.yyyy HH:mm'}}</div>
+              <div style="font-size: 14px; font-weight: bold;">GST Number: {{currentEvent.gst_number}}</div>
+              <br />
+              <table width="90%" style="font-size: 14px;">
+                <tr>
+                  <td width="25%"></td>
+                  <td width="35%" style="font-weight: bold;">Name:</td>
+                  <td width="25%">{{order.account?.name}}</td>
+                </tr>
+                <tr>
+                  <td width="25%"></td>
+                  <td width="35%" style="font-weight: bold;">Contact Name:</td>
+                  <td width="25%">{{order.account?.contact_name}}</td>
+                </tr>
+                <tr>
+                  <td width="25%"></td>
+                  <td width="35%" style="font-weight: bold;">Email:</td>
+                  <td width="25%">{{order.account?.email}}</td>
+                </tr>
+                <tr>
+                  <td width="25%"></td>
+                  <td width="35%" style="font-weight: bold;">Phone:</td>
+                  <td width="25%">{{order.account?.phone}}</td>
+                </tr>
+              </table>
+              <table width="90%" style="font-size: 14px;">
+                <thead>
+                  <tr>
+                    <td width="65%">Item</td>
+                    <td width="25%">Qty</td>
+                    <td width="25%">Value</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let i of order.order_items | groupBy: 'category_name'">
+                    <table width="90%" style="font-size: 14px;">
+                      <div style="font-size: 15px; text-align: left;">{{i.key}}</div>
+                      <tr *ngFor="let order_item of i.value">
+                        <td width="65%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{order_item.item}}<br>
+
+                          <small *ngIf="order_item.notes != null && order_item.notes != ''">({{order_item.notes}})</small>
+                        </td>
+                        <td width="25%">{{order_item.quantity}}</td>
+                        <td width="25%">${{(order_item.price * order_item.quantity).toFixed(2)}}</td>
+                      </tr>
+                    </table>
+                  </tr>
+                  <br />
+                  <table width="90%" style="font-size: 14px;">
+                    <tr>
+                      <td width="65%">TOTAL</td>
+                      <td width="25%">{{order.total_quantity}}</td>
+                      <td width="25%">${{(order.value * 1).toFixed(2)}}</td>
+                    </tr>
+                  </table>
+                </tbody>
+              </table>
+              <br>
+            </div>
+          </div>
         </tr>
       </tbody>
     </table>
