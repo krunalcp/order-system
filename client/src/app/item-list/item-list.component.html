@@ -7,6 +7,15 @@
       <a routerLink="/item/add" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
         <i class="fa fa-plus-circle g-mr-5"></i>New Item
       </a>
+      <button class="btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="exportItems()">
+        <i class="fa fa-file-excel-o g-mr-5"></i>
+        <span *ngIf="!isExporting">Export items</span>
+        <span *ngIf="isExporting">
+          <span>Exporting...</span>
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Loading...</span>
+        </span>
+      </button>
     </div>
   </div>
   <div class="table-responsive" *ngIf="items && !isItemsLoading">

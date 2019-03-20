@@ -6,6 +6,12 @@ import { ItemService } from '../item.service';
 
 import { Item } from '../item';
 
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
+
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
@@ -18,6 +24,7 @@ export class ItemListComponent implements OnInit {
   public isItemsLoading: boolean = false;
   public isItemDeleting: boolean = false;
   public currentItemId: number;
+  public isExporting: boolean = false;
 
   constructor(
   	private itemService: ItemService,
@@ -56,4 +63,51 @@ export class ItemListComponent implements OnInit {
       }
     );
   }
+
+  public exportItems() {
+    this.isExporting = true;
+    let itemsData = []
+
+    this.itemService.list().subscribe(
+      successResponse => {
+        let allItems = successResponse.json();
+
+          allItems.forEach(function(item) {
+            let newItem = {NAME: '', PRICE: '', ORDER_NO: '', ACTIVE: '', CATEGORY: ''}
+            newItem.NAME = item.name;
+            newItem.PRICE = item.price;
+            newItem.ORDER_NO = item.order_no;
+            if(item.active){
+              newItem.ACTIVE = 'Yes';
+            }else{
+              newItem.ACTIVE = 'No';
+            }
+            newItem.CATEGORY =  item.category_name;
+            itemsData.push(newItem);
+          });
+
+        this.exportAsExcelFile(itemsData, 'ctordering');
+      },
+      (errorResponse) => {
+        this.isExporting = false;
+      }
+    );
+  }
+
+  public exportAsExcelFile(json: any[], excelFileName: string): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, excelFileName);
+  }
+
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_items_' + new Date().getTime() + EXCEL_EXTENSION);
+
+    this.isExporting = false;
+  }
+
 }
