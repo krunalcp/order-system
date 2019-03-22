@@ -51,7 +51,11 @@ export class AppComponent {
         this.currentEvent = successResponse.json();
 
         // Set Title
-        document.title = this.currentEvent.published_name
+        if(this.currentEvent.published_name != '' || this.currentEvent.published_name != null){
+          document.title = this.currentEvent.published_name;
+        } else {
+          document.title = 'CT Ordering';
+        }
 
         // Set Favicon
         $("#appIcon").attr("href", this.currentEvent.icon);
