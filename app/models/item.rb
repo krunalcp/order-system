@@ -79,16 +79,16 @@ class Item < ApplicationRecord
   def self.import_items(current_event, items)
     response = []
     items.each_with_index do |item, index|
-      category = current_event.categories.find_by_name(item['Category Name'])
+      category = current_event.categories.find_by_name(item['Category'])
       item_hash = {
         name: item['Name'],
         price: item['Price'],
-        order_no: item['Order No'],
+        order_no: item['Order'],
         active: item['Active'],
         category: category
       }
       new_item = current_event.items.new(item_hash)
-      item_hash.merge!(category_name: item['Category Name'], row: index + 1)
+      item_hash.merge!(category_name: item['Category'], row: index + 1)
       if new_item.save
         response << item_hash.merge!({success: true})
       else
