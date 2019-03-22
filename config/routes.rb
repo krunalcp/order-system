@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get 'order_summary'
       get 'active_items'
       get 'last_order_number'
+      post 'import_items'
     end
   end
 

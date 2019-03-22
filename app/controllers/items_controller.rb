@@ -71,6 +71,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def import_items
+    items = Item.import_items(current_event, params[:items])
+    render json: items
+  end
+
   private
 
   def set_item

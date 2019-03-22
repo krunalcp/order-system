@@ -20,6 +20,12 @@ export class ItemService {
     return this.http.post(itemsApiURL, item, this.hostAppService.getToken());
   }
 
+  import(items: any): Observable<any>{
+    let itemsApiURL = this.hostAppService.getHost() + '/items/import_items';
+
+    return this.http.post(itemsApiURL, {items: items}, this.hostAppService.getToken());
+  }
+
   show(id: number): Observable<any>{
     let itemsApiURL = this.hostAppService.getHost() + '/items';
 

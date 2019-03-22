@@ -75,4 +75,26 @@ class Item < ApplicationRecord
     summary << total
     summary
   end
+
+  def self.import_items(current_event, items)
+    response = []
+    items.each_with_index do |item, index|
+      category = current_event.categories.find_by_name(item['Category Name'])
+      item_hash = {
+        name: item['Name'],
+        price: item['Price'],
+        order_no: item['Order No'],
+        active: item['Active'],
+        category: category
+      }
+      new_item = current_event.items.new(item_hash)
+      item_hash.merge!(category_name: item['Category Name'], row: index + 1)
+      if new_item.save
+        response << item_hash.merge!({success: true})
+      else
+        response << item_hash.merge!({success: false, error: new_item.errors.full_messages.join(', ')})
+      end
+    end
+    response
+  end
 end

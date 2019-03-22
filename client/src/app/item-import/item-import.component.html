@@ -1,0 +1,71 @@
+<div class="container g-mt-100">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Import items</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <a href='assets/sample/ctordering_items.xlsx' class='btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15'>
+        <i class="fa fa-file-excel-o g-mr-5"></i>Download Sample
+      </a>
+    </div>
+  </div>
+  <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
+    <!-- Text Input -->
+    <div class="row">
+      <div class="form-group g-mb-25 col-md-6">
+        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+      </div>
+      <div class="form-group g-mb-25 col-md-6">
+        <button (click)="upload()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
+          <span *ngIf="!isItemImporting">Import Item</span>
+          <span *ngIf="isItemImporting">Importing Item...</span>
+          <span class="g-pl-5" *ngIf="isItemImporting">
+            <i class="fa fa-spinner fa-spin"></i>
+            <span class="sr-only">Loading...</span>
+          </span>
+        </button>
+        <button class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="cancelImportItem()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="g-bg-main g-brd-blue g-mb-20 text-center g-py-50" *ngIf="imported_items && !isItemImporting">
+    <div class="table-responsive">
+      <table class="table table-bordered u-table--v2">
+        <thead class="text-uppercase g-letter-spacing-1">
+          <tr>
+            <th class="align-middle g-color-black">#</th>
+            <th class="align-middle g-color-black g-min-width-300">Name</th>
+            <th class="align-middle g-color-black">Order No</th>
+            <th class="align-middle g-color-black">Price</th>
+            <th class="align-middle g-color-black">Active</th>
+            <th class="align-middle g-color-black">Category Id</th>
+            <th class="align-middle g-color-black">Success</th>
+            <th class="align-middle g-color-black">Error</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of imported_items">
+            <td class="align-middle">{{item.row}}</td>
+            <td class="align-middle">{{item.name}}</td>
+            <td class="align-middle">{{item.order_no}}</td>
+            <td class="align-middle" align="right">${{(item.price * 1).toFixed(2)}}</td>
+            <td class="align-middle">{{item.active}}</td>
+            <td class="align-middle">{{item.category_name}}</td>
+            <td class="align-middle">{{item.success}}</td>
+            <td class="align-middle">{{item.error}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row" *ngIf="isItemImporting">
+      <div class="col-md-12 text-center g-color-blue">
+        <i class="fa fa-spinner fa-spin"></i>
+        <span class="sr-only">Loading...</span>
+        <p>Loading items...</p>
+      </div>
+    </div>
+  </div>
+</div>

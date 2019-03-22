@@ -43,6 +43,7 @@ import { AccountShowComponent } from './account-show/account-show.component';
 import { EventOrderAddComponent } from './event-order-add/event-order-add.component';
 import { HeaderService } from './services/header.service';
 import { EventOrderListComponent } from './event-order-list/event-order-list.component';
+import { ItemImportComponent } from './item-import/item-import.component';
 
 const appRoutes: Routes = [
 	{
@@ -72,6 +73,11 @@ const appRoutes: Routes = [
   {
     path: 'item/edit/:id',
     component: ItemEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'item/import',
+    component: ItemImportComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -227,7 +233,8 @@ const appRoutes: Routes = [
     AccountEditComponent,
     AccountShowComponent,
     EventOrderAddComponent,
-    EventOrderListComponent
+    EventOrderListComponent,
+    ItemImportComponent
   ],
   imports: [
     BrowserModule,
