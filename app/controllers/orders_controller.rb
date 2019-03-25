@@ -129,6 +129,11 @@
     end
   end
 
+  def import_orders
+    orders = Order.import_orders(current_event, params[:orders])
+    render json: orders
+  end
+
   private
 
   def order_params

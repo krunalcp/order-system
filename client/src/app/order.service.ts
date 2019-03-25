@@ -19,6 +19,12 @@ export class OrderService {
     return this.http.post(ordersApiURL, order, this.hostAppService.getToken());
   }
 
+  import(orders: any): Observable<any>{
+    let ordersApiURL = this.hostAppService.getHost() + '/orders/import_orders';
+
+    return this.http.post(ordersApiURL, {orders: orders}, this.hostAppService.getToken());
+  }
+
   show(id: number): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost() + '/orders';
 

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :orders do
     collection do
       get 'pending_list'
+      post 'import_orders'
     end
 
     member do

@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   belongs_to :event
   belongs_to :category
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: {scope: :event_id}
 
   attr_accessor :notes
 
