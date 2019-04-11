@@ -51,10 +51,10 @@
             <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'scheduled_order_time')">
               <i class="fa fa-sort-asc" *ngIf="sortBy == 'scheduled_order_time' && sortOrder == 'asc'"></i>
               <i class="fa fa-sort-desc" *ngIf="sortBy == 'scheduled_order_time' && sortOrder == 'desc'"></i>
-              Scheduled Order Time
+              Time
             </a>
           </th>
-          <!-- <th class="align-middle g-color-black">Scheduled Order Time</th> -->
+          <th class="align-middle g-color-black">Account</th>
           <th class="align-middle g-color-black">Reference</th>
           <th class="align-middle g-color-black">Items</th>
           <th class="align-middle g-color-black">Total value</th>
@@ -66,6 +66,7 @@
         <tr *ngFor="let order of stationOrders">
           <td class="align-middle">{{order.id}}</td>
           <td class="align-middle">{{order.display_scheduled_order_time | date:'dd.MM.yy HH:mm:ss'}}</td>
+          <td class="align-middle"><span *ngIf="order.account">{{order.account.name}}</span></td>
           <td class="align-middle">{{order.customer_name}}</td>
           <td class="align-middle child">
             <table class="borderless">
