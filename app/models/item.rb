@@ -85,6 +85,7 @@ class Item < ApplicationRecord
         price: item['Price'],
         order_no: item['Order'],
         active: item['Active'],
+        image: item['Image'],
         category: category
       }
       new_item = current_event.items.new(item_hash)
