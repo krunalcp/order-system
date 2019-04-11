@@ -73,7 +73,7 @@ export class ItemListComponent implements OnInit {
         let allItems = successResponse.json();
 
           allItems.forEach(function(item) {
-            let newItem = {Name: '', Price: '', Order: '', Active: '', Category: ''}
+            let newItem = {Name: '', Price: '', Order: '', Active: '', Category: '', Image: ''}
             newItem.Name = item.name;
             newItem.Price = item.price;
             newItem.Order = item.order_no;
@@ -83,6 +83,7 @@ export class ItemListComponent implements OnInit {
               newItem.Active = 'No';
             }
             newItem.Category =  item.category_name;
+            newItem.Image = item.image;
             itemsData.push(newItem);
           });
 
