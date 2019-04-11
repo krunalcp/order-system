@@ -21,11 +21,18 @@ export class AccountAddComponent implements OnInit {
     'name': '',
     'contact_name': '',
     'phone': '',
-    'email': ''
+    'email': '',
+    'password': ''
   };
   validationMessages = {
     'name': {
       'required': 'Name is required.',
+    },
+    'email': {
+      'required': 'Email is required.',
+    },
+    'password': {
+      'required': 'Password is required.',
     }
   };
 
@@ -84,7 +91,14 @@ export class AccountAddComponent implements OnInit {
         this.account.phone
       ],
       'email': [
-        this.account.email
+        this.account.email, [
+          Validators.required
+        ]
+      ],
+      'password': [
+        '', [
+          Validators.required
+        ]
       ]
     });
 

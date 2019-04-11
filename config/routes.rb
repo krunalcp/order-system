@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'Event', at: 'auth'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  post '/account/login', to: 'authentication#login'
+
   resources :items do
     collection do
       get 'order_summary'

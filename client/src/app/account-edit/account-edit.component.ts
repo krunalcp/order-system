@@ -29,10 +29,14 @@ export class AccountEditComponent implements OnInit {
     'contact_name': '',
     'phone': '',
     'email': '',
+    'password': ''
   };
   validationMessages = {
     'name': {
       'required': 'Name is required.'
+    },
+    'email': {
+      'required': 'Email is required.'
     }
   };
 
@@ -112,7 +116,12 @@ export class AccountEditComponent implements OnInit {
         this.account.phone
       ],
       'email': [
-        this.account.email
+        this.account.email, [
+          Validators.required,
+        ]
+      ],
+      'password': [
+        ''
       ]
     });
 

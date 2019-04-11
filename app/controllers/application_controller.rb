@@ -1,11 +1,31 @@
 class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :configure_permitted_parameters, if: :devise_controller?
+  include Response
 
   def set_pagination
     @page = params[:page].to_i > 0 ? params[:page].to_i : 1
     @per_page = params[:per].to_i > 0 ? params[:per].to_i : 10
     @offset = (@page - 1) * @per_page
+  end
+
+  def authenticate_event!
+    header = request.headers['Authorization']
+    if header
+      header = header.split(' ').last
+      begin
+        @decoded = JwtToken.decode(header)
+        current_account = Account.find(@decoded[:account_id])
+        @current_event = current_account.event
+        return @current_event
+      rescue ActiveRecord::RecordNotFound => e
+        not_found
+      rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+        message_response('Access Token is invalid or expire', 'Error', :unauthorized)
+      end
+    else
+      super
+    end
   end
 
   protected
