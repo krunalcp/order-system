@@ -57,17 +57,19 @@ export class EventListComponent implements OnInit {
   }
 
   public deleteEvent(id: number){
-    this.currentEventId = id;
-    this.isEventDeleting = true;
-    this.eventService.remove(id).subscribe(
-      successResponse => {
-        this.isEventDeleting = false;
-        this.loadEventList();
-      },
-      (errorResponse) => {
-        this.isEventDeleting = false;
-        // this.displayErrors(errorResponse);
-      }
-    );
+    if(confirm("Are you sure?")) {
+      this.currentEventId = id;
+      this.isEventDeleting = true;
+      this.eventService.remove(id).subscribe(
+        successResponse => {
+          this.isEventDeleting = false;
+          this.loadEventList();
+        },
+        (errorResponse) => {
+          this.isEventDeleting = false;
+          // this.displayErrors(errorResponse);
+        }
+      );
+    }
   }
 }
