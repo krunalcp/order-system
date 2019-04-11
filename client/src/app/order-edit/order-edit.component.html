@@ -8,24 +8,24 @@
       <!-- Text Input -->
       <div class="row">
         <div class="form-group g-mb-25 col-md-3">
-          <label class="g-mb-10" for="customer_name">Reference Name</label>
-          <input class="form-control u-form-control rounded-0" type="text" placeholder="(Refernece)" id="customer_name" formControlName="customer_name">
-        </div>
-        <div class="form-group g-mb-25 col-md-3">
-          <label class="g-mb-10" for="station_id">Select station</label>
+          <label class="g-mb-10" for="station_id">Station</label>
           <select class="form-control rounded-0 u-form-control" id="station" formControlName="station_id">
             <option *ngFor="let station of stations; index as i;" value="{{station.id}}">S{{i+1}} - {{station.name}}</option>
           </select>
         </div>
         <div class="form-group g-mb-25 col-md-3">
-          <label class="g-mb-10" for="scheduled_order_time">Scheduled Order Time</label>
-          <input class="form-control u-form-control rounded-0 pr-0" type="datetime-local" id="scheduled_order_time" formControlName="scheduled_order_time">
-        </div>
-        <div class="form-group g-mb-25 col-md-3">
-          <label class="g-mb-10" for="account_id">Select account</label>
+          <label class="g-mb-10" for="account_id">Account</label>
           <select class="form-control rounded-0 u-form-control" id="account" formControlName="account_id">
             <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
           </select>
+        </div>
+        <div class="form-group g-mb-25 col-md-3">
+          <label class="g-mb-10" for="customer_name">Reference</label>
+          <input class="form-control u-form-control rounded-0" type="text" placeholder="(Refernece)" id="customer_name" formControlName="customer_name">
+        </div>
+        <div class="form-group g-mb-25 col-md-3">
+          <label class="g-mb-10" for="scheduled_order_time">Scheduled Time</label>
+          <input class="form-control u-form-control rounded-0 pr-0" type="datetime-local" id="scheduled_order_time" formControlName="scheduled_order_time">
         </div>
       </div>
     </form>
