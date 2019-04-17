@@ -4,6 +4,7 @@ export class Account {
     public contact_name?: string,
     public phone?: string,
     public email?: string,
-    public event_id?: number
+    public event_id?: number,
+    public items? :any
   ) {}
 }
