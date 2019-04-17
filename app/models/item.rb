@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   belongs_to :event
   belongs_to :category
 
-  validates :name, presence: true, uniqueness: {scope: :event_id}
+  validates :name, presence: true, uniqueness: { scope: :event_id }
 
   attr_accessor :notes
 
@@ -10,33 +10,34 @@ class Item < ApplicationRecord
 
   acts_as_list column: :order_no
 
-  after_save :update_order_items, on: :update
-
-  def update_order_items
-    self.event.order_items.where(item: name_before_last_save).update_all(item: name)
-  end
-
   def self.get_summary(current_event, type = 'quantity')
     summary = []
 
     current_event.items.where(active: true).find_each do |item|
-      summary << { name: item.name, stations: [] }
+      summary << { id: item.id, name: item.name, stations: [] }
     end
     stations = {}
     current_event.stations.find_each do |station|
       stations["S#{station.id} - #{station.name}"] = { quantity: 0 }
       order_items = if type == 'value'
-        station.order_items.select("order_items.item, sum(order_items.#{type} * order_items.quantity) as quantity").group('order_items.item')
+        station.order_items.select(
+          "order_items.item_id, sum(order_items.#{type} * order_items.quantity) as quantity"
+        ).group('order_items.item_id')
       else
-        station.order_items.select("order_items.item, sum(order_items.#{type}) as quantity").group('order_items.item')
+        station.order_items.select(
+          "order_items.item_id, sum(order_items.#{type}) as quantity"
+        ).group('order_items.item_id')
       end
       if order_items.present?
         summary.each do |s|
           match = false
           order_items.each do |order_item|
-            next unless s[:name] == order_item.item
+            next unless s[:id] == order_item.item_id
 
-            s[:stations] << { name: "S#{station.id} - #{station.name}", quantity: order_item.quantity }
+            s[:stations] << {
+              name: "S#{station.id} - #{station.name}",
+              quantity: order_item.quantity
+            }
             match = true
             break
           end

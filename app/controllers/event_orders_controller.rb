@@ -9,7 +9,7 @@ class EventOrdersController < ApplicationController
     order_items = []
 
     order_params[:order_items].each do |item|
-      item_params = { item: item[:name], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes], category_id: item[:category_id] }
+      item_params = { item_id: item[:id], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes], category_id: item[:category_id] }
 
       order_item = OrderItem.create(item_params)
       order_items.push(order_item)

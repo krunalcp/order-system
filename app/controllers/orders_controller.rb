@@ -30,7 +30,7 @@
     order_items = []
 
     order_params[:order_items].each do |item|
-      item_params = { item: item[:name], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes], category_id: item[:category_id] }
+      item_params = { item_id: item[:id], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes], category_id: item[:category_id] }
 
       order_item = OrderItem.create(item_params)
       order_items.push(order_item)
@@ -66,7 +66,7 @@
       order_items = []
 
       order_params[:order_items].each do |item|
-        item_params = { item: item[:name], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes], category_id: item[:category_id] }
+        item_params = { item_id: item[:id], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes], category_id: item[:category_id] }
 
         order_item = OrderItem.create(item_params)
         order_items.push(order_item)
@@ -113,7 +113,7 @@
     order.fulfilled = [order.fulfilled.to_s, params[:c]].compact.join(',') if params[:c]
 
     category_ids = order.order_items.pluck(:category_id)
-    fulfilled_category_ids = order.fulfilled.split(",").map(&:to_i)
+    fulfilled_category_ids = order.fulfilled.split(',').map(&:to_i)
 
     if (category_ids - fulfilled_category_ids).blank?
       current_station = order.station
@@ -137,6 +137,6 @@
   private
 
   def order_params
-    params.permit(:customer_name, :station, :station_id, :value, :scheduled_order_time, :account_id, order_items: %i[name price quantity notes category_id])
+    params.permit(:customer_name, :station, :station_id, :value, :scheduled_order_time, :account_id, order_items: %i[id price quantity notes category_id])
   end
 end

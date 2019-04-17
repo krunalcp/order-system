@@ -5,6 +5,7 @@ export class Order {
     public station?: any,
     public value?: number,
     public item?: string,
+    public item_id?: number,
     public quantity?: number,
     public notes?: string,
     public order_items?: any,
