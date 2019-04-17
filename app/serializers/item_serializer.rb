@@ -7,7 +7,7 @@ class ItemSerializer < ActiveModel::Serializer
   end
 
   def item_used
-    order_items = OrderItem.where.not(order_id: nil).where(item: object.name).present?
+    object.order_items.present?
   end
 
   def status

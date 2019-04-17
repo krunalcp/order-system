@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: %i[show update destroy]
 
   def index
-    @items = current_event.items
+    @items = current_event.items.includes(:order_items, :category)
 
     render json: @items
   end
