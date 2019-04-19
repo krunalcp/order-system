@@ -1,4 +1,4 @@
- class OrdersController < ApplicationController
+class OrdersController < ApplicationController
   before_action :authenticate_event!
   before_action :set_pagination, only: :index
 
@@ -17,33 +17,42 @@
       if params[:oo] == '1'
         render json: @orders
       else
-        render json: { orders: @orders, total: @total, page: @page, per: @per_page }
+        render json: {
+          orders: @orders, total: @total, page: @page, per: @per_page
+        }
       end
     end
   end
 
   def create
-    new_order_params = { customer_name: order_params[:customer_name], station_id: order_params[:station_id], value: order_params[:value], charge_to_account: order_params[:charge_to_account], account_id: order_params[:account_id], scheduled_order_time: order_params[:scheduled_order_time] }
-
+    new_order_params = {
+      customer_name: order_params[:customer_name],
+      station_id: order_params[:station_id], value: order_params[:value],
+      charge_to_account: order_params[:charge_to_account],
+      account_id: order_params[:account_id], comments: order_params[:comments],
+      scheduled_order_time: order_params[:scheduled_order_time]
+    }
     @order = current_event.orders.create(new_order_params)
 
     order_items = []
-
     order_params[:order_items].each do |item|
-      item_params = { item_id: item[:id], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes], category_id: item[:category_id] }
+      item_params = {
+        item_id: item[:id], quantity: item[:quantity], notes: item[:notes],
+        value: item[:price].to_f.round(2), category_id: item[:category_id]
+      }
 
       order_item = OrderItem.create(item_params)
       order_items.push(order_item)
     end
 
     @order.order_items = order_items
-
     @order.station = current_event.stations.first if @order.station.blank?
 
     if @order.save
       render json: { id: @order.id }
     else
-      render json: { errors: @order.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @order.errors.full_messages },
+             status: :unprocessable_entity
     end
   end
 
@@ -61,24 +70,31 @@
     @order = current_event.orders.find(params[:id])
 
     if @order
-      new_order_params = { customer_name: order_params[:customer_name], station_id: order_params[:station_id], value: order_params[:value], charge_to_account: order_params[:charge_to_account], account_id: order_params[:account_id], scheduled_order_time: order_params[:scheduled_order_time] }
+      new_order_params = {
+        customer_name: order_params[:customer_name],
+        station_id: order_params[:station_id], value: order_params[:value],
+        charge_to_account: order_params[:charge_to_account],
+        account_id: order_params[:account_id],
+        comments: order_params[:comments],
+        scheduled_order_time: order_params[:scheduled_order_time]
+      }
 
       order_items = []
-
       order_params[:order_items].each do |item|
-        item_params = { item_id: item[:id], quantity: item[:quantity], value: item[:price].to_f.round(2), notes: item[:notes], category_id: item[:category_id] }
-
+        item_params = {
+          item_id: item[:id], quantity: item[:quantity], notes: item[:notes],
+          value: item[:price].to_f.round(2), category_id: item[:category_id]
+        }
         order_item = OrderItem.create(item_params)
         order_items.push(order_item)
       end
 
       @order.order_items = order_items
-
       if @order.update(new_order_params)
-
         head :ok
       else
-        render json: { errors: @order.errors.full_messages }, status: :unprocessable_entity
+        render json: { errors: @order.errors.full_messages },
+               status: :unprocessable_entity
       end
     else
       render json: { errors: ['order not found'] }, status: 404
@@ -137,6 +153,10 @@
   private
 
   def order_params
-    params.permit(:customer_name, :station, :station_id, :value, :scheduled_order_time, :account_id, order_items: %i[id price quantity notes category_id])
+    params.permit(
+      :customer_name, :station, :station_id, :value, :scheduled_order_time,
+      :account_id, :comments,
+      order_items: %i[id price quantity notes category_id]
+    )
   end
 end

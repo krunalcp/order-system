@@ -162,6 +162,9 @@ export class OrderAddComponent implements OnInit {
       ],
       'scheduled_order_time': [
         this.order.scheduled_order_time
+      ],
+      'comments': [
+        this.order.comments
       ]
     });
 

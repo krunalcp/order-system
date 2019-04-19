@@ -1,12 +1,14 @@
 class OrderSerializer < ActiveModel::Serializer
-	attributes :id, :customer_name, :station, :value, :created_at, :station_id, :charge_to_account, :scheduled_order_time, :display_scheduled_order_time, :account_id, :account, :fulfilled,
-  :total_quantity
+  attributes :id, :customer_name, :station, :value, :created_at, :station_id,
+             :charge_to_account, :scheduled_order_time, :comments, :fulfilled,
+             :display_scheduled_order_time, :account_id, :account,
+             :total_quantity
 
-	has_many :order_items
+  has_many :order_items
 
-	def created_at
-		(object.created_at + 12.hour).strftime("%m/%d/%Y %H:%M:%S")
-	end
+  def created_at
+    (object.created_at + 12.hour).strftime('%m/%d/%Y %H:%M:%S')
+  end
 
   def station
     object.station
@@ -17,11 +19,13 @@ class OrderSerializer < ActiveModel::Serializer
   end
 
   def scheduled_order_time
-    object.scheduled_order_time.try(:strftime, "%FT%T")
+    object.scheduled_order_time.try(:strftime, '%FT%T')
   end
 
   def display_scheduled_order_time
-    object.scheduled_order_time.try(:strftime, "%m/%d/%Y %H:%M:%S") || created_at
+    object.scheduled_order_time.try(
+      :strftime, '%m/%d/%Y %H:%M:%S'
+    ) || created_at
   end
 
   def fulfilled
@@ -31,5 +35,4 @@ class OrderSerializer < ActiveModel::Serializer
   def total_quantity
     object.order_items.sum(:quantity)
   end
-
 end

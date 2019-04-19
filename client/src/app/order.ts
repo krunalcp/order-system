@@ -8,6 +8,7 @@ export class Order {
     public item_id?: number,
     public quantity?: number,
     public notes?: string,
+    public comments?: string,
     public order_items?: any,
     public price?: any,
     public charge_to_account?: boolean,
