@@ -3,7 +3,7 @@
     <h1 class="h3 u-heading-v1__title">Place Order</h1>
   </div>
   <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
-    <h3 class="h2 g-font-weight-300 g-mb-20">Enter order details</h3>
+    <h3 class="h2 g-font-weight-300 g-mb-20"><span *ngIf="isEventOrderPage">Enter </span>Order details</h3>
     <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
       <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30">
         <!-- Text Input -->
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="card g-brd-teal rounded-0 g-mb-30">
+      <div *ngIf="isEventOrderPage" class="card g-brd-teal rounded-0 g-mb-30">
         <h3 class="card-header g-bg-teal g-brd-transparent g-color-white g-font-size-16 rounded-0 mb-0">
           <i class="fa fa-edit g-mr-5"></i>
           Choose items
@@ -92,6 +92,45 @@
         </div>
       </div>
 
+      <div *ngIf="!isEventOrderPage" class="card g-brd-teal rounded-0 g-mb-30">
+        <h3 class="card-header g-bg-teal g-brd-transparent g-color-white g-font-size-16 rounded-0 mb-0">
+          Selected items
+        </h3>
+
+        <div class="table-responsive text-center">
+          <table class="table table-striped u-table--v1 mb-0">
+            <thead>
+              <tr>
+                <th colspan="2">Item</th>
+                <th>Price($)</th>
+                <th>Quantity</th>
+                <th>Total($)</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order.order_items">
+                <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
+                <td class='text-left'>{{item.name}}</td>
+                <td class="price_width">${{(item.price * 1).toFixed(2)}}</td>
+                <td>{{item.quantity}}</td>
+                <td class="price_width">${{(item.price * item.quantity).toFixed(2)}}</td>
+                <td>{{item.notes}}</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td colspan="2"></td>
+                <td></td>
+                <td><b>Total($) :</b></td>
+                <td>${{order.value.toFixed(2)}}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30">
         <div class="row">
           <div class="form-group g-mb-25 col-md-12">
@@ -102,13 +141,19 @@
       </div>
     </form>
     <div class="text-right">
-      <button (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
-        <span *ngIf="!isOrderAdding">Add Order</span>
+      <button *ngIf="isEventOrderPage" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="button" (click)="placeEventOrder()">
+        Add Order
+      </button>
+      <button *ngIf="!isEventOrderPage" (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
+        <span *ngIf="!isOrderAdding">Confirm Order</span>
         <span *ngIf="isOrderAdding">Adding order...</span>
         <span class="g-pl-5" *ngIf="isOrderAdding">
           <i class="fa fa-spinner fa-spin"></i>
           <span class="sr-only">Loading...</span>
         </span>
+      </button>
+      <button *ngIf="!isEventOrderPage" class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="changeEventOrder()">
+        Change
       </button>
       <button class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="cancelEventOrder()">
         Cancel

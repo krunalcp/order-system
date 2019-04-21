@@ -23,6 +23,7 @@ declare var $: any;
 export class EventOrderAddComponent implements OnInit {
 
   public showHeader: boolean;
+  public isEventOrderPage: boolean;
   public items: any;
 	public errorMessage: any;
   public formErrors = {
@@ -64,6 +65,7 @@ export class EventOrderAddComponent implements OnInit {
     this.loadItems();
     this.getStationList();
     this.getAccountList();
+    this.isEventOrderPage = true;
   }
 
   private loadCurrentEvent(): void {
@@ -218,6 +220,22 @@ export class EventOrderAddComponent implements OnInit {
 
   public cancelEventOrder(){
     this.router.navigate(['/eventorder/list']);
+  }
+
+  public changeEventOrder(){
+    this.isEventOrderPage = true;
+  }
+
+  public placeEventOrder(){
+    this.order = this.orderForm.value;
+    this.order.order_items = this.items.filter(item => item.quantity > 0);
+    if(this.orderForm.status == 'INVALID' || this.order.order_items.length == 0) {
+      alert('Please add items!');
+      return;
+    }
+    this.order.value = this.totalPrice;
+
+    this.isEventOrderPage = false;
   }
 
   public toggleCategory(category) {

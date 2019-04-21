@@ -23,8 +23,8 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let station of stations">
-          <td class="align-middle">{{station.id}}</td>
+        <tr *ngFor="let station of stations; index as i;">
+          <td class="align-middle">{{i + 1}}</td>
           <td class="align-middle">{{station.name}}</td>
           <td class="align-middle"><span *ngIf="station.next_station_id >= 1">{{station.next_station.name}}</span></td>
           <td class="align-middle">{{station.refresh_time}}</td>

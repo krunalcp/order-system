@@ -18,8 +18,8 @@ class Item < ApplicationRecord
       summary << { id: item.id, name: item.name, stations: [] }
     end
     stations = {}
-    current_event.stations.find_each do |station|
-      stations["S#{station.id} - #{station.name}"] = { quantity: 0 }
+    current_event.stations.each_with_index do |station, index|
+      stations["S#{index + 1} - #{station.name}"] = { quantity: 0 }
       order_items = if type == 'value'
         station.order_items.select(
           "order_items.item_id, sum(order_items.#{type} * order_items.quantity) as quantity"
@@ -36,7 +36,7 @@ class Item < ApplicationRecord
             next unless s[:id] == order_item.item_id
 
             s[:stations] << {
-              name: "S#{station.id} - #{station.name}",
+              name: "S#{index + 1} - #{station.name}",
               quantity: order_item.quantity
             }
             match = true
@@ -44,11 +44,11 @@ class Item < ApplicationRecord
           end
           next if match
 
-          s[:stations] << { name: "S#{station.id} - #{station.name}", quantity: 0 }
+          s[:stations] << { name: "S#{index + 1} - #{station.name}", quantity: 0 }
         end
       else
         summary.each do |s|
-          s[:stations] << { name: "S#{station.id} - #{station.name}", quantity: 0 }
+          s[:stations] << { name: "S#{index + 1} - #{station.name}", quantity: 0 }
         end
       end
     end
