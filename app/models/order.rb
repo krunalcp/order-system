@@ -6,6 +6,9 @@ class Order < ApplicationRecord
   belongs_to :account, optional: true
 
   def self.import_orders(current_event, orders)
+    validate = validate_dependent(current_event, orders)
+    return validate if validate.is_a?(Array)
+
     response = []
     orders = orders.group_by{|h| h['ORDER_ID']}.values
     orders.each do |order|
@@ -23,11 +26,12 @@ class Order < ApplicationRecord
       order_hash.merge!(order_id: order[0]['ORDER_ID'], total_value: order[0]['TOTAL_VALUE'])
       if new_order.save
         order.each do |order_item|
+          item = current_event.items.find_by_name(order_item['ITEM'])
           order_item_hash = {
-            item: order_item['ITEM'],
+            item_id: item.id,
             quantity: order_item['QUANTITY'],
             value: order_item['VALUE'],
-            notes: order_item['NOTES'],
+            notes: order_item['NOTES']
           }
           new_order_item = new_order.order_items.new(order_item_hash)
           if new_order_item.save
@@ -41,5 +45,26 @@ class Order < ApplicationRecord
       end
     end
     response
+  end
+
+  def self.validate_dependent(current_event, orders)
+    items = current_event.items.pluck(:name)
+    stations = current_event.stations.pluck(:name)
+    accounts = current_event.accounts.pluck(:name)
+
+    order_items = orders.collect { |i| i['ITEM'] }.uniq
+    order_stations = orders.collect do |i|
+      i['STATION'].split(' - ')[1]
+    end.compact.uniq
+    order_accounts = orders.collect do |i|
+      i['ACCOUNT_NAME'] if i['ACCOUNT_NAME'].present?
+    end.compact.uniq
+
+    error = []
+    error << 'Items' if (order_items - items).present?
+    error << 'Stations' if (order_stations - stations).present?
+    error << 'Accounts' if (order_accounts - accounts).present?
+
+    return [{ error: error.join(', ') + ' Missing!' }] if error.present?
   end
 end
