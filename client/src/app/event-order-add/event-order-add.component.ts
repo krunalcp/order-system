@@ -127,6 +127,17 @@ export class EventOrderAddComponent implements OnInit {
     }
   }
 
+  public favouriteQuantityOptions(item, operation) {
+    let itemIndex = this.favourite_items.indexOf(item);
+
+    if (operation == 'plus' && this.favourite_items[itemIndex].quantity >= 0) {
+      this.favourite_items[itemIndex].quantity += 1;
+    }
+    else if (operation == 'minus' && this.favourite_items[itemIndex].quantity > 0) {
+      this.favourite_items[itemIndex].quantity -= 1;
+    }
+  }
+
   public notesOptions(item) {
     let itemIndex = this.items.indexOf(item);
     this.items[itemIndex].notes = $("#item_notes_" + item.id).val();
@@ -137,6 +148,9 @@ export class EventOrderAddComponent implements OnInit {
 
     if (this.items){
       this.items.forEach(function(item) {
+        total += item.price * item.quantity
+      });
+      this.favourite_items.forEach(function(item) {
         total += item.price * item.quantity
       });
 
@@ -155,7 +169,7 @@ export class EventOrderAddComponent implements OnInit {
       return;
     }
     this.order = this.orderForm.value;
-    this.order.order_items = this.items.filter(item => item.quantity > 0)
+    this.order.order_items = this.items.filter(item => item.quantity > 0).concat(this.favourite_items.filter(item => item.quantity > 0))
     this.order.value = this.totalPrice;
     this.isOrderAdding = true;
     this.orderAddRequest = this.eventOrderService.add(this.order, this.eventName).subscribe(
@@ -238,7 +252,8 @@ export class EventOrderAddComponent implements OnInit {
 
   public placeEventOrder(){
     this.order = this.orderForm.value;
-    this.order.order_items = this.items.filter(item => item.quantity > 0);
+    this.order.order_items = this.items.filter(item => item.quantity > 0).concat(this.favourite_items.filter(item => item.quantity > 0))
+    console.log(this.order.order_items)
     if(this.orderForm.status == 'INVALID' || this.order.order_items.length == 0) {
       alert('Please add items!');
       return;
