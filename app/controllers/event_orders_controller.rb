@@ -46,7 +46,17 @@ class EventOrdersController < ApplicationController
   end
 
   def active_items
-    @items =  Item.unscoped.where(event_id: @event.id).left_outer_joins(:category).where(active: true).order('categories.show_order asc, items.order_no asc')
+    @items =  Item.unscoped.where(event_id: @event.id)
+    .where.not(id: @event.event_favourites.pluck(:item_id))
+    .left_outer_joins(:category).where(active: true)
+    .order('categories.show_order asc, items.order_no asc')
+
+    render json: @items
+  end
+
+  def favourite_items
+    @items =  Item.unscoped.where(event_id: @event.id).joins(:event_favourite).where('item_id = items.id')
+
     render json: @items
   end
 
@@ -67,6 +77,23 @@ class EventOrdersController < ApplicationController
     accounts = @event.accounts
 
     render json: accounts
+  end
+
+  def favourite
+    favourite_item = @event.event_favourites.find_or_initialize_by(item_id: params[:item_id])
+    if favourite_item.save
+      render json: { favourite: true }
+    else
+      render json: { errors: @order.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def remove_favourite
+    favourite_item = @event.event_favourites.find_by(item_id: params[:item_id])
+    if favourite_item.present?
+      favourite_item.destroy
+    end
+    render json: { favourite: false }
   end
 
   private

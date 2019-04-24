@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   belongs_to :event
   belongs_to :category
   has_many :order_items
+  has_one :event_favourite
 
   validates :name, presence: true, uniqueness: { scope: :event_id }
 

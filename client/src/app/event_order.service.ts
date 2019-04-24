@@ -30,6 +30,12 @@ export class EventOrderService {
     return this.http.get(ordersApiURL + '/active_items');
   }
 
+  favouriteItems(eventName: string): Observable<any>{
+    let ordersApiURL = this.hostAppService.getHost() + '/' + eventName + '/orders';
+
+    return this.http.get(ordersApiURL + '/favourite_items');
+  }
+
   currentEvent(eventName: string): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost() + '/' + eventName + '/orders';
 
@@ -48,4 +54,13 @@ export class EventOrderService {
     return this.http.get(ordersApiURL + '/accounts');
   }
 
+  favourite(eventName: string, id: number): Observable<any>{
+    let ordersApiURL = this.hostAppService.getHost()+ '/' + eventName  + '/orders';
+    return this.http.get(ordersApiURL + "/favourite/" + id);
+  }
+
+  remove_favourite(eventName: string, id: number): Observable<any>{
+    let ordersApiURL = this.hostAppService.getHost()+ '/' + eventName  + '/orders';
+    return this.http.get(ordersApiURL + "/remove_favourite/" + id);
+  }
 }

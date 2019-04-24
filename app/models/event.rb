@@ -13,6 +13,7 @@ class Event < ActiveRecord::Base
   has_many :accounts
   has_many :categories
   belongs_to :station, optional: true
+  has_many :event_favourites
 
   validates :published_name, presence: true
   validates :name, presence: true, uniqueness: true

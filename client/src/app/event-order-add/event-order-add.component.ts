@@ -25,6 +25,7 @@ export class EventOrderAddComponent implements OnInit {
   public showHeader: boolean;
   public isEventOrderPage: boolean;
   public items: any;
+  public favourite_items: any;
 	public errorMessage: any;
   public formErrors = {
     'customer_name': ''
@@ -63,6 +64,7 @@ export class EventOrderAddComponent implements OnInit {
       }
     );
     this.loadItems();
+    this.loadFavouriteItem();
     this.getStationList();
     this.getAccountList();
     this.isEventOrderPage = true;
@@ -86,6 +88,14 @@ export class EventOrderAddComponent implements OnInit {
     this.eventOrderService.activeItem(this.eventName).subscribe(
       successResponse => {
         this.items = successResponse.json();
+      }
+    );
+  }
+
+  public loadFavouriteItem(){
+    this.eventOrderService.favouriteItems(this.eventName).subscribe(
+      successResponse => {
+        this.favourite_items = successResponse.json();
       }
     );
   }
@@ -245,5 +255,29 @@ export class EventOrderAddComponent implements OnInit {
 
   public removeSpace(category) {
     return category.replace(/[^A-Z0-9]+/ig, '')
+  }
+
+  public favourite(item_id){
+    this.eventOrderService.favourite(this.eventName, item_id).subscribe(
+      successResponse => {
+        this.loadItems();
+        this.loadFavouriteItem();
+      },
+      () => {
+        this.errorMessage = 'Failed to load order.';
+      }
+    );
+  }
+
+  public removeFavourite(item_id){
+    this.eventOrderService.remove_favourite(this.eventName, item_id).subscribe(
+      successResponse => {
+        this.loadItems();
+        this.loadFavouriteItem();
+      },
+      () => {
+        this.errorMessage = 'Failed to load order.';
+      }
+    );
   }
 }
