@@ -1,6 +1,17 @@
 class EventOrdersController < ApplicationController
   before_action :set_event
 
+  def show
+    order = @event.orders.find(params[:id])
+
+    if order
+      render json: order
+    else
+      render json: { errors: ['order not found'] }, status: 404
+    end
+  end
+
+
   def create
     new_order_params = {
       customer_name: order_params[:customer_name],

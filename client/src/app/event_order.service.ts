@@ -19,6 +19,11 @@ export class EventOrderService {
     return this.http.post(ordersApiURL , order);
   }
 
+  show(eventName: string, id: number): Observable<any>{
+    let ordersApiURL = this.hostAppService.getHost()+ '/' + eventName  + '/orders';
+    return this.http.get(ordersApiURL + "/" + id);
+  }
+
   activeItem(eventName: string): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost() + '/' + eventName + '/orders';
 

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
   resources :accounts
 
-  resources :event_orders, path: ':event/orders', only: [:create] do
+  resources :event_orders, path: ':event/orders', only: [:create, :show] do
     collection do
       get 'active_items'
       get 'event'

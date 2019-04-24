@@ -205,8 +205,8 @@ export class EventOrderAddComponent implements OnInit {
 
   private sucessHandler(successResponse: Response): void {
     this.isOrderAdding = false;
-    this.router.navigate([this.eventName+'/orders']);
-    window.location.reload();
+    var response = successResponse.json()
+    this.router.navigate([this.eventName+'/order/confirmed/'+response.id]);
   }
 
   private errorHandler(errorResponse: Response): void {

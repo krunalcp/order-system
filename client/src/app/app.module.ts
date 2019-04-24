@@ -43,6 +43,7 @@ import { AccountShowComponent } from './account-show/account-show.component';
 import { EventOrderAddComponent } from './event-order-add/event-order-add.component';
 import { HeaderService } from './services/header.service';
 import { EventOrderListComponent } from './event-order-list/event-order-list.component';
+import { EventOrderConfirmedComponent } from './event-order-confirmed/event-order-confirmed.component';
 import { ItemImportComponent } from './item-import/item-import.component';
 import { OrderImportComponent } from './order-import/order-import.component';
 
@@ -201,6 +202,10 @@ const appRoutes: Routes = [
     path: ':event/order',
     component: EventOrderAddComponent
   },
+	{
+		path: ':event/order/confirmed/:id',
+		component: EventOrderConfirmedComponent
+	},
   {
     path: 'eventorder/list',
     component: EventOrderListComponent
@@ -240,6 +245,7 @@ const appRoutes: Routes = [
     AccountShowComponent,
     EventOrderAddComponent,
     EventOrderListComponent,
+		EventOrderConfirmedComponent,
     ItemImportComponent,
     OrderImportComponent
   ],
