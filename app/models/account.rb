@@ -3,7 +3,7 @@ class Account < ApplicationRecord
   has_many :orders
 
   has_many :order_items, through: :orders
-
+  has_many :account_favourites
   belongs_to :event
 
   validates :email, presence: true, uniqueness: true

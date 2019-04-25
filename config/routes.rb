@@ -24,12 +24,12 @@ Rails.application.routes.draw do
   resources :event_orders, path: ':event/orders', only: [:create, :show] do
     collection do
       get 'active_items'
-      get 'favourite_items'
+      get 'favourite_items/:account_id', action: :favourite_items
       get 'event'
       get 'accounts'
       get 'stations'
-      get 'favourite/:item_id', action: :favourite
-      get 'remove_favourite/:item_id', action: :remove_favourite
+      get 'favourite/:item_id/:account_id', action: :favourite
+      get 'remove_favourite/:item_id/:account_id', action: :remove_favourite
     end
   end
 

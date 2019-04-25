@@ -2,11 +2,11 @@ class Item < ApplicationRecord
   belongs_to :event
   belongs_to :category
   has_many :order_items
-  has_one :event_favourite
+  has_many :account_favourites
 
   validates :name, presence: true, uniqueness: { scope: :event_id }
 
-  attr_accessor :notes
+  attr_accessor :notes, :favourite_quantity
 
   default_scope { order(:order_no) }
 

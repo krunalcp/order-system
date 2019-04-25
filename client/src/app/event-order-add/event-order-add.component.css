@@ -13,3 +13,6 @@
 .white {
   color: #ffffff;
 }
+.favourite{
+  cursor: pointer;
+}

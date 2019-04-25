@@ -3,7 +3,11 @@ class ItemSerializer < ActiveModel::Serializer
     :image, :status, :active, :category_id, :category_name
 
   def quantity
-  	0
+    if object.favourite_quantity.present?
+      object.favourite_quantity
+    else
+      0
+    end
   end
 
   def item_used

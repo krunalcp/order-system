@@ -32,6 +32,13 @@ class EventOrdersController < ApplicationController
 
       order_item = OrderItem.create(item_params)
       order_items.push(order_item)
+
+      if item[:default_quantity]
+        account_favourite = @event.account_favourites.find_by(account_id: params[:account_id], item_id: item[:id])
+        if account_favourite.present?
+          account_favourite.update_attributes(quantity: item[:quantity])
+        end
+      end
     end
 
     @order.order_items = order_items
@@ -47,16 +54,25 @@ class EventOrdersController < ApplicationController
 
   def active_items
     @items =  Item.unscoped.where(event_id: @event.id)
-    .where.not(id: @event.event_favourites.pluck(:item_id))
     .left_outer_joins(:category).where(active: true)
     .order('categories.show_order asc, items.order_no asc')
+
+    if params[:account_id].present?
+      item_ids = @event.account_favourites.where(account_id: params[:account_id]).pluck(:item_id)
+      @items = @items.where.not(id: item_ids)
+    end
 
     render json: @items
   end
 
   def favourite_items
-    @items =  Item.unscoped.where(event_id: @event.id).joins(:event_favourite).where('item_id = items.id')
+    @items =  Item.unscoped.where(event_id: @event.id)
+    .joins(:account_favourites).includes(:account_favourites)
+    .where('item_id = items.id and account_favourites.account_id = ?', params[:account_id])
 
+    @items.each do |item|
+      item.favourite_quantity = item.account_favourites.first.quantity
+    end
     render json: @items
   end
 
@@ -80,7 +96,8 @@ class EventOrdersController < ApplicationController
   end
 
   def favourite
-    favourite_item = @event.event_favourites.find_or_initialize_by(item_id: params[:item_id])
+    favourite_item = @event.account_favourites.find_or_initialize_by(
+      item_id: params[:item_id], account_id: params[:account_id])
     if favourite_item.save
       render json: { favourite: true }
     else
@@ -89,7 +106,8 @@ class EventOrdersController < ApplicationController
   end
 
   def remove_favourite
-    favourite_item = @event.event_favourites.find_by(item_id: params[:item_id])
+    favourite_item = @event.account_favourites.find_by(
+      item_id: params[:item_id], account_id: params[:account_id])
     if favourite_item.present?
       favourite_item.destroy
     end
@@ -106,7 +124,7 @@ class EventOrdersController < ApplicationController
     params.permit(
       :customer_name, :station, :station_id, :value, :scheduled_order_time,
       :account_id, :comments,
-      order_items: %i[id price quantity notes category_id]
+      order_items: %i[id price quantity notes category_id default_quantity]
     )
   end
 end

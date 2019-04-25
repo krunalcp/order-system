@@ -24,16 +24,16 @@ export class EventOrderService {
     return this.http.get(ordersApiURL + "/" + id);
   }
 
-  activeItem(eventName: string): Observable<any>{
+  activeItem(eventName: string, accountId: any): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost() + '/' + eventName + '/orders';
 
-    return this.http.get(ordersApiURL + '/active_items');
+    return this.http.get(ordersApiURL + '/active_items?account_id=' + accountId);
   }
 
-  favouriteItems(eventName: string): Observable<any>{
+  favouriteItems(eventName: string, accountId: number): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost() + '/' + eventName + '/orders';
 
-    return this.http.get(ordersApiURL + '/favourite_items');
+    return this.http.get(ordersApiURL + '/favourite_items/'+ accountId);
   }
 
   currentEvent(eventName: string): Observable<any>{
@@ -54,13 +54,13 @@ export class EventOrderService {
     return this.http.get(ordersApiURL + '/accounts');
   }
 
-  favourite(eventName: string, id: number): Observable<any>{
+  favourite(eventName: string, itemId: number, accountId: number): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost()+ '/' + eventName  + '/orders';
-    return this.http.get(ordersApiURL + "/favourite/" + id);
+    return this.http.get(ordersApiURL + "/favourite/" + itemId + '/' + accountId);
   }
 
-  remove_favourite(eventName: string, id: number): Observable<any>{
+  remove_favourite(eventName: string, itemId: number, accountId: number): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost()+ '/' + eventName  + '/orders';
-    return this.http.get(ordersApiURL + "/remove_favourite/" + id);
+    return this.http.get(ordersApiURL + "/remove_favourite/" + itemId + '/' + accountId);
   }
 }

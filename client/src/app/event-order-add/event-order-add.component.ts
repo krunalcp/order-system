@@ -25,7 +25,7 @@ export class EventOrderAddComponent implements OnInit {
   public showHeader: boolean;
   public isEventOrderPage: boolean;
   public items: any;
-  public favourite_items: any;
+  public favourite_items: any[] = [];
 	public errorMessage: any;
   public formErrors = {
     'customer_name': ''
@@ -44,6 +44,7 @@ export class EventOrderAddComponent implements OnInit {
   public stations: any;
   public accounts: any;
   public currentEvent: Event = new Event();
+  public accountId: any;
 
   constructor(
   	private eventOrderService: EventOrderService,
@@ -64,7 +65,6 @@ export class EventOrderAddComponent implements OnInit {
       }
     );
     this.loadItems();
-    this.loadFavouriteItem();
     this.getStationList();
     this.getAccountList();
     this.isEventOrderPage = true;
@@ -85,7 +85,7 @@ export class EventOrderAddComponent implements OnInit {
   }
 
   public loadItems(){
-    this.eventOrderService.activeItem(this.eventName).subscribe(
+    this.eventOrderService.activeItem(this.eventName, this.accountId).subscribe(
       successResponse => {
         this.items = successResponse.json();
       }
@@ -93,9 +93,10 @@ export class EventOrderAddComponent implements OnInit {
   }
 
   public loadFavouriteItem(){
-    this.eventOrderService.favouriteItems(this.eventName).subscribe(
+    this.eventOrderService.favouriteItems(this.eventName, this.accountId).subscribe(
       successResponse => {
         this.favourite_items = successResponse.json();
+        console.log(this.favourite_items)
       }
     );
   }
@@ -141,6 +142,11 @@ export class EventOrderAddComponent implements OnInit {
   public notesOptions(item) {
     let itemIndex = this.items.indexOf(item);
     this.items[itemIndex].notes = $("#item_notes_" + item.id).val();
+  }
+
+  public defaultQuantityOptions(item, event) {
+    let itemIndex = this.favourite_items.indexOf(item);
+    this.favourite_items[itemIndex].default_quantity = event.target.checked
   }
 
   get totalPrice() {
@@ -273,7 +279,7 @@ export class EventOrderAddComponent implements OnInit {
   }
 
   public favourite(item_id){
-    this.eventOrderService.favourite(this.eventName, item_id).subscribe(
+    this.eventOrderService.favourite(this.eventName, item_id, this.accountId).subscribe(
       successResponse => {
         this.loadItems();
         this.loadFavouriteItem();
@@ -285,7 +291,7 @@ export class EventOrderAddComponent implements OnInit {
   }
 
   public removeFavourite(item_id){
-    this.eventOrderService.remove_favourite(this.eventName, item_id).subscribe(
+    this.eventOrderService.remove_favourite(this.eventName, item_id, this.accountId).subscribe(
       successResponse => {
         this.loadItems();
         this.loadFavouriteItem();
@@ -294,5 +300,11 @@ export class EventOrderAddComponent implements OnInit {
         this.errorMessage = 'Failed to load order.';
       }
     );
+  }
+
+  public onAccountSelect(account_id){
+    this.accountId = account_id
+    this.loadItems();
+    this.loadFavouriteItem();
   }
 }
