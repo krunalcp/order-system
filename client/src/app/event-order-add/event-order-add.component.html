@@ -49,15 +49,15 @@
 
             <tbody *ngIf="favourite_items?.length > 0">
               <tr>
-                <td class="category_color i_favourite" (click)="toggleCategory('favourite')">
+                <td class="category_color hidden i_favourite" (click)="toggleCategory('favourite')">
                   <i class="fa fa-2x fa-angle-down white"></i>
                 </td>
-                <td class="category_color hidden i_favourite" (click)="toggleCategory('favourite')">
+                <td class="category_color i_favourite" (click)="toggleCategory('favourite')">
                   <i class="fa fa-2x fa-angle-up white"></i>
                 </td>
                 <td colspan=8 class="category_color" (click)="toggleCategory('favourite')"><b>Favourite</b></td>
               </tr>
-              <tr  *ngFor="let item of favourite_items" class="category_favourite hidden">
+              <tr  *ngFor="let item of favourite_items" class="category_favourite">
                 <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
                 <td class='text-left'>{{item.name}}</td>
                 <td class="price_width">${{(item.price * 1).toFixed(2)}}</td>
