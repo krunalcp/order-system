@@ -64,7 +64,7 @@
                 <td>
                   {{item.quantity}}
                 </td>
-                <td>
+                <td class="g-pt-45">
                   <input type="checkbox" value="true" id="default_quantity_{{item.id}}" (change)="defaultQuantityOptions(item, $event)">
                 </td>
                 <td class="plus_minus_width">
@@ -74,6 +74,7 @@
                   <button class="btn btn-sm u-btn-outline-lightred" type="button" (click)="favouriteQuantityOptions(item, 'minus')">
                     <i class="fa fa-minus g-px-20"></i>
                   </button>
+                  <br/><p class='g-mt-10'>Save as Default Quantity</p>
                 </td>
                 <td class="price_width">
                   ${{(item.price * item.quantity).toFixed(2)}}
