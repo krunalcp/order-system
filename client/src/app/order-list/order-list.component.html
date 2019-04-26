@@ -25,7 +25,8 @@
           <span class="sr-only">Loading...</span>
         </span>
       </button>
-      <a routerLink="/order/import" class="btn btn-md u-btn-outline-deeporange u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
+
+      <a *ngIf="currentEvent.admin" routerLink="/order/import" class="btn btn-md u-btn-outline-deeporange u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
         <i class="fa fa-file-excel-o g-mr-5"></i>Import orders
       </a>
     </div>
@@ -39,9 +40,10 @@
             <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'scheduled_order_time')">
               <i class="fa fa-sort-asc" *ngIf="sortBy == 'scheduled_order_time' && sortOrder == 'asc'"></i>
               <i class="fa fa-sort-desc" *ngIf="sortBy == 'scheduled_order_time' && sortOrder == 'desc'"></i>
-              Scheduled Order Time
+              Time
             </a>
           </th>
+          <th class="align-middle g-color-black">Account</th>
           <th class="align-middle g-color-black">Reference</th>
           <th class="align-middle g-color-black">
             <a class="text-primary g-pl-5" (click)="callLoadSortOrderList(1, 'station_id')">
@@ -58,7 +60,7 @@
               Value
             </a>
           </th>
-          <th class="align-middle g-color-black">Options</th>
+          <th class="align-middle g-color-black g-min-width-300">Options</th>
         </tr>
       </thead>
 
@@ -66,6 +68,7 @@
         <tr *ngFor="let order of orders">
           <td class="align-middle">{{order.id}}</td>
           <td class="align-middle">{{order.display_scheduled_order_time | date:'dd.MM.yy HH:mm:ss'}}</td>
+          <td class="align-middle"><span *ngIf="order.account">{{order.account.name}}</span></td>
           <td class="align-middle">{{order.customer_name}}</td>
           <td class="align-middle">S{{order.station.id}} - {{order.station.name}}</td>
           <td class="align-middle">
@@ -75,7 +78,6 @@
           </td>
           <td class="align-middle" align="right">${{(order.value * 1).toFixed(2)}}</td>
           <td class="align-middle text-center">
-            <a class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/order/show/{{order.id}}">open</a>
             <a class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/order/edit/{{order.id}}">edit</a>
             <button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteOrder(order.id)">
               <span *ngIf="!isOrderDeleting">Delete</span>

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 
 import { EventService } from '../event.service';
 import { OrderService } from '../order.service';
+import { HostappService } from '../hostapp.service';
 
 import { Event } from '../event';
 
@@ -59,6 +60,7 @@ export class EventEditComponent implements OnInit {
   	private route: ActivatedRoute,
     private router: Router,
     private eventService: EventService,
+    public hostAppService: HostappService,
   	private fb: FormBuilder
   ) { }
 

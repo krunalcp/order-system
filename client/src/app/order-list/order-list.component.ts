@@ -138,18 +138,20 @@ export class OrderListComponent implements OnInit {
   }
 
   public deleteOrder(id: number){
-    this.isOrderDeleting = true;
-    this.currentOrderId = id;
-    this.orderService.remove(id).subscribe(
-      successResponse => {
-        this.isOrderDeleting = false;
-        this.loadOrderList();
-      },
-      (errorResponse) => {
-        this.isOrderDeleting = false;
-        // this.displayErrors(errorResponse);
-      }
-    );
+    if(confirm("Are you sure?")) {
+      this.isOrderDeleting = true;
+      this.currentOrderId = id;
+      this.orderService.remove(id).subscribe(
+        successResponse => {
+          this.isOrderDeleting = false;
+          this.loadOrderList();
+        },
+        (errorResponse) => {
+          this.isOrderDeleting = false;
+          // this.displayErrors(errorResponse);
+        }
+      );
+    }
   }
 
   public exportOrders() {

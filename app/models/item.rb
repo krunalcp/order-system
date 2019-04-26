@@ -54,7 +54,7 @@ class Item < ApplicationRecord
       end
     end
 
-    total = { name: 'Station Total', stations: [] }
+    total = { name: 'Total', stations: [] }
     # Process Row and Column Total
     main_total = 0
     summary.each do |s|
@@ -67,13 +67,13 @@ class Item < ApplicationRecord
         station[:quantity] = "$#{station[:quantity]}" if type == 'value'
       end
 
-      s[:stations] << { name: 'Item Total', quantity: (type == 'value' ? "$#{row_total}" : row_total) }
+      s[:stations] << { name: 'Total', quantity: (type == 'value' ? "$#{row_total}" : row_total) }
     end
 
     stations.each do |name, value|
       total[:stations] << { name: name, quantity: (type == 'value' ? "$#{value[:quantity]}" : value[:quantity]) }
     end
-    total[:stations] << { name: 'Station Total', quantity: (type == 'value' ? "$#{main_total}" : main_total) }
+    total[:stations] << { name: 'Total', quantity: (type == 'value' ? "$#{main_total}" : main_total) }
 
     summary << total
     summary

@@ -3,8 +3,9 @@ import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ItemService } from '../item.service';
-
 import { Item } from '../item';
+import { EventService } from '../event.service';
+import { Event } from '../event';
 
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
@@ -16,7 +17,10 @@ const EXCEL_EXTENSION = '.xlsx';
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.css'],
-  providers: [ItemService]
+  providers: [
+    EventService,
+    ItemService
+  ]
 })
 export class ItemListComponent implements OnInit {
 
@@ -25,15 +29,29 @@ export class ItemListComponent implements OnInit {
   public isItemDeleting: boolean = false;
   public currentItemId: number;
   public isExporting: boolean = false;
+  public currentEvent: Event = new Event();
+	public errorMessage: any;
 
   constructor(
+    public eventService: EventService,
   	private itemService: ItemService,
     private router: Router
   ) { }
 
   ngOnInit() {
-
+    this.loadCurrentEvent();
   	this.loadItemList();
+  }
+
+  private loadCurrentEvent(): void {
+    this.eventService.current().subscribe(
+      successResponse => {
+        this.currentEvent = successResponse.json();
+      },
+      () => {
+        this.errorMessage = 'Failed to load Event.';
+      }
+    );
   }
 
   public loadItemList(){
