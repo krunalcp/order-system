@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
         item_id: item[:id], quantity: item[:quantity], notes: item[:notes],
         value: item[:price].to_f.round(2), category_id: item[:category_id]
       }
-
+      item_params[:value] = item[:special_price].to_f.round(2) if item[:special_price].present? && item[:special_price].to_f != 0
       order_item = OrderItem.create(item_params)
       order_items.push(order_item)
     end
@@ -85,6 +85,7 @@ class OrdersController < ApplicationController
           item_id: item[:id], quantity: item[:quantity], notes: item[:notes],
           value: item[:price].to_f.round(2), category_id: item[:category_id]
         }
+        item_params[:value] = item[:special_price].to_f.round(2) if item[:special_price].present? && item[:special_price].to_f != 0
         order_item = OrderItem.create(item_params)
         order_items.push(order_item)
       end
@@ -156,7 +157,7 @@ class OrdersController < ApplicationController
     params.permit(
       :customer_name, :station, :station_id, :value, :scheduled_order_time,
       :account_id, :comments,
-      order_items: %i[id price quantity notes category_id]
+      order_items: %i[id price quantity notes category_id special_price]
     )
   end
 end

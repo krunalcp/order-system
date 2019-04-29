@@ -91,9 +91,10 @@ export class ItemListComponent implements OnInit {
         let allItems = successResponse.json();
 
           allItems.forEach(function(item) {
-            let newItem = {Name: '', Price: '', Order: '', Active: '', Category: '', Image: ''}
+            let newItem = {Name: '', Price: '', SpecialPrice: '', Order: '', Active: '', Category: '', Image: ''}
             newItem.Name = item.name;
             newItem.Price = item.price;
+            newItem.SpecialPrice = item.special_price;
             newItem.Order = item.order_no;
             if(item.active){
               newItem.Active = 'Yes';

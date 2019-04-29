@@ -39,6 +39,7 @@
             <th class="align-middle g-color-black g-min-width-300">Name</th>
             <th class="align-middle g-color-black">Order No</th>
             <th class="align-middle g-color-black">Price</th>
+            <th class="align-middle g-color-black">Special Price</th>
             <th class="align-middle g-color-black">Active</th>
             <th class="align-middle g-color-black">Category Id</th>
             <th class="align-middle g-color-black">Success</th>
@@ -52,6 +53,7 @@
             <td class="align-middle">{{item.name}}</td>
             <td class="align-middle">{{item.order_no}}</td>
             <td class="align-middle" align="right">${{(item.price * 1).toFixed(2)}}</td>
+            <td class="align-middle" align="right">${{(item.special_price * 1).toFixed(2)}}</td>
             <td class="align-middle">{{item.active}}</td>
             <td class="align-middle">{{item.category_name}}</td>
             <td class="align-middle">{{item.success}}</td>

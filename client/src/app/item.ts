@@ -7,6 +7,7 @@ export class Item {
     public item_used?: boolean,
     public order_no?: number,
     public active?: boolean,
-    public category_id?: number
+    public category_id?: number,
+    public special_price?: number
   ) {}
 }

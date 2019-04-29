@@ -86,6 +86,7 @@ class Item < ApplicationRecord
       item_hash = {
         name: item['Name'],
         price: item['Price'],
+        special_price: itme['SpecialPrice'],
         order_no: item['Order'],
         active: item['Active'],
         image: item['Image'],

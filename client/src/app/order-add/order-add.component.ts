@@ -101,13 +101,21 @@ export class OrderAddComponent implements OnInit {
     this.items[itemIndex].notes = $("#item_notes_" + item.id).val();
   }
 
+  public getPrice(item){
+    if(item.special_price && item.special_price != 0){
+      return item.special_price
+    }else{
+      return item.price
+    }
+  }
+
   get totalPrice() {
     let total = 0;
 
     if (this.items){
       this.items.forEach(function(item) {
-        total += item.price * item.quantity
-      });
+        total += this.getPrice(item) * item.quantity
+      }, this);
 
       return total;
     }

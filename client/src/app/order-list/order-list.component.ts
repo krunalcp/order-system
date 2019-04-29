@@ -137,6 +137,14 @@ export class OrderListComponent implements OnInit {
     this.timerSubscription = timer(60000).subscribe(() => this.loadOrderList());
   }
 
+  public getPrice(item){
+    if(item.special_price && item.special_price != 0){
+      return item.special_price
+    }else{
+      return item.price
+    }
+  }
+
   public deleteOrder(id: number){
     if(confirm("Are you sure?")) {
       this.isOrderDeleting = true;

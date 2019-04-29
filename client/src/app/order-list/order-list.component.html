@@ -121,7 +121,7 @@
                       <small *ngIf="order_item.notes != null && order_item.notes != ''">({{order_item.notes}})</small>
                     </td>
                     <td align="right">{{order_item.quantity}}</td>
-                    <td align="right">${{(order_item.price * order_item.quantity).toFixed(2)}}</td>
+                    <td align="right">${{(getPrice(order_item) * order_item.quantity).toFixed(2)}}</td>
                   </tr>
                   <tr>
                     <td align="left" colspan="2">TOTAL</td>

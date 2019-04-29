@@ -122,6 +122,9 @@ export class ItemAddComponent implements OnInit {
       ],
       'active': [
         true
+      ],
+      'special_price':[
+        this.item.special_price
       ]
     });
 

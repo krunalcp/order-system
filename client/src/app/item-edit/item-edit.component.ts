@@ -105,6 +105,7 @@ export class ItemEditComponent implements OnInit {
         this.item['category_id'] = data.category_id;
         this.item['image'] = data.image;
         this.item['active'] = data.active;
+        this.item['special_price'] = data.special_price;
         this.itemForm.patchValue(this.item);
       },
       () => {
@@ -141,6 +142,9 @@ export class ItemEditComponent implements OnInit {
       ],
       'active': [
         this.item.active
+      ],
+      'special_price': [
+        this.item.special_price
       ]
     });
 
