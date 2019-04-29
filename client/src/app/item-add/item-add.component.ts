@@ -26,7 +26,8 @@ export class ItemAddComponent implements OnInit {
     'price': '',
     'order_no': '',
     'category_id': '',
-    'image': ''
+    'image': '',
+    'special_price': ''
   };
   validationMessages = {
     'name': {
