@@ -62,7 +62,7 @@ export class AppComponent {
 
       },
       () => {
-        this.errorMessage = 'Failed to load Event.';
+        this.errorMessage = 'Failed to load Site.';
       }
     );
   }

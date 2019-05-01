@@ -1,9 +1,9 @@
 <div class="container g-mt-100">
   <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
-    <h1 class="h3 u-heading-v1__title">Add Event</h1>
+    <h1 class="h3 u-heading-v1__title">Add Site</h1>
   </div>
   <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
-    <h3 class="h2 g-font-weight-300 g-mb-20">Enter event details</h3>
+    <h3 class="h2 g-font-weight-300 g-mb-20">Enter site details</h3>
     <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
       <!-- Text Input -->
       <div class="row">
@@ -74,8 +74,8 @@
     </form>
     <div class="text-right">
       <button (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
-        <span *ngIf="!isEventAdding">Add Event</span>
-        <span *ngIf="isEventAdding">Adding Event...</span>
+        <span *ngIf="!isEventAdding">Add Site</span>
+        <span *ngIf="isEventAdding">Adding Site...</span>
         <span class="g-pl-5" *ngIf="isEventAdding">
           <i class="fa fa-spinner fa-spin"></i>
           <span class="sr-only">Loading...</span>

@@ -257,7 +257,7 @@ export class EventOrderAddComponent implements OnInit {
   }
 
   public cancelEventOrder(){
-    this.router.navigate(['/eventorder/list']);
+    this.router.navigate(['/siteorder/list']);
   }
 
   public changeEventOrder(){

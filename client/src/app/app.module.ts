@@ -99,22 +99,22 @@ const appRoutes: Routes = [
     component: CategoryEditComponent
   },
   {
-    path: 'event/list',
+    path: 'site/list',
     component: EventListComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'event/add',
+    path: 'site/add',
     component: EventAddComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'event/show/:id',
+    path: 'site/show/:id',
     component: EventShowComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'event/edit/:id',
+    path: 'site/edit/:id',
     component: EventEditComponent,
     canActivate: [AuthGuard]
   },
@@ -207,7 +207,7 @@ const appRoutes: Routes = [
 		component: EventOrderConfirmedComponent
 	},
   {
-    path: 'eventorder/list',
+    path: 'siteorder/list',
     component: EventOrderListComponent
   }
 ]

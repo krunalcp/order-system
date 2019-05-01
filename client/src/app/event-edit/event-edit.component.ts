@@ -108,7 +108,7 @@ export class EventEditComponent implements OnInit {
   }
 
   public cancelEvent(){
-    this.router.navigate(['/event/list']);
+    this.router.navigate(['/site/list']);
   }
 
   private getEvent(): void {
@@ -202,7 +202,7 @@ export class EventEditComponent implements OnInit {
     // this.event = successResponse.json();
     // this.isEventCreated = true;
     this.isEventUpdating = false;
-    this.router.navigate(['/event/list']);
+    this.router.navigate(['/site/list']);
   }
 
   private errorHandler(errorResponse: Response): void {

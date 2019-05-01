@@ -1,11 +1,11 @@
 <div class="container g-mt-100">
   <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
-    <h1 class="h3 u-heading-v1__title">Events List</h1>
+    <h1 class="h3 u-heading-v1__title">Sites List</h1>
   </div>
   <div class="row" *ngIf="currentEvent.admin == true">
     <div class="col-md-12 text-right">
-      <a routerLink="/event/add" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
-        <i class="fa fa-plus-circle g-mr-5"></i>New Event
+      <a routerLink="/site/add" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
+        <i class="fa fa-plus-circle g-mr-5"></i>New Site
       </a>
     </div>
   </div>
@@ -16,8 +16,7 @@
           <th class="align-middle g-color-black g-min-width-220">Name</th>
           <th class="align-middle g-color-black g-min-width-220">Published Name</th>
           <th class="align-middle g-color-black">GST Number</th>
-          <th class="align-middle g-color-black">Is Active</th>
-          <th class="align-middle g-color-black">Is Admin</th>
+          <th class="align-middle g-color-black">Default Station</th>
           <th class="align-middle g-color-black g-min-width-220">Options</th>
         </tr>
       </thead>
@@ -27,14 +26,13 @@
           <td class="align-middle">{{event.name}}</td>
           <td class="align-middle">{{event.published_name}}</td>
           <td class="align-middle">{{event.gst_number}}</td>
-          <td class="align-middle">{{event.active}}</td>
-          <td class="align-middle">{{event.admin}}</td>
+          <td class="align-middle">{{event.station_name}}</td>
           <td class="text-center">
-            <button class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/event/edit/{{event.id}}">
+            <button class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/site/edit/{{event.id}}">
               edit
             </button>
 
-            <button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteEvent(event.id)" [disabled]="event.event_used">
+            <button *ngIf="currentEvent.admin == true" class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteEvent(event.id)" [disabled]="event.event_used">
               <span *ngIf="!isEventDeleting">Delete</span>
               <span *ngIf="isEventDeleting && currentEventId != event.id">Delete</span>
               <span *ngIf="isEventDeleting && currentEventId == event.id">Deleting..</span>

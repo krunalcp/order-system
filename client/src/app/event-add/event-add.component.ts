@@ -82,7 +82,7 @@ export class EventAddComponent implements OnInit {
   }
 
   public cancelEvent(){
-    this.router.navigate(['/event/list']);
+    this.router.navigate(['/site/list']);
   }
 
   private buildForm(): void {
@@ -154,7 +154,7 @@ export class EventAddComponent implements OnInit {
 
   private sucessHandler(successResponse: Response): void {
     this.isEventAdding = false;
-    this.router.navigate(['/event/list']);
+    this.router.navigate(['/site/list']);
   }
 
   private errorHandler(errorResponse: Response): void {
