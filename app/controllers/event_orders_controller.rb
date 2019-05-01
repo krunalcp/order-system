@@ -29,6 +29,9 @@ class EventOrdersController < ApplicationController
         item_id: item[:id], quantity: item[:quantity], notes: item[:notes],
         value: item[:price].to_f.round(2), category_id: item[:category_id]
       }
+      if item[:special_price].present? && item[:special_price].to_f != 0
+        item_params[:value] = item[:special_price].to_f.round(2)
+      end
 
       order_item = OrderItem.create(item_params)
       order_items.push(order_item)
@@ -68,7 +71,7 @@ class EventOrdersController < ApplicationController
   def favourite_items
     @items =  Item.unscoped.where(event_id: @event.id)
     .joins(:account_favourites).includes(:account_favourites)
-    .where('item_id = items.id and account_favourites.account_id = ?', params[:account_id])
+    .where('item_id = items.id and account_favourites.account_id = ?', params[:account_id]).order(:name)
 
     @items.each do |item|
       item.favourite_quantity = item.account_favourites.first.quantity
@@ -123,8 +126,9 @@ class EventOrdersController < ApplicationController
   def order_params
     params.permit(
       :customer_name, :station, :station_id, :value, :scheduled_order_time,
-      :account_id, :comments,
-      order_items: %i[id price quantity notes category_id default_quantity]
+      :account_id, :comments, order_items: %i[
+        id price quantity notes category_id default_quantity special_price
+      ]
     )
   end
 end

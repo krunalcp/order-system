@@ -149,16 +149,24 @@ export class EventOrderAddComponent implements OnInit {
     this.favourite_items[itemIndex].default_quantity = event.target.checked
   }
 
+  public getPrice(item){
+    if(item.special_price && item.special_price != 0){
+      return item.special_price
+    }else{
+      return item.price
+    }
+  }
+
   get totalPrice() {
     let total = 0;
 
     if (this.items){
       this.items.forEach(function(item) {
-        total += item.price * item.quantity
-      });
+        total += this.getPrice(item) * item.quantity
+      }, this);
       this.favourite_items.forEach(function(item) {
-        total += item.price * item.quantity
-      });
+        total += this.getPrice(item) * item.quantity
+      }, this);
 
       return total;
     }

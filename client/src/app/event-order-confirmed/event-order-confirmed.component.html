@@ -78,11 +78,11 @@
         <tbody>
           <tr *ngFor="let item of order.order_items">
             <td>{{item.item}}</td>
-            <td>${{(item.price * 1).toFixed(2)}}</td>
+            <td>${{(getPrice(item) * 1).toFixed(2)}}</td>
             <td>
               {{item.quantity}}
             </td>
-            <td>${{(item.quantity * item.price).toFixed(2)}}</td>
+            <td>${{(getPrice(item) * item.quantity).toFixed(2)}}</td>
           </tr>
         </tbody>
       </table>
@@ -137,7 +137,7 @@
                     <small *ngIf="order_item.notes != null && order_item.notes != ''">({{order_item.notes}})</small>
                   </td>
                   <td width="25%">{{order_item.quantity}}</td>
-                  <td width="25%">${{(order_item.price * order_item.quantity).toFixed(2)}}</td>
+                  <td width="25%">${{(getPrice(order_item) * order_item.quantity).toFixed(2)}}</td>
                 </tr>
               </table>
             </tr>

@@ -63,6 +63,14 @@ export class EventOrderConfirmedComponent implements OnInit {
     );
   }
 
+  public getPrice(item){
+    if(item.special_price && item.special_price != 0){
+      return item.special_price
+    }else{
+      return item.price
+    }
+  }
+
   public currentDate(){
     return new Date();
   }
