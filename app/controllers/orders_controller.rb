@@ -24,13 +24,23 @@ class OrdersController < ApplicationController
     end
   end
 
+  def last_order_number
+    order = current_event.orders.order(:order_number).first
+    if order
+      render json: (order.order_number || 0) + 1
+    else
+      render json: 0
+    end
+  end
+
   def create
     new_order_params = {
       customer_name: order_params[:customer_name],
       station_id: order_params[:station_id], value: order_params[:value],
       charge_to_account: order_params[:charge_to_account],
       account_id: order_params[:account_id], comments: order_params[:comments],
-      scheduled_order_time: order_params[:scheduled_order_time]
+      scheduled_order_time: order_params[:scheduled_order_time],
+      order_number: order_params[:order_number]
     }
     @order = current_event.orders.create(new_order_params)
 
@@ -76,7 +86,8 @@ class OrdersController < ApplicationController
         charge_to_account: order_params[:charge_to_account],
         account_id: order_params[:account_id],
         comments: order_params[:comments],
-        scheduled_order_time: order_params[:scheduled_order_time]
+        scheduled_order_time: order_params[:scheduled_order_time],
+        order_number: order_params[:order_number]
       }
 
       order_items = []
@@ -156,7 +167,7 @@ class OrdersController < ApplicationController
   def order_params
     params.permit(
       :customer_name, :station, :station_id, :value, :scheduled_order_time,
-      :account_id, :comments,
+      :account_id, :comments, :order_number,
       order_items: %i[id price quantity notes category_id special_price]
     )
   end

@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   belongs_to :event
   belongs_to :station, optional: true
   belongs_to :account, optional: true
+  validates :order_number, uniqueness: { scope: :event_id }
 
   def self.import_orders(current_event, orders)
     validate = validate_dependent(current_event, orders)
@@ -15,6 +16,7 @@ class Order < ApplicationRecord
       station = current_event.stations.find_by_name(order[0]['STATION'].split(' - ')[1])
       account = current_event.accounts.find_by_name(order[0]['ACCOUNT_NAME'])
       order_hash = {
+        order_number: order[0]['ORDER_NUMBER'],
         scheduled_order_time: order[0]['SCHEDULED_ORDER_TIME'],
         station: station,
         charge_to_account: order[0]['IS_COMPANY_ORDER'],

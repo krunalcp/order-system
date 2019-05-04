@@ -94,4 +94,10 @@ export class OrderService {
 
     return this.http.put(ordersApiURL + "/" + id + "/mark_item_fulfilled?c="+categoryId, {}, this.hostAppService.getToken());
   }
+
+  lastOrderNumber(): Observable<any>{
+    let ordersApiURL = this.hostAppService.getHost() + '/orders/last_order_number';
+
+    return this.http.get(ordersApiURL, this.hostAppService.getToken());
+  }
 }

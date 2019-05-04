@@ -13,12 +13,15 @@ class EventOrdersController < ApplicationController
 
 
   def create
+    last_order = @event.orders.order(:order_number).first
+    order_number = (last_order.try(:order_number) || 0) + 1
     new_order_params = {
       customer_name: order_params[:customer_name],
       station_id: order_params[:station_id], value: order_params[:value],
       charge_to_account: order_params[:charge_to_account],
       account_id: order_params[:account_id], comments: order_params[:comments],
-      scheduled_order_time: order_params[:scheduled_order_time] }
+      scheduled_order_time: order_params[:scheduled_order_time],
+      order_number: order_number }
 
     @order = @event.orders.create(new_order_params)
 

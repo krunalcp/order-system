@@ -63,6 +63,16 @@ export class OrderAddComponent implements OnInit {
     this.getStationList();
     this.getAccountList();
     this.loadItems();
+    this.getLastOrderNumber();
+  }
+
+  private getLastOrderNumber(): void {
+    this.orderService.lastOrderNumber().subscribe(
+      successResponse => {
+        this.order.order_number = successResponse.json();
+        this.buildForm();
+      }
+    );
   }
 
   public loadItems(){
@@ -173,6 +183,9 @@ export class OrderAddComponent implements OnInit {
       ],
       'comments': [
         this.order.comments
+      ],
+      'order_number':[
+        this.order.order_number
       ]
     });
 

@@ -221,6 +221,9 @@ export class OrderEditComponent implements OnInit {
       ],
       'comments': [
         this.order.comments
+      ],
+      'order_number': [
+        this.order.order_number
       ]
     });
 

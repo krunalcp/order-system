@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     collection do
       get 'pending_list'
       post 'import_orders'
+      get 'last_order_number'
     end
 
     member do

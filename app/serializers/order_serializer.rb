@@ -2,7 +2,7 @@ class OrderSerializer < ActiveModel::Serializer
   attributes :id, :customer_name, :station, :value, :created_at, :station_id,
              :charge_to_account, :scheduled_order_time, :comments, :fulfilled,
              :display_scheduled_order_time, :account_id, :account,
-             :total_quantity
+             :total_quantity, :order_number
 
   has_many :order_items
 

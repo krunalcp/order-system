@@ -66,7 +66,7 @@
 
       <tbody>
         <tr *ngFor="let order of orders">
-          <td class="align-middle">{{order.id}}</td>
+          <td class="align-middle">{{order.order_number}}</td>
           <td class="align-middle">{{order.display_scheduled_order_time | date:'dd.MM.yy HH:mm:ss'}}</td>
           <td class="align-middle"><span *ngIf="order.account">{{order.account.name}}</span></td>
           <td class="align-middle">{{order.customer_name}}</td>
@@ -99,7 +99,7 @@
                 <h1>{{currentEvent.published_name}}</h1>
               </div>
               <br />
-              <div style="font-size: 14px; font-weight: bold;">Order Number: {{order.id}}</div>
+              <div style="font-size: 14px; font-weight: bold;">Order Number: {{order.order_number}}</div>
               <div style="font-size: 14px; font-weight: bold;" *ngIf="order.account">Account: {{order.account.name}}</div>
               <div style="font-size: 14px; font-weight: bold;">Order Ref: {{order.customer_name}}</div>
               <br />
