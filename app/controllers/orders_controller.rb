@@ -25,11 +25,11 @@ class OrdersController < ApplicationController
   end
 
   def last_order_number
-    order = current_event.orders.order(:order_number).first
+    order = current_event.orders.order(order_number: :desc).first
     if order
-      render json: (order.order_number || 0) + 1
+      render json: (order.order_number.to_i) + 1
     else
-      render json: 0
+      render json: 1
     end
   end
 
