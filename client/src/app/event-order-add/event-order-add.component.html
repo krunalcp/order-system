@@ -87,6 +87,9 @@
                 </td>
                 <td>
                   <i class="fa fa-heart g-px-20 favourite" (click)="removeFavourite(item.id)"></i>
+                  <a class="favourite" (click)="removeDefaultQuantity(item.id)" >
+                    Remove Default Quantity
+                  </a>
                 </td>
               </tr>
             </tbody>

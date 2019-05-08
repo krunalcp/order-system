@@ -120,6 +120,15 @@ class EventOrdersController < ApplicationController
     render json: { favourite: false }
   end
 
+  def remove_default_quantity
+    favourite_item = @event.account_favourites.find_by(
+      item_id: params[:item_id], account_id: params[:account_id])
+    if favourite_item.present?
+      favourite_item.update_attributes(quantity: 0)
+    end
+    render json: { favourite: false }
+  end
+
   private
 
   def set_event

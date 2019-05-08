@@ -310,6 +310,18 @@ export class EventOrderAddComponent implements OnInit {
     );
   }
 
+  public removeDefaultQuantity(item_id){
+    this.eventOrderService.removeDefaultQuantity(this.eventName, item_id, this.accountId).subscribe(
+      successResponse => {
+        this.loadItems();
+        this.loadFavouriteItem();
+      },
+      () => {
+        this.errorMessage = 'Failed to load order.';
+      }
+    );
+  }
+
   public onAccountSelect(account_id){
     this.accountId = account_id
     this.loadItems();
