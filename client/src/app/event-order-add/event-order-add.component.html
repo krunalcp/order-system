@@ -74,9 +74,10 @@
                     <i class="fa fa-minus g-px-20"></i>
                   </button>
                   <br/>
-                  <a class="favourite" (click)="saveDefaultQuantity(item.id, item.quantity)" [ngClass]="{'disabled': item.favourite_quantity == item.quantity , 'text-danger': item.favourite_quantity != item.quantity}">
-                    Save as Default
-                  </a> 
+                  <a class="favourite text-danger" (click)="saveDefaultQuantity(item.id, item.quantity)" *ngIf="item.favourite_quantity != item.quantity">
+                    Save as Default Quantity
+                  </a>
+                  <span class="g-mt-10" *ngIf="item.favourite_quantity == item.quantity">Save as Default Quantity</span>
                 </td>
                 <td class="price_width">
                   ${{(item.price * item.quantity).toFixed(2)}}

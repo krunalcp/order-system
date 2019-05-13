@@ -1,6 +1,7 @@
 class ItemSerializer < ActiveModel::Serializer
   attributes :id, :name, :price, :quantity, :item_used, :order_no, :notes,
-    :image, :status, :active, :category_id, :category_name, :special_price,:favourite_quantity
+             :image, :status, :active, :category_id, :category_name,
+             :special_price, :favourite_quantity
 
   def quantity
     if object.favourite_quantity.present?
