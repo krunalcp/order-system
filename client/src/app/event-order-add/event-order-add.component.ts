@@ -310,8 +310,8 @@ export class EventOrderAddComponent implements OnInit {
     );
   }
 
-  public removeDefaultQuantity(item_id){
-    this.eventOrderService.removeDefaultQuantity(this.eventName, item_id, this.accountId).subscribe(
+  public saveDefaultQuantity(item_id, quantity){
+    this.eventOrderService.saveDefaultQuantity(this.eventName, item_id, this.accountId, quantity).subscribe(
       successResponse => {
         this.loadItems();
         this.loadFavouriteItem();

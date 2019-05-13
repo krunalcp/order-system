@@ -64,9 +64,9 @@ export class EventOrderService {
     return this.http.get(ordersApiURL + "/remove_favourite/" + itemId + '/' + accountId);
   }
 
-  removeDefaultQuantity(eventName: string, itemId: number, accountId: number): Observable<any>{
+  saveDefaultQuantity(eventName: string, itemId: number, accountId: number, quantity: number): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost()+ '/' + eventName  + '/orders';
-    return this.http.get(ordersApiURL + "/remove_default_quantity/" + itemId + '/' + accountId);
+    return this.http.get(ordersApiURL + "/remove_default_quantity/" + itemId + '/' + accountId + '?quantity=' + quantity);
   }
 
 }

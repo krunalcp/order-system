@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       get 'stations'
       get 'favourite/:item_id/:account_id', action: :favourite
       get 'remove_favourite/:item_id/:account_id', action: :remove_favourite
-      get 'remove_default_quantity/:item_id/:account_id', action: :remove_default_quantity
+      get 'change_default_quantity/:item_id/:account_id', action: :change_default_quantity
     end
   end
 
