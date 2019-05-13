@@ -74,9 +74,9 @@
                     <i class="fa fa-minus g-px-20"></i>
                   </button>
                   <br/>
-                  <a class="favourite" (click)="saveDefaultQuantity(item.id, item.quantity)" >
+                  <a class="favourite" (click)="saveDefaultQuantity(item.id, item.quantity)" [ngClass]="{'disabled': item.favourite_quantity == item.quantity , 'text-danger': item.favourite_quantity != item.quantity}">
                     Save as Default
-                  </a>
+                  </a> 
                 </td>
                 <td class="price_width">
                   ${{(item.price * item.quantity).toFixed(2)}}
@@ -110,7 +110,6 @@
                 <td>
                   {{item.quantity}}
                 </td>
-                <td></td>
                 <td class="plus_minus_width">
                   <button class="btn btn-sm u-btn-outline-primary g-mr-10" type="button" (click)="quantityOptions(item, 'plus')">
                     <i class="fa fa-plus g-px-20"></i>

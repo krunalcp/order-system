@@ -66,7 +66,7 @@ export class EventOrderService {
 
   saveDefaultQuantity(eventName: string, itemId: number, accountId: number, quantity: number): Observable<any>{
     let ordersApiURL = this.hostAppService.getHost()+ '/' + eventName  + '/orders';
-    return this.http.get(ordersApiURL + "/remove_default_quantity/" + itemId + '/' + accountId + '?quantity=' + quantity);
+    return this.http.get(ordersApiURL + "/change_default_quantity/" + itemId + '/' + accountId + '?quantity=' + quantity);
   }
 
 }
