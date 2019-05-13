@@ -14,6 +14,7 @@ export class LoginFormComponent implements OnInit {
     password: ''
   };
 
+  public errors: any;
   @Output() onFormResult = new EventEmitter<any>();
 
   constructor(public authService: AuthService, private router: Router) {}
@@ -31,6 +32,7 @@ export class LoginFormComponent implements OnInit {
         },
         err => {
           console.log('err:', err);
+          this.errors = JSON.parse(err._body).errors;
           this.onFormResult.emit({signedIn: false, err});
         }
     );
