@@ -64,7 +64,7 @@
 
       <tbody>
         <tr *ngFor="let order of stationOrders">
-          <td class="align-middle">{{order.id}}</td>
+          <td class="align-middle">{{order.order_number}}</td>
           <td class="align-middle">{{order.display_scheduled_order_time | date:'dd.MM.yy HH:mm:ss'}}</td>
           <td class="align-middle"><span *ngIf="order.account">{{order.account.name}}</span></td>
           <td class="align-middle">{{order.customer_name}}</td>
