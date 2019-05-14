@@ -9,14 +9,14 @@
       <div class="row">
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="name">
-            <span *ngIf="!formErrors.name" [ngClass]="{'text-success': !categoryForm.controls.name.pristine}"></span>
+            <span *ngIf="!formErrors.name" [ngClass]="{'text-success': !categoryForm.controls.name.pristine}">Name</span>
             <span *ngIf="formErrors.name" class="text-danger">{{formErrors.name}}</span>
           </label>
           <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter name" id="name" formControlName="name">
         </div>
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="show_order">
-            <span *ngIf="!formErrors.show_order" [ngClass]="{'text-success': !categoryForm.controls.show_order.pristine}"></span>
+            <span *ngIf="!formErrors.show_order" [ngClass]="{'text-success': !categoryForm.controls.show_order.pristine}">Show Order</span>
             <span *ngIf="formErrors.show_order" class="text-danger">{{formErrors.show_order}}</span>
           </label>
           <div class="input-group g-brd-primary--focus">
