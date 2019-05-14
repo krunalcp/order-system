@@ -18,3 +18,8 @@
   -o-transform:rotate(-5deg);
   transform:rotate(-5deg);
 }
+@media (min-width: 1200px){
+  .container{
+    max-width: 1690px !important;
+  }
+}
