@@ -11,6 +11,7 @@ export class Event {
     public station_name?: string,
     public logo?: string,
     public icon?: string,
-    public item_image?: string
+    public item_image?: string,
+    public help_url?: string
   ) {}
 }

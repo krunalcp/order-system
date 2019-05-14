@@ -125,6 +125,7 @@ export class EventEditComponent implements OnInit {
         this.event['icon'] = data.icon;
         this.event['item_image'] = data.item_image;
         this.event['id'] = data.id;
+        this.event['help_url'] = data.help_url;
         this.eventForm.patchValue(this.event);
         this.getStationList();
       },
@@ -169,7 +170,10 @@ export class EventEditComponent implements OnInit {
       ],
       'password': [
         ''
-      ]
+      ],
+      'help_url': [
+        this.event.help_url
+      ],
     });
 
     this.eventForm.valueChanges.subscribe(data => this.onValueChanged(data));

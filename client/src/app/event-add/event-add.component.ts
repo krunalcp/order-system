@@ -123,6 +123,9 @@ export class EventAddComponent implements OnInit {
       'admin': [
         this.event.admin
       ],
+      'help_url': [
+        this.event.help_url
+      ],
     });
 
     this.eventForm.valueChanges

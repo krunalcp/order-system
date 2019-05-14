@@ -62,6 +62,17 @@
           </label>
           <input id="hf-email" class="form-control u-form-control rounded-0" type="password" placeholder="Enter password " id="password" formControlName="password">
         </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="admin">Link</label>
+          <span class="form-control">{{hostAppService.getHost()}}/#/{{event.name}}/order</span>
+        </div>
+         <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="help_url">
+            <span *ngIf="!formErrors.help_url">Help URL</span>
+            <span *ngIf="formErrors.help_url" class="text-danger">{{formErrors.help_url}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="help_url" placeholder="Enter help_url " id="help_url" formControlName="help_url">
+        </div>
         <div class="form-group g-mb-25 col-md-3" *ngIf="currentEvent.admin == true">
           <label class="g-mb-10" for="admin">Admin</label>
           <input class="form-control u-form-control rounded-0" type="checkbox" id="admin" formControlName="admin">
@@ -69,10 +80,6 @@
         <div class="form-group g-mb-25 col-md-3" *ngIf="currentEvent.admin == true">
           <label class="g-mb-10" for="active">Active</label>
           <input class="form-control u-form-control rounded-0" type="checkbox" id="active" formControlName="active">
-        </div>
-        <div class="form-group g-mb-25 col-md-6">
-          <label class="g-mb-10" for="admin">Link</label>
-          <span class="form-control">{{hostAppService.getHost()}}/#/{{event.name}}/order</span>
         </div>
       </div>
     </form>
