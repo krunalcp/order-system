@@ -29,6 +29,7 @@ export class EventAddComponent implements OnInit {
     'icon': '',
     'password': '',
     'item_image': '',
+    'help_url' : ''
   };
   validationMessages = {
     'name': {

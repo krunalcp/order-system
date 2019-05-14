@@ -38,7 +38,8 @@ export class EventEditComponent implements OnInit {
     'logo': '',
     'icon': '',
     'password': '',
-    'item_image': ''
+    'item_image': '',
+    'help_url' : ''
   };
   validationMessages = {
     'name': {
