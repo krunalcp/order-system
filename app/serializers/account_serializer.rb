@@ -1,5 +1,5 @@
 class AccountSerializer < ActiveModel::Serializer
-  attributes :id, :name, :contact_name, :email, :phone, :items
+  attributes :id, :name, :contact_name, :email, :phone, :items, :account_used
 
   def items
     order_items = object.order_items.select(
@@ -14,5 +14,9 @@ class AccountSerializer < ActiveModel::Serializer
       sv += oi.value
     end
     items << { item: 'TOTAL', quantity: sq, value: sv } if sq.positive?
+  end
+
+  def account_used
+    object.orders.present?
   end
 end

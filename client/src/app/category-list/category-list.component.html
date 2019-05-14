@@ -28,7 +28,7 @@
               edit
             </button>
 
-            <button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteCategory(category.id)" [disabled]="category.category_used">
+            <button class="btn btn-md u-btn-outline-{{category.category_used ? 'darkgray' : 'deeporange'}} g-mr-10 g-mb-15" (click)="deleteCategory(category.id)" [disabled]="category.category_used">
               <span *ngIf="!isCategoryDeleting">Delete</span>
               <span *ngIf="isCategoryDeleting && currentCategoryId != category.id">Delete</span>
               <span *ngIf="isCategoryDeleting && currentCategoryId == category.id">Deleting..</span>

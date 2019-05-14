@@ -61,18 +61,20 @@ export class AccountListComponent implements OnInit {
   }
 
   public deleteAccount(id: number){
-    this.currentAccountId = id;
-    this.isAccountDeleting = true;
-    this.accountService.remove(id).subscribe(
-      successResponse => {
-        this.isAccountDeleting = false;
-        this.loadAccountList();
-      },
-      (errorResponse) => {
-        this.isAccountDeleting = false;
-        // this.displayErrors(errorResponse);
-      }
-    );
+    if(confirm("Are you sure?")) {
+      this.currentAccountId = id;
+      this.isAccountDeleting = true;
+      this.accountService.remove(id).subscribe(
+        successResponse => {
+          this.isAccountDeleting = false;
+          this.loadAccountList();
+        },
+        (errorResponse) => {
+          this.isAccountDeleting = false;
+          // this.displayErrors(errorResponse);
+        }
+      );
+    }
   }
 
   public getCurrentTime(){

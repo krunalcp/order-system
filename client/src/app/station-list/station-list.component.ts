@@ -43,18 +43,20 @@ export class StationListComponent implements OnInit {
   }
 
   public deleteStation(id: number){
-    this.currentStationId = id;
-    this.isStationDeleting = true;
-    this.stationService.remove(id).subscribe(
-      successResponse => {
-        this.isStationDeleting = false;
-        this.loadStationList();
-      },
-      (errorResponse) => {
-        this.isStationDeleting = false;
-        // this.displayErrors(errorResponse);
-      }
-    );
+    if(confirm("Are you sure?")) {
+      this.currentStationId = id;
+      this.isStationDeleting = true;
+      this.stationService.remove(id).subscribe(
+        successResponse => {
+          this.isStationDeleting = false;
+          this.loadStationList();
+        },
+        (errorResponse) => {
+          this.isStationDeleting = false;
+          // this.displayErrors(errorResponse);
+        }
+      );
+    }
   }
 
 }

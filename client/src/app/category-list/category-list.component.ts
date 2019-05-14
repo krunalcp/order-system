@@ -43,17 +43,19 @@ export class CategoryListComponent implements OnInit {
   }
 
   public deleteCategory(id: number){
-    this.currentCategoryId = id;
-    this.isCategoryDeleting = true;
-    this.categoryService.remove(id).subscribe(
-      successResponse => {
-        this.isCategoryDeleting = false;
-        this.loadCategoryList();
-      },
-      (errorResponse) => {
-        this.isCategoryDeleting = false;
-        // this.displayErrors(errorResponse);
-      }
-    );
+    if(confirm("Are you sure?")) {
+      this.currentCategoryId = id;
+      this.isCategoryDeleting = true;
+      this.categoryService.remove(id).subscribe(
+        successResponse => {
+          this.isCategoryDeleting = false;
+          this.loadCategoryList();
+        },
+        (errorResponse) => {
+          this.isCategoryDeleting = false;
+          // this.displayErrors(errorResponse);
+        }
+      );
+    }
   }
 }

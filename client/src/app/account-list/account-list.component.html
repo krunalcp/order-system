@@ -32,7 +32,7 @@
               edit
             </button>
 
-            <button class="btn btn-md u-btn-outline-deeporange g-mr-10 g-mb-15" (click)="deleteAccount(account.id)" [disabled]="account.account_used">
+            <button class="btn btn-md u-btn-outline-{{account.account_used ? 'darkgray' : 'deeporange'}} g-mr-10 g-mb-15" (click)="deleteAccount(account.id)" [disabled]="account.account_used"> 
               <span *ngIf="!isAccountDeleting">Delete</span>
               <span *ngIf="isAccountDeleting && currentAccountId != account.id">Delete</span>
               <span *ngIf="isAccountDeleting && currentAccountId == account.id">Deleting..</span>
