@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Angular2TokenService } from 'angular2-token';
-import { NgFlashMessagesModule } from 'ng-flash-messages';
 
 import { AppComponent } from './app.component';
 import { ItemListComponent } from './item-list/item-list.component';
@@ -258,7 +257,6 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MainPipe,
-    NgFlashMessagesModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true, useHash: true } // <-- debugging purposes only
