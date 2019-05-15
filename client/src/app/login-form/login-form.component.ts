@@ -1,7 +1,7 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgFlashMessageService } from 'ng-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-login-form',
@@ -21,7 +21,7 @@ export class LoginFormComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private router: Router,
-    private ngFlashMessageService: NgFlashMessageService
+    private flashMessage: FlashMessagesService
   ) {}
 
   ngOnInit() {}
@@ -38,12 +38,7 @@ export class LoginFormComponent implements OnInit {
         err => {
           console.log('err:', err);
           this.errors = JSON.parse(err._body).errors;
-          this.ngFlashMessageService.showFlashMessage({
-            messages: this.errors,
-            dismissible: false,
-            timeout: 2000,
-            type: 'danger'
-          });
+          this.flashMessage.show(this.errors, { cssClass: 'alert-danger', timeout: 2000 });
           this.onFormResult.emit({signedIn: false, err});
         }
     );
