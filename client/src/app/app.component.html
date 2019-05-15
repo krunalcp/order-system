@@ -18,14 +18,8 @@
         <!-- Navigation -->
         <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBarHeader">
           <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
-            <li *ngIf="tokenService.userSignedIn() && currentEvent.admin == true" class="nav-item g-mx-20--lg">
-                <a routerLink="/site/list" class="nav-link px-0"> Sites </a>
-            </li>
             <li *ngIf="tokenService.userSignedIn() && !currentEvent.admin" class="nav-item g-mx-20--lg">
                 <a routerLink="/site/edit/{{currentEvent.id}}" class="nav-link px-0"> Site </a>
-            </li>
-            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-              <a routerLink="/station/list" class="nav-link px-0"> Stations </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/category/list" class="nav-link px-0"> Categories </a>
@@ -43,16 +37,30 @@
               <a routerLink="/station/order" class="nav-link px-0"> Fulfilment </a>
             </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-              <a routerLink="/order/summary" class="nav-link px-0"> Summary </a>
-            </li>
-            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a href="{{currentEvent.help_url}}" class="nav-link px-0" target="_blank"> Help </a>
-            </li>            
+            </li>
+            <li *ngIf="tokenService.userSignedIn()" class="dropdown nav-item g-mx-20--lg">
+              <a class="dropdown-toggle nav-link px-0" data-toggle="dropdown" href="#" >
+                More
+                <span class="caret"></span> 
+              </a>
+              <ul class="dropdown-menu">
+                <li *ngIf="tokenService.userSignedIn() && currentEvent.admin == true" class="nav-item g-mx-20--lg">
+                  <a routerLink="/site/list" class="nav-link px-0"> Sites </a>
+                </li>
+                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+                  <a routerLink="/station/list" class="nav-link px-0"> Stations </a>
+                </li>
+                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+                  <a routerLink="/order/summary" class="nav-link px-0"> Summary </a>
+                </li>
+                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+                  <a (click)="onSignout()" class="nav-link px-0">LOGOUT</a>
+                </li>
+              </ul>
+            </li>
             <li *ngIf="!tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/login" class="nav-link px-0">Login</a>
-            </li>
-            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-              <a (click)="onSignout()" class="nav-link px-0">LOGOUT</a>
             </li>
           </ul>
         </div>

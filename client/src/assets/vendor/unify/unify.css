@@ -21708,7 +21708,7 @@ img.u-block-hover__main--magnifier-top-left {
 .dropdown-toggle::before {
   display: none; }
 
-.dropdown-toggle::after {
+/*.dropdown-toggle::after {
   content: "\e900";
   position: relative;
   top: 0.21429rem;
@@ -21717,7 +21717,7 @@ img.u-block-hover__main--magnifier-top-left {
   display: inline;
   border: none;
   margin-left: 0.5rem; }
-
+*/
 .dropdown-item {
   padding: 0.21429rem 1.07143rem; }
 
