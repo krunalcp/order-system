@@ -144,6 +144,11 @@ export class EventOrderAddComponent implements OnInit {
     this.items[itemIndex].notes = $("#item_notes_" + item.id).val();
   }
 
+  public notesfavouriteOptions(item) {
+    let itemIndex = this.favourite_items.indexOf(item);
+    this.favourite_items[itemIndex].notes = $("#item_notes_" + item.id).val();
+  }
+
   public defaultQuantityOptions(item, event) {
     let itemIndex = this.favourite_items.indexOf(item);
     this.favourite_items[itemIndex].default_quantity = event.target.checked

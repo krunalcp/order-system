@@ -82,7 +82,7 @@
                   ${{(item.price * item.quantity).toFixed(2)}}
                 </td>
                 <td>
-                  <input class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesOptions(item)">
+                  <input class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesfavouriteOptions(item)">
                 </td>
                 <td>
                   <i class="fa fa-heart g-px-20 favourite" (click)="removeFavourite(item.id)"></i>
