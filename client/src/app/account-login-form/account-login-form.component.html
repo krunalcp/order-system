@@ -1,0 +1,31 @@
+<div class="container g-mt-100">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Account Login</h1>
+  </div>
+  <div class="showErrorMessage">
+    <flash-messages>{{ errors }}</flash-messages>
+  </div>
+  <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
+    <h3 class="h2 g-font-weight-300 g-mb-20">Enter login details</h3>
+    <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" (ngSubmit)="onSignInSubmit()" #f="ngForm">
+      <div class="row">
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="email"></label>
+          <input id="email" type="text" required name='email' [(ngModel)]="signInAccountUser.email" class="validate form-control u-form-control rounded-0" placeholder="Enter name">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="password"></label>
+          <input id="password" type="password" required name='password' [(ngModel)]="signInAccountUser.password" class="validate form-control u-form-control rounded-0" placeholder="Enter password">
+        </div>
+      </div>
+      <!-- <div class="col s12 ">
+          <button type="submit" [disabled]="!(f.valid)" class="waves-effect waves-light btn blue right"> Login </button>
+        </div> -->
+      <div class="text-right">
+        <button [disabled]="!(f.valid)" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
+          <span>Login</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

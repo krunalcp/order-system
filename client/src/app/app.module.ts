@@ -47,6 +47,10 @@ import { EventOrderListComponent } from './event-order-list/event-order-list.com
 import { EventOrderConfirmedComponent } from './event-order-confirmed/event-order-confirmed.component';
 import { ItemImportComponent } from './item-import/item-import.component';
 import { OrderImportComponent } from './order-import/order-import.component';
+import { EventAccountOrderAddComponent } from './event-account-order-add/event-account-order-add.component';
+import { EventAccountOrderConfirmedComponent } from './event-account-order-confirmed/event-account-order-confirmed.component';
+import { EventAccountOrderListComponent } from './event-account-order-list/event-account-order-list.component';
+import { AccountLoginFormComponent } from './account-login-form/account-login-form.component';
 
 const appRoutes: Routes = [
 	{
@@ -210,6 +214,22 @@ const appRoutes: Routes = [
   {
     path: 'siteorder/list',
     component: EventOrderListComponent
+  },
+  {
+    path: ':event/account/login',
+    component: AccountLoginFormComponent
+  },
+  {
+    path: ':event/account/order',
+    component: EventAccountOrderAddComponent
+  },
+  {
+    path: ':event/account/order/confirmed/:id',
+    component: EventAccountOrderConfirmedComponent
+  },
+  {
+    path: 'siteaccountorder/list',
+    component: EventAccountOrderListComponent
   }
 ]
 
@@ -248,7 +268,11 @@ const appRoutes: Routes = [
     EventOrderListComponent,
 		EventOrderConfirmedComponent,
     ItemImportComponent,
-    OrderImportComponent
+    OrderImportComponent,
+    EventAccountOrderAddComponent,
+    EventAccountOrderConfirmedComponent,
+    EventAccountOrderListComponent,
+    AccountLoginFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,216 @@
+<div class="container">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Place Order</h1>
+  </div>
+  <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
+    <h3 class="h2 g-font-weight-300 g-mb-20"><span *ngIf="isEventAccountOrderPage">Enter </span>Order details</h3>
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+      <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30">
+        <!-- Text Input -->
+        <div class="row">
+          <div *ngIf="isEventAccountOrderPage" class="form-group g-mb-25 col-md-3">
+            <label class="g-mb-10" for="account_id">Account</label>
+            <select class="form-control rounded-0 u-form-control" id="account" formControlName="account_id" (change)="onAccountSelect($event.target.value)">
+              <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
+            </select>
+          </div>
+          <div class="form-group g-mb-25 col-md-3">
+            <label class="g-mb-10" for="customer_name">Order Reference</label>
+            <input class="form-control u-form-control rounded-0" type="text" placeholder="(Refernece)" id="customer_name" formControlName="customer_name">
+          </div>
+          <input type="hidden" formControlName="station_id" value="">
+          <div class="form-group g-mb-25 col-md-3">
+            <label class="g-mb-10" for="scheduled_order_time">Order Date/Time</label>
+            <input class="form-control u-form-control rounded-0 pr-0" type="datetime-local" id="scheduled_order_time" formControlName="scheduled_order_time">
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isEventAccountOrderPage" class="card g-brd-teal rounded-0 g-mb-30">
+        <h3 class="card-header g-bg-teal g-brd-transparent g-color-white g-font-size-16 rounded-0 mb-0">
+          <i class="fa fa-edit g-mr-5"></i>
+          Choose items
+        </h3>
+
+        <div class="table-responsive text-center">
+          <table class="table table-striped u-table--v1 mb-0">
+            <thead>
+              <tr>
+                <th colspan="2">Item</th>
+                <th>Price($)</th>
+                <th>Quantity</th>
+                <th></th>
+                <th>Total($)</th>
+                <th>Notes</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="favourite_items?.length > 0">
+              <tr>
+                <td class="category_color hidden i_favourite" (click)="toggleCategory('favourite')">
+                  <i class="fa fa-2x fa-angle-down white"></i>
+                </td>
+                <td class="category_color i_favourite" (click)="toggleCategory('favourite')">
+                  <i class="fa fa-2x fa-angle-up white"></i>
+                </td>
+                <td colspan=8 class="category_color" (click)="toggleCategory('favourite')"><b>Favourite</b></td>
+              </tr>
+              <tr  *ngFor="let item of favourite_items" class="category_favourite">
+                <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
+                <td class='text-left'>{{item.name}}</td>
+                <td class="price_width">
+                  <p class="{{(item.special_price && item.special_price != 0) ? 'strikethrough' : ''}}">${{(item.price * 1).toFixed(2)}}</p>
+                  <p *ngIf="item.special_price && item.special_price != 0" class='g-mt-10'>${{(item.special_price * 1).toFixed(2)}}</p>
+                </td>
+                <td>
+                  {{item.quantity}}
+                </td>
+                <td class="plus_minus_width">
+                  <button class="btn btn-sm u-btn-outline-primary g-mr-10" type="button" (click)="favouriteQuantityOptions(item, 'plus')">
+                    <i class="fa fa-plus g-px-20"></i>
+                  </button>
+                  <button class="btn btn-sm u-btn-outline-lightred" type="button" (click)="favouriteQuantityOptions(item, 'minus')">
+                    <i class="fa fa-minus g-px-20"></i>
+                  </button>
+                  <br/>
+                  <a class="favourite text-danger" (click)="saveDefaultQuantity(item.id, item.quantity)" *ngIf="item.favourite_quantity != item.quantity">
+                    Save as Default Qty
+                  </a>
+                </td>
+                <td class="price_width">
+                  ${{(item.price * item.quantity).toFixed(2)}}
+                </td>
+                <td>
+                  <input class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesfavouriteOptions(item)">
+                </td>
+                <td>
+                  <i class="fa fa-heart g-px-20 favourite" (click)="removeFavourite(item.id)"></i>
+                </td>
+              </tr>
+            </tbody>
+
+            <tbody *ngFor="let i of items | groupBy: 'category_name'">
+              <tr>
+                <td class="category_color i_{{ removeSpace(i.key) }}" (click)="toggleCategory(i.key)">
+                  <i class="fa fa-2x fa-angle-down white"></i>
+                </td>
+                <td class="category_color hidden i_{{ removeSpace(i.key) }}" (click)="toggleCategory(i.key)">
+                  <i class="fa fa-2x fa-angle-up white"></i>
+                </td>
+                <td colspan=8 class="category_color" (click)="toggleCategory(i.key)"><b>{{i.key}}</b></td>
+              </tr>
+              <tr *ngFor="let item of i.value" class="category_{{ removeSpace(i.key) }} hidden">
+                <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
+                <td class='text-left'>{{item.name}}</td>
+                <td class="price_width">
+                  <p class="{{(item.special_price && item.special_price != 0) ? 'strikethrough' : ''}}">${{(item.price * 1).toFixed(2)}}</p>
+                  <p *ngIf="item.special_price && item.special_price != 0" class='g-mt-10'>${{(item.special_price * 1).toFixed(2)}}</p>
+                </td>
+                <td>
+                  {{item.quantity}}
+                </td>
+                <td class="plus_minus_width">
+                  <button class="btn btn-sm u-btn-outline-primary g-mr-10" type="button" (click)="quantityOptions(item, 'plus')">
+                    <i class="fa fa-plus g-px-20"></i>
+                  </button>
+                  <button class="btn btn-sm u-btn-outline-lightred" type="button" (click)="quantityOptions(item, 'minus')">
+                    <i class="fa fa-minus g-px-20"></i>
+                  </button>
+                </td>
+                <td class="price_width">
+                  ${{(getPrice(item) * item.quantity).toFixed(2)}}
+                </td>
+                <td>
+                  <input class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesOptions(item)">
+                </td>
+                <td>
+                  <i *ngIf='accountId' class="fa fa-heart-o g-px-20 favourite" (click)="favourite(item.id)"></i>
+                </td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td colspan="4"></td>
+                <td><b>Total($) :</b></td>
+                <td>${{totalPrice.toFixed(2)}}</td>
+                <td colspan="2"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div *ngIf="!isEventAccountOrderPage" class="card g-brd-teal rounded-0 g-mb-30">
+        <h3 class="card-header g-bg-teal g-brd-transparent g-color-white g-font-size-16 rounded-0 mb-0">
+          Selected items
+        </h3>
+
+        <div class="table-responsive text-center">
+          <table class="table table-striped u-table--v1 mb-0">
+            <thead>
+              <tr>
+                <th colspan="2">Item</th>
+                <th>Price($)</th>
+                <th>Quantity</th>
+                <th>Total($)</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order.order_items">
+                <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
+                <td class='text-left'>{{item.name}}</td>
+                <td class="price_width">${{(item.price * 1).toFixed(2)}}</td>
+                <td>{{item.quantity}}</td>
+                <td class="price_width">
+                  <p class="{{(item.special_price && item.special_price != 0) ? 'strikethrough' : ''}}">${{(item.price * item.quantity).toFixed(2)}}</p>
+                  <p *ngIf="item.special_price && item.special_price != 0" class='g-mt-10'>${{(item.special_price * item.quantity).toFixed(2)}}</p>
+                </td>
+                <td>{{item.notes}}</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td colspan="2"></td>
+                <td></td>
+                <td><b>Total($) :</b></td>
+                <td>${{order.value.toFixed(2)}}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30">
+        <div class="row">
+          <div class="form-group g-mb-25 col-md-12">
+            <label class="g-mb-0" for="comments">Comments</label>
+            <p>(product requests)</p>
+            <textarea class="form-control u-form-control rounded-0" id="comments" formControlName="comments"></textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="text-right">
+      <button *ngIf="isEventAccountOrderPage" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="button" (click)="placeEventOrder()">
+        Review Order
+      </button>
+      <button *ngIf="!isEventAccountOrderPage" (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
+        <span *ngIf="!isOrderAdding">Confirm Order</span>
+        <span *ngIf="isOrderAdding">Adding order...</span>
+        <span class="g-pl-5" *ngIf="isOrderAdding">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Loading...</span>
+        </span>
+      </button>
+      <button *ngIf="!isEventAccountOrderPage" class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="changeEventOrder()">
+        Change
+      </button>
+      <button class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="cancelEventOrder()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

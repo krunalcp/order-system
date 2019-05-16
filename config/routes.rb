@@ -34,6 +34,19 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :event_account_orders, path: ':event/account/orders', only: [:create, :show] do
+    collection do
+      get 'active_items'
+      get 'favourite_items/:account_id', action: :favourite_items
+      get 'event'
+      get 'accounts'
+      get 'stations'
+      get 'favourite/:item_id/:account_id', action: :favourite
+      get 'remove_favourite/:item_id/:account_id', action: :remove_favourite
+      get 'change_default_quantity/:item_id/:account_id', action: :change_default_quantity
+    end
+  end
+
   resources :orders do
     collection do
       get 'pending_list'

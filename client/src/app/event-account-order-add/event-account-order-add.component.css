@@ -1,0 +1,21 @@
+.category_color{
+  background-color: #989696 !important;
+}
+.plus_minus_width{
+  min-width: 160px;
+}
+.hidden{
+  display: none;
+}
+.price_width{
+  min-width: 80px;
+}
+.white {
+  color: #ffffff;
+}
+.favourite{
+  cursor: pointer;
+}
+.disabled {
+    pointer-events: none;
+}

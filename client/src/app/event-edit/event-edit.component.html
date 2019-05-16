@@ -66,6 +66,10 @@
           <label class="g-mb-10" for="admin">Link</label>
           <span class="form-control">{{hostAppService.getHost()}}/#/{{event.name}}/order</span>
         </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="admin">Account Link</label>
+          <span class="form-control">{{hostAppService.getHost()}}/#/{{event.name}}/account/order</span>
+        </div>
          <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="help_url">
             <span *ngIf="!formErrors.help_url">Help URL</span>
