@@ -25,14 +25,14 @@
             <input class="form-control u-form-control rounded-0" type="text" placeholder="(Refernece)" id="customer_name" formControlName="customer_name">
           </div>
           <div class="form-group g-mb-25 col-md-3">
-            <label class="g-mb-10" for="scheduled_order_time">Scheduled Time</label>
-            <input class="form-control u-form-control rounded-0 pr-0" type="datetime-local" id="scheduled_order_time" formControlName="scheduled_order_time">
+            <label class="g-mb-10" for="order_number">Order Number</label>
+            <input class="form-control u-form-control rounded-0" type="text" placeholder="Order Number" id="order_number" formControlName="order_number">
           </div>
         </div>
         <div class="row">
-          <div class="form-group g-mb-25 col-md-3">
-            <label class="g-mb-10" for="order_number">Order Number</label>
-            <input class="form-control u-form-control rounded-0" type="text" placeholder="Order Number" id="order_number" formControlName="order_number">
+          <div class="form-group g-mb-25 col-md-3" *ngIf="currentEvent.show_date">
+            <label class="g-mb-10" for="scheduled_order_time">Scheduled Time</label>
+            <input class="form-control u-form-control rounded-0 pr-0" type="datetime-local" id="scheduled_order_time" formControlName="scheduled_order_time">
           </div>
         </div>
       </div>

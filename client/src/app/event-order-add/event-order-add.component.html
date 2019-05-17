@@ -28,7 +28,7 @@
             <input class="form-control u-form-control rounded-0" type="text" placeholder="(Refernece)" id="customer_name" formControlName="customer_name">
           </div>
           <input type="hidden" formControlName="station_id" value="">
-          <div class="form-group g-mb-25 col-md-3">
+          <div class="form-group g-mb-25 col-md-3" *ngIf="currentEvent.show_date">
             <label class="g-mb-10" for="scheduled_order_time">Order Date/Time</label>
             <input class="form-control u-form-control rounded-0 pr-0" type="datetime-local" id="scheduled_order_time" formControlName="scheduled_order_time">
           </div>

@@ -14,5 +14,6 @@ export class Event {
     public item_image?: string,
     public help_url?: string,
     public event_help_url?: string,
+    public show_date?: boolean
   ) {}
 }
