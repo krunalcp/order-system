@@ -18,9 +18,6 @@
         <!-- Navigation -->
         <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBarHeader">
           <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
-            <li *ngIf="tokenService.userSignedIn() && !currentEvent.admin" class="nav-item g-mx-20--lg">
-                <a routerLink="/site/edit/{{currentEvent.id}}" class="nav-link px-0"> Site </a>
-            </li>
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/category/list" class="nav-link px-0"> Categories </a>
             </li>
@@ -45,8 +42,11 @@
                 <span class="caret"></span> 
               </a>
               <ul class="dropdown-menu">
-                <li *ngIf="tokenService.userSignedIn() && currentEvent.admin == true" class="nav-item g-mx-20--lg">
+                <li *ngIf="tokenService.userSignedIn() && currentEvent.admin" class="nav-item g-mx-20--lg">
                   <a routerLink="/site/list" class="nav-link px-0"> Sites </a>
+                </li>
+                <li *ngIf="tokenService.userSignedIn() && !currentEvent.admin" class="nav-item g-mx-20--lg">
+                  <a routerLink="/site/edit/{{currentEvent.id}}" class="nav-link px-0"> Edit Site </a>
                 </li>
                 <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
                   <a routerLink="/station/list" class="nav-link px-0"> Stations </a>
