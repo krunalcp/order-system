@@ -39,7 +39,8 @@ export class EventEditComponent implements OnInit {
     'icon': '',
     'password': '',
     'item_image': '',
-    'help_url' : ''
+    'help_url' : '',
+    'event_help_url' : ''
   };
   validationMessages = {
     'name': {
@@ -127,6 +128,7 @@ export class EventEditComponent implements OnInit {
         this.event['item_image'] = data.item_image;
         this.event['id'] = data.id;
         this.event['help_url'] = data.help_url;
+        this.event['event_help_url'] = data.event_help_url;
         this.eventForm.patchValue(this.event);
         this.getStationList();
       },
@@ -174,6 +176,9 @@ export class EventEditComponent implements OnInit {
       ],
       'help_url': [
         this.event.help_url
+      ],
+      'event_help_url': [
+        this.event.event_help_url
       ],
     });
 

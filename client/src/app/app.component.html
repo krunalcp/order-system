@@ -46,7 +46,7 @@
                   <a routerLink="/site/list" class="nav-link px-0"> Sites </a>
                 </li>
                 <li *ngIf="tokenService.userSignedIn() && !currentEvent.admin" class="nav-item g-mx-20--lg">
-                  <a routerLink="/site/edit/{{currentEvent.id}}" class="nav-link px-0"> Edit Site </a>
+                  <a routerLink="/site/edit/{{currentEvent.id}}" class="nav-link px-0"> Site </a>
                 </li>
                 <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
                   <a routerLink="/station/list" class="nav-link px-0"> Stations </a>

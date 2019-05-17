@@ -66,7 +66,7 @@ class EventsController < ApplicationController
   def event_params
     params.permit(
       :name, :password, :gst_number, :admin, :active, :published_name,
-      :station_id, :logo, :icon, :item_image, :help_url
+      :station_id, :logo, :icon, :item_image, :help_url, :event_help_url
     )
   end
 end

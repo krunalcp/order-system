@@ -29,7 +29,8 @@ export class EventAddComponent implements OnInit {
     'icon': '',
     'password': '',
     'item_image': '',
-    'help_url' : ''
+    'help_url' : '',
+    'event_help_url' : ''
   };
   validationMessages = {
     'name': {
@@ -126,6 +127,9 @@ export class EventAddComponent implements OnInit {
       ],
       'help_url': [
         this.event.help_url
+      ],
+      'event_help_url': [
+        this.event.event_help_url
       ],
     });
 

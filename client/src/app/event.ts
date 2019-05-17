@@ -12,6 +12,7 @@ export class Event {
     public logo?: string,
     public icon?: string,
     public item_image?: string,
-    public help_url?: string
+    public help_url?: string,
+    public event_help_url?: string,
   ) {}
 }

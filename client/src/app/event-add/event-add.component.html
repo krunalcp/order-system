@@ -69,6 +69,13 @@
           </label>
           <input id="hf-email" class="form-control u-form-control rounded-0" type="help_url" placeholder="Enter help_url " id="help_url" formControlName="help_url">
         </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="event_help_url">
+            <span *ngIf="!formErrors.event_help_url" [ngClass]="{'text-success': !eventForm.controls.event_help_url.pristine}">Event Help URL</span>
+            <span *ngIf="formErrors.event_help_url" class="text-danger">{{formErrors.event_help_url}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="event_help_url" placeholder="Enter event_help_url " id="event_help_url" formControlName="event_help_url">
+        </div>
         <div class="form-group g-mb-25 col-md-3">
           <label class="g-mb-10" for="admin">Admin</label>
           <input class="form-control u-form-control rounded-0" type="checkbox" id="admin" formControlName="admin">
