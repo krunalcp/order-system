@@ -13,6 +13,8 @@ import * as XLSX from 'xlsx';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 
+declare var $: any;
+
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
@@ -130,4 +132,20 @@ export class ItemListComponent implements OnInit {
     this.isExporting = false;
   }
 
+  public toggleCategory(category) {
+    $(".category_" + this.removeSpace(category)).toggle();
+    $(".i_" + this.removeSpace(category)).toggle();
+  }
+
+  public removeSpace(category) {
+    return category.replace(/[^A-Z0-9]+/ig, '')
+  }
+
+  public getPrice(item){
+    if(item.special_price && item.special_price != 0){
+      return item.special_price
+    }else{
+      return item.price
+    }
+  }
 }
