@@ -56,6 +56,12 @@ export class ItemService {
     return this.http.get(itemsApiURL, this.hostAppService.getToken());
   }
 
+  nonActiveItem(): Observable<any>{
+    let itemsApiURL = this.hostAppService.getHost() + '/items/non_active_items';
+
+    return this.http.get(itemsApiURL, this.hostAppService.getToken());
+  }
+
   lastOrderNumber(): Observable<any>{
     let itemsApiURL = this.hostAppService.getHost() + '/items/last_order_number';
 

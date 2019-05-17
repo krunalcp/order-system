@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     collection do
       get 'order_summary'
       get 'active_items'
+      get 'non_active_items'
       get 'last_order_number'
       post 'import_items'
     end

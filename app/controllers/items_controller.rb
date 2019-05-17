@@ -13,6 +13,11 @@ class ItemsController < ApplicationController
     render json: @items
   end
 
+  def non_active_items
+    @items =  Item.unscoped.where(event_id: current_event.id).left_outer_joins(:category).where(active: false).order('categories.show_order asc, items.order_no asc')
+    render json: @items
+  end
+
   def create
     item = current_event.items.new(item_params)
 

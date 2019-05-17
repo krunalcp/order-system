@@ -28,6 +28,8 @@ export class ItemListComponent implements OnInit {
 
 	public items: any;
   public isItemsLoading: boolean = false;
+  public isActiveItemsLoading: boolean = true;
+  public isNonActiveItemsLoading: boolean = false;
   public isItemDeleting: boolean = false;
   public currentItemId: number;
   public isExporting: boolean = false;
@@ -68,7 +70,36 @@ export class ItemListComponent implements OnInit {
       }
     );
   }
+  
+  public showActiveItems(){
+    this.isActiveItemsLoading = true;
+    this.isNonActiveItemsLoading = false;
+    this.itemService.activeItem().subscribe(
+      successResponse => {
+        this.items = successResponse.json();
+        this.isActiveItemsLoading = false;
+        this.isNonActiveItemsLoading = true;
+      },
+      (errorResponse) => {
+        // this.displayErrors(errorResponse);
+      }
+    );
+  }
 
+  public hideActiveItems(){
+    this.isNonActiveItemsLoading = true;
+    this.isActiveItemsLoading = false;
+    this.itemService.nonActiveItem().subscribe(
+      successResponse => {
+        this.items = successResponse.json();
+        this.isActiveItemsLoading = true;
+        this.isNonActiveItemsLoading = false;
+      },
+      (errorResponse) => {
+        // this.displayErrors(errorResponse);
+      }
+    );
+  }
   public deleteItem(id: number){
     this.currentItemId = id;
     this.isItemDeleting = true;
