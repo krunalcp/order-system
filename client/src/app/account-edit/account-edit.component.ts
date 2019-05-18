@@ -93,6 +93,7 @@ export class AccountEditComponent implements OnInit {
         this.account['phone'] = data.phone;
         this.account['email'] = data.email;
         this.account['event_id'] = data.event_id;
+        this.account['is_active'] = data.is_active;
         this.accountForm.patchValue(this.account);
       },
       () => {
@@ -122,6 +123,9 @@ export class AccountEditComponent implements OnInit {
       ],
       'password': [
         ''
+      ],
+      'is_active': [
+        this.account.is_active
       ]
     });
 

@@ -99,6 +99,9 @@ export class AccountAddComponent implements OnInit {
         '', [
           Validators.required
         ]
+      ],
+      'is_active': [
+        this.account.is_active
       ]
     });
 

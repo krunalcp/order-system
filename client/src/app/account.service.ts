@@ -43,4 +43,13 @@ export class AccountService {
 
   	return this.http.get(categoriesApiURL, this.hostAppService.getToken());
   }
+
+  list(active: boolean): Observable<any>{
+  	let categoriesApiURL = this.hostAppService.getHost() + '/accounts';
+    if(active){
+      categoriesApiURL = categoriesApiURL + '?active=1';
+    }
+
+  	return this.http.get(categoriesApiURL, this.hostAppService.getToken());
+  }
 }

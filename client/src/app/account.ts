@@ -5,6 +5,7 @@ export class Account {
     public phone?: string,
     public email?: string,
     public event_id?: number,
+    public is_active? :boolean,
     public items? :any
   ) {}
 }

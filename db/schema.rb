@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190419134345) do
+ActiveRecord::Schema.define(version: 20190518131259) do
 
-  create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "account_favourites", force: :cascade do |t|
+    t.integer "account_id"
+    t.integer "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "quantity"
+    t.index ["account_id"], name: "index_account_favourites_on_account_id"
+    t.index ["item_id"], name: "index_account_favourites_on_item_id"
+  end
+
+  create_table "accounts", force: :cascade do |t|
     t.integer "event_id"
     t.string "name"
     t.string "contact_name"
@@ -21,10 +34,11 @@ ActiveRecord::Schema.define(version: 20190419134345) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.boolean "is_active"
     t.index ["event_id"], name: "index_accounts_on_event_id"
   end
 
-  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "categories", force: :cascade do |t|
     t.string "name"
     t.integer "show_order"
     t.datetime "created_at", null: false
@@ -33,7 +47,7 @@ ActiveRecord::Schema.define(version: 20190419134345) do
     t.index ["show_order"], name: "index_categories_on_show_order"
   end
 
-  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "events", force: :cascade do |t|
     t.string "provider", default: "name", null: false
     t.string "uid", default: "name", null: false
     t.string "encrypted_password", default: "", null: false
@@ -56,7 +70,7 @@ ActiveRecord::Schema.define(version: 20190419134345) do
     t.boolean "admin", default: false
     t.boolean "active", default: false
     t.string "gst_number"
-    t.string "tokens", limit: 500
+    t.string "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "default_station"
@@ -64,12 +78,15 @@ ActiveRecord::Schema.define(version: 20190419134345) do
     t.string "published_name"
     t.integer "station_id"
     t.string "item_image"
+    t.string "help_url"
+    t.string "event_help_url"
+    t.boolean "show_date"
     t.index ["confirmation_token"], name: "index_events_on_confirmation_token", unique: true
     t.index ["name"], name: "index_events_on_name", unique: true
     t.index ["reset_password_token"], name: "index_events_on_reset_password_token", unique: true
   end
 
-  create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "items", force: :cascade do |t|
     t.string "name"
     t.decimal "price", precision: 8, scale: 2
     t.datetime "created_at", null: false
@@ -79,11 +96,12 @@ ActiveRecord::Schema.define(version: 20190419134345) do
     t.integer "category_id"
     t.integer "event_id"
     t.string "image"
+    t.decimal "special_price", precision: 8, scale: 2
     t.index ["name"], name: "index_items_on_name"
     t.index ["order_no"], name: "index_items_on_order_no"
   end
 
-  create_table "order_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "order_items", force: :cascade do |t|
     t.integer "quantity"
     t.decimal "value", precision: 8, scale: 2
     t.datetime "created_at", null: false
@@ -95,7 +113,7 @@ ActiveRecord::Schema.define(version: 20190419134345) do
     t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
-  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "orders", force: :cascade do |t|
     t.string "customer_name"
     t.string "station"
     t.decimal "value", precision: 8, scale: 2
@@ -108,10 +126,12 @@ ActiveRecord::Schema.define(version: 20190419134345) do
     t.integer "account_id"
     t.text "fulfilled"
     t.text "comments"
+    t.integer "order_number"
+    t.index ["order_number"], name: "index_orders_on_order_number"
     t.index ["station_id"], name: "index_orders_on_station_id"
   end
 
-  create_table "stations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "stations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -120,6 +140,7 @@ ActiveRecord::Schema.define(version: 20190419134345) do
     t.integer "event_id"
     t.boolean "separate_by_category", default: false
     t.index ["name"], name: "index_stations_on_name"
+    t.index ["next_station_id"], name: "index_stations_on_next_station_id"
   end
 
 end

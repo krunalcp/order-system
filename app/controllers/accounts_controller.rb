@@ -4,6 +4,9 @@ class AccountsController < ApplicationController
 
   def index
     @accounts = current_event.accounts
+    if params[:active].present?
+      @accounts = @accounts.where(is_active: true)
+    end
 
     render json: @accounts
   end
@@ -53,6 +56,6 @@ class AccountsController < ApplicationController
   end
 
   def account_params
-    params.permit(:name, :contact_name, :email, :phone, :password)
+    params.permit(:name, :contact_name, :email, :phone, :password, :is_active)
   end
 end

@@ -96,7 +96,7 @@ class EventOrdersController < ApplicationController
   end
 
   def accounts
-    accounts = @event.accounts
+    accounts = @event.accounts.where(is_active: true)
 
     render json: accounts
   end
