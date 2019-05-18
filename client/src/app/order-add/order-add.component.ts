@@ -203,7 +203,7 @@ export class OrderAddComponent implements OnInit {
   }
 
   private getAccountList(): void {
-    this.accountService.list(true).subscribe(
+    this.accountService.active_list().subscribe(
       successResponse => {
         this.accounts = successResponse.json();
       }
