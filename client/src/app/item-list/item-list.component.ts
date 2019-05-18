@@ -70,8 +70,8 @@ export class ItemListComponent implements OnInit {
       }
     );
   }
-  
-  public showActiveItems(){
+
+  public hideInActiveItems(){
     this.isActiveItemsLoading = true;
     this.isNonActiveItemsLoading = false;
     this.itemService.activeItem().subscribe(
@@ -86,7 +86,7 @@ export class ItemListComponent implements OnInit {
     );
   }
 
-  public hideActiveItems(){
+  public showInActiveItems(){
     this.isNonActiveItemsLoading = true;
     this.isActiveItemsLoading = false;
     this.itemService.nonActiveItem().subscribe(
