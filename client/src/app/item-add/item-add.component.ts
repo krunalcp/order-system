@@ -9,6 +9,8 @@ import { CategoryService } from '../category.service';
 
 import { Item } from '../item';
 
+declare var $: any;
+
 @Component({
   selector: 'app-item-add',
   templateUrl: './item-add.component.html',

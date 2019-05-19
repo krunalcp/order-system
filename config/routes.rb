@@ -14,7 +14,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :categories
+  resources :categories do
+    collection do
+      get 'last_show_order'
+    end
+  end
+
   resources :events do
     collection do
       get 'current'

@@ -5,7 +5,7 @@ class Category < ApplicationRecord
 
   validates :name, :show_order, presence: true
 
-  acts_as_list column: :show_order
+  acts_as_list column: :show_order, scope: :event_id
 
   default_scope { order(:show_order) }
 end

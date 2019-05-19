@@ -46,6 +46,15 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def last_show_order
+    category = current_event.categories.last
+    if category
+      render json: (category.show_order.to_i + 1)
+    else
+      render json: 1
+    end
+  end
+
   private
 
   def set_category

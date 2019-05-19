@@ -42,4 +42,10 @@ export class CategoryService {
 
   	return this.http.get(categoriesApiURL, this.hostAppService.getToken());
   }
+
+  lastShowOrder(): Observable<any>{
+    let categoriesApiURL = this.hostAppService.getHost() + '/categories/last_show_order';
+
+    return this.http.get(categoriesApiURL, this.hostAppService.getToken());
+  }
 }

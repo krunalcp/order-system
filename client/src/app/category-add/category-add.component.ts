@@ -44,7 +44,17 @@ export class CategoryAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getLastShowOrder();
     this.buildForm();
+  }
+
+  private getLastShowOrder(): void {
+    this.categoryService.lastShowOrder().subscribe(
+      successResponse => {
+        this.category.show_order = successResponse.json();
+        this.buildForm();
+      }
+    );
   }
 
   public onSubmit() {
