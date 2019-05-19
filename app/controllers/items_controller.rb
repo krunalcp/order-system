@@ -68,11 +68,11 @@ class ItemsController < ApplicationController
   end
 
   def last_order_number
-    item = current_event.items.last
+    item = current_event.items.where(category_id: params[:category_id]).last
     if item
-      render json: (item.order_no || 0) + 1
+      render json: (item.order_no.to_i + 1)
     else
-      render json: 0
+      render json: 1
     end
   end
 

@@ -57,19 +57,19 @@ export class ItemAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.getLastOrderNumber();
     this.buildForm();
     this.getCategoryList();
   }
 
-  private getLastOrderNumber(): void {
-    this.itemService.lastOrderNumber().subscribe(
-      successResponse => {
-        this.item.order_no = successResponse.json();
-        this.buildForm();
-      }
-    );
+  public getLastOrderNumber(): void {
+    let categoryID = $("#category_id").val()
+    if(categoryID != ""){
+      this.itemService.lastOrderNumber(categoryID).subscribe(
+        successResponse => {
+          $("#order_no").val(successResponse.json());
+        }
+      );
+    }
   }
 
   public onSubmit() {

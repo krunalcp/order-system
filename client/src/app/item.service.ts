@@ -62,8 +62,8 @@ export class ItemService {
     return this.http.get(itemsApiURL, this.hostAppService.getToken());
   }
 
-  lastOrderNumber(): Observable<any>{
-    let itemsApiURL = this.hostAppService.getHost() + '/items/last_order_number';
+  lastOrderNumber(categoryId: number): Observable<any>{
+    let itemsApiURL = this.hostAppService.getHost() + '/items/last_order_number?category_id=' + categoryId;
 
     return this.http.get(itemsApiURL, this.hostAppService.getToken());
   }

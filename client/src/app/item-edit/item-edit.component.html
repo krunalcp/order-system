@@ -25,13 +25,6 @@
           </select>
         </div>
         <div class="form-group g-mb-25 col-md-6">
-          <label class="g-mb-10" for="order_no">
-            <span *ngIf="!formErrors.order_no" [ngClass]="{'text-success': !itemForm.controls.order_no.pristine}">Show Order</span>
-            <span *ngIf="formErrors.order_no" class="text-danger">{{formErrors.order_no}}</span>
-          </label>
-          <input class="form-control form-control-md rounded-0" type="number" placeholder="Enter Order no" id="order_no" formControlName="order_no">
-        </div>
-        <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="price">
             <span *ngIf="!formErrors.price" [ngClass]="{'text-success': !itemForm.controls.price.pristine}">Price</span>
             <span *ngIf="formErrors.price" class="text-danger">{{formErrors?.price}}</span>
@@ -44,13 +37,6 @@
           </div>
         </div>
         <div class="form-group g-mb-25 col-md-6">
-          <label class="g-mb-10" for="image">
-            <span *ngIf="!formErrors.image" [ngClass]="{'text-success': !itemForm.controls.image.pristine}">Image</span>
-            <span *ngIf="formErrors.image" class="text-danger">{{formErrors.image}}</span>
-          </label>
-          <input class="form-control form-control-md rounded-0" type="text" placeholder="Enter Image url" id="image" formControlName="image">
-        </div>
-        <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="special_price">
             <span *ngIf="!formErrors.special_price" [ngClass]="{'text-success': !itemForm.controls.special_price.pristine}">Special Price</span>
             <span *ngIf="formErrors.special_price" class="text-danger">{{formErrors.special_price}}</span>
@@ -61,6 +47,20 @@
             </div>
             <input class="form-control form-control-md rounded-0" type="text" placeholder="Enter Special Price" id="special_price" formControlName="special_price">
           </div>
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="order_no">
+            <span *ngIf="!formErrors.order_no" [ngClass]="{'text-success': !itemForm.controls.order_no.pristine}">Show Order</span>
+            <span *ngIf="formErrors.order_no" class="text-danger">{{formErrors.order_no}}</span>
+          </label>
+          <input class="form-control form-control-md rounded-0" type="number" placeholder="Enter Order no" id="order_no" formControlName="order_no">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="image">
+            <span *ngIf="!formErrors.image" [ngClass]="{'text-success': !itemForm.controls.image.pristine}">Image</span>
+            <span *ngIf="formErrors.image" class="text-danger">{{formErrors.image}}</span>
+          </label>
+          <input class="form-control form-control-md rounded-0" type="text" placeholder="Enter Image url" id="image" formControlName="image">
         </div>
         <div class="form-group g-mb-25 col-md-3">
           <label class="g-mb-10" for="active">Active</label>

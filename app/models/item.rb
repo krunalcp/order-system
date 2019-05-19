@@ -10,7 +10,7 @@ class Item < ApplicationRecord
 
   default_scope { order(:order_no) }
 
-  acts_as_list column: :order_no
+  acts_as_list column: :order_no, scope: %i[event_id category_id]
 
   def self.get_summary(current_event, type = 'quantity')
     summary = []
