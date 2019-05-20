@@ -1,6 +1,6 @@
 <header *ngIf="showHeader" id="js-header" class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance" data-header-fix-moment="300">
   <div class="u-header__section u-header__section--dark g-bg-black g-transition-0_3 g-py-10" data-header-fix-moment-exclude="g-py-10" data-header-fix-moment-classes="g-py-0">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg toggle_nav_bar">
       <div class="container">
         <!-- Responsive Toggle Button -->
         <button class="navbar-toggler navbar-toggler-right btn g-brd-none g-pa-0 g-pos-abs g-right-0" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBarHeader" data-toggle="collapse" data-target="#navBarHeader">
@@ -68,7 +68,21 @@
       </div>
     </nav>
   </div>
-  <div class="row">
+  <div class="row g-bg-black fa-caret">
+    <div class="col-sm-12">
+      <a class="toggle_btn" href="#" (click)="toggle_navbar()" >
+        <i class="fa fa-2x fa-caret-up white"></i> 
+      </a>
+    </div>
+  </div>
+  <div class="row g-bg-black hidden fa-caret">
+    <div class="col-sm-12">
+      <a class="toggle_btn" href="#" (click)="toggle_navbar()" >
+        <i class="fa fa-2x fa-caret-down white"></i> 
+      </a>
+    </div>
+  </div>
+  <div class="row hide_display_flex">
     <div class="col-sm-12">
       <h2 class="test-header" *ngIf="hostAppService.isTestSite()">{{ hostAppService.getHeaderName() }}</h2>
     </div>

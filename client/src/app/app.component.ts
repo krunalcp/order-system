@@ -45,6 +45,11 @@ export class AppComponent {
     }
   }
 
+  public toggle_navbar() {
+    $(".toggle_nav_bar").toggle();
+    $(".fa-caret").toggle();
+  }
+
   private loadCurrentEvent(): void {
     this.eventService.current().subscribe(
       successResponse => {
