@@ -20,7 +20,7 @@ export class StationListComponent implements OnInit {
   public isStationDeleting: boolean = false;
   public currentStationId: number;
   public currentEvent: Event = new Event();
-
+  public errorMessage: any;
   constructor(
     public eventService: EventService,  
     private stationService: StationService,
