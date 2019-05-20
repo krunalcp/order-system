@@ -63,10 +63,6 @@
           <input id="hf-email" class="form-control u-form-control rounded-0" type="password" placeholder="Enter password " id="password" formControlName="password">
         </div>
         <div class="form-group g-mb-25 col-md-6">
-          <label class="g-mb-10" for="admin">Link</label>
-          <span class="form-control">{{hostAppService.getHost()}}/#/{{event.name}}/order</span>
-        </div>
-        <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="help_url">
             <span *ngIf="!formErrors.help_url">Help URL</span>
             <span *ngIf="formErrors.help_url" class="text-danger">{{formErrors.help_url}}</span>
@@ -80,6 +76,10 @@
           </label>
           <input id="hf-email" class="form-control u-form-control rounded-0" type="event_help_url" placeholder="Enter event_help_url " id="event_help_url" formControlName="event_help_url">
         </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="admin">Link</label>
+          <span class="form-control">{{hostAppService.getHost()}}/#/{{event.name}}/order</span>
+        </div>
         <div class="form-group g-mb-25 col-md-1" *ngIf="currentEvent.admin == true">
           <label class="g-mb-10" for="admin">Admin</label>
           <input class="form-control u-form-control rounded-0" type="checkbox" id="admin" formControlName="admin">
@@ -89,7 +89,7 @@
           <input class="form-control u-form-control rounded-0" type="checkbox" id="active" formControlName="active">
         </div>
         <div class="form-group g-mb-25 col-md-1" *ngIf="currentEvent.admin == true">
-          <label class="g-mb-10" for="is_one_off">one off</label>
+          <label class="g-mb-10" for="is_one_off">Is one-off event</label>
           <input class="form-control u-form-control rounded-0" type="checkbox" id="is_one_off" formControlName="is_one_off">
         </div>
         <div class="form-group g-mb-25 col-md-2" *ngIf="currentEvent.admin == true">
