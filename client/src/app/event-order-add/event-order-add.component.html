@@ -7,14 +7,12 @@
       <div class="col-md-6">
         <h3 class="h2 g-font-weight-300 g-mb-20"><span *ngIf="isEventOrderPage">Enter </span>Order details</h3>
       </div>
-      <div class="col-md-3 text-right">
+      <div class="col-md-6 text-right">
         <button class="btn btn-md u-btn-outline-teal u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
           <a href="{{currentEvent.event_help_url}}" class="nav-link px-0" target="_blank"> Help </a>
         </button>
-      </div>
-      <div class="col-md-3 text-right">
         <button class="btn btn-md u-btn-outline-teal u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15">
-          <a class="nav-link px-0" (click)="toggleAllCategory()"> Expand all Categories </a>
+          <a class="nav-link px-0" id="expand-button"  (click)="toggleAllCategory()">Expand all Categories </a>
         </button>
       </div>
     </div>

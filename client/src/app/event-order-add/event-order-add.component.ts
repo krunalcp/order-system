@@ -337,6 +337,11 @@ export class EventOrderAddComponent implements OnInit {
     $(".all_category").toggle();
     $(".category_color_down").toggle();
     $(".category_color_up").toggle();
+    if($(".all_category").css('display') == 'none') {
+      $("#expand-button").text('Expand all Categories');
+    } else {
+      $("#expand-button").text('Collapse all Categories');
+    }
   }
 
 }
