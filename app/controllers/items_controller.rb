@@ -3,18 +3,18 @@ class ItemsController < ApplicationController
   before_action :set_item, only: %i[show update destroy]
 
   def index
-    @items = current_event.items.includes(:order_items, :category)
+    @items = Item.unscoped.where(event_id: current_event.id).left_outer_joins(:category).order('categories.show_order asc, items.order_no asc')
 
     render json: @items
   end
 
   def active_items
-    @items =  Item.unscoped.where(event_id: current_event.id).left_outer_joins(:category).where(active: true).order('categories.show_order asc, items.order_no asc')
+    @items = Item.unscoped.where(event_id: current_event.id).left_outer_joins(:category).where(active: true).order('categories.show_order asc, items.order_no asc')
     render json: @items
   end
 
   def non_active_items
-    @items =  Item.unscoped.where(event_id: current_event.id).left_outer_joins(:category).where(active: false).order('categories.show_order asc, items.order_no asc')
+    @items = Item.unscoped.where(event_id: current_event.id).left_outer_joins(:category).where(active: false).order('categories.show_order asc, items.order_no asc')
     render json: @items
   end
 
