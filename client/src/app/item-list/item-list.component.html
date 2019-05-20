@@ -20,12 +20,12 @@
         <i class="fa fa-file-excel-o g-mr-5"></i>Import items
       </a>
       <span *ngIf="isNonActiveItemsLoading">
-        <a *ngIf="currentEvent.admin" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="showInActiveItems()" >
+        <a class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="showInActiveItems()" >
           show inactive items
         </a>
       </span>
       <span *ngIf="isActiveItemsLoading">
-        <a *ngIf="currentEvent.admin, isNonActiveItemsLoading" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="hideInActiveItems()" >
+        <a class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="hideInActiveItems()" >
           hide inactive items
         </a>
       </span>
@@ -33,7 +33,7 @@
         <a *ngIf="currentEvent.admin" class="btn btn-md u-btn-outline-cyan u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15" (click)="toggleAllCategory()" >
           Collapse all categories
         </a>
-      </span> 
+      </span>
     </div>
   </div>
   <div class="card g-brd-teal rounded-0 g-mb-30">
