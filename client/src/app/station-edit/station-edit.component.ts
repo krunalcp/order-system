@@ -63,12 +63,13 @@ export class StationEditComponent implements OnInit {
     this.eventService.current().subscribe(
       successResponse => {
         this.currentEvent = successResponse.json();
+      },
       () => {
         this.errorMessage = 'Failed to load Event.';
       }
     );
   }
-
+  
   public onSubmit() {
     if(this.stationForm.status == 'INVALID') {
       this.isFormSubmitted = true;

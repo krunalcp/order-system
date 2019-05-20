@@ -37,6 +37,7 @@ export class StationListComponent implements OnInit {
     this.eventService.current().subscribe(
       successResponse => {
         this.currentEvent = successResponse.json();
+      },
       () => {
         this.errorMessage = 'Failed to load Event.';
       }
