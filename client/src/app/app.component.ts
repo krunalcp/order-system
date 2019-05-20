@@ -48,6 +48,14 @@ export class AppComponent {
   public toggle_navbar() {
     $(".toggle_nav_bar").toggle();
     $(".fa-caret").toggle();
+
+    if ($(".toggle_nav_bar").css('display') == 'none'){
+      $($(".container")[1]).removeClass('g-mt-100');
+      $($(".container")[1]).addClass('g-mt-20');
+    } else {
+      $($(".container")[1]).removeClass('g-mt-20');
+      $($(".container")[1]).addClass('g-mt-100');
+    }
   }
 
   private loadCurrentEvent(): void {

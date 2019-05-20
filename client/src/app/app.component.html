@@ -39,7 +39,7 @@
             <li *ngIf="tokenService.userSignedIn()" class="dropdown nav-item g-mx-20--lg">
               <a class="dropdown-toggle nav-link px-0" data-toggle="dropdown" href="#" >
                 More
-                <span class="caret"></span> 
+                <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
                 <li *ngIf="tokenService.userSignedIn() && currentEvent.admin" class="nav-item g-mx-20--lg">
@@ -54,7 +54,7 @@
                 <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
                   <a routerLink="/order/summary" class="nav-link px-0"> Summary </a>
                 </li>
-                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+                <li *ngIf="tokenService.userSignedIn()" style="cursor: pointer;" class="nav-item g-mx-20--lg">
                   <a (click)="onSignout()" class="nav-link px-0">LOGOUT</a>
                 </li>
               </ul>
@@ -70,16 +70,16 @@
   </div>
   <div class="row g-bg-black fa-caret">
     <div class="col-sm-12">
-      <a class="toggle_btn" href="#" (click)="toggle_navbar()" >
-        <i class="fa fa-2x fa-caret-up white"></i> 
-      </a>
+      <span class="toggle_btn" style="cursor: pointer;" (click)="toggle_navbar()" >
+        <i class="fa fa-2x fa-caret-up white"></i>
+      </span>
     </div>
   </div>
-  <div class="row g-bg-black hidden fa-caret">
+  <div class="row g-bg-black hidden fa-caret fa-caret-pd ">
     <div class="col-sm-12">
-      <a class="toggle_btn" href="#" (click)="toggle_navbar()" >
-        <i class="fa fa-2x fa-caret-down white"></i> 
-      </a>
+      <span class="toggle_btn" style="cursor: pointer;" (click)="toggle_navbar()" >
+        <i class="fa fa-2x fa-caret-down white"></i>
+      </span>
     </div>
   </div>
   <div class="row hide_display_flex">
