@@ -41,7 +41,8 @@ export class EventEditComponent implements OnInit {
     'item_image': '',
     'help_url' : '',
     'event_help_url' : '',
-    'show_date': ''
+    'show_date': '',
+    'is_one_off' : ''
   };
   validationMessages = {
     'name': {
@@ -131,6 +132,7 @@ export class EventEditComponent implements OnInit {
         this.event['help_url'] = data.help_url;
         this.event['event_help_url'] = data.event_help_url;
         this.event['show_date'] = data.show_date;
+        this.event['is_one_off'] = data.is_one_off;
         this.eventForm.patchValue(this.event);
         this.getStationList();
       },
@@ -184,6 +186,9 @@ export class EventEditComponent implements OnInit {
       ],
       'show_date':[
         this.event.show_date
+      ],
+      'is_one_off':[
+        this.event.is_one_off
       ]
     });
 

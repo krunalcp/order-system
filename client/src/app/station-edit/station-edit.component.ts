@@ -5,14 +5,15 @@ import { Response } from '@angular/http';
 import {Subscription} from 'rxjs';
 
 import { StationService } from '../station.service';
-
+import { EventService } from '../event.service';
 import { Station } from '../station';
+import { Event } from '../event';
 
 @Component({
   selector: 'app-station-edit',
   templateUrl: './station-edit.component.html',
   styleUrls: ['./station-edit.component.css'],
-  providers: [StationService]
+  providers: [StationService,EventService]
 })
 export class StationEditComponent implements OnInit {
 
@@ -23,6 +24,7 @@ export class StationEditComponent implements OnInit {
   private isFormSubmitted: boolean;
   public isStationUpdating: boolean = false;
   public stations: any;
+  public currentEvent: Event = new Event();
 
   public errorMessage: any;
   public formErrors = {
@@ -36,6 +38,7 @@ export class StationEditComponent implements OnInit {
 
 
   constructor(
+    public eventService: EventService,
     private route: ActivatedRoute,
     private router: Router,
     private stationService: StationService,
@@ -53,6 +56,17 @@ export class StationEditComponent implements OnInit {
       }
     );
     this.getStationList();
+    this.loadCurrentEvent();
+  }
+
+  private loadCurrentEvent(): void {
+    this.eventService.current().subscribe(
+      successResponse => {
+        this.currentEvent = successResponse.json();
+      () => {
+        this.errorMessage = 'Failed to load Event.';
+      }
+    );
   }
 
   public onSubmit() {

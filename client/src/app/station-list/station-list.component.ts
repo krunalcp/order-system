@@ -3,9 +3,10 @@ import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { StationService } from '../station.service';
-
+import { EventService } from '../event.service';
 import { Station } from '../station';
-
+import { Event } from '../event';
+ 
 @Component({
   selector: 'app-station-list',
   templateUrl: './station-list.component.html',
@@ -18,8 +19,10 @@ export class StationListComponent implements OnInit {
   public isStationsLoading: boolean = false;
   public isStationDeleting: boolean = false;
   public currentStationId: number;
+  public currentEvent: Event = new Event();
 
   constructor(
+    public eventService: EventService,  
     private stationService: StationService,
     private router: Router
   ) { }
@@ -27,8 +30,19 @@ export class StationListComponent implements OnInit {
   ngOnInit() {
 
     this.loadStationList();
+    this.loadCurrentEvent();
   }
 
+  private loadCurrentEvent(): void {
+    this.eventService.current().subscribe(
+      successResponse => {
+        this.currentEvent = successResponse.json();
+      () => {
+        this.errorMessage = 'Failed to load Event.';
+      }
+    );
+  }
+  
   public loadStationList(){
     this.isStationsLoading = true;
     this.stationService.list().subscribe(

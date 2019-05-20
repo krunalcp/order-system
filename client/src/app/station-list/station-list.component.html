@@ -16,8 +16,8 @@
           <th class="align-middle g-color-black">#</th>
           <th class="align-middle g-color-black g-min-width-200">Name</th>
           <th class="align-middle g-color-black g-min-width-200">Next Station</th>
-          <th class="align-middle g-color-black">Refresh Time</th>
-          <th class="align-middle g-color-black">Separate By Category</th>
+          <th class="align-middle g-color-black" *ngIf="currentEvent.is_one_off">Refresh Time</th>
+          <th class="align-middle g-color-black" *ngIf="currentEvent.is_one_off">Separate By Category</th>
           <th class="align-middle g-color-black g-min-width-300">Options</th>
         </tr>
       </thead>
@@ -26,8 +26,10 @@
         <tr *ngFor="let station of stations; index as i;">
           <td class="align-middle">{{i + 1}}</td>
           <td class="align-middle">{{station.name}}</td>
-          <td class="align-middle"><span *ngIf="station.next_station_id >= 1">{{station.next_station.name}}</span></td>
-          <td class="align-middle">{{station.refresh_time}}</td>
+          <td class="align-middle" *ngIf="currentEvent.is_one_off">
+            <span *ngIf="station.next_station_id >= 1">{{station.next_station.name}}</span>
+          </td>
+          <td class="align-middle" *ngIf="currentEvent.is_one_off">{{station.refresh_time}}</td>
           <td class="align-middle">{{station.separate_by_category ? 'Yes' : 'No'}}</td>
           <td class="align-middle text-center">
             <a href="#!" class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/station/edit/{{station.id}}">edit</a>
