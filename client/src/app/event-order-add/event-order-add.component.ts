@@ -332,4 +332,11 @@ export class EventOrderAddComponent implements OnInit {
     this.loadItems();
     this.loadFavouriteItem();
   }
+
+  public toggleAllCategory(category) {
+    $(".all_category").toggle();
+    $(".category_color_down").toggle();
+    $(".category_color_up").toggle();
+  }
+
 }
