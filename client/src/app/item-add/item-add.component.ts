@@ -113,7 +113,7 @@ export class ItemAddComponent implements OnInit {
       ],
       'order_no': [
         this.item.order_no, [
-          Validators.required,
+          // Validators.required,
           // Validators.maxLength(this.maxlength.description)
         ]
       ],
