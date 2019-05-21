@@ -22,6 +22,12 @@
       <button class="btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="loadItemList(true, 'value')">
 				<i class="fa fa-usd"></i> Value Sold
 			</button>
+
+      <select class="form-control rounded-0 u-form-control" style="width: 150px; float: right;" (change)="loadItemListFromPeriod()" id="period">
+        <option value=''>All</option>
+        <option value='current'>This Month</option>
+        <option value='last'>Last Month</option>
+      </select>
 		</div>
 	</div>
 

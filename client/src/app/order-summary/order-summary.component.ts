@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../item.service';
 import { timer } from 'rxjs';
 
+declare var $: any;
+
 @Component({
   selector: 'app-order-summary',
   templateUrl: './order-summary.component.html',
@@ -22,12 +24,17 @@ export class OrderSummaryComponent implements OnInit {
     this.loadItemList(true, 'quantity');
   }
 
+  public loadItemListFromPeriod(){
+    this.loadItemList(true, this.s_type)
+  }
+
   public loadItemList(ts: boolean, type: string){
     this.isItemsLoading = true;
     if (ts) {
       this.s_type = type;
     }
-    this.itemService.listSummary(this.s_type).subscribe(
+    let period = $("#period").val();
+    this.itemService.listSummary(this.s_type, period).subscribe(
       successResponse => {
         this.orderSummary = successResponse.json();
         this.stations = this.orderSummary[0].stations

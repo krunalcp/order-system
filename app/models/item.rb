@@ -12,7 +12,7 @@ class Item < ApplicationRecord
 
   acts_as_list column: :order_no, scope: %i[event_id category_id]
 
-  def self.get_summary(current_event, type = 'quantity')
+  def self.get_summary(current_event, type = 'quantity', period = 'all')
     summary = []
 
     current_event.items.where(active: true).find_each do |item|
@@ -21,19 +21,37 @@ class Item < ApplicationRecord
     stations = {}
     current_event.stations.each_with_index do |station, index|
       stations[station.name] = { quantity: 0 }
-      order_items = if type == 'value'
-        station.order_items.select(
-          "order_items.item_id, sum(order_items.#{type} * order_items.quantity) as quantity"
-        ).group('order_items.item_id')
+
+      select = if type == 'value'
+        "order_items.item_id, sum(order_items.#{type} * order_items.quantity) as quantity"
       else
-        station.order_items.select(
-          "order_items.item_id, sum(order_items.#{type}) as quantity"
-        ).group('order_items.item_id')
+        "order_items.item_id, sum(order_items.#{type}) as quantity"
       end
-      if order_items.present?
+
+      condition = if period == 'current'
+        [
+          "((orders.scheduled_order_time >= ? and orders.scheduled_order_time <= ?) or (orders.created_at >= ? and orders.created_at <= ?)) and orders.station_id = ?",
+          Time.now.beginning_of_month, Time.now.end_of_month,
+          Time.now.beginning_of_month, Time.now.end_of_month, station.id
+        ]
+      elsif period == 'last'
+        [
+          "((orders.scheduled_order_time >= ? and orders.scheduled_order_time <= ?) or (orders.created_at >= ? and orders.created_at <= ?)) and orders.station_id = ?",
+          DateTime.now.prev_month.beginning_of_month, DateTime.now.prev_month.end_of_month,
+          DateTime.now.prev_month.beginning_of_month, DateTime.now.prev_month.end_of_month, station.id
+        ]
+      else
+        ["orders.station_id = ?", station.id]
+      end
+
+      ots = OrderItem.joins(
+        "INNER JOIN orders ON order_items.order_id = orders.id"
+      ).select(select).group('order_items.item_id').where(condition)
+
+      if ots.present?
         summary.each do |s|
           match = false
-          order_items.each do |order_item|
+          ots.each do |order_item|
             next unless s[:id] == order_item.item_id
 
             s[:stations] << {
