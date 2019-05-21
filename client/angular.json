@@ -26,6 +26,7 @@
               "src/styles.css",
               "src/assets/vendor/bootstrap/bootstrap.min.css",
               "src/assets/vendor/bootstrap/bootstrap-grid.min.css",
+              "src/assets/vendor/bootstrap/bootstrap-datetimepicker.css",
               "src/assets/vendor/unify/unify.css",
               "src/assets/vendor/unify/unify-components.css",
               "src/assets/vendor/unify/unify-globals.css",
@@ -36,6 +37,7 @@
               "src/assets/jquery/jquery/jquery.min.js",
               "src/assets/jquery/jquery-migrate/jquery-migrate.min.js",
               "src/assets/vendor/bootstrap/bootstrap.min.js",
+              "src/assets/vendor/bootstrap/bootstrap-datetimepicker.js",
               "src/assets/jquery/jquery-ui//jquery-ui.min.js",
               "src/assets/js/hs.core.js",
               "src/assets/js/components/hs.count-qty.js"
