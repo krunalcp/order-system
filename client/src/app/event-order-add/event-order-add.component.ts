@@ -70,6 +70,15 @@ export class EventOrderAddComponent implements OnInit {
     this.isEventOrderPage = true;
   }
 
+  ngAfterViewChecked() {
+    this.initDatePicker();
+  }
+
+  public initDatePicker(): void {
+    $("#scheduled_order_time").datetimepicker({
+      format: 'dd-mm-yyyy hh:ii'
+    });
+  }
   private loadCurrentEvent(): void {
     this.eventOrderService.currentEvent(this.eventName).subscribe(
       successResponse => {
@@ -188,6 +197,7 @@ export class EventOrderAddComponent implements OnInit {
       return;
     }
     this.order = this.orderForm.value;
+    this.order.scheduled_order_time = $("#scheduled_order_time").val();
     this.order.order_items = this.items.filter(item => item.quantity > 0).concat(this.favourite_items.filter(item => item.quantity > 0))
     this.order.value = this.totalPrice;
     this.isOrderAdding = true;
