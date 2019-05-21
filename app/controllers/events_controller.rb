@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
   def index
     if current_event.admin
-      @events = Event.all
+      @events = Event.order(:name).all
     else
       @events = Event.where(id: current_event.id)
     end
