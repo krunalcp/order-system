@@ -168,7 +168,7 @@ export class ItemListComponent implements OnInit {
     $(".i_" + this.removeSpace(category)).toggle();
   }
 
-  public toggleAllCategory(category) {
+  public toggleAllCategory() {
     $(".all_category").toggle();
     $(".category_color_down").toggle();
     $(".category_color_up").toggle();
