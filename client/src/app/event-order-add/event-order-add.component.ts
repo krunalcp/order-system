@@ -76,7 +76,9 @@ export class EventOrderAddComponent implements OnInit {
 
   public initDatePicker(): void {
     $("#scheduled_order_time").datetimepicker({
-      format: 'dd-mm-yyyy hh:ii'
+      format: 'dd-mm-yyyy hh:ii',
+      autoclose: true,
+      minuteStep: 15,
     });
   }
   private loadCurrentEvent(): void {
