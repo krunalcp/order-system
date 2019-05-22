@@ -8,14 +8,7 @@ class EventSerializer < ActiveModel::Serializer
   end
 
   def is_allowed_to_order
-    if object.start_date.present? && object.end_date.present?
-	    if Date.today >= object.start_date && Date.today <= object.end_date
-	      true
-	    else
-	      false
-	    end
-    else
-      false
-    end
+    object.start_date.present? && object.end_date.present? &&
+    Date.today >= object.start_date && Date.today <= object.end_date
   end
 end
