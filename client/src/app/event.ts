@@ -15,6 +15,8 @@ export class Event {
     public help_url?: string,
     public event_help_url?: string,
     public show_date?: boolean,
-    public is_one_off?: boolean
+    public is_one_off?: boolean,
+    public start_date?: any,
+    public end_date?: any,
   ) {}
 }

@@ -67,7 +67,7 @@ class EventsController < ApplicationController
     params.permit(
       :name, :password, :gst_number, :admin, :active, :published_name,
       :station_id, :logo, :icon, :item_image, :help_url, :event_help_url,
-      :show_date, :is_one_off
+      :show_date, :is_one_off, :start_date, :end_date
     )
   end
 end

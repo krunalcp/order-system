@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container" *ngIf="currentEvent.is_allowed_to_order">
   <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
     <h1 class="h3 u-heading-v1__title">Place Order</h1>
   </div>
-  <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
-    <div class="row">
+  <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert"> 
+    <div class="row"> 
       <div class="col-md-6">
         <h3 class="h2 g-font-weight-300 g-mb-20"><span *ngIf="isEventOrderPage">Enter </span>Order details</h3>
       </div>
@@ -223,5 +223,10 @@
         Cancel
       </button>
     </div>
+  </div>
+</div>
+<div class="container" *ngIf="!currentEvent.is_allowed_to_order">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">You are not eligible for place order</h1>
   </div>
 </div>
