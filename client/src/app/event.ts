@@ -18,5 +18,6 @@ export class Event {
     public is_one_off?: boolean,
     public start_date?: any,
     public end_date?: any,
+    public is_allowed_to_order?: boolean,
   ) {}
 }
