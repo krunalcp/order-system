@@ -27,6 +27,9 @@ export class HostappService {
     else if (environment == 'ctordering-demo.herokuapp.com'){
       return "https://ctordering-demo.herokuapp.com"
     }
+    else if (environment == 'demoapp.campusandcoorders.com') {
+      return "https://demoapp.campusandcoorders.com"
+    }
   }
 
   public isTestSite() {
