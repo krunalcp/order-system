@@ -2,8 +2,8 @@
   <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
     <h1 class="h3 u-heading-v1__title">Place Order</h1>
   </div>
-  <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert"> 
-    <div class="row"> 
+  <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
+    <div class="row">
       <div class="col-md-6">
         <h3 class="h2 g-font-weight-300 g-mb-20"><span *ngIf="isEventOrderPage">Enter </span>Order details</h3>
       </div>
@@ -93,7 +93,7 @@
                   ${{(item.price * item.quantity).toFixed(2)}}
                 </td>
                 <td>
-                  <input class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesfavouriteOptions(item)">
+                  <input *ngIf="item.quantity > 0" class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesfavouriteOptions(item)">
                 </td>
                 <td>
                   <i class="fa fa-heart g-px-20 favourite" (click)="removeFavourite(item.id)"></i>
@@ -133,7 +133,7 @@
                   ${{(getPrice(item) * item.quantity).toFixed(2)}}
                 </td>
                 <td>
-                  <input class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesOptions(item)">
+                  <input *ngIf="item.quantity > 0" class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesOptions(item)">
                 </td>
                 <td>
                   <i *ngIf='accountId' class="fa fa-heart-o g-px-20 favourite" (click)="favourite(item.id)"></i>
@@ -227,6 +227,6 @@
 </div>
 <div class="container" *ngIf="!currentEvent.is_allowed_to_order">
   <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
-    <h1 class="h3 u-heading-v1__title">You are not eligible for place order</h1>
+    <h1 class="h3 u-heading-v1__title">Preordering for this site is closed</h1>
   </div>
 </div>
