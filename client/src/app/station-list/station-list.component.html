@@ -26,11 +26,11 @@
         <tr *ngFor="let station of stations; index as i;">
           <td class="align-middle">{{i + 1}}</td>
           <td class="align-middle">{{station.name}}</td>
-          <td class="align-middle" *ngIf="currentEvent.is_one_off">
+          <td class="align-middle">
             <span *ngIf="station.next_station_id >= 1">{{station.next_station.name}}</span>
           </td>
           <td class="align-middle" *ngIf="currentEvent.is_one_off">{{station.refresh_time}}</td>
-          <td class="align-middle">{{station.separate_by_category ? 'Yes' : 'No'}}</td>
+          <td class="align-middle" *ngIf="currentEvent.is_one_off">{{station.separate_by_category ? 'Yes' : 'No'}}</td>
           <td class="align-middle text-center">
             <a href="#!" class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/station/edit/{{station.id}}">edit</a>
             <button class="btn btn-md u-btn-outline-{{station.station_used ? 'darkgray' : 'deeporange'}} g-mr-10 g-mb-15" (click)="deleteStation(station.id)" [disabled]="station.station_used">
