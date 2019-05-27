@@ -19,5 +19,7 @@ export class Event {
     public start_date?: any,
     public end_date?: any,
     public is_allowed_to_order?: boolean,
+		public earliest_preorder_date?: any,
+		public latest_preorder_date?: any
   ) {}
 }

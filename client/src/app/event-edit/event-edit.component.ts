@@ -46,7 +46,9 @@ export class EventEditComponent implements OnInit {
     'show_date': '',
     'is_one_off' : '',
     'start_date' : '',
-    'end_date' : ''
+    'end_date' : '',
+    'earliest_preorder_date': '',
+    'latest_preorder_date': ''
   };
   validationMessages = {
     'name': {
@@ -62,7 +64,7 @@ export class EventEditComponent implements OnInit {
       'required': 'Password is required.'
     }
   };
- 
+
   constructor(
   	private orderService: OrderService,
   	private route: ActivatedRoute,
@@ -84,13 +86,13 @@ export class EventEditComponent implements OnInit {
       }
     );
   }
- 
+
   ngAfterViewChecked() {
     this.initDatePicker();
   }
 
   public initDatePicker(): void {
-    $("#end_date, #start_date").datetimepicker({
+    $("#end_date, #start_date, #earliest_preorder_date, #latest_preorder_date").datetimepicker({
       format: 'dd-mm-yyyy hh:ii',
       autoclose: true,
       minuteStep: 15,
@@ -117,6 +119,8 @@ export class EventEditComponent implements OnInit {
     this.event = this.eventForm.value;
     this.event.start_date = $("#start_date").val();
     this.event.end_date = $("#end_date").val();
+    this.event.earliest_preorder_date = $("#earliest_preorder_date").val();
+    this.event.latest_preorder_date = $("#latest_preorder_date").val();
     this.isEventUpdating = true
     this.eventUpdateRequest = this.eventService.update(this.eventId, this.event).subscribe(
       successResponse => {
@@ -153,6 +157,8 @@ export class EventEditComponent implements OnInit {
         this.event['is_one_off'] = data.is_one_off;
         this.event['start_date'] = data.start_date;
         this.event['end_date'] = data.end_date;
+        this.event['earliest_preorder_date'] = data.earliest_preorder_date;
+        this.event['latest_preorder_date'] = data.latest_preorder_date;
         this.eventForm.patchValue(this.event);
         this.getStationList();
       },
@@ -215,6 +221,12 @@ export class EventEditComponent implements OnInit {
       ],
       'end_date':[
         this.event.end_date
+      ],
+      'earliest_preorder_date':[
+        this.event.earliest_preorder_date
+      ],
+      'latest_preorder_date':[
+        this.event.latest_preorder_date
       ]
     });
 

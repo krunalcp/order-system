@@ -84,6 +84,14 @@
           <label class="g-mb-10" for="end_date">Preordering Closes</label>
           <input class="form-control u-form-control rounded-0" type="text" id="end_date" formControlName="end_date">
         </div>
+        <div class="form-group g-mb-25 col-md-6" >
+          <label class="g-mb-10" for="start_date">Earliest Preorder Date</label>
+          <input class="form-control u-form-control rounded-0" type="text" id="earliest_preorder_date" formControlName="earliest_preorder_date">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="end_date">Latest Preorder Date</label>
+          <input class="form-control u-form-control rounded-0" type="text" id="latest_preorder_date" formControlName="latest_preorder_date">
+        </div>
         <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="admin">Link</label>
           <span class="form-control">{{hostAppService.getHost()}}/#/{{event.name}}/order</span>

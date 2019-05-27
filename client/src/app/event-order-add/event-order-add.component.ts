@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
+import { formatDate } from '@angular/common';
 
 import { EventOrderService } from '../event_order.service';
 import { HeaderService } from "../services/header.service";
@@ -45,6 +46,7 @@ export class EventOrderAddComponent implements OnInit {
   public accounts: any;
   public currentEvent: Event = new Event();
   public accountId: any;
+  public showErrorMessage: boolean;
 
   constructor(
   	private eventOrderService: EventOrderService,
@@ -68,6 +70,7 @@ export class EventOrderAddComponent implements OnInit {
     this.getStationList();
     this.getAccountList();
     this.isEventOrderPage = true;
+    this.showErrorMessage = false
   }
 
   ngAfterViewChecked() {
@@ -75,10 +78,13 @@ export class EventOrderAddComponent implements OnInit {
   }
 
   public initDatePicker(): void {
+    var self = this;
     $("#scheduled_order_time").datetimepicker({
       format: 'dd-mm-yyyy hh:ii',
       autoclose: true,
       minuteStep: 15,
+    }).on('hide', function() {
+        self.onOrderDateSelect($(this).val());
     });
   }
   private loadCurrentEvent(): void {
@@ -343,6 +349,20 @@ export class EventOrderAddComponent implements OnInit {
     this.accountId = account_id
     this.loadItems();
     this.loadFavouriteItem();
+  }
+
+  public onOrderDateSelect(date){
+    let orderDate = Date.parse(date);
+    if(this.currentEvent.earliest_preorder_date != null || this.currentEvent.latest_preorder_date != null)
+    {
+      let earliestPreorderDate = Date.parse(this.currentEvent.earliest_preorder_date)
+      let latestPreorderDate = Date.parse(this.currentEvent.latest_preorder_date)
+      if(orderDate >= earliestPreorderDate && orderDate <= latestPreorderDate){
+        this.showErrorMessage = false
+      }else{
+        this.showErrorMessage = true
+      }
+    }
   }
 
   public toggleAllCategory() {

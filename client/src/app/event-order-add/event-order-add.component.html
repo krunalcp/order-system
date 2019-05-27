@@ -32,8 +32,11 @@
           </div>
           <input type="hidden" formControlName="station_id" value="">
           <div class="form-group g-mb-25 col-md-3" *ngIf="currentEvent.show_date">
-            <label class="g-mb-10" for="scheduled_order_time">Order Date/Time</label>
-            <input class="form-control u-form-control rounded-0 pr-0" type="text" id="scheduled_order_time" formControlName="scheduled_order_time">
+            <label class="g-mb-10" for="scheduled_order_time">
+              <span *ngIf="!showErrorMessage" [ngClass]="{'text-success': showErrorMessage}">Order Date/Time</span>
+              <span *ngIf="showErrorMessage" class="text-danger">You have ordered outside the available dates of {{currentEvent.earliest_preorder_date}} to {{currentEvent.latest_preorder_date}}</span>
+            </label>
+            <input class="form-control u-form-control rounded-0 pr-0" (change)="onOrderDateSelect($event.target.value)" type="text" id="scheduled_order_time" formControlName="scheduled_order_time">
           </div>
         </div>
       </div>
