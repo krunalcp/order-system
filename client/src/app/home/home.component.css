@@ -1,0 +1,14 @@
+.homepage-bg{
+  background-image: url('/assets/home_page.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.homepage-name{
+  background: rgba(255, 255, 255, 0.8);
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  height: 390px;
+  width: 390px;
+}
