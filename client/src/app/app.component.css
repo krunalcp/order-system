@@ -5,7 +5,7 @@
   font-size: 1.5rem;
 }
 .dropdown-menu{
-	background-color: #000;
+	background-color: #575352;
 }
 .toggle_btn{
 	float: right;
@@ -21,4 +21,7 @@
 }
 .hide_display_flex{
   display: flex;
+}
+.bg-custom{
+  background-color: #575352;
 }
