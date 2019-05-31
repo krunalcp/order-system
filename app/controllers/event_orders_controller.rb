@@ -13,8 +13,8 @@ class EventOrdersController < ApplicationController
 
 
   def create
-    last_order = @event.orders.order(order_number: :desc).first
-    order_number = (last_order.try(:order_number) || 0) + 1
+    last_order = @event.orders.where.not(order_number: nil).order(order_number: :desc).first
+    order_number = (last_order.try(:order_number).to_i) + 1
     new_order_params = {
       customer_name: order_params[:customer_name],
       station_id: order_params[:station_id], value: order_params[:value],

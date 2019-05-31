@@ -290,7 +290,10 @@ export class EventOrderAddComponent implements OnInit {
   public placeEventOrder(){
     this.order = this.orderForm.value;
     this.order.order_items = this.items.filter(item => item.quantity > 0).concat(this.favourite_items.filter(item => item.quantity > 0))
-    console.log(this.order.order_items)
+    if(this.orderForm.status == 'INVALID' || this.order.account_id == null) {
+      alert('Please select account!');
+      return;
+    }
     if(this.orderForm.status == 'INVALID' || this.order.order_items.length == 0) {
       alert('Please add items!');
       return;

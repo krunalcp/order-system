@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   end
 
   def last_order_number
-    order = current_event.orders.order(order_number: :desc).first
+    order = current_event.orders.where.not(order_number: nil).order(order_number: :desc).first
     if order
       render json: (order.order_number.to_i) + 1
     else
