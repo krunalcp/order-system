@@ -30,6 +30,9 @@ export class HostappService {
     else if (environment == 'demoapp.campusandcoorders.com') {
       return "https://demoapp.campusandcoorders.com"
     }
+    else if (environment == 'campusandcoorders.herokuapp.com'){
+      return "https://campusandcoorders.herokuapp.com"
+    }
   }
 
   public isTestSite() {
