@@ -15,23 +15,8 @@ export class HostappService {
     if (environment == 'localhost'){
       return "http://localhost:3000"
     }
-    else if (environment == 'ctordering.herokuapp.com'){
-      return "https://ctordering.herokuapp.com"
-    }
-    else if (environment == 'ctordering-test.herokuapp.com'){
-      return "https://ctordering-test.herokuapp.com"
-    }
-    else if (environment == 'ctordering-obsolete.herokuapp.com'){
-      return "https://ctordering-obsolete.herokuapp.com"
-    }
-    else if (environment == 'ctordering-demo.herokuapp.com'){
-      return "https://ctordering-demo.herokuapp.com"
-    }
-    else if (environment == 'demoapp.campusandcoorders.com') {
-      return "https://demoapp.campusandcoorders.com"
-    }
-    else if (environment == 'campusandcoorders.herokuapp.com'){
-      return "https://campusandcoorders.herokuapp.com"
+    else {
+      return "https://" + environment
     }
   }
 
