@@ -116,6 +116,7 @@
                 <img src="{{ currentEvent.logo }}" style="width: 80px">
                 <h1>{{currentEvent.published_name}}</h1>
               </div>
+              <div style="font-size: 14px; font-weight: bold;">{{order.display_scheduled_order_time | date:'dd.MM.yyyy HH:mm'}}</div>
               <div style="font-size: 14px; font-weight: bold;">{{currentDate() | date:'dd.MM.yyyy HH:mm'}}</div>
               <div style="font-size: 14px; font-weight: bold;">GST Number: {{currentEvent.gst_number}}</div>
               <br />
