@@ -20,7 +20,7 @@
   padding: 10px;
 }
 .hide_display_flex{
-  display: flex;
+  display: block;
 }
 .bg-custom{
   background-color: #575352;
