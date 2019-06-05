@@ -100,19 +100,22 @@ export class ItemListComponent implements OnInit {
       }
     );
   }
+
   public deleteItem(id: number){
-    this.currentItemId = id;
-    this.isItemDeleting = true;
-    this.itemService.remove(id).subscribe(
-      successResponse => {
-        this.isItemDeleting = false;
-        this.loadItemList();
-      },
-      (errorResponse) => {
-        this.isItemDeleting = false;
-        // this.displayErrors(errorResponse);
-      }
-    );
+    if(confirm("Are you sure?")) {
+      this.currentItemId = id;
+      this.isItemDeleting = true;
+      this.itemService.remove(id).subscribe(
+        successResponse => {
+          this.isItemDeleting = false;
+          this.loadItemList();
+        },
+        (errorResponse) => {
+          this.isItemDeleting = false;
+          // this.displayErrors(errorResponse);
+        }
+      );
+    }
   }
 
   public exportItems() {
@@ -178,7 +181,7 @@ export class ItemListComponent implements OnInit {
       $("#expand-button").text('Collapse all Categories');
     }
   }
-  
+
   public removeSpace(category) {
     return category.replace(/[^A-Z0-9]+/ig, '')
   }
