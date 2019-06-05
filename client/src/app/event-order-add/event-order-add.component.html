@@ -69,8 +69,8 @@
                 <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
                 <td class='text-left'>{{item.name}}</td>
                 <td class="price_width">
-                  <span *ngIf="item.special_price && item.special_price != 0">${{(item.special_price * 1).toFixed(2)}}</span>
                   <span class="{{(item.special_price && item.special_price != 0) ? 'strikethrough' : ''}}">${{(item.price * 1).toFixed(2)}}</span>
+                  <span *ngIf="item.special_price && item.special_price != 0"> &nbsp; ${{(item.special_price * 1).toFixed(2)}}</span>
                 </td>
                 <td>
                   {{item.quantity}}
@@ -113,8 +113,8 @@
                 <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
                 <td class='text-left'>{{item.name}}</td>
                 <td class="price_width">
-                  <span *ngIf="item.special_price && item.special_price != 0">${{(item.special_price * 1).toFixed(2)}} &nbsp; </span>
                   <span class="{{(item.special_price && item.special_price != 0) ? 'strikethrough' : ''}}">${{(item.price * 1).toFixed(2)}}</span>
+                  <span *ngIf="item.special_price && item.special_price != 0"> &nbsp; ${{(item.special_price * 1).toFixed(2)}}</span>
                 </td>
                 <td>
                   {{item.quantity}}
