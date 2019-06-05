@@ -31,7 +31,8 @@ export class EventAddComponent implements OnInit {
     'item_image': '',
     'help_url' : '',
     'event_help_url' : '',
-    'printed_image': ''
+    'printed_image': '',
+    'banner_message': ''
   };
   validationMessages = {
     'name': {
@@ -134,6 +135,9 @@ export class EventAddComponent implements OnInit {
       ],
       'printed_image': [
         this.event.printed_image
+      ],
+      'banner_message': [
+        this.event.banner_message
       ]
     });
 

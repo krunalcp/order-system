@@ -49,7 +49,8 @@ export class EventEditComponent implements OnInit {
     'end_date' : '',
     'earliest_preorder_date': '',
     'latest_preorder_date': '',
-    'printed_image': ''
+    'printed_image': '',
+    'banner_message': ''
   };
   validationMessages = {
     'name': {
@@ -161,6 +162,7 @@ export class EventEditComponent implements OnInit {
         this.event['earliest_preorder_date'] = data.earliest_preorder_date;
         this.event['latest_preorder_date'] = data.latest_preorder_date;
         this.event['printed_image'] = data.printed_image;
+        this.event['banner_message'] = data.banner_message
         this.eventForm.patchValue(this.event);
         this.getStationList();
       },
@@ -232,6 +234,9 @@ export class EventEditComponent implements OnInit {
       ],
       'printed_image':[
         this.event.printed_image
+      ],
+      'banner_message':[
+        this.event.banner_message
       ]
     });
 

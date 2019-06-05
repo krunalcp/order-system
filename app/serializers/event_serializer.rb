@@ -3,7 +3,7 @@ class EventSerializer < ActiveModel::Serializer
              :published_name, :station_id, :station_name, :item_image,
              :help_url, :event_help_url, :show_date, :is_one_off, :start_date,
              :end_date, :is_allowed_to_order, :earliest_preorder_date,
-             :latest_preorder_date, :printed_image
+             :latest_preorder_date, :printed_image, :banner_message
 
   def station_name
     object.station.try(:name)

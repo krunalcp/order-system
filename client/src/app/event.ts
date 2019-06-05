@@ -21,6 +21,7 @@ export class Event {
     public is_allowed_to_order?: boolean,
 		public earliest_preorder_date?: any,
 		public latest_preorder_date?: any,
-		public printed_image?: string
+		public printed_image?: string,
+		public banner_message?: string
   ) {}
 }
