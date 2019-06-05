@@ -30,7 +30,8 @@ export class EventAddComponent implements OnInit {
     'password': '',
     'item_image': '',
     'help_url' : '',
-    'event_help_url' : ''
+    'event_help_url' : '',
+    'printed_image': ''
   };
   validationMessages = {
     'name': {
@@ -131,6 +132,9 @@ export class EventAddComponent implements OnInit {
       'event_help_url': [
         this.event.event_help_url
       ],
+      'printed_image': [
+        this.event.printed_image
+      ]
     });
 
     this.eventForm.valueChanges
