@@ -5,14 +5,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { StationService } from '../station.service';
-
+import { EventService } from '../event.service';
 import { Station } from '../station';
+import { Event } from '../event';
 
 @Component({
   selector: 'app-station-add',
   templateUrl: './station-add.component.html',
   styleUrls: ['./station-add.component.css'],
-  providers: [StationService]
+  providers: [StationService, EventService]
 })
 export class StationAddComponent implements OnInit {
 
@@ -32,9 +33,11 @@ export class StationAddComponent implements OnInit {
   private isFormSubmitted: boolean;
   public isStationAdding: boolean = false;
   public stations: any;
+  public currentEvent: Event = new Event();
 
   constructor(
     private stationService: StationService,
+    private eventService: EventService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
@@ -43,6 +46,18 @@ export class StationAddComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
     this.getStationList();
+    this.loadCurrentEvent();
+  }
+
+  private loadCurrentEvent(): void {
+    this.eventService.current().subscribe(
+      successResponse => {
+        this.currentEvent = successResponse.json();
+      },
+      () => {
+        this.errorMessage = 'Failed to load Event.';
+      }
+    );
   }
 
   public onSubmit() {
