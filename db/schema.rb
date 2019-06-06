@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190518131259) do
+ActiveRecord::Schema.define(version: 20190606090943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 20190518131259) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "name"
-    t.string "logo"
     t.string "email"
     t.boolean "admin", default: false
     t.boolean "active", default: false
@@ -75,12 +74,22 @@ ActiveRecord::Schema.define(version: 20190518131259) do
     t.datetime "updated_at", null: false
     t.string "default_station"
     t.string "icon"
+    t.string "logo"
     t.string "published_name"
     t.integer "station_id"
     t.string "item_image"
     t.string "help_url"
     t.string "event_help_url"
     t.boolean "show_date"
+    t.boolean "is_one_off"
+    t.date "start_date"
+    t.date "end_date"
+    t.date "earliest_preorder_date"
+    t.date "latest_preorder_date"
+    t.string "printed_image"
+    t.string "banner_message"
+    t.string "printouts_email"
+    t.string "phone_number"
     t.index ["confirmation_token"], name: "index_events_on_confirmation_token", unique: true
     t.index ["name"], name: "index_events_on_name", unique: true
     t.index ["reset_password_token"], name: "index_events_on_reset_password_token", unique: true

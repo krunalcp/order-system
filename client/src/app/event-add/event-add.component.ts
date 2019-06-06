@@ -32,7 +32,9 @@ export class EventAddComponent implements OnInit {
     'help_url' : '',
     'event_help_url' : '',
     'printed_image': '',
-    'banner_message': ''
+    'banner_message': '',
+    'printouts_email': '',
+    'phone_number': ''
   };
   validationMessages = {
     'name': {
@@ -138,6 +140,12 @@ export class EventAddComponent implements OnInit {
       ],
       'banner_message': [
         this.event.banner_message
+      ],
+      'printouts_email': [
+        this.event.printouts_email
+      ],
+      'phone_number': [
+        this.event.phone_number
       ]
     });
 
