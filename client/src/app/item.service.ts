@@ -50,7 +50,7 @@ export class ItemService {
     return this.http.get(itemsApiURL, this.hostAppService.getToken());
   }
 
-  activeItem(): Observable<any>{ 
+  activeItem(): Observable<any>{
     let itemsApiURL = this.hostAppService.getHost() + '/items/active_items';
 
     return this.http.get(itemsApiURL, this.hostAppService.getToken());
@@ -70,6 +70,12 @@ export class ItemService {
 
   listSummary(s_type: string, period: string): Observable<any>{
     let itemsApiURL = this.hostAppService.getHost() + '/items/order_summary?type=' + s_type + '&period=' + period;
+
+    return this.http.get(itemsApiURL, this.hostAppService.getToken());
+  }
+
+  totalSalesProfit(period: string): Observable<any>{
+    let itemsApiURL = this.hostAppService.getHost() + '/items/total_sales_profit?period=' + period;
 
     return this.http.get(itemsApiURL, this.hostAppService.getToken());
   }

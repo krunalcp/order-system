@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'non_active_items'
       get 'last_order_number'
       post 'import_items'
+      get 'total_sales_profit'
     end
   end
 

@@ -52,7 +52,8 @@ export class EventEditComponent implements OnInit {
     'printed_image': '',
     'banner_message': '',
     'printouts_email': '',
-    'phone_number': ''
+    'phone_number': '',
+    'total_costs': ''
   };
   validationMessages = {
     'name': {
@@ -167,6 +168,7 @@ export class EventEditComponent implements OnInit {
         this.event['banner_message'] = data.banner_message
         this.event['printouts_email'] = data.printouts_email
         this.event['phone_number'] = data.phone_number
+        this.event['total_costs'] = data.total_costs
         this.eventForm.patchValue(this.event);
         this.getStationList();
       },
@@ -247,6 +249,9 @@ export class EventEditComponent implements OnInit {
       ],
       'phone_number':[
         this.event.phone_number
+      ],
+      'total_costs':[
+        this.event.total_costs
       ]
     });
 

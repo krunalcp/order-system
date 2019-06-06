@@ -34,7 +34,8 @@ export class EventAddComponent implements OnInit {
     'printed_image': '',
     'banner_message': '',
     'printouts_email': '',
-    'phone_number': ''
+    'phone_number': '',
+    'total_costs': ''
   };
   validationMessages = {
     'name': {
@@ -146,6 +147,9 @@ export class EventAddComponent implements OnInit {
       ],
       'phone_number': [
         this.event.phone_number
+      ],
+      'total_costs': [
+        this.event.total_costs
       ]
     });
 

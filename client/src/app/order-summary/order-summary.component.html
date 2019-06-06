@@ -3,6 +3,23 @@
     <h1 class="h3 u-heading-v1__title">Order summary</h1>
   </div>
 
+  <div class="row g-mb-15" *ngIf="currentEvent.is_one_off">
+    <div class="offset-md-2 col-md-2  u-icon-v4 u-icon-v4-bg-cyan g-font-weight-600 g-letter-spacing-0_5 g-brd-2 g-rounded-10 g-mb-15">
+      $ {{summary?.sales}}
+    </div>
+    <div class="col-md-1 g-font-weight-600 g-mb-15 text-center p-2">
+      -
+    </div>
+    <div class="col-md-2 u-icon-v4 u-icon-v4-bg-cyan g-font-weight-600 g-letter-spacing-0_5 g-brd-2 g-rounded-10 g-mb-15">
+      $ {{summary?.total_costs}}
+    </div>
+    <div class="col-md-1 g-font-weight-600 g-mb-15 text-center p-2">
+      =
+    </div>
+    <div class="col-md-2 u-icon-v4 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 g-rounded-10 g-mb-15" [ngClass]="{'u-icon-v4-bg-teal': summary?.positive_profit, 'u-icon-v4-bg-red': !summary?.positive_profit}">
+      $ {{summary?.profit}}
+    </div>
+  </div>
   <div class="row">
 		<div class="col-md-12 text-right">
 			<button class="btn btn-md u-btn-outline-teal u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15"  (click)="loadItemList(false, 'quantity')">

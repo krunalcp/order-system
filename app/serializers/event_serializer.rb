@@ -4,7 +4,7 @@ class EventSerializer < ActiveModel::Serializer
              :help_url, :event_help_url, :show_date, :is_one_off, :start_date,
              :end_date, :is_allowed_to_order, :earliest_preorder_date,
              :latest_preorder_date, :printed_image, :banner_message,
-             :printouts_email, :phone_number
+             :printouts_email, :phone_number, :total_costs
 
   def station_name
     object.station.try(:name)

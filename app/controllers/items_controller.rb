@@ -68,6 +68,29 @@ class ItemsController < ApplicationController
     end
   end
 
+  def total_sales_profit
+    condition = if params[:period] == 'current'
+      [
+        "((scheduled_order_time >= ? and scheduled_order_time <= ?) or (created_at >= ? and created_at <= ?))",
+        Time.now.beginning_of_month, Time.now.end_of_month,
+        Time.now.beginning_of_month, Time.now.end_of_month
+      ]
+    elsif params[:period] == 'last'
+      [
+        "((scheduled_order_time >= ? and scheduled_order_time <= ?) or (created_at >= ? and created_at <= ?))",
+        DateTime.now.prev_month.beginning_of_month, DateTime.now.prev_month.end_of_month,
+        DateTime.now.prev_month.beginning_of_month, DateTime.now.prev_month.end_of_month
+      ]
+    else
+      []
+    end
+
+    sales = current_event.orders.where(condition).sum(:value).to_f
+    total_costs = current_event.total_costs.to_f
+    profit = sales - total_costs
+    render json: { sales: sales, total_costs: total_costs,  profit: profit, positive_profit: profit.positive? }
+  end
+
   def last_order_number
     item = current_event.items.where(category_id: params[:category_id]).last
     if item
