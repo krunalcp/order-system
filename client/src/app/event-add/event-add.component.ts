@@ -9,6 +9,8 @@ import { OrderService } from '../order.service';
 
 import { Event } from '../event';
 
+declare var $: any;
+
 @Component({
   selector: 'app-event-add',
   templateUrl: './event-add.component.html',
@@ -31,6 +33,12 @@ export class EventAddComponent implements OnInit {
     'item_image': '',
     'help_url' : '',
     'event_help_url' : '',
+    'show_date': '',
+    'is_one_off' : '',
+    'start_date': '',
+    'end_date' : '',
+    'earliest_preorder_date': '',
+    'latest_preorder_date': '',
     'printed_image': '',
     'banner_message': '',
     'printouts_email': '',
@@ -69,6 +77,19 @@ export class EventAddComponent implements OnInit {
     this.getStationList();
   }
 
+  ngAfterViewChecked() {
+    this.initDatePicker();
+  }
+
+  public initDatePicker(): void {
+    $("#end_date, #start_date, #earliest_preorder_date, #latest_preorder_date").datetimepicker({
+      format: 'dd-mm-yyyy hh:ii',
+      autoclose: true,
+      minuteStep: 15,
+    });
+  }
+
+
   public onSubmit() {
     if(this.eventForm.status == 'INVALID') {
       this.isFormSubmitted = true;
@@ -76,6 +97,10 @@ export class EventAddComponent implements OnInit {
       return;
     }
     this.event = this.eventForm.value;
+    this.event.start_date = $("#start_date").val();
+    this.event.end_date = $("#end_date").val();
+    this.event.earliest_preorder_date = $("#earliest_preorder_date").val();
+    this.event.latest_preorder_date = $("#latest_preorder_date").val();
     this.isEventAdding = true;
     this.eventAddRequest = this.eventService.add(this.event).subscribe(
       successResponse => {
@@ -135,6 +160,24 @@ export class EventAddComponent implements OnInit {
       ],
       'event_help_url': [
         this.event.event_help_url
+      ],
+      'show_date':[
+        this.event.show_date
+      ],
+      'is_one_off':[
+        this.event.is_one_off
+      ],
+      'start_date':[
+        this.event.start_date
+      ],
+      'end_date':[
+        this.event.end_date
+      ],
+      'earliest_preorder_date':[
+        this.event.earliest_preorder_date
+      ],
+      'latest_preorder_date':[
+        this.event.latest_preorder_date
       ],
       'printed_image': [
         this.event.printed_image
