@@ -26,3 +26,6 @@
 .brd-color{
   border-color: #575352;
 }
+body, html {
+  height: 100%;
+}

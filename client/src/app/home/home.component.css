@@ -3,6 +3,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100%;
 }
 .homepage-name{
   background: rgba(255, 255, 255, 0.8);
@@ -10,7 +11,4 @@
   -webkit-border-radius: 50%;
   border-radius: 50%;
   height: 450px;
-}
-.g-height-798{
-  height: 798px;
 }
