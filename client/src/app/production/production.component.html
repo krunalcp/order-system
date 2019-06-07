@@ -1,0 +1,36 @@
+<div class="container g-mt-100">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Production</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group g-mb-25">
+        <label>&nbsp;</label>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group g-mb-25">
+        <label for="item">Select item</label>
+        <select class="form-control rounded-0" (change)="onItemSelect($event.target.value)" id="item">
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of items" value="{{item.id}}">{{item.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group g-mb-25">
+        <label for="station">Select station</label>
+        <select class="form-control rounded-0" id="station" (change)="onStationSelect($event.target.value)">
+          <option value="" disabled selected></option>
+          <option *ngFor="let station of stations; index as i;" value="{{station.id}}">S{{i+1}} - {{station.name}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center col-md-12 g-font-size-90">
+      {{this.stationItem}}
+  </div>
+
+</div>

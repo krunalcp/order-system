@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get 'last_order_number'
       post 'import_items'
       get 'total_sales_profit'
+      get 'station_item'
     end
   end
 

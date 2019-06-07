@@ -105,6 +105,13 @@ class ItemsController < ApplicationController
     render json: items
   end
 
+  def station_item
+    station_item = OrderItem.joins("INNER JOIN orders ON order_items.order_id = orders.id").where(
+      "orders.station_id = ? and order_items.item_id = ?", params[:station_id], params[:item_id]
+    ).sum(:quantity)
+    render json: station_item
+  end
+
   private
 
   def set_item

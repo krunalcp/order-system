@@ -54,6 +54,9 @@
                 <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
                   <a routerLink="/order/summary" class="nav-link px-0"> Summary </a>
                 </li>
+                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+                  <a routerLink="/production" class="nav-link px-0"> Production </a>
+                </li>
                 <li *ngIf="tokenService.userSignedIn()" style="cursor: pointer;" class="nav-item g-mx-20--lg">
                   <a (click)="onSignout()" class="nav-link px-0">LOGOUT</a>
                 </li>

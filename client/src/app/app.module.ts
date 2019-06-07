@@ -47,6 +47,7 @@ import { EventOrderListComponent } from './event-order-list/event-order-list.com
 import { EventOrderConfirmedComponent } from './event-order-confirmed/event-order-confirmed.component';
 import { ItemImportComponent } from './item-import/item-import.component';
 import { OrderImportComponent } from './order-import/order-import.component';
+import { ProductionComponent } from './production/production.component';
 
 const appRoutes: Routes = [
 	{
@@ -210,6 +211,10 @@ const appRoutes: Routes = [
   {
     path: 'siteorder/list',
     component: EventOrderListComponent
+  },
+  {
+    path: 'production',
+    component: ProductionComponent
   }
 ]
 
@@ -248,7 +253,8 @@ const appRoutes: Routes = [
     EventOrderListComponent,
 		EventOrderConfirmedComponent,
     ItemImportComponent,
-    OrderImportComponent
+    OrderImportComponent,
+    ProductionComponent
   ],
   imports: [
     BrowserModule,

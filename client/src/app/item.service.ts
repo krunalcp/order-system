@@ -79,4 +79,10 @@ export class ItemService {
 
     return this.http.get(itemsApiURL, this.hostAppService.getToken());
   }
+
+  stationItem(stationId: number, itemId: number): Observable<any>{
+    let itemsApiURL = this.hostAppService.getHost() + '/items/station_item?item_id=' + itemId + '&station_id=' + stationId;
+
+    return this.http.get(itemsApiURL, this.hostAppService.getToken());
+  }
 }
