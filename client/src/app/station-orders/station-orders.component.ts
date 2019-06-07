@@ -50,6 +50,8 @@ export class StationOrdersComponent implements OnInit {
   public sortOrder: string = 'desc';
   public newOrder: boolean;
   public newOrderNumbr: number;
+  public newFulfilledOrder: boolean;
+  public newFulfilledOrderNumber: number;
   public categorySelected: boolean;
   public currentEvent: Event = new Event();
   public errorMessage: any;
@@ -139,10 +141,15 @@ export class StationOrdersComponent implements OnInit {
     this.orderService.list(this.currentPage, this.currentStation, 0, this.sortBy, this.sortOrder).subscribe(
       successResponse => {
         this.newOrder = false
+        this.newFulfilledOrder = false
         let listResponse = successResponse.json();
         if(this.totalOrder < listResponse.total){
           this.newOrder = true
           this.newOrderNumbr = listResponse.total - this.totalOrder
+        }
+        if(listResponse.total < this.totalOrder){
+          this.newFulfilledOrder = true
+          this.newFulfilledOrderNumber = this.totalOrder - listResponse.total
         }
       }
     )
