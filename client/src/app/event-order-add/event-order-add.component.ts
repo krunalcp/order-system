@@ -75,6 +75,13 @@ export class EventOrderAddComponent implements OnInit {
 
   ngAfterViewChecked() {
     this.initDatePicker();
+    var account_id = this.getCookie('ct_account_id');
+    if(parseInt(account_id) > 0){
+      $('#account').val(account_id);
+      this.order.accountId = account_id;
+      this.onAccountSelect(account_id);
+      this.onValueChanged();
+    }
   }
 
   public initDatePicker(): void {
@@ -290,6 +297,9 @@ export class EventOrderAddComponent implements OnInit {
   public placeEventOrder(){
     this.order = this.orderForm.value;
     this.order.order_items = this.items.filter(item => item.quantity > 0).concat(this.favourite_items.filter(item => item.quantity > 0))
+    if (this.order.account_id == null) {
+      this.order.account_id = this.accountId;
+    }
     if(this.orderForm.status == 'INVALID' || this.order.account_id == null) {
       alert('Please select account!');
       return;
@@ -349,9 +359,12 @@ export class EventOrderAddComponent implements OnInit {
   }
 
   public onAccountSelect(account_id){
-    this.accountId = account_id
-    this.loadItems();
-    this.loadFavouriteItem();
+    this.setCookie('ct_account_id', account_id);
+    if(this.accountId != account_id) {
+      this.accountId = account_id;
+      this.loadItems();
+      this.loadFavouriteItem();
+    }
   }
 
   public onOrderDateSelect(date){
@@ -377,6 +390,28 @@ export class EventOrderAddComponent implements OnInit {
     } else {
       $("#expand-button").text('Collapse all Categories');
     }
+  }
+
+  public setCookie(cname, cvalue) {
+    var d = new Date();
+    d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  public getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
 
 }
