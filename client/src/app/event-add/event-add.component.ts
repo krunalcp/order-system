@@ -43,7 +43,8 @@ export class EventAddComponent implements OnInit {
     'banner_message': '',
     'printouts_email': '',
     'phone_number': '',
-    'total_costs': ''
+    'total_costs': '',
+    'number_of_tiles': ''
   };
   validationMessages = {
     'name': {
@@ -193,6 +194,9 @@ export class EventAddComponent implements OnInit {
       ],
       'total_costs': [
         this.event.total_costs
+      ],
+      'number_of_tiles': [
+        this.event.number_of_tiles
       ]
     });
 

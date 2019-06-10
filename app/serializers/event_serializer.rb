@@ -4,10 +4,15 @@ class EventSerializer < ActiveModel::Serializer
              :help_url, :event_help_url, :show_date, :is_one_off, :start_date,
              :end_date, :is_allowed_to_order, :earliest_preorder_date,
              :latest_preorder_date, :printed_image, :banner_message,
-             :printouts_email, :phone_number, :total_costs
+             :printouts_email, :phone_number, :total_costs, :number_of_tiles,
+             :number_of_tiles_array
 
   def station_name
     object.station.try(:name)
+  end
+
+  def number_of_tiles_array
+    (1..object.number_of_tiles.to_i).to_a
   end
 
   def is_allowed_to_order

@@ -131,6 +131,13 @@
           </label>
           <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter Total Costs" id="total_costs" formControlName="total_costs">
         </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="number_of_tiles">
+            <span *ngIf="!formErrors.number_of_tiles" [ngClass]="{'text-success': !eventForm.controls.number_of_tiles.pristine}">Number Of Tiles</span>
+            <span *ngIf="formErrors.number_of_tiles" class="text-danger">{{formErrors.number_of_tiles}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter Total Costs" id="number_of_tiles" formControlName="number_of_tiles">
+        </div>
         <div class="form-group g-mb-25 col-md-1" *ngIf="currentEvent.admin == true">
           <label class="g-mb-10" for="admin">Admin</label>
           <input class="form-control u-form-control rounded-0" type="checkbox" id="admin" formControlName="admin">

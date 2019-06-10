@@ -25,6 +25,8 @@ export class Event {
 		public banner_message?: string,
 		public printouts_email?: string,
 		public phone_number?: string,
-		public total_costs?: number
+		public total_costs?: number,
+		public number_of_tiles?: number,
+		public number_of_tiles_array?: number
   ) {}
 }
