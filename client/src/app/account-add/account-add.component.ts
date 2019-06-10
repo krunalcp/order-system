@@ -22,7 +22,9 @@ export class AccountAddComponent implements OnInit {
     'contact_name': '',
     'phone': '',
     'email': '',
-    'password': ''
+    'password': '',
+    'number': '',
+    'address': ''
   };
   validationMessages = {
     'name': {
@@ -102,6 +104,12 @@ export class AccountAddComponent implements OnInit {
       ],
       'is_active': [
         this.account.is_active
+      ],
+      'number': [
+        this.account.number
+      ],
+      'address': [
+        this.account.address
       ]
     });
 

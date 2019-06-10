@@ -43,6 +43,20 @@
           <input id="hf-email" class="form-control u-form-control rounded-0" type="password" placeholder="Enter password " id="password" formControlName="password">
         </div>
         <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="number">
+            <span *ngIf="!formErrors.number">Number</span>
+            <span *ngIf="formErrors.number" class="text-danger">{{formErrors.number}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter number" id="number" formControlName="number">
+        </div>
+        <div class="form-group g-mb-25 col-md-12">
+          <label class="g-mb-10" for="address">
+            <span *ngIf="!formErrors.address">Address</span>
+            <span *ngIf="formErrors.address" class="text-danger">{{formErrors.address}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter address" id="address" formControlName="address">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="is_active">Active</label>
           <input class="form-control u-form-control rounded-0" type="checkbox" id="is_active" formControlName="is_active">
         </div>

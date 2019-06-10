@@ -1,6 +1,6 @@
 class AccountSerializer < ActiveModel::Serializer
   attributes :id, :name, :contact_name, :email, :phone, :items,
-             :account_used, :is_active
+             :account_used, :is_active, :number, :address
 
   def items
     order_items = object.order_items.select(

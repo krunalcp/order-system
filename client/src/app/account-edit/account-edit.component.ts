@@ -29,7 +29,9 @@ export class AccountEditComponent implements OnInit {
     'contact_name': '',
     'phone': '',
     'email': '',
-    'password': ''
+    'password': '',
+    'number': '',
+    'address': ''
   };
   validationMessages = {
     'name': {
@@ -39,7 +41,6 @@ export class AccountEditComponent implements OnInit {
       'required': 'Email is required.'
     }
   };
-
 
   constructor(
   	private route: ActivatedRoute,
@@ -94,6 +95,8 @@ export class AccountEditComponent implements OnInit {
         this.account['email'] = data.email;
         this.account['event_id'] = data.event_id;
         this.account['is_active'] = data.is_active;
+        this.account['number'] = data.number;
+        this.account['address'] = data.address;
         this.accountForm.patchValue(this.account);
       },
       () => {
@@ -126,6 +129,12 @@ export class AccountEditComponent implements OnInit {
       ],
       'is_active': [
         this.account.is_active
+      ],
+      'number': [
+        this.account.number
+      ],
+      'address': [
+        this.account.address
       ]
     });
 
