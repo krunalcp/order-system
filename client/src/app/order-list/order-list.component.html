@@ -75,6 +75,7 @@
             <span *ngFor="let item of order.order_items">{{item.quantity}} &#215; {{item.item}}
               <small *ngIf="item.notes != null && item.notes != ''">({{item.notes}})</small><br>
             </span>
+            <p *ngIf="order.comments != null && order.comments != ''" class="text-danger">{{order.comments}}</p>
           </td>
           <td class="align-middle" align="right">${{(order.value * 1).toFixed(2)}}</td>
           <td class="align-middle text-center">

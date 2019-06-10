@@ -84,6 +84,11 @@
                   <i *ngIf="fulfilledOrder(order, i.key)" class="fa fa-check fa-2x"></i>
                 </td>
               </tr>
+              <tr *ngIf="order.comments != null && order.comments != ''">
+                <td colspan="2" class="text-danger">
+                  {{order.comments}}
+                </td>
+              </tr>
             </table>
           </td>
           <td class="align-middle" align="right">${{(order.value * 1).toFixed(2)}}</td>
