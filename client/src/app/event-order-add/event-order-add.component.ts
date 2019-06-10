@@ -78,7 +78,6 @@ export class EventOrderAddComponent implements OnInit {
     var account_id = this.getCookie('ct_account_id');
     if(parseInt(account_id) > 0){
       $('#account').val(account_id);
-      this.order.accountId = account_id;
       this.onAccountSelect(account_id);
       this.onValueChanged();
     }
