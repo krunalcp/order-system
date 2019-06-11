@@ -19,7 +19,7 @@ class Item < ApplicationRecord
       summary << { id: item.id, name: item.name, stations: [] }
     end
     stations = {}
-    current_event.stations.each_with_index do |station, index|
+    current_event.stations.order('created_at').each_with_index do |station, index|
       stations[station.name] = { quantity: 0 }
 
       select = if type == 'value'
