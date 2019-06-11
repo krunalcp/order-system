@@ -250,4 +250,13 @@ export class OrderAddComponent implements OnInit {
     }
   }
 
+  public toggleAllCategory() {
+    $(".all_category").toggle();
+    if($(".all_category").css('display') == 'none') {
+      $("#expand-button").text('Expand all Categories');
+    } else {
+      $("#expand-button").text('Collapse all Categories');
+    }
+  }
+
 }
