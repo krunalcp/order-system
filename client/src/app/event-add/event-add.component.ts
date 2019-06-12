@@ -24,6 +24,7 @@ export class EventAddComponent implements OnInit {
     'name': '',
     'published_name': '',
     'station_id': '',
+    'second_station_id': '',
     'gst_number': '',
     'active': '',
     'admin': '',
@@ -135,6 +136,9 @@ export class EventAddComponent implements OnInit {
       ],
       'station_id': [
         this.event.station_id
+      ],
+      'second_station_id': [
+        this.event.second_station_id
       ],
       'password': [
         this.event.gst_number

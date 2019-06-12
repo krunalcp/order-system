@@ -69,7 +69,8 @@ class EventsController < ApplicationController
       :station_id, :logo, :icon, :item_image, :help_url, :event_help_url,
       :show_date, :is_one_off, :start_date, :end_date, :earliest_preorder_date,
       :latest_preorder_date, :printed_image, :banner_message, :printouts_email,
-      :phone_number, :total_costs, :number_of_tiles, :disable_print_popup
+      :phone_number, :total_costs, :number_of_tiles, :disable_print_popup,
+      :second_station_id
     )
   end
 end

@@ -34,6 +34,7 @@ export class EventEditComponent implements OnInit {
     'name': '',
     'published_name': '',
     'station_id': '',
+    'second_station_id': '',
     'gst_number': '',
     'admin': '',
     'active': '',
@@ -151,6 +152,7 @@ export class EventEditComponent implements OnInit {
         this.event['name'] = data.name;
         this.event['published_name'] = data.published_name;
         this.event['station_id'] = data.station_id;
+        this.event['second_station_id'] = data.second_station_id;
         this.event['gst_number'] = data.gst_number;
         this.event['admin'] = data.admin;
         this.event['active'] = data.active;
@@ -196,6 +198,9 @@ export class EventEditComponent implements OnInit {
       ],
       'station_id': [
         this.event.station_id
+      ],
+      'second_station_id': [
+        this.event.second_station_id
       ],
       'gst_number': [
         this.event.gst_number

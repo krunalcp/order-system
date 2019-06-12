@@ -15,6 +15,8 @@ class EventOrdersController < ApplicationController
   def create
     last_order = @event.orders.where.not(order_number: nil).order(order_number: :desc).first
     order_number = (last_order.try(:order_number).to_i) + 1
+    last_order = @event.orders.order(created_at: :desc).first
+    last_default_station_id = last_order.station_id
     new_order_params = {
       customer_name: order_params[:customer_name],
       station_id: order_params[:station_id], value: order_params[:value],
@@ -49,7 +51,14 @@ class EventOrdersController < ApplicationController
 
     @order.order_items = order_items
 
-    @order.station = Station.first if @order.station.blank?
+    default_station_id = @event.stations.first.try(:id)
+    if last_default_station_id == @event.station_id
+      default_station_id = @event.second_station_id || @event.station_id
+    else
+      default_station_id =  @event.station_id
+    end
+
+    @order.station_id = default_station_id
 
     if @order.save
       render json: { id: @order.id }

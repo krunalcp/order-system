@@ -49,6 +49,12 @@
           </select>
         </div>
         <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="refresh_time">Second Default Station</label>
+          <select class="form-control rounded-0 u-form-control" id="second_station_id" formControlName="second_station_id">
+            <option *ngFor="let station of stations; index as i;" value="{{station.id}}">S{{i+1}} - {{station.name}}</option>
+          </select>
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="gst_number">
             <span *ngIf="!formErrors.gst_number" [ngClass]="{'text-success': !eventForm.controls.gst_number.pristine}">GST Number</span>
             <span *ngIf="formErrors.gst_number" class="text-danger">{{formErrors.gst_number}}</span>
