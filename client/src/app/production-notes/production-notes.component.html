@@ -1,0 +1,83 @@
+<div class="container g-mt-100">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Production Notes</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group g-mb-25">
+        <label for="item">Select item</label>
+        <select multiple class="form-control rounded-0" (change)="onItemSelect($event.target.value)" id="item">
+          <option value="" disabled selected></option>
+          <option *ngFor="let item of items" value="{{item.id}}">{{item.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group g-mb-25">
+        <label for="station">Select station</label>
+        <select multiple class="form-control rounded-0" data-live-search="true" id="station" (change)="onStationSelect($event.target.value)">
+          <option value="" disabled selected></option>
+          <option *ngFor="let station of stations; index as i;" value="{{station.id}}">{{station.name}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive" *ngIf="orderItems && !isOrdersLoading">
+    <table class="table table-bordered u-table--v2">
+      <thead class="text-uppercase g-letter-spacing-1">
+        <tr>
+          <th class="align-middle g-color-black">Account Name</th>
+          <th class="align-middle g-color-black">Order Reference</th>
+          <th class="align-middle g-color-black">Item Name</th>
+          <th class="align-middle g-color-black">Notes</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let orderItem of orderItems">
+          <td class="align-middle">{{orderItem.account_name}}</td>
+          <td class="align-middle">{{orderItem.order.customer_name}}</td>
+          <td class="align-middle" align="right">{{orderItem.item}}</td>
+          <td class="align-middle" align="right">{{orderItem.notes}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <div class="form-inline pull-right">
+          <div class="form-group">
+            <span class="g-mx-15 g-mb-15 g-ml-10"> {{((currentPage - 1) * perPageOrder) + 1}} - {{currentPage * perPageOrder > totalOrder ? totalOrder : (currentPage * perPageOrder) }} of {{totalOrder}} </span>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15 g-mr-10" (click)="callLoadOrderList(this.currentPage - 1)">
+              <span *ngIf="!isOrdersLoading">Prev</span>
+              <span class="g-pl-5" *ngIf="isOrdersLoading">
+                <i class="fa fa-spinner fa-spin"></i>
+                <span class="sr-only">Prev...</span>
+              </span>
+            </button>
+          </div>
+          <div class="form-group">
+            <select class="form-control g-mx-15 g-mb-15 g-mr-10" ng-model="selectedPage" id="selectedPage" (change)="callPageLoadOrderList()">
+              <option *ngFor="let dummy of ' '.repeat(pages).split(''), let page = index" value="{{page + 1}}">{{page + 1}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15 g-ml-10" (click)="callLoadOrderList(this.currentPage + 1)">
+              <span *ngIf="!isOrdersLoading">Next</span>
+              <span class="g-pl-5" *ngIf="isOrdersLoading">
+                <i class="fa fa-spinner fa-spin"></i>
+                <span class="sr-only">Next...</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

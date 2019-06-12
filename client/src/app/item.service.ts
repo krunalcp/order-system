@@ -85,4 +85,14 @@ export class ItemService {
 
     return this.http.get(itemsApiURL, this.hostAppService.getToken());
   }
+
+  productionNotes(stationId: any, itemId: any, page: number, onlyOrder: number): Observable<any>{
+    let itemsApiURL = this.hostAppService.getHost() + '/items/production_notes';
+    itemsApiURL = itemsApiURL + '?s=' + stationId + '&i=' + itemId + '&page=' + page + '&oo=' + onlyOrder;
+    if (stationId != 0 && itemId != 0) {
+      itemsApiURL = itemsApiURL + '&per=20'
+    }
+
+    return this.http.get(itemsApiURL, this.hostAppService.getToken());
+  }
 }

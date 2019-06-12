@@ -6,6 +6,7 @@
 }
 .dropdown-menu{
 	background-color: #575352;
+  min-width: 13rem;
 }
 .toggle_btn{
 	float: right;

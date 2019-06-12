@@ -48,6 +48,7 @@ import { EventOrderConfirmedComponent } from './event-order-confirmed/event-orde
 import { ItemImportComponent } from './item-import/item-import.component';
 import { OrderImportComponent } from './order-import/order-import.component';
 import { ProductionComponent } from './production/production.component';
+import { ProductionNotesComponent } from './production-notes/production-notes.component';
 
 const appRoutes: Routes = [
 	{
@@ -215,6 +216,10 @@ const appRoutes: Routes = [
   {
     path: 'production',
     component: ProductionComponent
+  },
+  {
+    path: 'production-notes',
+    component: ProductionNotesComponent
   }
 ]
 
@@ -254,7 +259,8 @@ const appRoutes: Routes = [
 		EventOrderConfirmedComponent,
     ItemImportComponent,
     OrderImportComponent,
-    ProductionComponent
+		ProductionComponent,
+    ProductionNotesComponent
   ],
   imports: [
     BrowserModule,

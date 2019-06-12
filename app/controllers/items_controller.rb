@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_event!
   before_action :set_item, only: %i[show update destroy]
+  before_action :set_pagination, only: :production_notes
 
   def index
     @items = Item.unscoped.where(event_id: current_event.id).left_outer_joins(:category).order('categories.show_order asc, items.order_no asc')
@@ -110,6 +111,29 @@ class ItemsController < ApplicationController
       "orders.station_id IN (?) and order_items.item_id = ?", params[:station_id].to_s.split(',').map{|s| s.to_i}, params[:item_id]
     ).sum(:quantity)
     render json: station_item
+  end
+
+  def production_notes
+    @order_items = OrderItem.joins("INNER JOIN orders ON order_items.order_id = orders.id").includes(
+      :item, :category, order: [:account, :station, :items]
+    ).where(
+      "orders.station_id IN (?) and order_items.item_id IN (?)", params[:s].to_s.split(',').map{|s| s.to_i}, params[:i].to_s.split(',').map{|s| s.to_i}
+    )
+
+    if params[:all] == 'true'
+      render json: @order_items
+    else
+      @total  = @order_items.count
+      @order_items = @order_items.limit(@per_page).offset(@offset)
+
+      if params[:oo] == '1'
+        render json: @order_items
+      else
+        render json: {
+          order_items: @order_items, total: @total, page: @page, per: @per_page
+        }
+      end
+    end
   end
 
   private
