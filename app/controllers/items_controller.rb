@@ -117,7 +117,7 @@ class ItemsController < ApplicationController
     @order_items = OrderItem.joins("INNER JOIN orders ON order_items.order_id = orders.id").includes(
       :item, :category, order: [:account, :station, :items]
     ).where(
-      "orders.station_id IN (?) and order_items.item_id IN (?)", params[:s].to_s.split(',').map{|s| s.to_i}, params[:i].to_s.split(',').map{|s| s.to_i}
+      "orders.station_id IN (?) and order_items.item_id IN (?) and order_items.notes != ''", params[:s].to_s.split(',').map{|s| s.to_i}, params[:i].to_s.split(',').map{|s| s.to_i}
     )
 
     if params[:all] == 'true'
