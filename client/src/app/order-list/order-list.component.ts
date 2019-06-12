@@ -119,7 +119,7 @@ export class OrderListComponent implements OnInit {
         this.route.params.subscribe(
           (params: any) => {
             let id : number = params.id;
-            if(this.isOrderPrinting == false && id != null ){
+            if(this.isOrderPrinting == false && id != null && !this.currentEvent.disable_print_popup ){
               this.isOrderPrinting = true;
               this.timerSubscription = timer(1000).subscribe(() => this.printOrders(id));
             }

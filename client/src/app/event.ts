@@ -27,6 +27,7 @@ export class Event {
 		public phone_number?: string,
 		public total_costs?: number,
 		public number_of_tiles?: number,
-		public number_of_tiles_array?: number
+		public number_of_tiles_array?: number,
+		public disable_print_popup?: boolean
   ) {}
 }
