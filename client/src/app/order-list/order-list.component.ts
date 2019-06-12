@@ -253,4 +253,8 @@ export class OrderListComponent implements OnInit {
     this.isExporting = false;
   }
 
+  public currentDate(){
+    return new Date();
+  }
+
 }
