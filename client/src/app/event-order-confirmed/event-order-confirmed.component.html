@@ -93,28 +93,33 @@
           <img src="{{ currentEvent.printed_image }}" style="width: 80px">
           <h1>{{currentEvent.published_name}}</h1>
         </div>
-        <div style="font-size: 14px; font-weight: bold;">{{currentDate() | date:'dd.MM.yyyy HH:mm'}}</div>
-        <div style="font-size: 14px; font-weight: bold;">GST Number: {{currentEvent.gst_number}}</div>
-        <div style="font-size: 14px; font-weight: bold;">Email: {{currentEvent.printouts_email}}</div>
-        <div style="font-size: 14px; font-weight: bold;">Phone Number: {{currentEvent.phone_number}}</div>
+        <div *ngIf="currentEvent.gst_number" style="font-size: 14px; font-weight: bold;">GST Number: {{currentEvent.gst_number}}</div>
+        <div *ngIf="currentEvent.printouts_email" style="font-size: 14px; font-weight: bold;">Email: {{currentEvent.printouts_email}}</div>
+        <div *ngIf="currentEvent.phone_number" style="font-size: 14px; font-weight: bold;">Phone Number: {{currentEvent.phone_number}}</div>
+        <br />
+        <div *ngIf="order.customer_name" style="font-size: 14px; font-weight: bold;">Order Ref: {{order.customer_name}}</div>
+        <div *ngIf="order.order_number" style="font-size: 14px; font-weight: bold;">Order Number: {{order.order_number}}</div>
+        <div *ngIf="order.display_scheduled_order_time" style="font-size: 14px; font-weight: bold;">Ordered On: {{order.display_scheduled_order_time | date:'dd.MM.yyyy HH:mm'}}</div>
+        <div style="font-size: 14px; font-weight: bold;">Printed On: {{currentDate() | date:'dd.MM.yyyy HH:mm'}}</div>
+        <br />
         <br />
         <table width="90%" style="font-size: 14px;">
-          <tr>
+          <tr *ngIf="order.account?.name">
             <td width="25%"></td>
             <td width="35%" style="font-weight: bold;">Name:</td>
             <td width="25%">{{order.account?.name}}</td>
           </tr>
-          <tr>
+          <tr *ngIf="order.account?.contact_name">
             <td width="25%"></td>
             <td width="35%" style="font-weight: bold;">Contact Name:</td>
             <td width="25%">{{order.account?.contact_name}}</td>
           </tr>
-          <tr>
+          <tr *ngIf="order.account?.email">
             <td width="25%"></td>
             <td width="35%" style="font-weight: bold;">Email:</td>
             <td width="25%">{{order.account?.email}}</td>
           </tr>
-          <tr>
+          <tr *ngIf="order.account?.phone">
             <td width="25%"></td>
             <td width="35%" style="font-weight: bold;">Phone:</td>
             <td width="25%">{{order.account?.phone}}</td>
