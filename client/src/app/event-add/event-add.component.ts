@@ -6,6 +6,7 @@ import { Response } from '@angular/http';
 
 import { EventService } from '../event.service';
 import { OrderService } from '../order.service';
+import { AccountService } from '../account.service';
 
 import { Event } from '../event';
 
@@ -49,7 +50,8 @@ export class EventAddComponent implements OnInit {
     'disable_print_popup': '',
     'disable_print_popup_customer': '',
     'comments_label': '',
-    'website': ''
+    'website': '',
+    'account_id': ''
   };
   validationMessages = {
     'name': {
@@ -69,10 +71,12 @@ export class EventAddComponent implements OnInit {
   private isFormSubmitted: boolean;
   public isEventAdding: boolean = false;
   public stations: any;
+  public accounts: any;
 
   constructor(
     private orderService: OrderService,
     private eventService: EventService,
+    private accountService: AccountService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
@@ -81,6 +85,7 @@ export class EventAddComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
     this.getStationList();
+    this.getAccountList();
   }
 
   ngAfterViewChecked() {
@@ -217,6 +222,9 @@ export class EventAddComponent implements OnInit {
       ],
       'website': [
         this.event.website
+      ],
+      'account_id': [
+        this.event.account_id
       ]
     });
 
@@ -265,6 +273,13 @@ export class EventAddComponent implements OnInit {
     this.orderService.stations().subscribe(
       successResponse => {
         this.stations = successResponse.json();
+      }
+    );
+  }
+  private getAccountList(): void {
+    this.accountService.list().subscribe(
+      successResponse => {
+        this.accounts = successResponse.json();
       }
     );
   }

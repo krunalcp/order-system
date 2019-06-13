@@ -5,6 +5,7 @@ import { Response } from '@angular/http';
 import { Subscription } from 'rxjs';
 
 import { EventService } from '../event.service';
+import { AccountService } from '../account.service';
 import { OrderService } from '../order.service';
 import { HostappService } from '../hostapp.service';
 
@@ -28,6 +29,7 @@ export class EventEditComponent implements OnInit {
   private isFormSubmitted: boolean;
   public isEventUpdating: boolean = false;
   public stations: any;
+  public accounts: any;
 
 	public errorMessage: any;
   public formErrors = {
@@ -59,7 +61,8 @@ export class EventEditComponent implements OnInit {
     'disable_print_popup': '',
     'disable_print_popup_customer': '',
     'comments_label': '',
-    'website': ''
+    'website': '',
+    'account_id': ''
   };
   validationMessages = {
     'name': {
@@ -82,7 +85,8 @@ export class EventEditComponent implements OnInit {
     private router: Router,
     private eventService: EventService,
     public hostAppService: HostappService,
-  	private fb: FormBuilder
+    private fb: FormBuilder,
+    public accountService: AccountService
   ) { }
 
   ngOnInit() {
@@ -181,8 +185,10 @@ export class EventEditComponent implements OnInit {
         this.event['disable_print_popup_customer'] = data.disable_print_popup_customer
         this.event['comments_label'] = data.comments_label
         this.event['website'] = data.website
+        this.event['account_id'] = data.account_id
         this.eventForm.patchValue(this.event);
         this.getStationList();
+        this.getAccountList();
       },
       () => {
         this.errorMessage = 'Failed to load event.';
@@ -282,6 +288,9 @@ export class EventEditComponent implements OnInit {
       ],
       'website':[
         this.event.website
+      ],
+      'account_id':[
+        this.event.account_id
       ]
     });
 
@@ -331,6 +340,13 @@ export class EventEditComponent implements OnInit {
     this.orderService.event_stations(this.event.id).subscribe(
       successResponse => {
         this.stations = successResponse.json();
+      }
+    );
+  }
+  private getAccountList(): void {
+    this.accountService.list().subscribe(
+      successResponse => {
+        this.accounts = successResponse.json();
       }
     );
   }

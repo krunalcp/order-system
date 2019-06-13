@@ -75,8 +75,12 @@ export class EventOrderAddComponent implements OnInit {
 
   ngAfterViewChecked() {
     this.initDatePicker();
-    var account_id = this.getCookie('ct_account_id');
-    if(parseInt(account_id) > 0){
+    if(this.currentEvent.account_id){
+      var account_id = this.currentEvent.account_id
+    }else{
+      var account_id = parseInt(this.getCookie('ct_account_id'));
+    }
+    if(account_id > 0){
       $('#account').val(account_id);
       this.onAccountSelect(account_id);
       this.onValueChanged();

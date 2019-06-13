@@ -20,7 +20,7 @@
       <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30">
         <!-- Text Input -->
         <div class="row">
-          <div class="form-group g-mb-25 col-md-3" [ngClass]="{'disabled': isEventOrderPage}">
+          <div class="form-group g-mb-25 col-md-3" [ngClass]="{'disabled': !isEventOrderPage}">
             <label class="g-mb-10" for="account_id">Account</label>
             <select class="form-control rounded-0 u-form-control" id="account" formControlName="account_id" (change)="onAccountSelect($event.target.value)">
               <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
