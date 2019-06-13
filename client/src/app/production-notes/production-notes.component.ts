@@ -146,4 +146,10 @@ export class ProductionNotesComponent implements OnInit {
     }
   }
 
+  public toggle_navbar(){
+    $(".nav-bar").toggle();
+    $(".fa-caret-down").toggle();
+    $(".fa-caret-up").toggle();
+  }
+
 }

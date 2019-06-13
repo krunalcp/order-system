@@ -3,9 +3,9 @@
     <h1 class="h3 u-heading-v1__title">Production Notes</h1>
   </div>
 
-  <div class="row">
+  <div class="row nav-bar">
     <div class="col-md-6">
-      <div class="form-group g-mb-25">
+      <div class="form-group g-mb-0">
         <label for="item">Select item</label>
         <select multiple class="form-control rounded-0" (change)="onItemSelect($event.target.value)" id="item">
           <option value="" disabled selected></option>
@@ -14,13 +14,21 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="form-group g-mb-25">
+      <div class="form-group g-mb-0">
         <label for="station">Select station</label>
         <select multiple class="form-control rounded-0" data-live-search="true" id="station" (change)="onStationSelect($event.target.value)">
           <option value="" disabled selected></option>
           <option *ngFor="let station of stations; index as i;" value="{{station.id}}">{{station.name}}</option>
         </select>
       </div>
+    </div>
+  </div>
+  <div class="row g-mb-25">
+    <div class="offset-md-11 col-md-1 bg-custom fa-caret text-right">
+      <span class="toggle_btn" style="cursor: pointer;" (click)="toggle_navbar()" >
+        <i class="fa fa-2x fa-caret-up white"></i>
+        <i class="fa fa-2x fa-caret-down white hidden"></i>
+      </span>
     </div>
   </div>
 
@@ -31,6 +39,7 @@
           <th class="align-middle g-color-black">Account Name</th>
           <th class="align-middle g-color-black">Order Reference</th>
           <th class="align-middle g-color-black">Item Name</th>
+          <th class="align-middle g-color-black">Quantity</th>
           <th class="align-middle g-color-black">Notes</th>
         </tr>
       </thead>
@@ -39,8 +48,9 @@
         <tr *ngFor="let orderItem of orderItems">
           <td class="align-middle">{{orderItem.account_name}}</td>
           <td class="align-middle">{{orderItem.order.customer_name}}</td>
-          <td class="align-middle" align="right">{{orderItem.item}}</td>
-          <td class="align-middle" align="right">{{orderItem.notes}}</td>
+          <td class="align-middle">{{orderItem.item}}</td>
+          <td class="align-middle">{{orderItem.quantity}}</td>
+          <td class="align-middle">{{orderItem.notes}}</td>
         </tr>
       </tbody>
     </table>
