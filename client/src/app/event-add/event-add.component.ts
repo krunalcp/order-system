@@ -48,7 +48,8 @@ export class EventAddComponent implements OnInit {
     'number_of_tiles': '',
     'disable_print_popup': '',
     'disable_print_popup_customer': '',
-    'comments_label': ''
+    'comments_label': '',
+    'website': ''
   };
   validationMessages = {
     'name': {
@@ -213,6 +214,9 @@ export class EventAddComponent implements OnInit {
       ],
       'comments_label': [
         this.event.comments_label
+      ],
+      'website': [
+        this.event.website
       ]
     });
 

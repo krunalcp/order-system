@@ -6,7 +6,7 @@ class EventSerializer < ActiveModel::Serializer
              :latest_preorder_date, :printed_image, :banner_message,
              :printouts_email, :phone_number, :total_costs, :number_of_tiles,
              :number_of_tiles_array, :disable_print_popup, :second_station_id,
-             :disable_print_popup_customer, :comments_label
+             :disable_print_popup_customer, :comments_label, :website
 
   def station_name
     object.station.try(:name)

@@ -58,7 +58,8 @@ export class EventEditComponent implements OnInit {
     'number_of_tiles': '',
     'disable_print_popup': '',
     'disable_print_popup_customer': '',
-    'comments_label': ''
+    'comments_label': '',
+    'website': ''
   };
   validationMessages = {
     'name': {
@@ -179,6 +180,7 @@ export class EventEditComponent implements OnInit {
         this.event['disable_print_popup'] = data.disable_print_popup
         this.event['disable_print_popup_customer'] = data.disable_print_popup_customer
         this.event['comments_label'] = data.comments_label
+        this.event['website'] = data.website
         this.eventForm.patchValue(this.event);
         this.getStationList();
       },
@@ -277,6 +279,9 @@ export class EventEditComponent implements OnInit {
       ],
       'comments_label':[
         this.event.comments_label
+      ],
+      'website':[
+        this.event.website
       ]
     });
 

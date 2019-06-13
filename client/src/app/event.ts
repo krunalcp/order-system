@@ -32,5 +32,6 @@ export class Event {
 		public disable_print_popup?: boolean,
 		public disable_print_popup_customer?: boolean,
 		public comments_label?: string
+		public website?: string
   ) {}
 }

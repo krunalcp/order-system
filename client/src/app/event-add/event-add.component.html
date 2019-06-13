@@ -147,6 +147,13 @@
           </label>
           <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter Comments Label" id="comments_label" formControlName="comments_label">
         </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="website">
+            <span *ngIf="!formErrors.website" [ngClass]="{'text-success': !eventForm.controls.website.pristine}">Website</span>
+            <span *ngIf="formErrors.website" class="text-danger">{{formErrors.website}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter Website" id="website" formControlName="website">
+        </div>
       </div>
       <div class="row">
         <div class="form-group g-mb-25 col-md-2">
