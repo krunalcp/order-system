@@ -205,24 +205,26 @@ export class EventOrderAddComponent implements OnInit {
   }
 
   public onSubmit() {
-    if(this.orderForm.status == 'INVALID') {
-      this.isFormSubmitted = true;
-      this.onValueChanged();
-      return;
-    }
-    this.order = this.orderForm.value;
-    this.order.scheduled_order_time = $("#scheduled_order_time").val();
-    this.order.order_items = this.items.filter(item => item.quantity > 0).concat(this.favourite_items.filter(item => item.quantity > 0))
-    this.order.value = this.totalPrice;
-    this.isOrderAdding = true;
-    this.orderAddRequest = this.eventOrderService.add(this.order, this.eventName).subscribe(
-      successResponse => {
-        this.sucessHandler(successResponse);
-      },
-      errorResponse   => {
-        this.errorHandler(errorResponse);
+    if(!this.isOrderAdding){
+      if(this.orderForm.status == 'INVALID') {
+        this.isFormSubmitted = true;
+        this.onValueChanged();
+        return;
       }
-    );
+      this.order = this.orderForm.value;
+      this.order.scheduled_order_time = $("#scheduled_order_time").val();
+      this.order.order_items = this.items.filter(item => item.quantity > 0).concat(this.favourite_items.filter(item => item.quantity > 0))
+      this.order.value = this.totalPrice;
+      this.isOrderAdding = true;
+      this.orderAddRequest = this.eventOrderService.add(this.order, this.eventName).subscribe(
+        successResponse => {
+          this.sucessHandler(successResponse);
+        },
+        errorResponse   => {
+          this.errorHandler(errorResponse);
+        }
+      );
+    }
   }
 
   private buildForm(): void {

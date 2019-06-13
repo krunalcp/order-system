@@ -136,23 +136,25 @@ export class OrderAddComponent implements OnInit {
   }
 
   public onSubmit() {
-    if(this.orderForm.status == 'INVALID') {
-      this.isFormSubmitted = true;
-      this.onValueChanged();
-      return;
-    }
-    this.order = this.orderForm.value;
-    this.order.order_items = this.items.filter(item => item.quantity > 0)
-    this.order.value = this.totalPrice;
-    this.isOrderAdding = true;
-    this.orderAddRequest = this.orderService.add(this.order).subscribe(
-      successResponse => {
-        this.sucessHandler(successResponse);
-      },
-      errorResponse   => {
-        this.errorHandler(errorResponse);
+    if(!this.isOrderAdding){
+      if(this.orderForm.status == 'INVALID') {
+        this.isFormSubmitted = true;
+        this.onValueChanged();
+        return;
       }
-    );
+      this.order = this.orderForm.value;
+      this.order.order_items = this.items.filter(item => item.quantity > 0)
+      this.order.value = this.totalPrice;
+      this.isOrderAdding = true;
+      this.orderAddRequest = this.orderService.add(this.order).subscribe(
+        successResponse => {
+          this.sucessHandler(successResponse);
+        },
+        errorResponse   => {
+          this.errorHandler(errorResponse);
+        }
+      );
+    }
   }
 
   public cancelOrder(){
