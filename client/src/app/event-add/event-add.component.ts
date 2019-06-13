@@ -47,7 +47,8 @@ export class EventAddComponent implements OnInit {
     'total_costs': '',
     'number_of_tiles': '',
     'disable_print_popup': '',
-    'disable_print_popup_customer': ''
+    'disable_print_popup_customer': '',
+    'comments_label': ''
   };
   validationMessages = {
     'name': {
@@ -209,6 +210,9 @@ export class EventAddComponent implements OnInit {
       ],
       'disable_print_popup_customer': [
         this.event.disable_print_popup_customer
+      ],
+      'comments_label': [
+        this.event.comments_label
       ]
     });
 

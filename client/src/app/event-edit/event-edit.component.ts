@@ -57,7 +57,8 @@ export class EventEditComponent implements OnInit {
     'total_costs': '',
     'number_of_tiles': '',
     'disable_print_popup': '',
-    'disable_print_popup_customer': ''
+    'disable_print_popup_customer': '',
+    'comments_label': ''
   };
   validationMessages = {
     'name': {
@@ -177,6 +178,7 @@ export class EventEditComponent implements OnInit {
         this.event['number_of_tiles'] = data.number_of_tiles
         this.event['disable_print_popup'] = data.disable_print_popup
         this.event['disable_print_popup_customer'] = data.disable_print_popup_customer
+        this.event['comments_label'] = data.comments_label
         this.eventForm.patchValue(this.event);
         this.getStationList();
       },
@@ -272,6 +274,9 @@ export class EventEditComponent implements OnInit {
       ],
       'disable_print_popup_customer':[
         this.event.disable_print_popup_customer
+      ],
+      'comments_label':[
+        this.event.comments_label
       ]
     });
 

@@ -138,7 +138,14 @@
             <span *ngIf="!formErrors.number_of_tiles" [ngClass]="{'text-success': !eventForm.controls.number_of_tiles.pristine}">Number Of Tiles</span>
             <span *ngIf="formErrors.number_of_tiles" class="text-danger">{{formErrors.number_of_tiles}}</span>
           </label>
-          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter Total Costs" id="number_of_tiles" formControlName="number_of_tiles">
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter Number Of Tiles" id="number_of_tiles" formControlName="number_of_tiles">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="comments_label">
+            <span *ngIf="!formErrors.comments_label" [ngClass]="{'text-success': !eventForm.controls.comments_label.pristine}">Comments Label</span>
+            <span *ngIf="formErrors.comments_label" class="text-danger">{{formErrors.comments_label}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter Comments Label" id="comments_label" formControlName="comments_label">
         </div>
       </div>
       <div class="row">

@@ -20,6 +20,7 @@ export class EventOrderConfirmedComponent implements OnInit {
   public order: any;
   public currentEvent: Event = new Event();
   public isOrderPrinting: boolean = false;
+  public timerSubscription: any;
 
   constructor(
     private route: ActivatedRoute,
