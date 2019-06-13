@@ -30,9 +30,6 @@ export class AccountAddComponent implements OnInit {
     'name': {
       'required': 'Name is required.',
     },
-    'email': {
-      'required': 'Email is required.',
-    },
     'password': {
       'required': 'Password is required.',
     }
@@ -93,9 +90,7 @@ export class AccountAddComponent implements OnInit {
         this.account.phone
       ],
       'email': [
-        this.account.email, [
-          Validators.required
-        ]
+        this.account.email
       ],
       'password': [
         '', [
