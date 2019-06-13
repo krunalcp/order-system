@@ -56,7 +56,8 @@ export class EventEditComponent implements OnInit {
     'phone_number': '',
     'total_costs': '',
     'number_of_tiles': '',
-    'disable_print_popup': ''
+    'disable_print_popup': '',
+    'disable_print_popup_customer': ''
   };
   validationMessages = {
     'name': {
@@ -175,6 +176,7 @@ export class EventEditComponent implements OnInit {
         this.event['total_costs'] = data.total_costs
         this.event['number_of_tiles'] = data.number_of_tiles
         this.event['disable_print_popup'] = data.disable_print_popup
+        this.event['disable_print_popup_customer'] = data.disable_print_popup_customer
         this.eventForm.patchValue(this.event);
         this.getStationList();
       },
@@ -267,6 +269,9 @@ export class EventEditComponent implements OnInit {
       ],
       'disable_print_popup':[
         this.event.disable_print_popup
+      ],
+      'disable_print_popup_customer':[
+        this.event.disable_print_popup_customer
       ]
     });
 

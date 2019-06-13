@@ -46,7 +46,8 @@ export class EventAddComponent implements OnInit {
     'phone_number': '',
     'total_costs': '',
     'number_of_tiles': '',
-    'disable_print_popup': ''
+    'disable_print_popup': '',
+    'disable_print_popup_customer': ''
   };
   validationMessages = {
     'name': {
@@ -205,6 +206,9 @@ export class EventAddComponent implements OnInit {
       ],
       'disable_print_popup': [
         this.event.disable_print_popup
+      ],
+      'disable_print_popup_customer': [
+        this.event.disable_print_popup_customer
       ]
     });
 

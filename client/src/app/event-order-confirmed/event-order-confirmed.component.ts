@@ -5,6 +5,7 @@ import { Order } from '../order';
 import { Event } from '../event';
 import { HeaderService } from "../services/header.service";
 import { EventOrderService } from '../event_order.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-event-order-confirmed',
@@ -18,6 +19,7 @@ export class EventOrderConfirmedComponent implements OnInit {
   private eventName: string;
   public order: any;
   public currentEvent: Event = new Event();
+  public isOrderPrinting: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -56,6 +58,10 @@ export class EventOrderConfirmedComponent implements OnInit {
     this.eventOrderService.show(this.eventName, id).subscribe(
       successResponse => {
         this.order = successResponse.json();
+        if(this.isOrderPrinting == false && !this.currentEvent.disable_print_popup_customer ){
+          this.isOrderPrinting = true;
+          this.timerSubscription = timer(1000).subscribe(() => this.printOrders(id));
+        }
       },
       () => {
         this.errorMessage = 'Failed to load order.';

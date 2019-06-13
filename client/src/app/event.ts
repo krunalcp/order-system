@@ -29,6 +29,7 @@ export class Event {
 		public total_costs?: number,
 		public number_of_tiles?: number,
 		public number_of_tiles_array?: number,
-		public disable_print_popup?: boolean
+		public disable_print_popup?: boolean,
+		public disable_print_popup_customer?: boolean
   ) {}
 }
