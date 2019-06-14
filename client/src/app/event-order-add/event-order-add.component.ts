@@ -97,6 +97,7 @@ export class EventOrderAddComponent implements OnInit {
         self.onOrderDateSelect($(this).val());
     });
   }
+
   private loadCurrentEvent(): void {
     this.eventOrderService.currentEvent(this.eventName).subscribe(
       successResponse => {
