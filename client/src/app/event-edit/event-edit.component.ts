@@ -60,6 +60,7 @@ export class EventEditComponent implements OnInit {
     'number_of_tiles': '',
     'disable_print_popup': '',
     'disable_print_popup_customer': '',
+    'show_station_list': '',
     'comments_label': '',
     'website': '',
     'account_id': ''
@@ -183,6 +184,7 @@ export class EventEditComponent implements OnInit {
         this.event['number_of_tiles'] = data.number_of_tiles
         this.event['disable_print_popup'] = data.disable_print_popup
         this.event['disable_print_popup_customer'] = data.disable_print_popup_customer
+        this.event['show_station_list'] = data.show_station_list
         this.event['comments_label'] = data.comments_label
         this.event['website'] = data.website
         this.event['account_id'] = data.account_id
@@ -282,6 +284,9 @@ export class EventEditComponent implements OnInit {
       ],
       'disable_print_popup_customer':[
         this.event.disable_print_popup_customer
+      ],
+      'show_station_list':[
+        this.event.show_station_list
       ],
       'comments_label':[
         this.event.comments_label

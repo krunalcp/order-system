@@ -49,6 +49,7 @@ export class EventAddComponent implements OnInit {
     'number_of_tiles': '',
     'disable_print_popup': '',
     'disable_print_popup_customer': '',
+    'show_station_list': '',
     'comments_label': '',
     'website': '',
     'account_id': ''
@@ -99,7 +100,6 @@ export class EventAddComponent implements OnInit {
       minuteStep: 15,
     });
   }
-
 
   public onSubmit() {
     if(this.eventForm.status == 'INVALID') {
@@ -216,6 +216,9 @@ export class EventAddComponent implements OnInit {
       ],
       'disable_print_popup_customer': [
         this.event.disable_print_popup_customer
+      ],
+      'show_station_list': [
+        this.event.show_station_list
       ],
       'comments_label': [
         this.event.comments_label

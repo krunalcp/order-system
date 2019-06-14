@@ -38,7 +38,7 @@
             </label>
             <input class="form-control u-form-control rounded-0 pr-0" (change)="onOrderDateSelect($event.target.value)" type="text" id="scheduled_order_time" formControlName="scheduled_order_time">
           </div>
-          <div class="form-group g-mb-25 col-md-3">
+          <div class="form-group g-mb-25 col-md-3" *ngIf="currentEvent.show_station_list">
             <label class="g-mb-10" for="station_id">Station</label>
             <select class="form-control rounded-0 u-form-control" id="station" formControlName="station_id">
               <option *ngFor="let station of stations; index as i;" value="{{station.id}}">{{station.name}}</option>

@@ -31,6 +31,7 @@ export class Event {
 		public number_of_tiles_array?: number,
 		public disable_print_popup?: boolean,
 		public disable_print_popup_customer?: boolean,
+    public show_station_list?: boolean,
 		public comments_label?: string,
 		public website?: string,
 		public account_id?: number

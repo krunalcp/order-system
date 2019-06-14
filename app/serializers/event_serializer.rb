@@ -7,7 +7,7 @@ class EventSerializer < ActiveModel::Serializer
              :printouts_email, :phone_number, :total_costs, :number_of_tiles,
              :number_of_tiles_array, :disable_print_popup, :second_station_id,
              :disable_print_popup_customer, :comments_label, :website,
-             :account_id
+             :account_id, :show_station_list
 
   def station_name
     object.station.try(:name)
