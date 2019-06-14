@@ -33,6 +33,6 @@ class OrderSerializer < ActiveModel::Serializer
   end
 
   def total_quantity
-    object.order_items.sum(:quantity)
+    object.order_items.map(&:quantity).inject(:+)
   end
 end
