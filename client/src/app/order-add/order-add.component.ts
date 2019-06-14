@@ -65,6 +65,9 @@ export class OrderAddComponent implements OnInit {
     this.loadItems();
     this.getLastOrderNumber();
   }
+  ngAfterViewChecked() {
+    this.initDatePicker();
+  }
 
   private getLastOrderNumber(): void {
     this.orderService.lastOrderNumber().subscribe(
@@ -143,6 +146,7 @@ export class OrderAddComponent implements OnInit {
         return;
       }
       this.order = this.orderForm.value;
+      this.order.scheduled_order_time = $("#scheduled_order_time").val();
       this.order.order_items = this.items.filter(item => item.quantity > 0)
       this.order.value = this.totalPrice;
       this.isOrderAdding = true;
@@ -231,6 +235,15 @@ export class OrderAddComponent implements OnInit {
         }
       }
     }
+  }
+
+  public initDatePicker(): void {
+    var self = this;
+    $("#scheduled_order_time").datetimepicker({
+      format: 'dd-mm-yyyy hh:ii',
+      autoclose: true,
+      minuteStep: 15,
+    })
   }
 
   private sucessHandler(successResponse: Response): void {

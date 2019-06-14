@@ -68,6 +68,10 @@ export class OrderEditComponent implements OnInit {
     );
   }
 
+  ngAfterViewChecked() {
+    this.initDatePicker();
+  }
+
   private loadCurrentEvent(): void {
     this.eventService.current().subscribe(
       successResponse => {
@@ -179,6 +183,7 @@ export class OrderEditComponent implements OnInit {
       return;
     }
     this.order = this.orderForm.value;
+    this.order.scheduled_order_time = $("#scheduled_order_time").val();
     this.order.order_items = this.items.filter(item => item.quantity > 0);
     this.order.value = this.totalPrice;
     this.isOrderUpdating = true;
@@ -265,6 +270,15 @@ export class OrderEditComponent implements OnInit {
     if(data.errors.length > 0) {
       this.errorMessage = data.errors.join(', ')
     }
+  }
+
+  public initDatePicker(): void {
+    var self = this;
+    $("#scheduled_order_time").datetimepicker({
+      format: 'dd-mm-yyyy hh:ii',
+      autoclose: true,
+      minuteStep: 15,
+    })
   }
 
 
