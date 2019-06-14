@@ -188,7 +188,9 @@ export class OrderListComponent implements OnInit {
               newItem.ACCOUNT_NAME =  order.account.name;
               newItem.ACCOUNT_CONTACT_NAME = order.account.contact_name;
             }
-            newItem.STATION = 'S' + order.station.id + ' - ' + order.station.name;
+            if(order.station != null){
+              newItem.STATION = 'S' + order.station.id + ' - ' + order.station.name;
+            }
             newItem.TOTAL_VALUE = order.value;
             newItem.ITEM = orderItem.item;
             newItem.NOTES = orderItem.notes;
