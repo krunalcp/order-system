@@ -3,8 +3,9 @@ class OrdersController < ApplicationController
   before_action :set_pagination, only: :index
 
   def index
-    sort_by = %w[scheduled_order_time station_id value].include?(params[:sort_by]) ? params[:sort_by] : 'created_at'
+    sort_by = %w[scheduled_order_time station_id value].include?(params[:sort_by]) ? params[:sort_by] : 'scheduled_order_time'
     order   = params[:sort_order].present? && params[:sort_order] == 'asc' ? 'asc' : 'desc'
+    sort_by = "CASE WHEN scheduled_order_time IS NULL then created_at ELSE scheduled_order_time END" if sort_by == 'scheduled_order_time'
     @orders = current_event.orders.includes([:station, :account, order_items: [:category, :item]]).order("#{sort_by} #{order}")
 
     if params[:all] == 'true'
