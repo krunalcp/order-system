@@ -52,7 +52,8 @@ export class EventAddComponent implements OnInit {
     'show_station_list': '',
     'comments_label': '',
     'website': '',
-    'account_id': ''
+    'account_id': '',
+    'hide_site_page': ''
   };
   validationMessages = {
     'name': {
@@ -228,6 +229,9 @@ export class EventAddComponent implements OnInit {
       ],
       'account_id': [
         this.event.account_id
+      ],
+      'hide_site_page':[
+        this.event.hide_site_page
       ]
     });
 

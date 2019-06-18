@@ -63,7 +63,8 @@ export class EventEditComponent implements OnInit {
     'show_station_list': '',
     'comments_label': '',
     'website': '',
-    'account_id': ''
+    'account_id': '',
+    'hide_site_page': ''
   };
   validationMessages = {
     'name': {
@@ -188,6 +189,7 @@ export class EventEditComponent implements OnInit {
         this.event['comments_label'] = data.comments_label
         this.event['website'] = data.website
         this.event['account_id'] = data.account_id
+        this.event['hide_site_page'] = data.hide_site_page
         this.eventForm.patchValue(this.event);
         this.getStationList();
         this.getAccountList();
@@ -296,6 +298,9 @@ export class EventEditComponent implements OnInit {
       ],
       'account_id':[
         this.event.account_id
+      ],
+      'hide_site_page':[
+        this.event.hide_site_page
       ]
     });
 
