@@ -63,19 +63,9 @@ export class OrderAddComponent implements OnInit {
     this.getStationList();
     this.getAccountList();
     this.loadItems();
-    this.getLastOrderNumber();
   }
   ngAfterViewChecked() {
     this.initDatePicker();
-  }
-
-  private getLastOrderNumber(): void {
-    this.orderService.lastOrderNumber().subscribe(
-      successResponse => {
-        this.order.order_number = successResponse.json();
-        this.buildForm();
-      }
-    );
   }
 
   public loadItems(){

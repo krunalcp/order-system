@@ -43,6 +43,12 @@ class OrdersController < ApplicationController
       scheduled_order_time: order_params[:scheduled_order_time],
       order_number: order_params[:order_number]
     }
+
+    if new_order_params[:order_number].nil?
+      order = current_event.orders.where.not(order_number: nil).order(order_number: :desc).first
+      new_order_params[:order_number] = (order.order_number.to_i) + 1
+    end
+
     @order = current_event.orders.create(new_order_params)
 
     order_items = []
