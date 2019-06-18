@@ -8,6 +8,7 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Angular2TokenService } from 'angular2-token';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { Select2Module } from 'ng-select2-component';
 
 import { AppComponent } from './app.component';
 import { ItemListComponent } from './item-list/item-list.component';
@@ -270,6 +271,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MainPipe,
+    Select2Module,
     FlashMessagesModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,

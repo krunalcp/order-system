@@ -124,7 +124,6 @@ export class EventOrderAddComponent implements OnInit {
     this.eventOrderService.favouriteItems(this.eventName, this.accountId).subscribe(
       successResponse => {
         this.favourite_items = successResponse.json();
-        console.log(this.favourite_items)
       }
     );
   }
