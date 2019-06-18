@@ -73,7 +73,7 @@ export class EventOrderAddComponent implements OnInit {
     this.showErrorMessage = false
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewInit() {
     this.initDatePicker();
     if(this.currentEvent.account_id){
       var account_id = this.currentEvent.account_id
@@ -81,7 +81,7 @@ export class EventOrderAddComponent implements OnInit {
       var account_id = parseInt(this.getCookie('ct_account_id'));
     }
     if(account_id > 0){
-      $('#account').val(account_id);
+      this.order.account_id = account_id
       this.onAccountSelect(account_id);
       this.onValueChanged();
     }
