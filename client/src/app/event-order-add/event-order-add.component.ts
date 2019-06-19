@@ -73,18 +73,8 @@ export class EventOrderAddComponent implements OnInit {
     this.showErrorMessage = false
   }
 
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
     this.initDatePicker();
-    if(this.currentEvent.account_id){
-      var account_id = this.currentEvent.account_id
-    }else{
-      var account_id = parseInt(this.getCookie('ct_account_id'));
-    }
-    if(account_id > 0){
-      this.order.account_id = account_id
-      this.onAccountSelect(account_id);
-      this.onValueChanged();
-    }
   }
 
   public initDatePicker(): void {
@@ -104,6 +94,16 @@ export class EventOrderAddComponent implements OnInit {
         this.currentEvent = successResponse.json();
         // Set Title
         document.title = this.currentEvent.published_name
+        if(this.currentEvent.account_id){
+          var account_id = this.currentEvent.account_id
+        }else{
+          var account_id = parseInt(this.getCookie('ct_account_id'));
+        }
+        if(account_id > 0){
+          this.order.account_id = account_id
+          this.onAccountSelect(account_id);
+          this.onValueChanged();
+        }
         this.buildForm();
       },
       () => {

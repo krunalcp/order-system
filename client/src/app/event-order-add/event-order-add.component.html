@@ -22,7 +22,7 @@
         <div class="row">
           <div class="form-group g-mb-25 col-md-3" [ngClass]="{'disabled': !isEventOrderPage}">
             <label class="g-mb-10" for="account_id">Account</label>
-            <select2 *ngIf="accounts" [data]="accounts" formControlName="account_id" (update)="onAccountSelect($event)">
+            <select2 *ngIf="accounts" [data]="accounts" formControlName="account_id" (update)="onAccountSelect($event)" [minCountForSearch]=1>
             </select2>
           </div>
           <div class="form-group g-mb-25 col-md-3">
@@ -35,7 +35,7 @@
               <span *ngIf="!showErrorMessage" [ngClass]="{'text-success': showErrorMessage}">Order Date/Time</span>
               <span *ngIf="showErrorMessage" class="text-danger">You have ordered outside the available dates of {{currentEvent.earliest_preorder_date}} to {{currentEvent.latest_preorder_date}}</span>
             </label>
-            <input class="form-control u-form-control rounded-0 pr-0" (change)="onOrderDateSelect($event.target.value)" type="text" id="scheduled_order_time" formControlName="scheduled_order_time">
+            <input class="form-control u-form-control rounded-0 pr-0" (change)="onOrderDateSelect($event.target.value)" type="text" id="scheduled_order_time" formControlName="scheduled_order_time" autocomplete="off">
           </div>
           <div class="form-group g-mb-25 col-md-3" *ngIf="currentEvent.show_station_list">
             <label class="g-mb-10" for="station_id">Station</label>
