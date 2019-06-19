@@ -82,4 +82,9 @@ export class OrderSummaryComponent implements OnInit {
     this.timerSubscription = timer(60000).subscribe(() => this.loadItemList(false, this.s_type));
   }
 
+  public refreshPage(){
+    this.loadItemList(false, 'quantity')
+    this.loadOrderSumary()
+  }
+
 }
