@@ -110,6 +110,7 @@ export class EventEditComponent implements OnInit {
 
   public initDatePicker(): void {
     $("#end_date, #start_date, #earliest_preorder_date, #latest_preorder_date").datetimepicker({
+      fontAwesome: true,
       format: 'dd-mm-yyyy hh:ii',
       autoclose: true,
       minuteStep: 15,
