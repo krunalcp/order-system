@@ -15,6 +15,8 @@ export class Order {
     public scheduled_order_time?: any,
     public account?: any,
     public account_id?: number,
-    public order_number?: number
+    public order_number?: number,
+		public station_id?: number
+
   ) {}
 }
