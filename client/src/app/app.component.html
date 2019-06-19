@@ -33,15 +33,27 @@
             <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
               <a routerLink="/station/order" class="nav-link px-0"> Fulfilment </a>
             </li>
-            <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-              <a href="{{currentEvent.help_url}}" class="nav-link px-0" target="_blank"> Help </a>
-            </li>
             <li *ngIf="tokenService.userSignedIn()" class="dropdown nav-item g-mx-20--lg">
               <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" >
                 More
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
+                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+                  <a routerLink="/station/list" class="nav-link px-0"> Stations </a>
+                </li>
+                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+                  <a routerLink="/production" class="nav-link px-0"> Production </a>
+                </li>
+                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+                  <a routerLink="/production-notes" class="nav-link px-0"> Production Notes </a>
+                </li>
+                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+                  <a href="{{hostAppService.getHost()}}/#/{{currentEvent.name}}/order" class="nav-link px-0" target="_blank"> Ordering Link </a>
+                </li>
+                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
+                  <a routerLink="/order/summary" class="nav-link px-0"> Summary </a>
+                </li>
                 <li *ngIf="tokenService.userSignedIn() && currentEvent.admin && !currentEvent.hide_site_page" class="nav-item g-mx-20--lg">
                   <a routerLink="/site/list" class="nav-link px-0"> Sites </a>
                 </li>
@@ -49,16 +61,7 @@
                   <a routerLink="/site/edit/{{currentEvent.id}}" class="nav-link px-0"> Site </a>
                 </li>
                 <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-                  <a routerLink="/station/list" class="nav-link px-0"> Stations </a>
-                </li>
-                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-                  <a routerLink="/order/summary" class="nav-link px-0"> Summary </a>
-                </li>
-                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-                  <a routerLink="/production" class="nav-link px-0"> Production </a>
-                </li>
-                <li *ngIf="tokenService.userSignedIn()" class="nav-item g-mx-20--lg">
-                  <a routerLink="/production-notes" class="nav-link px-0"> Production Notes </a>
+                  <a href="{{currentEvent.help_url}}" class="nav-link px-0" target="_blank"> Help </a>
                 </li>
                 <li *ngIf="tokenService.userSignedIn()" style="cursor: pointer;" class="nav-item g-mx-20--lg">
                   <a (click)="onSignout()" class="nav-link px-0">LOGOUT</a>
