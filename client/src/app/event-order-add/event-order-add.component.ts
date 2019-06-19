@@ -95,22 +95,35 @@ export class EventOrderAddComponent implements OnInit {
         this.currentEvent = successResponse.json();
         // Set Title
         document.title = this.currentEvent.published_name
-        if(this.currentEvent.account_id){
-          var account_id = this.currentEvent.account_id
-        }else{
-          var account_id = parseInt(this.getCookie('ct_account_id'));
-        }
-        if(account_id > 0){
-          this.order.account_id = account_id
-          this.onAccountSelect(account_id);
-          this.onValueChanged();
-        }
+        this.setDefaultAccountId();
+        this.setDefaultStationId();
         this.buildForm();
       },
       () => {
         this.errorMessage = 'Failed to load Event.';
       }
     );
+  }
+
+  public setDefaultAccountId(){
+    if(this.currentEvent.account_id){
+      var account_id = this.currentEvent.account_id
+    }else{
+      var account_id = parseInt(this.getCookie('ct_account_id'));
+    }
+    if(account_id > 0){
+      this.order.account_id = account_id
+      this.onAccountSelect(account_id);
+      this.onValueChanged();
+    }
+  }
+
+  public setDefaultStationId(){
+    if (this.currentEvent.last_order_station_id == this.currentEvent.station_id){
+      this.order.station_id = this.currentEvent.second_station_id
+    }else{
+      this.order.station_id = this.currentEvent.station_id
+    }
   }
 
   public loadItems(){
@@ -238,7 +251,7 @@ export class EventOrderAddComponent implements OnInit {
         this.order.customer_name
       ],
       'station_id': [
-        this.currentEvent.station_id
+        this.order.station_id
       ],
       'account_id': [
         this.order.account_id

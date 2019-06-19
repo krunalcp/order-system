@@ -35,6 +35,7 @@ export class Event {
     public comments_label?: string,
     public website?: string,
     public account_id?: number,
-    public hide_site_page?: boolean
+    public hide_site_page?: boolean,
+		public last_order_station_id? :number
   ) {}
 }

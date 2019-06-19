@@ -7,7 +7,7 @@ class EventSerializer < ActiveModel::Serializer
              :printouts_email, :phone_number, :total_costs, :number_of_tiles,
              :number_of_tiles_array, :disable_print_popup, :second_station_id,
              :disable_print_popup_customer, :comments_label, :website,
-             :account_id, :show_station_list, :hide_site_page
+             :account_id, :show_station_list, :hide_site_page, :last_order_station_id
 
   def station_name
     object.station.try(:name)
@@ -19,5 +19,9 @@ class EventSerializer < ActiveModel::Serializer
 
   def is_allowed_to_order
     (object.start_date.blank? || Date.today >= object.start_date) && (object.end_date.blank? || Date.today <= object.end_date)
+  end
+
+  def last_order_station_id
+    object.orders.order(created_at: :desc).first.try(:station_id)
   end
 end
