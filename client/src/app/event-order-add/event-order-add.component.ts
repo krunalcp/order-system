@@ -66,7 +66,6 @@ export class EventOrderAddComponent implements OnInit {
         this.loadCurrentEvent();
       }
     );
-    this.loadItems();
     this.getStationList();
     this.getAccountList();
     this.isEventOrderPage = true;
@@ -379,7 +378,7 @@ export class EventOrderAddComponent implements OnInit {
 
   public onAccountSelect(account_id){
     this.setCookie('ct_account_id', account_id);
-    if(this.accountId != account_id) {
+    if(account_id != null && this.accountId != account_id) {
       this.accountId = account_id;
       this.loadItems();
       this.loadFavouriteItem();
