@@ -1,5 +1,5 @@
 class AccountSerializer < ActiveModel::Serializer
-  attributes :id, :name, :contact_name, :email, :phone, :items,
+  attributes :id, :name, :contact_name, :email, :phone, :items, :station_id,
              :account_used, :is_active, :number, :address, :value, :label
 
   def items

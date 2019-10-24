@@ -50,6 +50,9 @@ import { ItemImportComponent } from './item-import/item-import.component';
 import { OrderImportComponent } from './order-import/order-import.component';
 import { ProductionComponent } from './production/production.component';
 import { ProductionNotesComponent } from './production-notes/production-notes.component';
+import { AccountOrderLoginComponent } from './account-order-login/account-order-login.component';
+import { AccountOrderAddComponent } from './account-order-add/account-order-add.component';
+import { AccountOrderConfirmedComponent } from './account-order-confirmed/account-order-confirmed.component';
 
 const appRoutes: Routes = [
 	{
@@ -221,7 +224,19 @@ const appRoutes: Routes = [
   {
     path: 'production-notes',
     component: ProductionNotesComponent
-  }
+  },
+  {
+    path: ':event/self-service',
+    component: AccountOrderLoginComponent
+  },
+	{
+		path: ':event/self-service/:accountNumber/add',
+		component: AccountOrderAddComponent
+	},
+	{
+		path: ':event/self-service/:accountNumber/confirmed/:id',
+		component: AccountOrderConfirmedComponent
+	}
 ]
 
 @NgModule({
@@ -261,7 +276,10 @@ const appRoutes: Routes = [
     ItemImportComponent,
     OrderImportComponent,
 		ProductionComponent,
-    ProductionNotesComponent
+    ProductionNotesComponent,
+    AccountOrderLoginComponent,
+		AccountOrderAddComponent,
+		AccountOrderConfirmedComponent
   ],
   imports: [
     BrowserModule,

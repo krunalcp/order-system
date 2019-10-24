@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { AccountService } from '../account.service';
+import { OrderService } from '../order.service';
 
 import { Account } from '../account';
 
@@ -12,7 +13,7 @@ import { Account } from '../account';
   selector: 'app-account-add',
   templateUrl: './account-add.component.html',
   styleUrls: ['./account-add.component.css'],
-  providers: [AccountService]
+  providers: [AccountService, OrderService]
 })
 export class AccountAddComponent implements OnInit {
 
@@ -40,15 +41,18 @@ export class AccountAddComponent implements OnInit {
 	public accountAddRequest: Subscription;
   private isFormSubmitted: boolean;
   public isAccountAdding: boolean = false;
+  public stations: any;
 
   constructor(
-  	private accountService: AccountService,
-  	private fb: FormBuilder,
+    private accountService: AccountService,
+    private orderService: OrderService,
+    private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.getStationList();
     this.buildForm();
   }
 
@@ -105,13 +109,24 @@ export class AccountAddComponent implements OnInit {
       ],
       'address': [
         this.account.address
-      ]
+      ],
+      'station_id': [
+        this.account.station_id
+      ],
     });
 
     this.accountForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
+  }
+
+  private getStationList(): void {
+    this.orderService.stations().subscribe(
+      successResponse => {
+        this.stations = successResponse.json();
+      }
+    );
   }
 
   private onValueChanged(data?: any) {

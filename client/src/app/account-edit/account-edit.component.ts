@@ -5,6 +5,7 @@ import { Response } from '@angular/http';
 import {Subscription} from 'rxjs';
 
 import { AccountService } from '../account.service';
+import { OrderService } from '../order.service';
 
 import { Account } from '../account';
 
@@ -12,7 +13,7 @@ import { Account } from '../account';
   selector: 'app-account-edit',
   templateUrl: './account-edit.component.html',
   styleUrls: ['./account-edit.component.css'],
-  providers: [AccountService]
+  providers: [AccountService, OrderService]
 })
 export class AccountEditComponent implements OnInit {
 
@@ -22,6 +23,7 @@ export class AccountEditComponent implements OnInit {
 	public accountUpdateRequest: Subscription;
   private isFormSubmitted: boolean;
   public isAccountUpdating: boolean = false;
+  public stations: any;
 
 	public errorMessage: any;
   public formErrors = {
@@ -43,11 +45,13 @@ export class AccountEditComponent implements OnInit {
   	private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
+    private orderService: OrderService,
   	private fb: FormBuilder
   ) { }
 
   ngOnInit() {
 
+    this.getStationList();
     this.buildForm();
 
   	this.route.params.subscribe(
@@ -57,6 +61,14 @@ export class AccountEditComponent implements OnInit {
       }
     );
 
+  }
+
+  private getStationList(): void {
+    this.orderService.stations().subscribe(
+      successResponse => {
+        this.stations = successResponse.json();
+      }
+    );
   }
 
   public onSubmit() {
@@ -94,6 +106,7 @@ export class AccountEditComponent implements OnInit {
         this.account['is_active'] = data.is_active;
         this.account['number'] = data.number;
         this.account['address'] = data.address;
+        this.account['station_id'] = data.station_id;
         this.accountForm.patchValue(this.account);
       },
       () => {
@@ -130,7 +143,10 @@ export class AccountEditComponent implements OnInit {
       ],
       'address': [
         this.account.address
-      ]
+      ],
+      'station_id': [
+        this.account.station_id
+      ],
     });
 
     this.accountForm.valueChanges.subscribe(data => this.onValueChanged(data));

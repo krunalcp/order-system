@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Welcome</h1>
+  </div>
+  <div class="showErrorMessage">
+    <flash-messages>{{ errors }}</flash-messages>
+  </div>
+  <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40 text-center" role="alert">
+    <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30 offset-md-3 col-md-6" (ngSubmit)="onAccountSubmit()" #f="ngForm">
+      <div class="row">
+        <div class="form-group g-mb-25 col-md-12">
+          <label class="g-mb-10" for="number"></label>
+          <input id="number" type="text" required name='number' [(ngModel)]="signInAccount.number" class="validate form-control u-form-control rounded-0" placeholder="Enter Account Number">
+        </div>
+      </div>
+      <div class="text-center">
+        <button [disabled]="!(f.valid)" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
+          <span>Start</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

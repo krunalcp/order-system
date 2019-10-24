@@ -30,6 +30,12 @@ Rails.application.routes.draw do
   end
   resources :accounts
 
+  resources :account_orders, path: ':event/self_service', only: [:create, :show] do
+    collection do
+      post 'login'
+    end
+  end
+
   resources :event_orders, path: ':event/orders', only: [:create, :show] do
     collection do
       get 'active_items'

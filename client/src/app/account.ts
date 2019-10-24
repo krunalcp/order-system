@@ -8,6 +8,7 @@ export class Account {
     public email?: string,
     public event_id?: number,
     public is_active? :boolean,
-    public items? :any
+    public items? :any,
+		public station_id? :any
   ) {}
 }

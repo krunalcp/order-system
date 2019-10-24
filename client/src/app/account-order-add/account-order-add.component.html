@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">{{currentEvent.published_name}}</h1>
+  </div>
+  <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40" role="alert">
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="form-group g-mb-25 col-md-3" [ngClass]="{'hidden': !isAccountOrderPage}">
+          <label class="g-mb-10" for="account_id">Item</label>
+          <select2 *ngIf="items" [data]="items" formControlName="account_id" (update)="onItemSelect($event)" [minCountForSearch]=1 [multiple]=true>
+          </select2>
+        </div>
+      </div>
+      <div *ngIf="isAccountOrderPage" class="card brd-color rounded-0 g-mb-30">
+        <div class="table-responsive text-center">
+          <table class="table table-striped u-table--v1 mb-0">
+            <thead>
+              <tr>
+                <th colspan="2">Item</th>
+                <th>Price($)</th>
+                <th>Quantity</th>
+                <th></th>
+                <th>Total($)</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of items" class="all_category">
+                <ng-container *ngIf="item.selected">
+                  <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
+                  <td class='text-left'>{{item.name}}</td>
+                  <td class="price_width">
+                    <span class="{{(item.special_price && item.special_price != 0) ? 'strikethrough' : ''}}">${{(item.price * 1).toFixed(2)}}</span>
+                    <span *ngIf="item.special_price && item.special_price != 0"> &nbsp; ${{(item.special_price * 1).toFixed(2)}}</span>
+                  </td>
+                  <td>
+                    {{item.quantity}}
+                  </td>
+                  <td class="plus_minus_width">
+                    <button class="btn btn-sm u-btn-outline-primary g-mr-10" type="button" (click)="quantityOptions(item, 'plus')">
+                      <i class="fa fa-plus g-px-20"></i>
+                    </button>
+                    <button class="btn btn-sm u-btn-outline-lightred" type="button" (click)="quantityOptions(item, 'minus')">
+                      <i class="fa fa-minus g-px-20"></i>
+                    </button>
+                  </td>
+                  <td class="price_width">
+                    ${{(getPrice(item) * item.quantity).toFixed(2)}}
+                  </td>
+                </ng-container>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td colspan="4"></td>
+                <td><b>Total($) :</b></td>
+                <td>${{totalPrice.toFixed(2)}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div *ngIf="!isAccountOrderPage" class="card brd-color rounded-0 g-mb-30">
+        <div class="table-responsive text-center">
+          <table class="table table-striped u-table--v1 mb-0">
+            <thead>
+              <tr>
+                <th colspan="2">Item</th>
+                <th>Price($)</th>
+                <th>Quantity</th>
+                <th>Total($)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order.order_items">
+                <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
+                <td class='text-left'>{{item.name}}</td>
+                <td class="price_width">
+                  <span class="{{(item.special_price && item.special_price != 0) ? 'strikethrough' : ''}}">${{(item.price * 1).toFixed(2)}}</span>
+                  <span *ngIf="item.special_price && item.special_price != 0"> &nbsp; ${{(item.special_price * 1).toFixed(2)}}</span>
+                </td>
+                <td>{{item.quantity}}</td>
+                <td class="price_width">
+                  ${{(getPrice(item) * item.quantity).toFixed(2)}}
+                </td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td colspan="2"></td>
+                <td></td>
+                <td><b>Total($) :</b></td>
+                <td>${{order.value.toFixed(2)}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+    <div class="text-right">
+      <button *ngIf="isAccountOrderPage" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="button" (click)="placeEventOrder()">
+        Review Order
+      </button>
+      <button *ngIf="!isAccountOrderPage" (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
+        <span *ngIf="!isOrderAdding">Confirm Order</span>
+        <span *ngIf="isOrderAdding">Adding order...</span>
+        <span class="g-pl-5" *ngIf="isOrderAdding">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span class="sr-only">Loading...</span>
+        </span>
+      </button>
+      <button *ngIf="!isAccountOrderPage" class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="changeEventOrder()">
+        Change
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="container g-mt-100">
+  <div class="g-bg-main g-brd-blue text-center">
+    <h1 class="h3 u-heading-v1__title">Thank you for your order</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <a href="#!" class="btn btn-md u-btn-outline-teal g-mx-15 g-mb-15" routerLink="/{{currentEvent.name}}/self-service/{{this.accountNumber}}/add">New Order</a>
+    </div>
+  </div>
+  <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
+    <h1 class="h3 u-heading-v1__title">Order Detail</h1>
+  </div>
+  <div class="row text-center">
+    <div class="col-md-6 offset-md-3">
+      <div class="u-shadow-v3 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40 g-mb-30" role="alert">
+        <h3 class="h2 g-font-weight-300 g-mb-20"></h3>
+        <p class="mb-0">
+          <span class="row">
+            <dt class="col-md-6">Order Id :
+            </dt>
+            <dd class="col-md-6">{{order.order_number}}
+            </dd>
+          </span>
+          <span class="row">
+            <dt class="col-md-6">Order Time:
+            </dt>
+            <dd class="col-md-6">{{order.created_at}}
+            </dd>
+          </span>
+          <span class="row">
+            <dt class="col-md-6">Current station :
+            </dt>
+            <dd class="col-md-6">S{{order.station.id}} - {{order.station.name}}
+            </dd>
+          </span>
+          <span class="row">
+            <dt class="col-md-6">Scheduled Order Time :
+            </dt>
+            <dd class="col-md-6">{{order.display_scheduled_order_time}}
+            </dd>
+          </span>
+          <span class="row">
+            <dt class="col-md-6">Total Value:
+            </dt>
+            <dd class="col-md-6">${{(order.value * 1).toFixed(2)}}
+            </dd>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card g-brd-teal rounded-0 g-mb-30">
+    <h3 class="card-header g-bg-teal g-brd-transparent g-color-white g-font-size-16 rounded-0 mb-0">
+      <i class="fa fa-edit g-mr-5"></i>
+      Order items
+    </h3>
+
+    <div class="table-responsive text-center">
+      <table class="table table-striped u-table--v1 mb-0">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Price($)</th>
+            <th>Quantity</th>
+            <th>Total Price($)</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of order.order_items">
+            <td>{{item.item}}</td>
+            <td>${{(getPrice(item) * 1).toFixed(2)}}</td>
+            <td>
+              {{item.quantity}}
+            </td>
+            <td>${{(getPrice(item) * item.quantity).toFixed(2)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

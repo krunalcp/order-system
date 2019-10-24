@@ -59,6 +59,12 @@
           <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter address" id="address" formControlName="address">
         </div>
         <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="refresh_time">Default Station</label>
+          <select class="form-control rounded-0 u-form-control" id="station_id" formControlName="station_id">
+            <option *ngFor="let station of stations; index as i;" value="{{station.id}}">S{{i+1}} - {{station.name}}</option>
+          </select>
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
           <label class="g-mb-10" for="is_active">Active</label>
           <input class="form-control u-form-control rounded-0" type="checkbox" id="is_active" formControlName="is_active">
         </div>
