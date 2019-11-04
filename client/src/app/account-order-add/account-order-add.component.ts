@@ -110,6 +110,13 @@ export class AccountOrderAddComponent implements OnInit {
     }
   }
 
+  public removeItem(item) {
+    let itemIndex = this.items.indexOf(item);
+
+    this.items[itemIndex].quantity = 0
+    this.items[itemIndex].selected = false
+  }
+
   public getPrice(item){
     if(item.special_price && item.special_price != 0){
       return item.special_price
@@ -207,7 +214,9 @@ export class AccountOrderAddComponent implements OnInit {
 
   public onItemSelect(item_ids){
     for (let item_id of item_ids) {
-      this.items.find(x => x.id === item_id).selected = true
+      let item_selected = this.items.find(x => x.id === item_id)
+      item_selected.selected = true
+      item_selected.quantity = 1
     }
   }
 

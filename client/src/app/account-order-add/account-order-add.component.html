@@ -21,6 +21,7 @@
                 <th>Quantity</th>
                 <th></th>
                 <th>Total($)</th>
+                <th></th>
               </tr>
             </thead>
 
@@ -47,6 +48,11 @@
                   <td class="price_width">
                     ${{(getPrice(item) * item.quantity).toFixed(2)}}
                   </td>
+                  <td class="price_width">
+                    <button class="btn btn-sm u-btn-outline-lightred g-mr-10" type="button" (click)="removeItem(item)">
+                      <i class="fa fa-trash g-px-20"></i>
+                    </button>
+                  </td>
                 </ng-container>
               </tr>
             </tbody>
@@ -55,6 +61,7 @@
                 <td colspan="4"></td>
                 <td><b>Total($) :</b></td>
                 <td>${{totalPrice.toFixed(2)}}</td>
+                <td></td>
               </tr>
             </tbody>
           </table>
