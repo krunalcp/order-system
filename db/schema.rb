@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190613123440) do
+ActiveRecord::Schema.define(version: 20200130095537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20190613123440) do
     t.boolean "is_active"
     t.string "number", limit: 20
     t.string "address"
+    t.integer "station_id"
     t.index ["event_id"], name: "index_accounts_on_event_id"
   end
 
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(version: 20190613123440) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "name"
+    t.string "logo"
     t.string "email"
     t.boolean "admin", default: false
     t.boolean "active", default: false
@@ -76,7 +78,6 @@ ActiveRecord::Schema.define(version: 20190613123440) do
     t.datetime "updated_at", null: false
     t.string "default_station"
     t.string "icon"
-    t.string "logo"
     t.string "published_name"
     t.integer "station_id"
     t.string "item_image"
@@ -100,6 +101,9 @@ ActiveRecord::Schema.define(version: 20190613123440) do
     t.string "comments_label"
     t.string "website"
     t.integer "account_id"
+    t.boolean "show_station_list", default: false
+    t.boolean "hide_site_page", default: false
+    t.string "admin_password"
     t.index ["confirmation_token"], name: "index_events_on_confirmation_token", unique: true
     t.index ["name"], name: "index_events_on_name", unique: true
     t.index ["reset_password_token"], name: "index_events_on_reset_password_token", unique: true

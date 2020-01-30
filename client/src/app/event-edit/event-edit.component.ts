@@ -64,7 +64,8 @@ export class EventEditComponent implements OnInit {
     'comments_label': '',
     'website': '',
     'account_id': '',
-    'hide_site_page': ''
+    'hide_site_page': '',
+    'admin_password': ''
   };
   validationMessages = {
     'name': {
@@ -191,6 +192,7 @@ export class EventEditComponent implements OnInit {
         this.event['website'] = data.website
         this.event['account_id'] = data.account_id
         this.event['hide_site_page'] = data.hide_site_page
+        this.event['admin_password'] = data.admin_password
         this.eventForm.patchValue(this.event);
         this.getStationList();
         this.getAccountList();
@@ -302,6 +304,9 @@ export class EventEditComponent implements OnInit {
       ],
       'hide_site_page':[
         this.event.hide_site_page
+      ],
+      'admin_password':[
+        this.event.admin_password
       ]
     });
 

@@ -53,7 +53,8 @@ export class EventAddComponent implements OnInit {
     'comments_label': '',
     'website': '',
     'account_id': '',
-    'hide_site_page': ''
+    'hide_site_page': '',
+    'admin_password': ''
   };
   validationMessages = {
     'name': {
@@ -233,6 +234,9 @@ export class EventAddComponent implements OnInit {
       ],
       'hide_site_page':[
         this.event.hide_site_page
+      ],
+      'admin_password':[
+        this.event.admin_password
       ]
     });
 
