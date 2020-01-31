@@ -134,7 +134,7 @@ export class StationOrdersComponent implements OnInit {
   }
 
   public subscribeToOrders(refresh_time): void {
-    if refresh_time
+    if(refresh_time)
       this.timerSubscription = timer(refresh_time * 1000).subscribe(() => this.setNotification());
   }
 
