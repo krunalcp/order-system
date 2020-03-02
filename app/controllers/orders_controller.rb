@@ -3,16 +3,17 @@ class OrdersController < ApplicationController
   before_action :set_pagination, only: :index
 
   def index
-    sort_by = %w[scheduled_order_time station_id value].include?(params[:sort_by]) ? params[:sort_by] : 'scheduled_order_time'
+    sort_by = %w[station_id value].include?(params[:sort_by]) ? params[:sort_by] : 'time'
     order   = params[:sort_order].present? && params[:sort_order] == 'asc' ? 'asc' : 'desc'
-    sort_by = "CASE WHEN scheduled_order_time IS NULL then created_at ELSE scheduled_order_time END" if sort_by == 'scheduled_order_time'
-    @orders = current_event.orders.includes([:station, :account, order_items: [:category, :item]]).order("#{sort_by} #{order}")
+    @orders = current_event.orders.select(
+      "*, CASE WHEN scheduled_order_time IS NULL then created_at + interval '12 hour' ELSE scheduled_order_time END as time"
+    ).includes([:station, :account, order_items: [:category, :item]]).order("#{sort_by} #{order}")
 
     if params[:all] == 'true'
       render json: @orders
     else
       @orders = @orders.where(station_id: params[:s]) if params[:s].to_i > 0
-      @total  = @orders.count
+      @total  = @orders.size
       @orders = @orders.limit(@per_page).offset(@offset)
 
       if params[:oo] == '1'
