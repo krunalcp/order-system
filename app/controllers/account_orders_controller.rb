@@ -21,7 +21,7 @@ class AccountOrdersController < ApplicationController
   end
 
   def create
-    last_order = @event.orders.where.not(order_number: nil).order(order_number: :desc).first
+    last_order = @event.orders.where.not(order_number: nil).order(created_at: :desc).first
     order_number = last_order.try(:order_number).to_i + 1
     station_id = @account.station_id
 
