@@ -206,6 +206,9 @@
       <button *ngIf="isEventOrderPage" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="button" (click)="placeEventOrder()">
         Review Order
       </button>
+      <button *ngIf="!isEventOrderPage" class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="changeEventOrder()">
+        Change
+      </button>
       <button *ngIf="!isEventOrderPage" (click)="onSubmit()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
         <span *ngIf="!isOrderAdding">Confirm Order</span>
         <span *ngIf="isOrderAdding">Adding order...</span>
@@ -213,9 +216,6 @@
           <i class="fa fa-spinner fa-spin"></i>
           <span class="sr-only">Loading...</span>
         </span>
-      </button>
-      <button *ngIf="!isEventOrderPage" class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="changeEventOrder()">
-        Change
       </button>
       <button class="btn btn-md u-btn-outline-bluegray g-mr-10 g-mb-15" type="button" (click)="cancelEventOrder()">
         Cancel
