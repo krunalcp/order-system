@@ -71,7 +71,8 @@ class EventsController < ApplicationController
       :latest_preorder_date, :printed_image, :banner_message, :printouts_email,
       :phone_number, :total_costs, :number_of_tiles, :disable_print_popup,
       :second_station_id, :disable_print_popup_customer, :comments_label,
-      :website, :account_id, :show_station_list, :hide_site_page, :admin_password
+      :website, :account_id, :show_station_list, :hide_site_page, :admin_password,
+      :hide_event_help_url, :hide_help_url
     )
   end
 end

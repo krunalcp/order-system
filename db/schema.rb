@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200130095537) do
+ActiveRecord::Schema.define(version: 20200303123930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(version: 20200130095537) do
     t.boolean "show_station_list", default: false
     t.boolean "hide_site_page", default: false
     t.string "admin_password"
+    t.boolean "hide_help_url", default: false
+    t.boolean "hide_event_help_url", default: false
     t.index ["confirmation_token"], name: "index_events_on_confirmation_token", unique: true
     t.index ["name"], name: "index_events_on_name", unique: true
     t.index ["reset_password_token"], name: "index_events_on_reset_password_token", unique: true

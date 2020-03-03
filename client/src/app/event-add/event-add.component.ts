@@ -54,7 +54,9 @@ export class EventAddComponent implements OnInit {
     'website': '',
     'account_id': '',
     'hide_site_page': '',
-    'admin_password': ''
+    'admin_password': '',
+    'hide_event_help_url': '',
+    'hide_help_url': ''
   };
   validationMessages = {
     'name': {
@@ -237,6 +239,12 @@ export class EventAddComponent implements OnInit {
       ],
       'admin_password':[
         this.event.admin_password
+      ],
+      'hide_help_url':[
+        this.event.hide_help_url
+      ],
+      'hide_event_help_url':[
+        this.event.hide_event_help_url
       ]
     });
 

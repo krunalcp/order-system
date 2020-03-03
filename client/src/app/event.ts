@@ -38,5 +38,7 @@ export class Event {
     public hide_site_page?: boolean,
 		public last_order_station_id? :number,
 		public admin_password?: string
+		public hide_help_url?: boolean
+		public hide_event_help_url?: boolean
   ) {}
 }
