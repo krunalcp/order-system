@@ -1,5 +1,5 @@
 class Account < ApplicationRecord
-  has_secure_password
+  has_secure_password validations: false
   has_many :orders
 
   has_many :order_items, through: :orders
@@ -8,7 +8,4 @@ class Account < ApplicationRecord
   belongs_to :station, optional: true
 
   validates :email, uniqueness: { scope: :event_id }, allow_blank: true
-  validates :password,
-            length: { minimum: 6 },
-            if: -> { new_record? || !password.nil? }
 end

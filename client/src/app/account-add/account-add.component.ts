@@ -30,9 +30,6 @@ export class AccountAddComponent implements OnInit {
   validationMessages = {
     'name': {
       'required': 'Name is required.',
-    },
-    'password': {
-      'required': 'Password is required.',
     }
   };
 
@@ -97,9 +94,7 @@ export class AccountAddComponent implements OnInit {
         this.account.email
       ],
       'password': [
-        '', [
-          Validators.required
-        ]
+        ''
       ],
       'is_active': [
         this.account.is_active
