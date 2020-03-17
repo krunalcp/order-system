@@ -19,3 +19,6 @@
 .disabled {
     pointer-events: none;
 }
+.note_width {
+  min-width: 180px;
+}

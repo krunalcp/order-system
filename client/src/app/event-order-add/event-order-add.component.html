@@ -95,7 +95,7 @@
                 <td class="price_width">
                   ${{(item.price * item.quantity).toFixed(2)}}
                 </td>
-                <td>
+                <td class="note_width">
                   <input *ngIf="item.quantity > 0" class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesfavouriteOptions(item)">
                 </td>
                 <td>
@@ -135,7 +135,7 @@
                 <td class="price_width">
                   ${{(getPrice(item) * item.quantity).toFixed(2)}}
                 </td>
-                <td>
+                <td class="note_width">
                   <input *ngIf="item.quantity > 0" class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesOptions(item)">
                 </td>
                 <td>
