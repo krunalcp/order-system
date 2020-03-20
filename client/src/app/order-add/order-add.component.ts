@@ -46,6 +46,7 @@ export class OrderAddComponent implements OnInit {
   public stations: any;
   public accounts: any;
   public currentEvent: Event = new Event();
+  public showImage= {};
 
   constructor(
     public eventService: EventService,
@@ -72,6 +73,9 @@ export class OrderAddComponent implements OnInit {
     this.itemService.activeItem().subscribe(
       successResponse => {
         this.items = successResponse.json();
+        this.items.forEach(function(item) {
+          this.showImage[this.removeSpace(item.category_name)] = false
+        }, this);
       }
     );
   }
@@ -156,7 +160,9 @@ export class OrderAddComponent implements OnInit {
   }
 
   public toggleCategory(category) {
-    $(".category_" + this.removeSpace(category)).toggle();
+    var cat = this.removeSpace(category)
+    $(".category_" + cat).toggle();
+    this.showImage[cat] = $(".category_" + cat).css('display') != "none"
   }
 
   public removeSpace(category) {
@@ -260,8 +266,14 @@ export class OrderAddComponent implements OnInit {
     $(".all_category").toggle();
     if($(".all_category").css('display') == 'none') {
       $("#expand-button").text('Expand all Categories');
+      this.items.forEach(function(item) {
+        this.showImage[this.removeSpace(item.category_name)] = false
+      }, this);
     } else {
       $("#expand-button").text('Collapse all Categories');
+      this.items.forEach(function(item) {
+        this.showImage[this.removeSpace(item.category_name)] = true
+      }, this);
     }
   }
 

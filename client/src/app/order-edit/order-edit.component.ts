@@ -43,6 +43,7 @@ export class OrderEditComponent implements OnInit {
   public stations: any;
   public accounts: any;
   public currentEvent: Event = new Event();
+  public showImage= {};
 
   constructor(
     public eventService: EventService,
@@ -104,6 +105,9 @@ export class OrderEditComponent implements OnInit {
       });
     });
     this.items = items;
+    this.items.forEach(function(item) {
+      this.showImage[this.removeSpace(item.category_name)] = false
+    }, this);
   }
 
   public quantityOptions(item, operation) {
@@ -203,7 +207,9 @@ export class OrderEditComponent implements OnInit {
   }
 
   public toggleCategory(category) {
-    $(".category_" + this.removeSpace(category)).toggle();
+    var cat = this.removeSpace(category)
+    $(".category_" + cat).toggle();
+    this.showImage[cat] = $(".category_" + cat).css('display') != "none"
   }
 
   public removeSpace(category) {

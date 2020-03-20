@@ -54,7 +54,7 @@
                 <td class="category_color pointer" colspan=7 (click)="toggleCategory(i.key)"><b>{{i.key}}</b></td>
               </tr>
               <tr *ngFor="let item of i.value" class="category_{{ removeSpace(i.key) }} hidden">
-                <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
+                <td><span *ngIf="showImage[i.key]"><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
                 <td class='text-left'>{{item.name}}</td>
                 <td class="price_width">
                   <span class="{{(item.special_price && item.special_price != 0) ? 'strikethrough' : ''}}">${{(item.price * 1).toFixed(2)}}</span>
