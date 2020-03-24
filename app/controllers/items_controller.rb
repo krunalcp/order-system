@@ -106,6 +106,16 @@ class ItemsController < ApplicationController
     render json: items
   end
 
+  def before_import_items_price
+    items = Item.before_import_items_price(current_event, params[:items])
+    render json: items
+  end
+
+  def import_items_price
+    items = Item.import_items_price(current_event, params[:items])
+    render json: items
+  end
+
   def station_item
     station_item = OrderItem.joins("INNER JOIN orders ON order_items.order_id = orders.id").where(
       "orders.station_id IN (?) and order_items.item_id = ?", params[:station_id].to_s.split(',').map{|s| s.to_i}, params[:item_id]
@@ -143,6 +153,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.permit(:name, :price, :order_no, :active, :category_id, :image, :special_price)
+    params.permit(:name, :price, :order_no, :active, :category_id, :image, :special_price, :system_code)
   end
 end

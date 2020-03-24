@@ -51,6 +51,7 @@ import { HeaderService } from './services/header.service';
 import { EventOrderListComponent } from './event-order-list/event-order-list.component';
 import { EventOrderConfirmedComponent } from './event-order-confirmed/event-order-confirmed.component';
 import { ItemImportComponent } from './item-import/item-import.component';
+import { ItemPriceImportComponent } from './item-price-import/item-price-import.component';
 import { OrderImportComponent } from './order-import/order-import.component';
 import { ProductionComponent } from './production/production.component';
 import { ProductionNotesComponent } from './production-notes/production-notes.component';
@@ -91,6 +92,11 @@ const appRoutes: Routes = [
   {
     path: 'item/import',
     component: ItemImportComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'item/price-import',
+    component: ItemPriceImportComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -285,7 +291,8 @@ export function tokenGetter() {
     EventOrderAddComponent,
     EventOrderListComponent,
 		EventOrderConfirmedComponent,
-    ItemImportComponent,
+		ItemImportComponent,
+    ItemPriceImportComponent,
     OrderImportComponent,
 		ProductionComponent,
     ProductionNotesComponent,

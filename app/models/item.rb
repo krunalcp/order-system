@@ -120,4 +120,46 @@ class Item < ApplicationRecord
     end
     response
   end
+
+  def self.before_import_items_price(current_event, items)
+    response = []
+    items.each_with_index do |new_item, index|
+      item_hash = {
+        new_price: new_item['Price'],
+        new_special_price: new_item['SpecialPrice'],
+        system_code: new_item['ItemCode']
+      }
+      item = current_event.items.find_by_system_code(new_item['ItemCode'])
+      if item.present?
+        response << item_hash.merge!({price: item.price, special_price: item.special_price})
+      else
+        response << item_hash.merge!({price: '', special_price: '', error: 'Item not Found'})
+      end
+    end
+    response
+  end
+
+  def self.import_items_price(current_event, items)
+    response = []
+    items.each_with_index do |new_item, index|
+      item_hash = {
+        new_price: new_item['new_price'],
+        new_special_price: new_item['new_special_price'],
+        system_code: new_item['system_code']
+      }
+      item = current_event.items.find_by_system_code(new_item['system_code'])
+      if item.present? && item.system_code.present?
+        item.price =  new_item['new_price']
+        item.special_price = new_item['new_special_price']
+        if item.save
+          response << item_hash.merge!({price: item.price_was, special_price: item.special_price_was, success: true})
+        else
+          response << item_hash.merge!({price: item.price, special_price: item.special_price, error: item.errors.full_messages.join(', '), success: false})
+        end
+      else
+        response << item_hash.merge!({price: '', special_price: '', error: 'Item not Found'}, success: false)
+      end
+    end
+    response
+  end
 end

@@ -29,7 +29,8 @@ export class ItemAddComponent implements OnInit {
     'order_no': '',
     'category_id': '',
     'image': '',
-    'special_price': ''
+    'special_price': '',
+    'system_code': ''
   };
   validationMessages = {
     'name': {
@@ -128,6 +129,9 @@ export class ItemAddComponent implements OnInit {
       ],
       'special_price':[
         this.item.special_price
+      ],
+      'system_code':[
+        this.item.system_code
       ]
     });
 

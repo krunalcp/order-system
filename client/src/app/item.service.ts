@@ -26,6 +26,18 @@ export class ItemService {
     return this.http.post(itemsApiURL, {items: items}, this.hostAppService.getToken());
   }
 
+  check_import_price(items: any): Observable<any>{
+    let itemsApiURL = this.hostAppService.getHost() + '/items/before_import_items_price';
+
+    return this.http.post(itemsApiURL, {items: items}, this.hostAppService.getToken());
+  }
+
+  import_price(items: any): Observable<any>{
+    let itemsApiURL = this.hostAppService.getHost() + '/items/import_items_price';
+
+    return this.http.post(itemsApiURL, {items: items}, this.hostAppService.getToken());
+  }
+
   show(id: number): Observable<any>{
     let itemsApiURL = this.hostAppService.getHost() + '/items';
 

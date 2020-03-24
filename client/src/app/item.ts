@@ -8,6 +8,7 @@ export class Item {
     public order_no?: number,
     public active?: boolean,
     public category_id?: number,
-    public special_price?: number
+    public special_price?: number,
+		public system_code?: string
   ) {}
 }

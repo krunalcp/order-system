@@ -35,7 +35,8 @@ export class ItemEditComponent implements OnInit {
     'order_no': '',
     'category_id': '',
     'image': '',
-    'special_price': ''
+    'special_price': '',
+    'system_code': ''
   };
   validationMessages = {
     'name': {
@@ -107,6 +108,7 @@ export class ItemEditComponent implements OnInit {
         this.item['image'] = data.image;
         this.item['active'] = data.active;
         this.item['special_price'] = data.special_price;
+        this.item['system_code'] = data.system_code;
         this.itemForm.patchValue(this.item);
       },
       () => {
@@ -146,6 +148,9 @@ export class ItemEditComponent implements OnInit {
       ],
       'special_price': [
         this.item.special_price
+      ],
+      'system_code': [
+        this.item.system_code
       ]
     });
 
