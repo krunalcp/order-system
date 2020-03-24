@@ -8,7 +8,8 @@ class EventSerializer < ActiveModel::Serializer
              :number_of_tiles_array, :disable_print_popup, :second_station_id,
              :disable_print_popup_customer, :comments_label, :website,
              :account_id, :show_station_list, :hide_site_page, :last_order_station_id,
-             :admin_password, :hide_event_help_url, :hide_help_url
+             :admin_password, :hide_event_help_url, :hide_help_url,
+             :require_password_for_customer_order
 
   def station_name
     object.station.try(:name)

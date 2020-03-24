@@ -39,6 +39,7 @@ export class Event {
 		public last_order_station_id? :number,
 		public admin_password?: string,
 		public hide_help_url?: boolean,
-		public hide_event_help_url?: boolean
+		public hide_event_help_url?: boolean,
+		public require_password_for_customer_order?: boolean
   ) {}
 }

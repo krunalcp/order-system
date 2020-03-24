@@ -56,7 +56,8 @@ export class EventAddComponent implements OnInit {
     'hide_site_page': '',
     'admin_password': '',
     'hide_event_help_url': '',
-    'hide_help_url': ''
+    'hide_help_url': '',
+    'require_password_for_customer_order': ''
   };
   validationMessages = {
     'name': {
@@ -245,6 +246,9 @@ export class EventAddComponent implements OnInit {
       ],
       'hide_event_help_url':[
         this.event.hide_event_help_url
+      ],
+      'require_password_for_customer_order':[
+        this.event.require_password_for_customer_order
       ]
     });
 

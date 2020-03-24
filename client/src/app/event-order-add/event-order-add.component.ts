@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 import { formatDate } from '@angular/common';
+import { EventAuthService } from '../services/event-auth.service';
 
 import { EventOrderService } from '../event_order.service';
 import { HeaderService } from "../services/header.service";
@@ -54,7 +55,8 @@ export class EventOrderAddComponent implements OnInit {
   	private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private header: HeaderService
+    private header: HeaderService,
+    private auth: EventAuthService
   ) {
     this.header.changeMessage(false)
   }
@@ -99,11 +101,18 @@ export class EventOrderAddComponent implements OnInit {
         this.setDefaultAccountId();
         this.setDefaultStationId();
         this.buildForm();
+        this.navigateToOrder();
       },
       () => {
         this.errorMessage = 'Failed to load Event.';
       }
     );
+  }
+
+  public navigateToOrder(){
+    if(localStorage.getItem('event_access_token') == null  && this.currentEvent.require_password_for_customer_order){
+      this.router.navigate([this.currentEvent.name + '/login'])
+    }
   }
 
   public setDefaultAccountId(){
@@ -454,6 +463,11 @@ export class EventOrderAddComponent implements OnInit {
       }
     }
     return "";
+  }
+
+  public onEventAccountSignout(eventName) {
+    this.auth.logout();
+    this.router.navigate([eventName+'/login']);
   }
 
 }

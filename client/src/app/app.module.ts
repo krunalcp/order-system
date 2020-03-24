@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Angular2TokenService } from 'angular2-token';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { Select2Module } from 'ng-select2-component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
 import { ItemListComponent } from './item-list/item-list.component';
@@ -38,6 +39,9 @@ import { MainPipe } from './main-pipe.module';
 import { LoginFormComponent } from './login-form/login-form.component';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './guards/auth.guard';
+import { EventAuthService } from './services/event-auth.service';
+import { EventAuthGuard } from './guards/event-auth.guard';
+import { EventLoginFormComponent } from './event-login-form/event-login-form.component';
 import { AccountAddComponent } from './account-add/account-add.component';
 import { AccountListComponent } from './account-list/account-list.component';
 import { AccountEditComponent } from './account-edit/account-edit.component';
@@ -236,8 +240,16 @@ const appRoutes: Routes = [
 	{
 		path: ':event/self-service/:accountNumber/confirmed/:id',
 		component: AccountOrderConfirmedComponent
+	},
+	{
+		path: ':event/login',
+		component: EventLoginFormComponent
 	}
 ]
+
+export function tokenGetter() {
+  return localStorage.getItem('event_access_token');
+}
 
 @NgModule({
   declarations: [
@@ -279,7 +291,8 @@ const appRoutes: Routes = [
     ProductionNotesComponent,
     AccountOrderLoginComponent,
 		AccountOrderAddComponent,
-		AccountOrderConfirmedComponent
+		AccountOrderConfirmedComponent,
+		EventLoginFormComponent
   ],
   imports: [
     BrowserModule,
@@ -294,9 +307,14 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true, useHash: true } // <-- debugging purposes only
-    )
+    ),
+		JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter
+      }
+    })
   ],
-  providers: [Angular2TokenService, AuthService, AuthGuard, HeaderService],
+  providers: [Angular2TokenService, AuthService, AuthGuard, HeaderService, EventAuthGuard, EventAuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
