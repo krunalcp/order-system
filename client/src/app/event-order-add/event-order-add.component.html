@@ -102,7 +102,7 @@
                   <input *ngIf="item.quantity > 0" class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesfavouriteOptions(item)">
                 </td>
                 <td>
-                  <i class="fa fa-heart g-px-20 favourite" (click)="removeFavourite(item.id)"></i>
+                  <i class="fa {{item.favourite_icon}} g-px-20 favourite" (click)="removeFavourite(item.id)"></i>
                 </td>
               </tr>
             </tbody>
@@ -142,7 +142,7 @@
                   <input *ngIf="item.quantity > 0" class="form-control u-form-control rounded-0" type="text" placeholder="(Notes)" id="item_notes_{{item.id}}" value="{{item.notes}}" (change)="notesOptions(item)">
                 </td>
                 <td>
-                  <i *ngIf='accountId' class="fa fa-heart-o g-px-20 favourite" (click)="favourite(item.id)"></i>
+                  <i *ngIf='accountId' class="fa {{item.favourite_icon}} g-px-20 favourite" (click)="favourite(item.id)"></i>
                 </td>
               </tr>
             </tbody>

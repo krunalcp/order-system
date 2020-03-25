@@ -127,13 +127,14 @@ class Item < ApplicationRecord
       item_hash = {
         new_price: new_item['Price'],
         new_special_price: new_item['SpecialPrice'],
-        system_code: new_item['ItemCode']
+        system_code: new_item['ItemCode'],
+        new_active: new_item['Active']
       }
       item = current_event.items.find_by_system_code(new_item['ItemCode'])
       if item.present?
-        response << item_hash.merge!({price: item.price, special_price: item.special_price})
+        response << item_hash.merge!({price: item.price, special_price: item.special_price, active: item.active})
       else
-        response << item_hash.merge!({price: '', special_price: '', error: 'Item not Found'})
+        response << item_hash.merge!({price: '', special_price: '', active: '', error: 'Item not Found'})
       end
     end
     response
@@ -145,19 +146,21 @@ class Item < ApplicationRecord
       item_hash = {
         new_price: new_item['new_price'],
         new_special_price: new_item['new_special_price'],
-        system_code: new_item['system_code']
+        system_code: new_item['system_code'],
+        new_active: new_item['new_active']
       }
       item = current_event.items.find_by_system_code(new_item['system_code'])
       if item.present? && item.system_code.present?
         item.price =  new_item['new_price']
         item.special_price = new_item['new_special_price']
+        item.active = new_item['new_active']
         if item.save
-          response << item_hash.merge!({price: item.price_was, special_price: item.special_price_was, success: true})
+          response << item_hash.merge!({price: item.price_was, special_price: item.special_price_was, active: item.active_was, success: true})
         else
-          response << item_hash.merge!({price: item.price, special_price: item.special_price, error: item.errors.full_messages.join(', '), success: false})
+          response << item_hash.merge!({price: item.price, special_price: item.special_price, active: item.active_was, error: item.errors.full_messages.join(', '), success: false})
         end
       else
-        response << item_hash.merge!({price: '', special_price: '', error: 'Item not Found'}, success: false)
+        response << item_hash.merge!({price: '', special_price: '', active: '', error: 'Item not Found'}, success: false)
       end
     end
     response

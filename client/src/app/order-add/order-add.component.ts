@@ -163,6 +163,10 @@ export class OrderAddComponent implements OnInit {
     var cat = this.removeSpace(category)
     $(".category_" + cat).toggle();
     this.showImage[cat] = $(".category_" + cat).css('display') != "none"
+    if($(".all_category").css('display') == 'none')
+      $("#expand-button").text('Expand all Categories');
+    else
+      $("#expand-button").text('Collapse all Categories');
   }
 
   public removeSpace(category) {
@@ -263,16 +267,17 @@ export class OrderAddComponent implements OnInit {
   }
 
   public toggleAllCategory() {
-    $(".all_category").toggle();
     if($(".all_category").css('display') == 'none') {
-      $("#expand-button").text('Expand all Categories');
-      this.items.forEach(function(item) {
-        this.showImage[this.removeSpace(item.category_name)] = false
-      }, this);
-    } else {
       $("#expand-button").text('Collapse all Categories');
+      $(".all_category").show();
       this.items.forEach(function(item) {
         this.showImage[this.removeSpace(item.category_name)] = true
+      }, this);
+    } else {
+      $("#expand-button").text('Expand all Categories');
+      $(".all_category").hide();
+      this.items.forEach(function(item) {
+        this.showImage[this.removeSpace(item.category_name)] = false
       }, this);
     }
   }

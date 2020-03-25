@@ -39,8 +39,10 @@
             <th class="align-middle g-color-black g-min-width-300">Code</th>
             <th class="align-middle g-color-black">Before Price</th>
             <th class="align-middle g-color-black">Before Special Price</th>
+            <th class="align-middle g-color-black">Before Active</th>
             <th class="align-middle g-color-black">After Price</th>
             <th class="align-middle g-color-black">After Special Price</th>
+            <th class="align-middle g-color-black">After Active</th>
             <th class="align-middle g-color-black">Error</th>
           </tr>
         </thead>
@@ -51,8 +53,10 @@
             <td class="align-middle">{{item.system_code}}</td>
             <td class="align-middle" align="right">${{(item.price * 1).toFixed(2)}}</td>
             <td class="align-middle" align="right">${{(item.special_price * 1).toFixed(2)}}</td>
+            <td class="align-middle">{{item.active}}</td>
             <td class="align-middle" align="right">${{(item.new_price * 1).toFixed(2)}}</td>
             <td class="align-middle" align="right">${{(item.new_special_price * 1).toFixed(2)}}</td>
+            <td class="align-middle">{{item.new_active}}</td>
             <td class="align-middle">{{item.error}}</td>
           </tr>
         </tbody>
@@ -90,8 +94,10 @@
             <th class="align-middle g-color-black g-min-width-300">Item Code</th>
             <th class="align-middle g-color-black">Before Price</th>
             <th class="align-middle g-color-black">Before Special Price</th>
+            <th class="align-middle g-color-black">Before Active</th>
             <th class="align-middle g-color-black">After Price</th>
             <th class="align-middle g-color-black">After Special Price</th>
+            <th class="align-middle g-color-black">After Active</th>
             <th class="align-middle g-color-black">Success</th>
             <th class="align-middle g-color-black">Error</th>
           </tr>
@@ -103,8 +109,10 @@
             <td class="align-middle">{{item.system_code}}</td>
             <td class="align-middle" align="right">${{(item.price * 1).toFixed(2)}}</td>
             <td class="align-middle" align="right">${{(item.special_price * 1).toFixed(2)}}</td>
+            <td class="align-middle">{{item.active}}</td>
             <td class="align-middle" align="right">${{(item.new_price * 1).toFixed(2)}}</td>
             <td class="align-middle" align="right">${{(item.new_special_price * 1).toFixed(2)}}</td>
+            <td class="align-middle">{{item.new_active}}</td>
             <td class="align-middle">{{item.success}}</td>
             <td class="align-middle">{{item.error}}</td>
           </tr>

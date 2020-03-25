@@ -141,6 +141,7 @@ export class EventOrderAddComponent implements OnInit {
       successResponse => {
         this.items = successResponse.json();
         this.items.forEach(function(item) {
+          item.favourite_icon = 'fa-heart-o'
           this.showImage[this.removeSpace(item.category_name)] = false
         }, this);
       }
@@ -152,6 +153,7 @@ export class EventOrderAddComponent implements OnInit {
       successResponse => {
         this.favourite_items = successResponse.json();
         this.favourite_items.forEach(function(item) {
+          item.favourite_icon = 'fa-heart'
           this.showImage[this.removeSpace(item.category_name)] = false
         }, this);
       }
@@ -353,6 +355,10 @@ export class EventOrderAddComponent implements OnInit {
     $(".category_" + cat).toggle();
     $(".i_" + cat).toggle();
     this.showImage[cat] = $(".category_" + cat).css('display') != "none"
+    if($(".all_category").css('display') == 'none')
+      $("#expand-button").text('Expand all Categories');
+    else
+      $("#expand-button").text('Collapse all Categories');
   }
 
   public removeSpace(category) {
@@ -362,8 +368,9 @@ export class EventOrderAddComponent implements OnInit {
   public favourite(item_id){
     this.eventOrderService.favourite(this.eventName, item_id, this.accountId).subscribe(
       successResponse => {
-        this.loadItems();
-        this.loadFavouriteItem();
+        var item = this.items.find(item => item.id == item_id)
+        let itemIndex = this.items.indexOf(item);
+        this.items[itemIndex].favourite_icon = 'fa-heart'
       },
       () => {
         this.errorMessage = 'Failed to load order.';
@@ -374,8 +381,9 @@ export class EventOrderAddComponent implements OnInit {
   public removeFavourite(item_id){
     this.eventOrderService.remove_favourite(this.eventName, item_id, this.accountId).subscribe(
       successResponse => {
-        this.loadItems();
-        this.loadFavouriteItem();
+        var item = this.favourite_items.find(item => item.id == item_id)
+        let itemIndex = this.favourite_items.indexOf(item);
+        this.favourite_items[itemIndex].favourite_icon = 'fa-heart-o'
       },
       () => {
         this.errorMessage = 'Failed to load order.';
@@ -419,20 +427,11 @@ export class EventOrderAddComponent implements OnInit {
   }
 
   public toggleAllCategory() {
-    $(".all_category").toggle();
-    $(".category_color_down").toggle();
-    $(".category_color_up").toggle();
     if($(".all_category").css('display') == 'none') {
-      $("#expand-button").text('Expand all Categories');
-      this.items.forEach(function(item) {
-        this.showImage[this.removeSpace(item.category_name)] = false
-      }, this);
-      this.favourite_items.forEach(function(item) {
-        this.showImage[this.removeSpace(item.category_name)] = false
-      }, this);
-      this.showImage['favourite'] = false
-    } else {
       $("#expand-button").text('Collapse all Categories');
+      $(".all_category").show();
+      $(".category_color_down").hide();
+      $(".category_color_up").show();
       this.items.forEach(function(item) {
         this.showImage[this.removeSpace(item.category_name)] = true
       }, this);
@@ -440,6 +439,18 @@ export class EventOrderAddComponent implements OnInit {
         this.showImage[this.removeSpace(item.category_name)] = true
       }, this);
       this.showImage['favourite'] = true
+    } else {
+      $("#expand-button").text('Expand all Categories');
+      $(".all_category").hide();
+      $(".category_color_down").show();
+      $(".category_color_up").hide();
+      this.items.forEach(function(item) {
+        this.showImage[this.removeSpace(item.category_name)] = false
+      }, this);
+      this.favourite_items.forEach(function(item) {
+        this.showImage[this.removeSpace(item.category_name)] = false
+      }, this);
+      this.showImage['favourite'] = false
     }
   }
 
