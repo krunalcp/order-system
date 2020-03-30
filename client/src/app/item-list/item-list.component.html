@@ -64,7 +64,14 @@
 
           <tr *ngFor="let item of i.value" class="all_category category_{{ removeSpace(i.key) }} hidden">
             <td>{{item.order_no}}</td>
-            <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
+            <td>
+              <span *ngIf="currentEvent.item_image_width && currentEvent.item_image_height">
+                <img width="{{currentEvent.item_image_width}}" height="{{currentEvent.item_image_height}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
+              </span>
+              <span *ngIf="!currentEvent.item_image_width && !currentEvent.item_image_height">
+                <img src="{{ item.image ? item.image : currentEvent.item_image}}" />
+              </span>
+            </td>
             <td class='text-left'>{{item.name}}</td>
             <td class="price_width">
               ${{(item.price * 1).toFixed(2)}}

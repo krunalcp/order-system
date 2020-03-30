@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200323052355) do
+ActiveRecord::Schema.define(version: 20200330084056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,8 @@ ActiveRecord::Schema.define(version: 20200323052355) do
     t.boolean "hide_help_url", default: false
     t.boolean "hide_event_help_url", default: false
     t.boolean "require_password_for_customer_order", default: false
+    t.string "item_image_width"
+    t.string "item_image_height"
     t.index ["confirmation_token"], name: "index_events_on_confirmation_token", unique: true
     t.index ["name"], name: "index_events_on_name", unique: true
     t.index ["reset_password_token"], name: "index_events_on_reset_password_token", unique: true
@@ -123,6 +125,7 @@ ActiveRecord::Schema.define(version: 20200323052355) do
     t.integer "event_id"
     t.string "image"
     t.decimal "special_price", precision: 8, scale: 2
+    t.string "system_code"
     t.index ["name"], name: "index_items_on_name"
     t.index ["order_no"], name: "index_items_on_order_no"
   end

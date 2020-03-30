@@ -57,7 +57,9 @@ export class EventAddComponent implements OnInit {
     'admin_password': '',
     'hide_event_help_url': '',
     'hide_help_url': '',
-    'require_password_for_customer_order': ''
+    'require_password_for_customer_order': '',
+    'item_image_width': '',
+    'item_image_height': ''
   };
   validationMessages = {
     'name': {
@@ -249,6 +251,12 @@ export class EventAddComponent implements OnInit {
       ],
       'require_password_for_customer_order':[
         this.event.require_password_for_customer_order
+      ],
+      'item_image_width':[
+        this.event.item_image_width
+      ],
+      'item_image_height':[
+        this.event.item_image_height
       ]
     });
 

@@ -40,6 +40,8 @@ export class Event {
 		public admin_password?: string,
 		public hide_help_url?: boolean,
 		public hide_event_help_url?: boolean,
-		public require_password_for_customer_order?: boolean
+		public require_password_for_customer_order?: boolean,
+		public item_image_width?: string,
+		public item_image_height?: string
   ) {}
 }

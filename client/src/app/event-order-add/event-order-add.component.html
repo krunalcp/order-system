@@ -74,7 +74,16 @@
                 <td colspan=8 class="category_color pointer" (click)="toggleCategory('favourite')"><b>Favourite</b></td>
               </tr>
               <tr  *ngFor="let item of favourite_items" class="all_category category_favourite">
-                <td><span *ngIf="showImage['favourite']" ><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
+                <td>
+                  <span *ngIf="showImage['favourite']">
+                    <span *ngIf="currentEvent.item_image_width && currentEvent.item_image_height">
+                      <img width="{{currentEvent.item_image_width}}" height="{{currentEvent.item_image_height}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
+                    </span>
+                    <span *ngIf="!currentEvent.item_image_width && !currentEvent.item_image_height">
+                      <img src="{{ item.image ? item.image : currentEvent.item_image}}" />
+                    </span>
+                  </span>
+                </td>
                 <td class='text-left'>{{item.name}}</td>
                 <td class="price_width">
                   <span class="{{(item.special_price && item.special_price != 0) ? 'strikethrough' : ''}}">${{(item.price * 1).toFixed(2)}}</span>
@@ -118,7 +127,16 @@
                 <td colspan=8 class="category_color pointer" (click)="toggleCategory(i.key)"><b>{{i.key}}</b></td>
               </tr>
               <tr *ngFor="let item of i.value" class="all_category category_{{ removeSpace(i.key) }} hidden">
-                <td><span *ngIf="showImage[removeSpace(i.key)]"><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
+                <td>
+                  <span *ngIf="showImage[removeSpace(i.key)]">
+                    <span *ngIf="currentEvent.item_image_width && currentEvent.item_image_height">
+                      <img width="{{currentEvent.item_image_width}}" height="{{currentEvent.item_image_height}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
+                    </span>
+                    <span *ngIf="!currentEvent.item_image_width && !currentEvent.item_image_height">
+                      <img src="{{ item.image ? item.image : currentEvent.item_image}}" />
+                    </span>
+                  </span>
+                </td>
                 <td class='text-left'>{{item.name}}</td>
                 <td class="price_width">
                   <span class="{{(item.special_price && item.special_price != 0) ? 'strikethrough' : ''}}">${{(item.price * 1).toFixed(2)}}</span>
@@ -172,7 +190,14 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of order.order_items">
-                <td><span><img src="{{item.image ? item.image : currentEvent.item_image}}" /></span></td>
+                <td>
+                  <span *ngIf="currentEvent.item_image_width && currentEvent.item_image_height">
+                    <img width="{{currentEvent.item_image_width}}" height="{{currentEvent.item_image_height}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
+                  </span>
+                  <span *ngIf="!currentEvent.item_image_width && !currentEvent.item_image_height">
+                    <img src="{{ item.image ? item.image : currentEvent.item_image}}" />
+                  </span>
+                </td>
                 <td class='text-left'>{{item.name}}</td>
                 <td class="price_width">${{(item.price * 1).toFixed(2)}}</td>
                 <td>{{item.quantity}}</td>

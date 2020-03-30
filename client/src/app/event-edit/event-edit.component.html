@@ -172,6 +172,20 @@
           </label>
           <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter Admin Password" id="admin_password" formControlName="admin_password">
         </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="item_image_width">
+            <span *ngIf="!formErrors.item_image_width" [ngClass]="{'text-success': !eventForm.controls.item_image_width.pristine}">Item Image Width</span>
+            <span *ngIf="formErrors.item_image_width" class="text-danger">{{formErrors.item_image_width}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter Item Image Width" id="item_image_width" formControlName="item_image_width">
+        </div>
+        <div class="form-group g-mb-25 col-md-6">
+          <label class="g-mb-10" for="item_image_height">
+            <span *ngIf="!formErrors.item_image_height" [ngClass]="{'text-success': !eventForm.controls.item_image_height.pristine}">Item Image Height</span>
+            <span *ngIf="formErrors.item_image_height" class="text-danger">{{formErrors.item_image_height}}</span>
+          </label>
+          <input id="hf-email" class="form-control u-form-control rounded-0" type="text" placeholder="Enter Item Image Height" id="item_image_height" formControlName="item_image_height">
+        </div>
       </div>
       <div class="row">
         <div class="form-group g-mb-25 col-md-1" *ngIf="currentEvent.admin == true">

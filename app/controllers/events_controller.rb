@@ -72,7 +72,8 @@ class EventsController < ApplicationController
       :phone_number, :total_costs, :number_of_tiles, :disable_print_popup,
       :second_station_id, :disable_print_popup_customer, :comments_label,
       :website, :account_id, :show_station_list, :hide_site_page, :admin_password,
-      :hide_event_help_url, :hide_help_url, :require_password_for_customer_order
+      :hide_event_help_url, :hide_help_url, :require_password_for_customer_order,
+      :item_image_width, :item_image_height
     )
   end
 end

@@ -9,7 +9,7 @@ class EventSerializer < ActiveModel::Serializer
              :disable_print_popup_customer, :comments_label, :website,
              :account_id, :show_station_list, :hide_site_page, :last_order_station_id,
              :admin_password, :hide_event_help_url, :hide_help_url,
-             :require_password_for_customer_order
+             :require_password_for_customer_order, :item_image_width, :item_image_height
 
   def station_name
     object.station.try(:name)

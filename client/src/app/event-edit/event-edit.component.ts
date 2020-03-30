@@ -68,7 +68,9 @@ export class EventEditComponent implements OnInit {
     'admin_password': '',
     'hide_help_url': '',
     'hide_event_help_url': '',
-    'require_password_for_customer_order': ''
+    'require_password_for_customer_order': '',
+    'item_image_width': '',
+    'item_image_height': ''
   };
   validationMessages = {
     'name': {
@@ -199,6 +201,8 @@ export class EventEditComponent implements OnInit {
         this.event['hide_help_url'] = data.hide_help_url
         this.event['hide_event_help_url'] = data.hide_event_help_url
         this.event['require_password_for_customer_order'] = data.require_password_for_customer_order
+        this.event['item_image_width'] = data.item_image_width
+        this.event['item_image_height'] = data.item_image_height
         this.eventForm.patchValue(this.event);
         this.getStationList();
         this.getAccountList();
@@ -322,6 +326,12 @@ export class EventEditComponent implements OnInit {
       ],
       'require_password_for_customer_order':[
         this.event.require_password_for_customer_order
+      ],
+      'item_image_width':[
+        this.event.item_image_width
+      ],
+      'item_image_height':[
+        this.event.item_image_height
       ]
     });
 
