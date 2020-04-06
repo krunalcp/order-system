@@ -79,6 +79,12 @@
                     <span *ngIf="currentEvent.item_image_width && currentEvent.item_image_height">
                       <img width="{{currentEvent.item_image_width}}" height="{{currentEvent.item_image_height}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
                     </span>
+                    <span *ngIf="currentEvent.item_image_width && !currentEvent.item_image_height">
+                      <img width="{{currentEvent.item_image_width}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
+                    </span>
+                    <span *ngIf="!currentEvent.item_image_width && currentEvent.item_image_height">
+                      <img height="{{currentEvent.item_image_height}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
+                    </span>
                     <span *ngIf="!currentEvent.item_image_width && !currentEvent.item_image_height">
                       <img src="{{ item.image ? item.image : currentEvent.item_image}}" />
                     </span>
@@ -131,6 +137,12 @@
                   <span *ngIf="showImage[removeSpace(i.key)]">
                     <span *ngIf="currentEvent.item_image_width && currentEvent.item_image_height">
                       <img width="{{currentEvent.item_image_width}}" height="{{currentEvent.item_image_height}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
+                    </span>
+                    <span *ngIf="currentEvent.item_image_width && !currentEvent.item_image_height">
+                      <img width="{{currentEvent.item_image_width}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
+                    </span>
+                    <span *ngIf="!currentEvent.item_image_width && currentEvent.item_image_height">
+                      <img height="{{currentEvent.item_image_height}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
                     </span>
                     <span *ngIf="!currentEvent.item_image_width && !currentEvent.item_image_height">
                       <img src="{{ item.image ? item.image : currentEvent.item_image}}" />
