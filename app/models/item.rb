@@ -125,16 +125,27 @@ class Item < ApplicationRecord
     response = []
     items.each_with_index do |new_item, index|
       item_hash = {
+        new_name: new_item['Name'],
         new_price: new_item['Price'],
         new_special_price: new_item['SpecialPrice'],
+        new_order_no: new_item['Order'],
         system_code: new_item['ItemCode'],
-        new_active: new_item['Active']
+        new_active: new_item['Active'],
+        new_image: new_item['Image'],
+        new_category_name: new_item['Category'],
+        row: index + 1
       }
       item = current_event.items.find_by_system_code(new_item['ItemCode'])
       if item.present?
-        response << item_hash.merge!({price: item.price, special_price: item.special_price, active: item.active})
+        response << item_hash.merge!({
+          price: item.price, special_price: item.special_price, active: item.active,
+          name: item.name, order_no: item.order_no, category_name: item.category&.name,
+          image: item.image
+        })
       else
-        response << item_hash.merge!({price: '', special_price: '', active: '', error: 'Item not Found'})
+        response << item_hash.merge!({
+          price: '', special_price: '', active: '', name: '', order_no: '',
+          category_name: '', image: '', error: 'Item not Found'})
       end
     end
     response
@@ -143,24 +154,51 @@ class Item < ApplicationRecord
   def self.import_items_price(current_event, items)
     response = []
     items.each_with_index do |new_item, index|
-      item_hash = {
-        new_price: new_item['new_price'],
-        new_special_price: new_item['new_special_price'],
-        system_code: new_item['system_code'],
-        new_active: new_item['new_active']
-      }
+      new_category = current_event.categories.find_by_name(new_item['new_category_name'])
       item = current_event.items.find_by_system_code(new_item['system_code'])
       if item.present? && item.system_code.present?
+        item_hash = {
+          name: item.name,
+          price: item.price,
+          special_price: item.special_price,
+          order_no: item.order_no,
+          active: item.active,
+          image: item.image,
+          category_name: item.category&.name,
+          new_name: new_item['new_name'],
+          new_price: new_item['new_price'],
+          new_special_price: new_item['new_special_price'],
+          new_order_no: new_item['new_order_no'],
+          system_code: new_item['system_code'],
+          new_active: new_item['new_active'],
+          new_image: new_item['new_image'],
+          new_category_name: new_item['new_category_name'],
+          row: index + 1
+        }
+
         item.price =  new_item['new_price']
         item.special_price = new_item['new_special_price']
         item.active = new_item['new_active']
+        item.name = new_item['new_name']
+        item.order_no = new_item['new_order_no']
+        item.image = new_item['new_image']
+        item.category = new_category
         if item.save
-          response << item_hash.merge!({price: item.price_was, special_price: item.special_price_was, active: item.active_was, success: true})
+          response << item_hash.merge!({ success: true })
         else
-          response << item_hash.merge!({price: item.price, special_price: item.special_price, active: item.active_was, error: item.errors.full_messages.join(', '), success: false})
+          response << item_hash.merge!({
+            error: item.errors.full_messages.join(', '), success: false
+          })
         end
       else
-        response << item_hash.merge!({price: '', special_price: '', active: '', error: 'Item not Found'}, success: false)
+        response << {
+          name: '', price: '', special_price: '', order_no: '', active: '',
+          image: '', category: '', new_name: new_item['new_name'], row: index + 1,
+          new_price: new_item['new_price'], new_special_price: new_item['new_special_price'],
+          new_order_no: new_item['new_order_no'], system_code: new_item['system_code'],
+          new_active: new_item['new_active'], new_image: new_item['new_image'],
+          new_category: new_item['new_category_name'], error: 'Item not Found', success: false
+        }
       end
     end
     response

@@ -1,10 +1,10 @@
 <div class="container g-mt-100">
   <div class="u-heading-v1-5 g-bg-main g-brd-blue g-mb-20 text-center g-py-50">
-    <h1 class="h3 u-heading-v1__title">Import Item Price</h1>
+    <h1 class="h3 u-heading-v1__title">Update Item Detail</h1>
   </div>
   <div class="row">
     <div class="col-md-12 text-right">
-      <a href='assets/sample/ctordering_items_price.xlsx' class='btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15'>
+      <a href='assets/sample/ctordering_items_details.xlsx' class='btn btn-md u-btn-outline-pink u-btn-hover-v1-2 g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-10 g-mr-10 g-mb-15'>
         <i class="fa fa-file-excel-o g-mr-5"></i>Download Sample
       </a>
     </div>
@@ -17,8 +17,8 @@
       </div>
       <div class="form-group g-mb-25 col-md-6">
         <button (click)="checkUpload()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
-          <span *ngIf="!isItemPriceBeforeImporting">Import Item Price</span>
-          <span *ngIf="isItemPriceBeforeImporting">Importing Item Price...</span>
+          <span *ngIf="!isItemPriceBeforeImporting">Update Item Detail</span>
+          <span *ngIf="isItemPriceBeforeImporting">Updating Item Detail...</span>
           <span class="g-pl-5" *ngIf="isItemPriceBeforeImporting">
             <i class="fa fa-spinner fa-spin"></i>
             <span class="sr-only">Loading...</span>
@@ -37,12 +37,18 @@
           <tr>
             <th class="align-middle g-color-black">#</th>
             <th class="align-middle g-color-black g-min-width-300">Code</th>
+            <th class="align-middle g-color-black">Before Name</th>
+            <th class="align-middle g-color-black">Before Order No</th>
             <th class="align-middle g-color-black">Before Price</th>
             <th class="align-middle g-color-black">Before Special Price</th>
             <th class="align-middle g-color-black">Before Active</th>
+            <th class="align-middle g-color-black">Before Category Id</th>
+            <th class="align-middle g-color-black">After Name</th>
+            <th class="align-middle g-color-black">After Order No</th>
             <th class="align-middle g-color-black">After Price</th>
             <th class="align-middle g-color-black">After Special Price</th>
             <th class="align-middle g-color-black">After Active</th>
+            <th class="align-middle g-color-black">After Category Id</th>
             <th class="align-middle g-color-black">Error</th>
           </tr>
         </thead>
@@ -51,12 +57,18 @@
           <tr *ngFor="let item of before_imported_items">
             <td class="align-middle">{{item.row}}</td>
             <td class="align-middle">{{item.system_code}}</td>
+            <td class="align-middle">{{item.name}}</td>
+            <td class="align-middle">{{item.order_no}}</td>
             <td class="align-middle" align="right">${{(item.price * 1).toFixed(2)}}</td>
             <td class="align-middle" align="right">${{(item.special_price * 1).toFixed(2)}}</td>
             <td class="align-middle">{{item.active}}</td>
+            <td class="align-middle">{{item.category_name}}</td>
+            <td class="align-middle">{{item.new_name}}</td>
+            <td class="align-middle">{{item.new_order_no}}</td>
             <td class="align-middle" align="right">${{(item.new_price * 1).toFixed(2)}}</td>
             <td class="align-middle" align="right">${{(item.new_special_price * 1).toFixed(2)}}</td>
             <td class="align-middle">{{item.new_active}}</td>
+            <td class="align-middle">{{item.new_category_name}}</td>
             <td class="align-middle">{{item.error}}</td>
           </tr>
         </tbody>
@@ -74,7 +86,7 @@
   <div *ngIf="before_imported_items && !isItemPriceBeforeImporting && !afterItemPriceImported" class="form-group g-mb-25 col-md-6">
     <button (click)="upload()" class="btn btn-md u-btn-outline-cyan g-mr-10 g-mb-15" type="submit">
       <span *ngIf="!isItemPriceImporting">Confirm</span>
-      <span *ngIf="isItemPriceImporting">Importing Item Price...</span>
+      <span *ngIf="isItemPriceImporting">Updating Item Detail...</span>
       <span class="g-pl-5" *ngIf="isItemPriceImporting">
         <i class="fa fa-spinner fa-spin"></i>
         <span class="sr-only">Loading...</span>
@@ -92,12 +104,18 @@
           <tr>
             <th class="align-middle g-color-black">#</th>
             <th class="align-middle g-color-black g-min-width-300">Item Code</th>
+            <th class="align-middle g-color-black">Before Name</th>
+            <th class="align-middle g-color-black">Before Order No</th>
             <th class="align-middle g-color-black">Before Price</th>
             <th class="align-middle g-color-black">Before Special Price</th>
             <th class="align-middle g-color-black">Before Active</th>
+            <th class="align-middle g-color-black">Before Category Id</th>
+            <th class="align-middle g-color-black">After Name</th>
+            <th class="align-middle g-color-black">After Order No</th>
             <th class="align-middle g-color-black">After Price</th>
             <th class="align-middle g-color-black">After Special Price</th>
             <th class="align-middle g-color-black">After Active</th>
+            <th class="align-middle g-color-black">After Category Id</th>
             <th class="align-middle g-color-black">Success</th>
             <th class="align-middle g-color-black">Error</th>
           </tr>
@@ -107,12 +125,18 @@
           <tr *ngFor="let item of imported_items">
             <td class="align-middle">{{item.row}}</td>
             <td class="align-middle">{{item.system_code}}</td>
+            <td class="align-middle">{{item.name}}</td>
+            <td class="align-middle">{{item.order_no}}</td>
             <td class="align-middle" align="right">${{(item.price * 1).toFixed(2)}}</td>
             <td class="align-middle" align="right">${{(item.special_price * 1).toFixed(2)}}</td>
             <td class="align-middle">{{item.active}}</td>
+            <td class="align-middle">{{item.category_name}}</td>
+            <td class="align-middle">{{item.new_name}}</td>
+            <td class="align-middle">{{item.new_order_no}}</td>
             <td class="align-middle" align="right">${{(item.new_price * 1).toFixed(2)}}</td>
             <td class="align-middle" align="right">${{(item.new_special_price * 1).toFixed(2)}}</td>
             <td class="align-middle">{{item.new_active}}</td>
+            <td class="align-middle">{{item.new_category_name}}</td>
             <td class="align-middle">{{item.success}}</td>
             <td class="align-middle">{{item.error}}</td>
           </tr>

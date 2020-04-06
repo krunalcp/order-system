@@ -95,7 +95,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'item/price-import',
+    path: 'item/update-details-import',
     component: ItemPriceImportComponent,
     canActivate: [AuthGuard]
   },
