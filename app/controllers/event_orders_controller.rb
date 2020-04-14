@@ -58,7 +58,7 @@ class EventOrdersController < ApplicationController
   end
 
   def active_items
-    @items =  Item.unscoped.where(event_id: @event.id)
+    @items =  Item.unscoped.where(event_id: @event.id).includes(:category, :order_items)
     .left_outer_joins(:category).where(active: true)
     .order('categories.show_order asc, items.order_no asc')
 
@@ -72,7 +72,7 @@ class EventOrdersController < ApplicationController
 
   def favourite_items
     @items =  Item.unscoped.where(event_id: @event.id)
-    .joins(:account_favourites).includes(:account_favourites)
+    .joins(:account_favourites).includes(:account_favourites, :category)
     .where('item_id = items.id and account_favourites.account_id = ?', params[:account_id]).order(:name)
 
     @items.each do |item|
