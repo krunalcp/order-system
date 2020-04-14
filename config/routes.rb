@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get 'total_sales_profit'
       get 'station_item'
       get 'production_notes'
+      get 'category_items'
     end
   end
 

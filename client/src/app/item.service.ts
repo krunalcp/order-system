@@ -107,4 +107,10 @@ export class ItemService {
 
     return this.http.get(itemsApiURL, this.hostAppService.getToken());
   }
+
+  categoryItem(categoryId: string): Observable<any>{
+    let itemsApiURL = this.hostAppService.getHost() + '/items/category_items?category_id=' + categoryId;
+
+    return this.http.get(itemsApiURL, this.hostAppService.getToken());
+  }
 }

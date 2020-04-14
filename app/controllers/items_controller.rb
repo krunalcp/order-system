@@ -4,18 +4,24 @@ class ItemsController < ApplicationController
   before_action :set_pagination, only: :production_notes
 
   def index
-    @items = Item.unscoped.where(event_id: current_event.id).left_outer_joins(:category).order('categories.show_order asc, items.order_no asc')
+    @items = Item.unscoped.where(event_id: current_event.id).includes(:category, :order_items).left_outer_joins(:category).order('categories.show_order asc, items.order_no asc')
 
     render json: @items
   end
 
   def active_items
-    @items = Item.unscoped.where(event_id: current_event.id).left_outer_joins(:category).where(active: true).order('categories.show_order asc, items.order_no asc')
+    @items = Item.unscoped.where(event_id: current_event.id).includes(:category, :order_items).left_outer_joins(:category).where(active: true).order('categories.show_order asc, items.order_no asc')
     render json: @items
   end
 
   def non_active_items
-    @items = Item.unscoped.where(event_id: current_event.id).left_outer_joins(:category).where(active: false).order('categories.show_order asc, items.order_no asc')
+    @items = Item.unscoped.where(event_id: current_event.id).includes(:category, :order_items).left_outer_joins(:category).where(active: false).order('categories.show_order asc, items.order_no asc')
+    render json: @items
+  end
+
+  def category_items
+    @items = Item.unscoped.where(event_id: current_event.id, category_id: params[:category_id]).includes(:category, :order_items).left_outer_joins(:category).order('categories.show_order asc, items.order_no asc')
+
     render json: @items
   end
 

@@ -6,6 +6,8 @@ import { ItemService } from '../item.service';
 import { Item } from '../item';
 import { EventService } from '../event.service';
 import { Event } from '../event';
+import { CategoryService } from '../category.service';
+import { Category } from '../category';
 
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
@@ -21,7 +23,8 @@ declare var $: any;
   styleUrls: ['./item-list.component.css'],
   providers: [
     EventService,
-    ItemService
+    ItemService,
+    CategoryService
   ]
 })
 export class ItemListComponent implements OnInit {
@@ -35,16 +38,21 @@ export class ItemListComponent implements OnInit {
   public isExporting: boolean = false;
   public currentEvent: Event = new Event();
 	public errorMessage: any;
+  public categoryItems = {};
+  public categories: any;
+  public showActiveInactiveItem: boolean = false
 
   constructor(
     public eventService: EventService,
   	private itemService: ItemService,
+    private categoryService: CategoryService,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.loadCurrentEvent();
-  	this.loadItemList();
+  	// this.loadItemList();
+    this.loadCategoryList();
   }
 
   private loadCurrentEvent(): void {
@@ -64,6 +72,23 @@ export class ItemListComponent implements OnInit {
       successResponse => {
         this.items = successResponse.json();
         this.isItemsLoading = false;
+        this.items.forEach(function(item) {
+          this.categoryItems[this.removeSpace(item.category_name)] = []
+        }, this);
+      },
+      (errorResponse) => {
+        // this.displayErrors(errorResponse);
+      }
+    );
+  }
+
+  public loadCategoryList() {
+    this.categoryService.list().subscribe(
+      successResponse => {
+        this.categories = successResponse.json();
+        this.categories.forEach(function(category) {
+          this.categoryItems[category.id] = []
+        }, this);
       },
       (errorResponse) => {
         // this.displayErrors(errorResponse);
@@ -79,6 +104,7 @@ export class ItemListComponent implements OnInit {
         this.items = successResponse.json();
         this.isActiveItemsLoading = false;
         this.isNonActiveItemsLoading = true;
+        this.showActiveInactiveItem = true;
       },
       (errorResponse) => {
         // this.displayErrors(errorResponse);
@@ -94,6 +120,7 @@ export class ItemListComponent implements OnInit {
         this.items = successResponse.json();
         this.isActiveItemsLoading = true;
         this.isNonActiveItemsLoading = false;
+        this.showActiveInactiveItem = true;
       },
       (errorResponse) => {
         // this.displayErrors(errorResponse);
@@ -169,16 +196,29 @@ export class ItemListComponent implements OnInit {
   public toggleCategory(category) {
     $(".category_" + this.removeSpace(category)).toggle();
     $(".i_" + this.removeSpace(category)).toggle();
+    if($(".all_category").css('display') == 'none')
+      $("#expand-button").text('Expand all Categories');
+    else
+      $("#expand-button").text('Collapse all Categories');
   }
 
   public toggleAllCategory() {
-    $(".all_category").toggle();
-    $(".category_color_down").toggle();
-    $(".category_color_up").toggle();
-    if($(".all_category").css('display') == 'none') {
-      $("#expand-button").text('Expand all Categories');
-    } else {
+    if($(".all_category").css('display') == 'none' || $(".all_category").css('display') == undefined) {
       $("#expand-button").text('Collapse all Categories');
+      this.categories.forEach(function(category) {
+        this.getCategoryItem(category.name, category.id)
+        $(".all_category").show();
+        $(".category_color_down").hide();
+        $(".category_color_up").show();
+      }, this);
+      $(".all_category").show();
+      $(".category_color_down").hide();
+      $(".category_color_up").show();
+    } else {
+      $("#expand-button").text('Expand all Categories');
+      $(".all_category").hide();
+      $(".category_color_down").show();
+      $(".category_color_up").hide();
     }
   }
 
@@ -191,6 +231,22 @@ export class ItemListComponent implements OnInit {
       return item.special_price
     }else{
       return item.price
+    }
+  }
+
+  public getCategoryItem(categoryName, categoryId){
+    if(this.categoryItems[categoryId].length == 0){
+      this.itemService.categoryItem(categoryId).subscribe(
+        successResponse => {
+          this.categoryItems[categoryId] = successResponse.json();
+          this.toggleCategory(categoryName)
+        },
+        (errorResponse) => {
+          // this.displayErrors(errorResponse);
+        }
+      );
+    }else{
+      this.toggleCategory(categoryName)
     }
   }
 }

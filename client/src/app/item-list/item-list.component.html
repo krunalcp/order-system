@@ -39,7 +39,72 @@
   </div>
   <div class="card brd-color rounded-0 g-mb-30">
     <div class="table-responsive text-center">
-      <table class="table table-striped u-table--v1 mb-0">
+      <table class="table table-striped u-table--v1 mb-0" *ngIf="!showActiveInactiveItem">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price($)</th>
+            <th>Special Price($)</th>
+            <th>Status</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let category of categories">
+          <tr>
+            <td class="category_color pointer category_color_down  i_{{ removeSpace(category.name) }}" (click)="getCategoryItem(removeSpace(category.name), category.id)">
+              <i class="fa fa-2x fa-angle-down white"></i>
+            </td>
+            <td class="category_color pointer category_color_up hidden i_{{ removeSpace(category.name) }}" (click)="getCategoryItem(removeSpace(category.name), category.id)">
+              <i class="fa fa-2x fa-angle-up white"></i>
+            </td>
+            <td colspan=8 class="category_color pointer category_color_name" (click)="getCategoryItem(removeSpace(category.name), category.id)"><b>{{category.name}}</b></td>
+          </tr>
+          <tr *ngFor="let item of categoryItems[category.id]" class="all_category category_{{ removeSpace(category.name) }}">
+            <td>{{item.order_no}}</td>
+            <td>
+              <span *ngIf="currentEvent.item_image_width && currentEvent.item_image_height">
+                <img width="{{currentEvent.item_image_width}}" height="{{currentEvent.item_image_height}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
+              </span>
+              <span *ngIf="!currentEvent.item_image_width && currentEvent.item_image_height">
+                <img height="{{currentEvent.item_image_height}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
+              </span>
+              <span *ngIf="currentEvent.item_image_width && !currentEvent.item_image_height">
+                <img width="{{currentEvent.item_image_width}}" src="{{ item.image ? item.image : currentEvent.item_image}}" />
+              </span>
+              <span *ngIf="!currentEvent.item_image_width && !currentEvent.item_image_height">
+                <img src="{{ item.image ? item.image : currentEvent.item_image}}" />
+              </span>
+            </td>
+            <td class='text-left'>{{item.name}}</td>
+            <td class="price_width">
+              ${{(item.price * 1).toFixed(2)}}
+            </td>
+            <td class="price_width">
+              ${{(item.special_price * 1).toFixed(2)}}
+            </td>
+            <td class="price_width">
+              {{item.status}}
+            </td>
+            <td class="align-middle text-center">
+              <button class="btn btn-md u-btn-outline-indigo g-mr-10 g-mb-15" routerLink="/item/edit/{{item.id}}">
+                edit
+              </button>
+              <button class="btn btn-md u-btn-outline-{{item.item_used ? 'darkgray' : 'deeporange'}} g-mr-10 g-mb-15" (click)="deleteItem(item.id)" [disabled]="item.item_used">
+                <span *ngIf="!isItemDeleting">Delete</span>
+                <span *ngIf="isItemDeleting && currentItemId != item.id">Delete</span>
+                <span *ngIf="isItemDeleting && currentItemId == item.id">Deleting..</span>
+                <span class="g-pl-5" *ngIf="isItemDeleting && currentItemId == item.id">
+                  <i class="fa fa-spinner fa-spin"></i>
+                  <span class="sr-only">Loading...</span>
+                </span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-striped u-table--v1 mb-0" *ngIf="showActiveInactiveItem">
         <thead>
           <tr>
             <th>#</th>
